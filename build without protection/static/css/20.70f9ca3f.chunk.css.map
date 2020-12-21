@@ -1,1 +1,0 @@
-{"version":3,"sources":["Select.module.css","ModalForLetter.module.css"],"names":[],"mappings":"AAAA,4BACE,iBACF,CCFA,yBACE,6BACE,gBAAiB,CACjB,mBACF,CACF","file":"20.70f9ca3f.chunk.css","sourcesContent":[".select__menu {\r\n  position: relative;\r\n}","@media (min-width: 576px) {\r\n  .modal {\r\n    max-width: 1200px;\r\n    margin: 1.75rem auto;\r\n  }\r\n}\r\n"]}

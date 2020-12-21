@@ -1,5 +1,5 @@
 // const URL = "http://f2.uppeople.space/api";
-const URL = "http://back.uppeople.co/api";
+const URL = "/api";
 const getToken = () => localStorage.getItem("token");
 
 
