@@ -17,8 +17,8 @@ class CandidateExpandableTableRow extends Component {
   render() {
 
     const {userRole, candId, candidateStatus} = this.props;
-    const parsedStatus = JSON.parse(candidateStatus);
-    const {date_follow_up, recruiter, compId, comments} = parsedStatus;
+    // const parsedStatus = JSON.parse(candidateStatus);
+    const {date_follow_up, recruiter, compId, comments} = candidateStatus; // parsedStatus;
 
     return (
 
