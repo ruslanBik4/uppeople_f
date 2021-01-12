@@ -50,9 +50,9 @@ export default class CandidateCreate extends Component {
   createCandidate = candidate => {
     createNewCandidate(candidate).then(data => {
           console.log(data)
-          if (typeof language === 'object') {
+          if (typeof data === 'object') {
             if (data.formErrors !== undefined) {
-              if (typeof language === 'object') {
+              if (typeof data.formErrors === 'object') {
                 Object.entries(data.formErrors).forEach(function (elem, i, arr) {
                   if (elem[0].startsWith("Select")) {
                     let s = elem[0].slice(7).toLowerCase()
