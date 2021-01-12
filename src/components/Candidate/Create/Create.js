@@ -47,8 +47,8 @@ export default class CandidateCreate extends Component {
   };
 
   createCandidate = candidate => {
-    createNewCandidate(candidate).then(data => console.log(data))
-        .then(data => {
+    createNewCandidate(candidate).then(data => {
+          console.log(data)
           if (data.formErrors !== undefined) {
             alert(data.formErrors)
           } else {

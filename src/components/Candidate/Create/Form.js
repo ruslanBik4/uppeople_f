@@ -225,6 +225,10 @@ export default class CandidateCreateForm extends Component {
     } = this.state;
     const {onCreateCandidate} = this.props;
 
+    if (name == "") {
+      document.querySelector('input[name=name]').classList.add('error');
+      throw new Error("name is required");
+    }
     // const aboutEditorState = draftToHtml(
     //   convertToRaw(about.getCurrentContent())
     // );
