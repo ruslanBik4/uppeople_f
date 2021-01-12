@@ -234,7 +234,7 @@ export const createNewCandidate = async candidate => {
     }
     if (response.status == 401) {
       this.props.history.push('/login/')
-      // return response.json();
+      return response.text();
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {

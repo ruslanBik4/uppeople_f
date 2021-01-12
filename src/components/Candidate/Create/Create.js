@@ -9,6 +9,7 @@ import {
   createNewCandidate
 } from "../../../utils/api/candidate";
 import CandidateEditForm from "../Edit/Form";
+import {toLower} from "@progress/kendo-data-query/dist/npm/filter-serialization.common";
 
 export default class CandidateCreate extends Component {
   state = {
@@ -49,10 +50,26 @@ export default class CandidateCreate extends Component {
   createCandidate = candidate => {
     createNewCandidate(candidate).then(data => {
           console.log(data)
-          if (data.formErrors !== undefined) {
-            alert(data.formErrors)
+          if (typeof language === 'object') {
+            if (data.formErrors !== undefined) {
+              if (typeof language === 'object') {
+                Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+                  if (elem[0].startsWith("Select")) {
+                    let s = elem[0].slice(7).toLowerCase()
+                    document.querySelector('label[for='+ s+']').classList.add('error');
+                  } else {
+                    document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+                  }
+
+                })
+              } else {
+                alert(data.formErrors)
+              }
+            } else {
+              this.props.history.push('/candidates/')
+            }
           } else {
-            this.props.history.push('/candidates/')
+            alert(data)
           }
         }
     );
