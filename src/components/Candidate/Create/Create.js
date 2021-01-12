@@ -55,7 +55,7 @@ export default class CandidateCreate extends Component {
               if (typeof data.formErrors === 'object') {
                 Object.entries(data.formErrors).forEach(function (elem, i, arr) {
                   if (elem[0].startsWith("Select")) {
-                    let s = elem[0].slice(7).toLowerCase()
+                    let s = elem[0].slice(6).toLowerCase()
                     console.log(elem, s)
                     document.querySelector('label[for='+s+']').classList.add('error');
                   } else {
