@@ -60,7 +60,7 @@ export default class CandidateCreate extends Component {
                     document.querySelector('label[for='+s+']').classList.add('error');
                   } else {
                     document.querySelector('input[name='+ elem[0]+']').classList.add('error');
-                    document.querySelector('input[name='+ elem[0]+'Error]').textContent = elem[1];
+                    document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
                   }
 
                 })
