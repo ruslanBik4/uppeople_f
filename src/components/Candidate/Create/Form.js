@@ -388,7 +388,7 @@ export default class CandidateCreateForm extends Component {
                   <Col lg={6} md={12}>
                     <FormGroup row>
                       <Label for="name" sm={3}>
-                        Name
+                        Name (*)
                       </Label>
                       <Col sm={9}>
                         <Input
@@ -403,6 +403,9 @@ export default class CandidateCreateForm extends Component {
                           className="icon-user icons font-lg"
                         />
                       </Col>
+                      <Label for="nameError" sm={3}>
+
+                      </Label>
                     </FormGroup>
                     <FormGroup row>
                       <Label for="platform" sm={3}>
