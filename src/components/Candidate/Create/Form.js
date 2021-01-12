@@ -225,7 +225,11 @@ export default class CandidateCreateForm extends Component {
     } = this.state;
     const {onCreateCandidate} = this.props;
 
-    document.querySelector('.error').classList.remove('error');
+    let errList = document.querySelector('.error');
+
+    if (errList !== null) {
+      errList.classList.remove('error');
+    }
 
     if (name == "") {
       document.querySelector('input[name=name]').classList.add('error');
@@ -400,7 +404,7 @@ export default class CandidateCreateForm extends Component {
                   <Col lg={6} md={12}>
                     <FormGroup row>
                       <Label for="name" sm={3}>
-                        Name(*)
+                        Name*
                       </Label>
                       <Col sm={9}>
                         <Input
@@ -420,7 +424,7 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="platform" sm={3}>
-                        Platform(*)
+                        Platform*
                       </Label>
                       <Col sm={9}>
                         <Select
@@ -434,7 +438,7 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="seniorities" sm={3}>
-                        Seniorities(*)
+                        Seniorities*
                       </Label>
                       <Col sm={9}>
                         <Select
