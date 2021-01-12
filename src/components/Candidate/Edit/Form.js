@@ -204,7 +204,7 @@ export default class CandidateEditForm extends Component {
     //   }
     // }
     let platformVacancies = [];
-    if (selectedPlatform !== undefined) {
+    if ( (selectedPlatform !== undefined)  && (vacancies !== undefined) ){
       vacancies.map((vacancy) => {
         if (vacancy.platform_id === selectedPlatform.id) {
           platformVacancies.push(vacancy);
