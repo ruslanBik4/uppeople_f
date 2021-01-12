@@ -437,7 +437,7 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="seniorities" sm={3}>
+                      <Label for="seniority" sm={3}>
                         Seniorities*
                       </Label>
                       <Col sm={9}>
@@ -517,7 +517,7 @@ export default class CandidateCreateForm extends Component {
                     {/*</FormGroup>*/}
 
                     <FormGroup row>
-                      <Label for="salary" sm={3}>
+                      <Label for="language" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
@@ -550,14 +550,14 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     {this.ReasonFormGroup()}
                     <FormGroup row>
-                      <Label for="phone" sm={3}>
+                      <Label for="mobile" sm={3}>
                         Phone
                       </Label>
                       <Col sm={9}>
                         <Input
                           id="phone"
                           type="tel"
-                          name="phone"
+                          name="mobile"
                           value={phone}
                           onChange={this.handleInputChange}
                         />
@@ -565,6 +565,9 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-phone icons font-lg"
                         />
+                        <Label for="mobileError" sm={3}>
+                          Phone
+                        </Label>
                       </Col>
                     </FormGroup>
                     <FormGroup row>
