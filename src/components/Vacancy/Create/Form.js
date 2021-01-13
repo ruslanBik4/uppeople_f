@@ -63,7 +63,7 @@ export default class VacancyCreateForm extends Component {
     selectCompany: [],
     selectLocation: [],
     selectRecruiter: [],
-    salary: "",
+    salary: 0,
     comment: "",
     link: "",
     selectedVacancyStatus: 0,
@@ -304,7 +304,8 @@ export default class VacancyCreateForm extends Component {
                       <Col>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
+                          min={100}
                           name="salary"
                           value={salary}
                           required={true}
