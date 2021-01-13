@@ -566,7 +566,6 @@ export default class CandidateCreateForm extends Component {
                           className="icon-phone icons font-lg"
                         />
                         <Label for="mobileError" sm={3}>
-                          Phone
                         </Label>
                       </Col>
                     </FormGroup>
