@@ -156,20 +156,45 @@ export default class VacancyCreateForm extends Component {
       errList.classList.remove('error');
     }
 
-    if (typeof selectPlatform !== 'object' ) {
-      document.querySelector('label[for=platform]').classList.add('error');
-      throw new Error("platform is required");
+    let isValid = true;
+
+    if (descriptionEditorState.toString().trim() == "") {
+      document.querySelector('.description_div > div').classList.add('error');
+      isValid = false;
     }
 
-    if (typeof selectSeniority !== 'object' ) {
-      document.querySelector('label[for=seniority]').classList.add('error');
-      throw new Error("Seniority is required");
+    if (detailsEditorState.toString().trim() == "") {
+      document.querySelector('.details_div > div').classList.add('error');
+      isValid = false;
     }
 
-    if (vacancy.selectRecruiter.length > 0) {
-      onCreateVacancy(vacancy);
-    } else {
+    if (typeof vacancy.selectPlatform !== 'object' ) {
+      document.querySelector('.platforms_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (typeof vacancy.selectSeniority !== 'object' ) {
+      document.querySelector('.seniority_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (typeof vacancy.selectCompany !== 'object' ) {
+      document.querySelector('.companies_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (typeof vacancy.selectLocation !== 'object' ) {
+      document.querySelector('.location_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (!(vacancy.selectRecruiter.length > 0)) {
       document.querySelector('.recruiters_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (isValid) {
+      onCreateVacancy(vacancy);
     }
   };
 
@@ -198,7 +223,7 @@ export default class VacancyCreateForm extends Component {
             <Card>
               <CardBody>
                 <h6>Description</h6>
-                <Editor
+                <Editor  className={"description_div"}
                   editorState={description}
                   wrapperClassName="wrapper-class"
                   editorClassName="editor-class"
@@ -212,7 +237,7 @@ export default class VacancyCreateForm extends Component {
                   onEditorStateChange={this.handleDescriptionStateChange}
                 />
                 <h6>Description for Freelancers</h6>
-                <Editor
+                <Editor className={"details_div"}
                   editorState={details}
                   wrapperClassName="wrapper-class"
                   editorClassName="editor-class"
@@ -230,7 +255,7 @@ export default class VacancyCreateForm extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <FormGroup>
+                    <FormGroup className={"platforms_div"}>
                       <Select
                         value={selectPlatform}
                         options={platforms}
@@ -238,7 +263,7 @@ export default class VacancyCreateForm extends Component {
                         onChange={this.handlePlatformChange}
                       />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"seniority_div"}>
                       <Select
                         value={selectSeniority}
                         options={seniority}
@@ -246,7 +271,7 @@ export default class VacancyCreateForm extends Component {
                         onChange={this.handleSeniorityChange}
                       />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"companies_div"}>
                       <Select
                         value={selectCompany}
                         options={companies}
@@ -265,7 +290,7 @@ export default class VacancyCreateForm extends Component {
                       style={{zIndex: 2}}
                     />
                   </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"location_div"}>
                       <Select
                         value={selectLocation}
                         options={location}
