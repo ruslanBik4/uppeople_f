@@ -557,7 +557,7 @@ export default class CandidateCreateForm extends Component {
                         <Input
                           id="phone"
                           type="tel"
-                          name="mobile"
+                          name="phone"
                           value={phone}
                           onChange={this.handleInputChange}
                         />
@@ -565,7 +565,7 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-phone icons font-lg"
                         />
-                        <Label for="mobileError" sm={3}>
+                        <Label for="phoneError" sm={3}>
                         </Label>
                       </Col>
                     </FormGroup>
