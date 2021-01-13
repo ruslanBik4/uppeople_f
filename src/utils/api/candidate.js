@@ -229,7 +229,9 @@ export const createNewCandidate = async candidate => {
     if (response.ok) {
       return response.json();
     }
-    // to do сделать обработку кода ошибок
+    if (response.status == 400) {
+      return response.json();
+    }
     throw new Error(`${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);
