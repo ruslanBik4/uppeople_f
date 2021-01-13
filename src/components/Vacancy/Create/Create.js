@@ -56,7 +56,6 @@ class VacancyCreate extends Component {
                             document.querySelector('.'+s+'_div > div').classList.add('error');
                         } else {
                             document.querySelector('input[name='+ elem[0]+']').classList.add('error');
-                            document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
                         }
 
                     })
@@ -66,7 +65,7 @@ class VacancyCreate extends Component {
             } else {
                 history.push(`/vacancies/${data.id}`);
             }
-        } else if (data == 401) {
+        } else if (data === 401) {
             this.props.history.push('/login/')
         } else {
             alert(data)
