@@ -43,12 +43,34 @@ class VacancyCreate extends Component {
   };
 
   createVacancy = vacancy => {
-    createNewVacancy(vacancy).then(createdVacancy => {
+    createNewVacancy(vacancy).then(data => {
       const {history} = this.props;
       console.log("CREATED VACANCY", vacancy);
-      if(createdVacancy !== undefined) {
-        history.push(`/vacancies/${createdVacancy.id}`);
-      }
+        if (typeof data === 'object') {
+            if (data.formErrors !== undefined) {
+                if (typeof data.formErrors === 'object') {
+                    Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+                        if (elem[0].startsWith("Select")) {
+                            let s = elem[0].slice(6).toLowerCase()
+                            console.log(elem, s)
+                            document.querySelector('label[for='+s+']').classList.add('error');
+                        } else {
+                            document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+                            document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
+                        }
+
+                    })
+                } else {
+                    alert(data.formErrors)
+                }
+            } else {
+                history.push(`/vacancies/${data.id}`);
+            }
+        } else if (data == 401) {
+            this.props.history.push('/login/')
+        } else {
+            alert(data)
+        }
     });
   };
 

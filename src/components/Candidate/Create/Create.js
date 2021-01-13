@@ -70,7 +70,9 @@ export default class CandidateCreate extends Component {
             } else {
               this.props.history.push('/candidates/')
             }
-          } else {
+          } else if (data == 401) {
+            this.props.history.push('/login/')
+          } else  {
             alert(data)
           }
         }

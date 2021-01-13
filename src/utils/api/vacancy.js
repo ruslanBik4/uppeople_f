@@ -70,6 +70,12 @@ export const createNewVacancy = async vacancy => {
     if (response.ok) {
       return response.json();
     }
+    if (response.status == 400) {
+      return response.json();
+    }
+    if (response.status == 401) {
+      return 401;
+    }
     throw new Error(`${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);

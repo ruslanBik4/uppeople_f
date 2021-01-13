@@ -150,7 +150,22 @@ export default class VacancyCreateForm extends Component {
       details: detailsEditorState
     };
 
-    document.querySelector('.recruiters_div > div').classList.remove('error');
+    let errList = document.querySelector('.error');
+
+    if (errList !== null) {
+      errList.classList.remove('error');
+    }
+
+    if (typeof selectPlatform !== 'object' ) {
+      document.querySelector('label[for=platform]').classList.add('error');
+      throw new Error("platform is required");
+    }
+
+    if (typeof selectSeniority !== 'object' ) {
+      document.querySelector('label[for=seniority]').classList.add('error');
+      throw new Error("Seniority is required");
+    }
+
     if (vacancy.selectRecruiter.length > 0) {
       onCreateVacancy(vacancy);
     } else {
@@ -266,6 +281,7 @@ export default class VacancyCreateForm extends Component {
                           type="text"
                           name="salary"
                           value={salary}
+                          required=true
                           placeholder="Salary"
                           onChange={this.handleInputChange}
                         />
