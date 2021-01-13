@@ -166,12 +166,12 @@ export default class VacancyCreateForm extends Component {
 
 
     if (descriptionEditorState.toString().trim() === "<p></p>") {
-      document.querySelector('.description_div > div').classList.add('error');
+      document.querySelector('.description_div + div').classList.add('error');
       isValid = false;
     }
 
     if (detailsEditorState.toString().trim() === "<p></p>") {
-      document.querySelector('.details_div > div').classList.add('error');
+      document.querySelector('.details_div + div').classList.add('error');
       isValid = false;
     }
 
