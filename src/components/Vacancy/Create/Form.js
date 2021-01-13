@@ -158,6 +158,8 @@ export default class VacancyCreateForm extends Component {
 
     let isValid = true;
 
+    console.log(vacancy.selectPlatform, vacancy.selectSeniority, vacancy.selectCompany)
+
     if (descriptionEditorState.toString().trim() == "") {
       document.querySelector('.description_div > div').classList.add('error');
       isValid = false;

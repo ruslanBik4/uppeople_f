@@ -53,7 +53,7 @@ class VacancyCreate extends Component {
                         if (elem[0].startsWith("Select")) {
                             let s = elem[0].slice(6).toLowerCase()
                             console.log(elem, s)
-                            document.querySelector('label[for='+s+']').classList.add('error');
+                            document.querySelector('.'+s+'_div > div').classList.add('error');
                         } else {
                             document.querySelector('input[name='+ elem[0]+']').classList.add('error');
                             document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
