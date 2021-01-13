@@ -75,6 +75,12 @@ export default class VacancyCreateForm extends Component {
     this.setState({[name]: value});
   };
 
+  handleSalaryChange = (value => {
+    this.setState({
+      salary: value
+    });
+  };
+
   handleDescriptionStateChange = description => {
     this.setState({description});
   };
@@ -158,7 +164,7 @@ export default class VacancyCreateForm extends Component {
 
     let isValid = true;
 
-  console.log(descriptionEditorState.toString().trim(), detailsEditorState.toString().trim())
+
     if (descriptionEditorState.toString().trim() === "<p></p>") {
       document.querySelector('.description_div > div').classList.add('error');
       isValid = false;
@@ -223,8 +229,8 @@ export default class VacancyCreateForm extends Component {
           <Col md={9}>
             <Card>
               <CardBody>
-                <h6>Description</h6>
-                <Editor  className={"description_div"}
+                <h6 className={"description_div"}>Description</h6>
+                <Editor
                   editorState={description}
                   wrapperClassName="wrapper-class"
                   editorClassName="editor-class"
@@ -237,8 +243,8 @@ export default class VacancyCreateForm extends Component {
                   }}
                   onEditorStateChange={this.handleDescriptionStateChange}
                 />
-                <h6>Description for Freelancers</h6>
-                <Editor className={"details_div"}
+                <h6 className={"details_div"}>Description for Freelancers</h6>
+                <Editor
                   editorState={details}
                   wrapperClassName="wrapper-class"
                   editorClassName="editor-class"
@@ -310,7 +316,7 @@ export default class VacancyCreateForm extends Component {
                           value={salary}
                           required={true}
                           placeholder="Salary"
-                          onChange={this.handleInputChange}
+                          onChange={this.handleSalaryChange({value})}
                         />
                         <i
                           style={{
