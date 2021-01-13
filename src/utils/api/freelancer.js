@@ -1,5 +1,5 @@
 // const URL = "http://f2.uppeople.space/api";
-const URL = "/api";
+const URL = process.env.REACT_APP_API_ENDPOINT;
 const getToken = () => localStorage.getItem("token");
 
 /**

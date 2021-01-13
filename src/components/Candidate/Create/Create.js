@@ -47,8 +47,8 @@ export default class CandidateCreate extends Component {
   };
 
   createCandidate = candidate => {
-    createNewCandidate(candidate).then(
-      this.props.history.push('/candidates/')
+    createNewCandidate(candidate).then(data => console.log(data)
+    //  this.props.history.push('/candidates/')
     );
   };
 

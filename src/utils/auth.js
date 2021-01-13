@@ -1,5 +1,6 @@
 // const URL = "http://f2.uppeople.space/api";
-const URL = "/api";
+
+const URL = process.env.REACT_APP_API_ENDPOINT;
 
 export const userSignIn = user => {
   return fetch(`${URL}/auth/login`, {

@@ -42,10 +42,10 @@ export default class AccountProvider extends Component {
 
   signIn = user => {
     userSignIn(user).then(response => {
-      if (response === "Unauthorized" || response.access_token === undefined) {
+      if (!response || response === "Unauthorized" || response.access_token === undefined) {
         this.setState(
           {
-            authError: response
+            authError: response || 'Unknown error'
           },
           () => console.log(this.state.authError)
         );

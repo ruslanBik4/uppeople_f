@@ -1,5 +1,5 @@
 // const URL = "http://f2.uppeople.space/api";
-const URL = "/api";
+const URL = process.env.REACT_APP_API_ENDPOINT;
 const getToken = () => localStorage.getItem("token");
 
 
@@ -229,6 +229,7 @@ export const createNewCandidate = async candidate => {
     if (response.ok) {
       return response.json();
     }
+    // to do сделать обработку кода ошибок
     throw new Error(`${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);

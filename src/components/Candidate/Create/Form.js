@@ -384,10 +384,11 @@ export default class CandidateCreateForm extends Component {
                   <Col lg={6} md={12}>
                     <FormGroup row>
                       <Label for="name" sm={3}>
-                        Name
+                        Name<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Input
+                          required
                           id="name"
                           type="text"
                           name="name"
@@ -402,10 +403,11 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="platform" sm={3}>
-                        Platform
+                        Platform<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
+                          required
                           id="platform"
                           value={selectPlatform}
                           placeholder="Platform"
@@ -416,10 +418,11 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="seniorities" sm={3}>
-                        Seniorities
+                        Seniorities<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
+                          required
                           id="seniorities"
                           value={selectSeniority}
                           placeholder="Seniorities"
@@ -430,10 +433,11 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="language" sm={3}>
-                        Language
+                        Language<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
+                          required
                           id="language"
                           value={language}
                           options={languages}
@@ -514,10 +518,11 @@ export default class CandidateCreateForm extends Component {
                   <Col lg={6} md={12}>
                     <FormGroup row>
                       <Label for="seniority" sm={3}>
-                        Tag
+                        Tag<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
+                          required
                           id="tags"
                           options={tags}
                           value={selectedTag}
