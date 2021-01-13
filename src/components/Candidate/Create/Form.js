@@ -225,6 +225,37 @@ export default class CandidateCreateForm extends Component {
     } = this.state;
     const {onCreateCandidate} = this.props;
 
+    let errList = document.querySelector('.error');
+
+    if (errList !== null) {
+      errList.classList.remove('error');
+    }
+
+    if (name == "") {
+      document.querySelector('input[name=name]').classList.add('error');
+      throw new Error("name is required");
+    }
+
+    if (typeof selectPlatform !== 'object' ) {
+      document.querySelector('label[for=platform]').classList.add('error');
+      throw new Error("platform is required");
+    }
+
+    if (typeof selectSeniority !== 'object' ) {
+      document.querySelector('label[for=seniority]').classList.add('error');
+      throw new Error("Seniority is required");
+    }
+
+    if (typeof language !== 'object' ) {
+      document.querySelector('label[for=language]').classList.add('error');
+      throw new Error("language is required");
+    }
+
+    if (typeof selectedTag !== 'object' ) {
+      document.querySelector('label[for=Tag').classList.add('error');
+      throw new Error("Tag is required");
+    }
+
     // const aboutEditorState = draftToHtml(
     //   convertToRaw(about.getCurrentContent())
     // );
@@ -399,6 +430,8 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-user icons font-lg"
                         />
+                      <Label for="nameError" sm={3}>
+                      </Label>
                       </Col>
                     </FormGroup>
                     <FormGroup row>
@@ -499,7 +532,7 @@ export default class CandidateCreateForm extends Component {
                     {/*</FormGroup>*/}
 
                     <FormGroup row>
-                      <Label for="salary" sm={3}>
+                      <Label for="language" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
@@ -517,8 +550,8 @@ export default class CandidateCreateForm extends Component {
                   </Col>
                   <Col lg={6} md={12}>
                     <FormGroup row>
-                      <Label for="seniority" sm={3}>
-                        Tag<font color="red">*</font>
+                      <Label for="tags" sm={3}>
+                        Tag
                       </Label>
                       <Col sm={9}>
                         <Select
@@ -548,6 +581,8 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-phone icons font-lg"
                         />
+                        <Label for="phoneError" sm={3}>
+                        </Label>
                       </Col>
                     </FormGroup>
                     <FormGroup row>

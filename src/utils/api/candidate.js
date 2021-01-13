@@ -232,6 +232,10 @@ export const createNewCandidate = async candidate => {
     if (response.status == 400) {
       return response.json();
     }
+    if (response.status == 401) {
+      this.props.history.push('/login/')
+      return response.text();
+    }
     throw new Error(`${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);

@@ -9,6 +9,7 @@ import {
   createNewCandidate
 } from "../../../utils/api/candidate";
 import CandidateEditForm from "../Edit/Form";
+import {toLower} from "@progress/kendo-data-query/dist/npm/filter-serialization.common";
 
 export default class CandidateCreate extends Component {
   state = {
@@ -47,12 +48,30 @@ export default class CandidateCreate extends Component {
   };
 
   createCandidate = candidate => {
-    createNewCandidate(candidate).then(data => console.log(data))
-        .then(data => {
-          if (data.formError !== undefined) {
-            alert(formError)
+    createNewCandidate(candidate).then(data => {
+          console.log(data)
+          if (typeof data === 'object') {
+            if (data.formErrors !== undefined) {
+              if (typeof data.formErrors === 'object') {
+                Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+                  if (elem[0].startsWith("Select")) {
+                    let s = elem[0].slice(6).toLowerCase()
+                    console.log(elem, s)
+                    document.querySelector('label[for='+s+']').classList.add('error');
+                  } else {
+                    document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+                    document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
+                  }
+
+                })
+              } else {
+                alert(data.formErrors)
+              }
+            } else {
+              this.props.history.push('/candidates/')
+            }
           } else {
-            this.props.history.push('/candidates/')
+            alert(data)
           }
         }
     );
