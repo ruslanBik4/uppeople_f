@@ -158,39 +158,38 @@ export default class VacancyCreateForm extends Component {
 
     let isValid = true;
 
-    console.log(vacancy.selectPlatform, vacancy.selectSeniority, vacancy.selectCompany)
-
-    if (descriptionEditorState.toString().trim() == "") {
+  console.log(descriptionEditorState.toString().trim(), detailsEditorState.toString().trim())
+    if (descriptionEditorState.toString().trim() === "") {
       document.querySelector('.description_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (detailsEditorState.toString().trim() == "") {
+    if (detailsEditorState.toString().trim() === "") {
       document.querySelector('.details_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (typeof vacancy.selectPlatform !== 'object' ) {
-      document.querySelector('.platforms_div > div').classList.add('error');
+    if ( vacancy.selectPlatform.length === 0) {
+      document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (typeof vacancy.selectSeniority !== 'object' ) {
+    if ( vacancy.selectSeniority.length === 0) {
       document.querySelector('.seniority_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (typeof vacancy.selectCompany !== 'object' ) {
+    if ( vacancy.selectCompany.length === 0) {
       document.querySelector('.companies_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (typeof vacancy.selectLocation !== 'object' ) {
+    if ( vacancy.selectLocation.length === 0) {
       document.querySelector('.location_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (!(vacancy.selectRecruiter.length > 0)) {
+    if (vacancy.selectRecruiter.length === 0) {
       document.querySelector('.recruiters_div > div').classList.add('error');
       isValid = false;
     }
@@ -257,7 +256,7 @@ export default class VacancyCreateForm extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <FormGroup className={"platforms_div"}>
+                    <FormGroup className={"platform_div"}>
                       <Select
                         value={selectPlatform}
                         options={platforms}
