@@ -75,7 +75,7 @@ export default class VacancyCreateForm extends Component {
     this.setState({[name]: value});
   };
 
-  handleSalaryChange = value => {
+  handleSalaryChange = ({target: {name, value}}) => {
     this.setState({
       salary: parseInt(value)
     });
@@ -316,7 +316,7 @@ export default class VacancyCreateForm extends Component {
                           value={salary}
                           required={true}
                           placeholder="Salary"
-                          onChange={this.handleSalaryChange({value})}
+                          onChange={this.handleSalaryChange}
                         />
                         <i
                           style={{
