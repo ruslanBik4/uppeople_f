@@ -281,7 +281,7 @@ export default class VacancyCreateForm extends Component {
                           type="text"
                           name="salary"
                           value={salary}
-                          required=true
+                          required={true}
                           placeholder="Salary"
                           onChange={this.handleInputChange}
                         />
