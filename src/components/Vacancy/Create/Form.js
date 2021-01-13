@@ -75,9 +75,9 @@ export default class VacancyCreateForm extends Component {
     this.setState({[name]: value});
   };
 
-  handleSalaryChange = (value => {
+  handleSalaryChange = value => {
     this.setState({
-      salary: value
+      salary: parseInt(value)
     });
   };
 
