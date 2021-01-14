@@ -28,28 +28,28 @@ export const getVacancyProfile = id => {
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
-    .then(data => {
-      const vacancy = data;
-
-      console.log( vacancy);
-
-      const vacancyInfo = {
-        id: vacancy.id,
-        date: vacancy.date_create,
-        company: vacancy.company_id,
-        platform: vacancy.platform_id,
-        seniority: vacancy.seniority_id,
-        status: vacancy.status,
-        location: vacancy.location_id,
-        salary: vacancy.salary,
-        link: vacancy.link,
-        description: vacancy.opus,
-        details: vacancy.details,
-        user_ids: vacancy.user_ids
-      };
-
-      return vacancyInfo;
-    })
+    // .then(data => {
+    //   const vacancy = data;
+    //
+    //   console.log( vacancy);
+    //
+    //   const vacancyInfo = {
+    //     id: vacancy.id,
+    //     date: vacancy.date_create,
+    //     company: vacancy.company_id,
+    //     platform: vacancy.platform_id,
+    //     seniority: vacancy.seniority_id,
+    //     status: vacancy.status,
+    //     location: vacancy.location_id,
+    //     salary: vacancy.salary,
+    //     link: vacancy.link,
+    //     description: vacancy.opus,
+    //     details: vacancy.details,
+    //     user_ids: vacancy.user_ids
+    //   };
+    //
+    //   return vacancyInfo;
+    // })
     .catch(error => console.log("error in fetch: ", error));
 };
 /**
