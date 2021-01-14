@@ -74,12 +74,12 @@ export default class VacancyEditForm extends Component {
   static defaultProps = {
     vacancy: {
       id: null,
-      seniority: {},
-      platform: {},
-      company: {},
-      location: {},
-      status: {},
-      salary: "",
+      seniority_id: 0,
+      platform_id: 0,
+      company_id: 0,
+      location_id: 0,
+      status: 0,
+      salary: 0,
       link: "",
       date: "",
       description: "",
@@ -96,7 +96,7 @@ export default class VacancyEditForm extends Component {
     salary: 0,
     comment: "",
     link: "",
-    selectedVacancyStatus: "",
+    selectedVacancyStatus: 0,
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
