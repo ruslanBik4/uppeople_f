@@ -17,7 +17,7 @@ class VacancyEdit extends Component {
       seniority: {},
       status: {},
       location: {},
-      recruiters_ids: [],
+      user_ids: [],
       salary: null,
       link: "",
       description: "",

@@ -120,7 +120,6 @@ export default class VacancyEditForm extends Component {
     const {vacancy, options} = this.props;
 
     if (this.props !== prevProps) {
-      if (vacancy.platform !== null) {
         const selectedPlatform = options.platforms.find(
           platform => platform.id === vacancy.platform_id
         )
@@ -128,9 +127,8 @@ export default class VacancyEditForm extends Component {
         this.setState({
           selectPlatform: selectedPlatform
         });
-      }
 
-      if (vacancy.seniority !== null) {
+
         const selectedSeniority = options.seniority.find(
           seniority => seniority.id === vacancy.seniority_id
         );
@@ -138,9 +136,8 @@ export default class VacancyEditForm extends Component {
         this.setState({
           selectSeniority: selectedSeniority
         });
-      }
 
-      if (vacancy.company !== null) {
+
         const selectedCompany = options.companies.find(
           company => company.id === vacancy.company_id
         );
@@ -148,12 +145,12 @@ export default class VacancyEditForm extends Component {
         this.setState({
           selectCompany: selectedCompany
         });
-      }
 
 
-      if (vacancy.recruiters_ids !== null &&  options.recruiters !== undefined) {
+
+      if (vacancy.user_ids !== null &&  options.recruiters !== undefined) {
         const selectRecruiter = options.recruiters.filter(
-          recruiter => vacancy.recruiters_ids.indexOf(recruiter.id) > -1
+          recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
         );
 
         this.setState({
@@ -161,7 +158,6 @@ export default class VacancyEditForm extends Component {
         });
       }
 
-      if (vacancy.location !== null) {
         const selectedLocation = options.location.find(
           location => location.id === vacancy.location.id
         );
@@ -169,7 +165,7 @@ export default class VacancyEditForm extends Component {
         this.setState({
           selectLocation: selectedLocation
         });
-      }
+
 
       const htmlDescription = vacancy.description;
       const descriptionBlock = htmlToDraft(htmlDescription);
