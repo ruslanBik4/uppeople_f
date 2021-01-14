@@ -1,6 +1,7 @@
 // const URL = "http://f2.uppeople.space/api";
 const URL = "/api";
 const getToken = () => localStorage.getItem("token");
+const getOptions = () => localStorage.getItem("optionsForSelects");
 
 /**
  * Fetches options for selects from an api
@@ -8,7 +9,7 @@ const getToken = () => localStorage.getItem("token");
  * @returns {Promise} Promise object represents operation result
  */
 export const getOptionsForSelects = async () => {
- let opt = localStorage.getItem('optionsForSelects')
+ const opt = getOptions();
   if (opt !== null) {
     return JSON.parse(opt)
   }
@@ -23,7 +24,7 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-      let data = response.json();
+      const data = response.json();
       localStorage.setItem('optionsForSelects', JSON.stringify(data));
 
       return data;

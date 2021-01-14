@@ -108,7 +108,7 @@ export default class VacancyEditForm extends Component {
     selectCompany: [],
     selectRecruiter: [],
     selectLocation: [],
-    salary: "",
+    salary: 0,
     comment: "",
     link: "",
     selectedVacancyStatus: "",
@@ -159,7 +159,7 @@ export default class VacancyEditForm extends Component {
       }
 
         const selectedLocation = options.location.find(
-          location => location.id === vacancy.location.id
+          location => location.id === vacancy.location_id
         );
 
         this.setState({
@@ -195,16 +195,13 @@ export default class VacancyEditForm extends Component {
         }
       }
 
-      const salary = vacancy.salary !== null ? vacancy.salary : "";
       const comment = vacancy.comment !== null ? vacancy.comment : "";
-      const link = vacancy.link !== null ? vacancy.link : "";
-      const selectedVacancyStatus = vacancy.status.id;
 
       this.setState({
-        salary,
+        vacancy.salary,
         comment,
-        link,
-        selectedVacancyStatus
+        vacancy.link,
+        vacancy.status
       });
     }
   }
