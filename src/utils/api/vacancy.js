@@ -10,7 +10,7 @@ const getToken = () => localStorage.getItem("token");
  */
 export const getVacancyProfile = id => {
   const token = getToken();
-  // console.log("vacancy before");
+
   return fetch(`${URL}/main/viewVacancy/${id}`, {
     method: "GET",
     headers: {
@@ -21,6 +21,9 @@ export const getVacancyProfile = id => {
     .then(response => {
       if (response.ok) {
         return response.json();
+      }
+      if (response.status == 401) {
+        return 401;
       }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -42,7 +45,7 @@ export const getVacancyProfile = id => {
         link: vacancy.link,
         description: vacancy.opus,
         details: vacancy.details,
-        recruiters_ids: vacancy.recruiters_ids
+        user_ids: vacancy.user_ids
       };
 
       return vacancyInfo;

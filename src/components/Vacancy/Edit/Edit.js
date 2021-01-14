@@ -29,7 +29,11 @@ class VacancyEdit extends Component {
     const { id } = this.props.match.params;
 
     getVacancyProfile(id).then(vacancy => {
-      this.setState({ vacancy });
+      if (vacancy === 401) {
+        this.props.history.push('/login/')
+      } else {
+        this.setState({vacancy});
+      }
     });
   }
 
