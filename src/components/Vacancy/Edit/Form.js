@@ -27,27 +27,12 @@ export default class VacancyEditForm extends Component {
   static propTypes = {
     vacancy: PropTypes.shape({
       id: PropTypes.number,
-      platform: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string
-      }),
-      seniority: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string
-      }),
-      company: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string
-      }),
-      location: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string
-      }),
-      status: PropTypes.shape({
-        id: PropTypes.number,
-        status: PropTypes.string
-      }),
-      salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      platform_id: PropTypes.number,
+      seniority_id: PropTypes.number,
+      company_id: PropTypes.number,
+      location_id: PropTypes.number,
+      status: PropTypes.number,
+      salary: PropTypes.number,
       link: PropTypes.string,
       date: PropTypes.string,
       description: PropTypes.string,

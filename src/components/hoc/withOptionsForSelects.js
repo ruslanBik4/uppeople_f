@@ -29,8 +29,10 @@ const withOptionsForSelects = WrappedComponent =>
           recruiters:  optionsForSelects.recruiters,
           vacancies: optionsForSelects.vacancies,
         };
+          localStorage.setItem('optionsForSelects', options);
 
-        this.setState({ ...options });
+
+          this.setState({ ...options });
       });
     }
 
