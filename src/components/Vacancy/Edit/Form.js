@@ -82,7 +82,7 @@ export default class VacancyEditForm extends Component {
       salary: 0,
       link: "",
       date: "",
-      description: "",
+      opus: "",
       details: ""
     }
   };
@@ -97,7 +97,7 @@ export default class VacancyEditForm extends Component {
     comment: "",
     link: "",
     selectedVacancyStatus: 0,
-    description: EditorState.createEmpty(),
+    opus: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
 
