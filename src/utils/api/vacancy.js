@@ -109,23 +109,23 @@ export const updateVacancy = (id, vacancy) => {
 
       throw new Error(`${response.statusText}`);
     })
-    .then(vacancy => {
-      const vacancyInfo = {
-        id: vacancy.id,
-        date: vacancy.date_create,
-        company: vacancy.company,
-        platform: vacancy.platforms,
-        seniority: vacancy.seniorities,
-        status: vacancy.status,
-        location: vacancy.location,
-        salary: vacancy.salary,
-        link: vacancy.link,
-        description: vacancy.opus,
-        details: vacancy.details
-      };
-
-      return vacancyInfo;
-    })
+    // .then(vacancy => {
+    //   const vacancyInfo = {
+    //     id: vacancy.id,
+    //     date: vacancy.date_create,
+    //     company: vacancy.company,
+    //     platform: vacancy.platforms,
+    //     seniority: vacancy.seniorities,
+    //     status: vacancy.status,
+    //     location: vacancy.location,
+    //     salary: vacancy.salary,
+    //     link: vacancy.link,
+    //     description: vacancy.opus,
+    //     details: vacancy.details
+    //   };
+    //
+    //   return vacancyInfo;
+    // })
     .catch(error => console.log("error in fetch: ", error));
 };
 

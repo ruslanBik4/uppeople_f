@@ -20,7 +20,7 @@ class VacancyEdit extends Component {
       user_ids: [],
       salary: 0,
       link: "",
-      opus: "",
+      description: "",
       details: ""
     }
   };
