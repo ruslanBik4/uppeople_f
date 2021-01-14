@@ -10,7 +10,7 @@ import { updateVacancy, getVacancyProfile } from "../../../utils/api/vacancy";
 class VacancyEdit extends Component {
   state = {
     vacancy: {
-      id: null,
+      id: -1,
       date: "",
       company_id: 0,
       platform_id: 0,
@@ -60,7 +60,7 @@ class VacancyEdit extends Component {
             alert(data.formErrors)
           }
         } else {
-          history.push(`/vacancies/${data.id}`);
+          history.push(`/vacancies/${id}`);
         }
       } else if (data === 401) {
           history.push('/login/')
