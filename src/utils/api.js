@@ -10,8 +10,9 @@ const getToken = () => localStorage.getItem("token");
 export const getOptionsForSelects = async () => {
  let opt = localStorage.getItem('optionsForSelects')
   if (opt !== null) {
-    return opt
+    return JSON.parse(opt)
   }
+
   const token = getToken();
   try {
     const response = await fetch(`${URL}/main/returnOptionsForSelects`, {
@@ -22,8 +23,10 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-      localStorage.setItem('optionsForSelects', response.json())
-      return response.json();
+      data = response.json();
+      localStorage.setItem('optionsForSelects', JSON.stringify(data));
+
+      return data;
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
