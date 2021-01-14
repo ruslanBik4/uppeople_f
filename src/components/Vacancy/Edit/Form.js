@@ -35,7 +35,7 @@ export default class VacancyEditForm extends Component {
       salary: PropTypes.number,
       link: PropTypes.string,
       date: PropTypes.string,
-      description: PropTypes.string,
+      opus: PropTypes.string,
       details: PropTypes.string
     }),
     options: PropTypes.shape({
@@ -152,7 +152,7 @@ export default class VacancyEditForm extends Component {
         });
 
 
-      const htmlDescription = vacancy.description;
+      const htmlDescription = vacancy.opus;
       const descriptionBlock = htmlToDraft(htmlDescription);
       if (descriptionBlock) {
         const contentState = ContentState.createFromBlockArray(
