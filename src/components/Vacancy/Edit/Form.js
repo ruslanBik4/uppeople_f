@@ -195,13 +195,16 @@ export default class VacancyEditForm extends Component {
         }
       }
 
+      const salary =  vacancy.salary;
       const comment = vacancy.comment !== null ? vacancy.comment : "";
+      const link = vacancy.link ;
+      const selectedVacancyStatus = vacancy.status;
 
       this.setState({
-        vacancy.salary,
+        salary,
         comment,
-        vacancy.link,
-        vacancy.status
+        link,
+        selectedVacancyStatus
       });
     }
   }
