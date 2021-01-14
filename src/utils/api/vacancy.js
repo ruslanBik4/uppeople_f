@@ -26,18 +26,18 @@ export const getVacancyProfile = id => {
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {
-      const vacancy = data[0];
+      const vacancy = data;
 
       console.log( vacancy);
 
       const vacancyInfo = {
         id: vacancy.id,
         date: vacancy.date_create,
-        company: vacancy.company,
-        platform: vacancy.platforms,
-        seniority: vacancy.seniorities,
+        company: vacancy.company_id,
+        platform: vacancy.platform_id,
+        seniority: vacancy.seniority_id,
         status: vacancy.status,
-        location: vacancy.location,
+        location: vacancy.location_id,
         salary: vacancy.salary,
         link: vacancy.link,
         description: vacancy.opus,
@@ -106,9 +106,7 @@ export const updateVacancy = (id, vacancy) => {
 
       throw new Error(`${response.statusText}`);
     })
-    .then(data => {
-      const vacancy = data[0];
-      console.log("vacancy response", data);
+    .then(vacancy => {
       const vacancyInfo = {
         id: vacancy.id,
         date: vacancy.date_create,

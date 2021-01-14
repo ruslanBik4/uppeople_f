@@ -45,7 +45,7 @@ class VacancyCreate extends Component {
   createVacancy = vacancy => {
     createNewVacancy(vacancy).then(data => {
       const {history} = this.props;
-      console.log("CREATED VACANCY", vacancy);
+
         if (typeof data === 'object') {
             if (data.formErrors !== undefined) {
                 if (typeof data.formErrors === 'object') {

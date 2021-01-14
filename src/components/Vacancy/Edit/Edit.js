@@ -36,10 +36,33 @@ class VacancyEdit extends Component {
   editVacancy = vacancy => {
     const { id } = this.props.match.params;
 
-    updateVacancy(id, vacancy).then(vacancy => {
+    updateVacancy(id, vacancy).then(data => {
       const { history } = this.props;
 
-      history.push(`/vacancies/${vacancy.id}`);
+      if (typeof data === 'object') {
+        if (data.formErrors !== undefined) {
+          if (typeof data.formErrors === 'object') {
+            Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+              if (elem[0].startsWith("Select")) {
+                let s = elem[0].slice(6).toLowerCase()
+                console.log(elem, s)
+                document.querySelector('.'+s+'_div > div').classList.add('error');
+              } else {
+                document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+              }
+
+            })
+          } else {
+            alert(data.formErrors)
+          }
+        } else {
+          history.push(`/vacancies/${data.id}`);
+        }
+      } else if (data === 401) {
+          history.push('/login/')
+      } else {
+        alert(data)
+      }
     });
   };
 

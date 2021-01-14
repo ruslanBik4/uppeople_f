@@ -29,15 +29,15 @@ export default class VacancyEditForm extends Component {
       id: PropTypes.number,
       platform: PropTypes.shape({
         id: PropTypes.number,
-        nazva: PropTypes.string
+        name: PropTypes.string
       }),
       seniority: PropTypes.shape({
         id: PropTypes.number,
-        nazva: PropTypes.string
+        name: PropTypes.string
       }),
       company: PropTypes.shape({
         id: PropTypes.number,
-        nazva: PropTypes.string
+        name: PropTypes.string
       }),
       location: PropTypes.shape({
         id: PropTypes.number,
@@ -122,8 +122,8 @@ export default class VacancyEditForm extends Component {
     if (this.props !== prevProps) {
       if (vacancy.platform !== null) {
         const selectedPlatform = options.platforms.find(
-          platform => platform.id === vacancy.platform.id
-        );
+          platform => platform.id === vacancy.platform_id
+        )
 
         this.setState({
           selectPlatform: selectedPlatform
@@ -132,7 +132,7 @@ export default class VacancyEditForm extends Component {
 
       if (vacancy.seniority !== null) {
         const selectedSeniority = options.seniority.find(
-          seniority => seniority.id === vacancy.seniority.id
+          seniority => seniority.id === vacancy.seniority_id
         );
 
         this.setState({
@@ -142,7 +142,7 @@ export default class VacancyEditForm extends Component {
 
       if (vacancy.company !== null) {
         const selectedCompany = options.companies.find(
-          company => company.id === vacancy.company.id
+          company => company.id === vacancy.company_id
         );
 
         this.setState({
