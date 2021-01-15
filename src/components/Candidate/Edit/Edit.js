@@ -55,7 +55,7 @@ class CandidateEdit extends Component {
     const { id } = this.props.match.params;
 console.log(candidate);
     updateCandidateProfile(id, candidate).then(
-    this.props.history.push('/candidates/{id}')
+    this.props.history.push(`/candidates/${id}`)
     );
   };
 
