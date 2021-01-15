@@ -47,15 +47,15 @@ const VacancyProfileInfo = ({
           <ListGroupItem>
             Company:{" "}
             {userRole !== 4 ? (
-              <Link to={`/companies/${company.id}`}>{company.nazva}</Link>
+              <Link to={`/companies/${company.id}`}>{company.name}</Link>
             ) : (
               company.nazva
             )}
           </ListGroupItem>
         )}
-        {platform && <ListGroupItem>Platform: {platform.nazva}</ListGroupItem>}
+        {platform && <ListGroupItem>Platform: {platform.name}</ListGroupItem>}
         {seniority && (
-          <ListGroupItem>Seniority: {seniority.nazva}</ListGroupItem>
+          <ListGroupItem>Seniority: {seniority.name}</ListGroupItem>
         )}
         {status && <ListGroupItem>Status: {status.status}</ListGroupItem>}
         {location && <ListGroupItem>Location: {location.name}</ListGroupItem>}

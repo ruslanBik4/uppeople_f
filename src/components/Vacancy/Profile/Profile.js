@@ -23,17 +23,18 @@ export default class VacancyProfile extends Component {
   };
 
   state = {
-    id: null,
-    date: "",
-    company: {},
-    platform: {},
-    seniority: {},
-    status: {},
-    location: {},
-    salary: "",
-    link: "",
-    description: "",  
-    details: ""
+      id: -1,
+      date: "",
+      company_id: 0,
+      platform_id: 0,
+      seniority_id: 0,
+      status: 0,
+      location_id: 0,
+      user_ids: [],
+      salary: 0,
+      link: "",
+      description: "",
+      details: ""
   };
 
   componentDidMount() {

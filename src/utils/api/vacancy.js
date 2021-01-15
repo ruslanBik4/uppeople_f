@@ -10,7 +10,7 @@ const getToken = () => localStorage.getItem("token");
  */
 export const getVacancyProfile = id => {
   const token = getToken();
-  // console.log("vacancy before");
+
   return fetch(`${URL}/main/viewVacancy/${id}`, {
     method: "GET",
     headers: {
@@ -22,31 +22,34 @@ export const getVacancyProfile = id => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status == 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
-    .then(data => {
-      const vacancy = data[0];
-
-      console.log( vacancy);
-
-      const vacancyInfo = {
-        id: vacancy.id,
-        date: vacancy.date_create,
-        company: vacancy.company,
-        platform: vacancy.platforms,
-        seniority: vacancy.seniorities,
-        status: vacancy.status,
-        location: vacancy.location,
-        salary: vacancy.salary,
-        link: vacancy.link,
-        description: vacancy.opus,
-        details: vacancy.details,
-        recruiters_ids: vacancy.recruiters_ids
-      };
-
-      return vacancyInfo;
-    })
+    // .then(data => {
+    //   const vacancy = data;
+    //
+    //   console.log( vacancy);
+    //
+    //   const vacancyInfo = {
+    //     id: vacancy.id,
+    //     date: vacancy.date_create,
+    //     company: vacancy.company_id,
+    //     platform: vacancy.platform_id,
+    //     seniority: vacancy.seniority_id,
+    //     status: vacancy.status,
+    //     location: vacancy.location_id,
+    //     salary: vacancy.salary,
+    //     link: vacancy.link,
+    //     description: vacancy.opus,
+    //     details: vacancy.details,
+    //     user_ids: vacancy.user_ids
+    //   };
+    //
+    //   return vacancyInfo;
+    // })
     .catch(error => console.log("error in fetch: ", error));
 };
 /**
@@ -69,6 +72,12 @@ export const createNewVacancy = async vacancy => {
     });
     if (response.ok) {
       return response.json();
+    }
+    if (response.status == 400) {
+      return response.json();
+    }
+    if (response.status == 401) {
+      return 401;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {
@@ -100,25 +109,23 @@ export const updateVacancy = (id, vacancy) => {
 
       throw new Error(`${response.statusText}`);
     })
-    .then(data => {
-      const vacancy = data[0];
-      console.log("vacancy response", data);
-      const vacancyInfo = {
-        id: vacancy.id,
-        date: vacancy.date_create,
-        company: vacancy.company,
-        platform: vacancy.platforms,
-        seniority: vacancy.seniorities,
-        status: vacancy.status,
-        location: vacancy.location,
-        salary: vacancy.salary,
-        link: vacancy.link,
-        description: vacancy.opus,
-        details: vacancy.details
-      };
-
-      return vacancyInfo;
-    })
+    // .then(vacancy => {
+    //   const vacancyInfo = {
+    //     id: vacancy.id,
+    //     date: vacancy.date_create,
+    //     company: vacancy.company,
+    //     platform: vacancy.platforms,
+    //     seniority: vacancy.seniorities,
+    //     status: vacancy.status,
+    //     location: vacancy.location,
+    //     salary: vacancy.salary,
+    //     link: vacancy.link,
+    //     description: vacancy.opus,
+    //     details: vacancy.details
+    //   };
+    //
+    //   return vacancyInfo;
+    // })
     .catch(error => console.log("error in fetch: ", error));
 };
 

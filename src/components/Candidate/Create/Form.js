@@ -260,10 +260,6 @@ export default class CandidateCreateForm extends Component {
     //   convertToRaw(about.getCurrentContent())
     // );
 
-    if (document.querySelector('.reasons_div > div') !== null) {
-      document.querySelector('.reasons_div > div').classList.remove('error');
-    }
-
     if (selectedTag !== undefined && selectedTag.id === 3 && selectedReason !== undefined || selectedTag.id !== 3) {
 
       selectedTag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedTag;

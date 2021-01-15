@@ -27,27 +27,12 @@ export default class VacancyEditForm extends Component {
   static propTypes = {
     vacancy: PropTypes.shape({
       id: PropTypes.number,
-      platform: PropTypes.shape({
-        id: PropTypes.number,
-        nazva: PropTypes.string
-      }),
-      seniority: PropTypes.shape({
-        id: PropTypes.number,
-        nazva: PropTypes.string
-      }),
-      company: PropTypes.shape({
-        id: PropTypes.number,
-        nazva: PropTypes.string
-      }),
-      location: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string
-      }),
-      status: PropTypes.shape({
-        id: PropTypes.number,
-        status: PropTypes.string
-      }),
-      salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      platform_id: PropTypes.number,
+      seniority_id: PropTypes.number,
+      company_id: PropTypes.number,
+      location_id: PropTypes.number,
+      status: PropTypes.number,
+      salary: PropTypes.number,
       link: PropTypes.string,
       date: PropTypes.string,
       description: PropTypes.string,
@@ -89,12 +74,12 @@ export default class VacancyEditForm extends Component {
   static defaultProps = {
     vacancy: {
       id: null,
-      seniority: {},
-      platform: {},
-      company: {},
-      location: {},
-      status: {},
-      salary: "",
+      seniority_id: 0,
+      platform_id: 0,
+      company_id: 0,
+      location_id: 0,
+      status: 0,
+      salary: 0,
       link: "",
       date: "",
       description: "",
@@ -108,10 +93,10 @@ export default class VacancyEditForm extends Component {
     selectCompany: [],
     selectRecruiter: [],
     selectLocation: [],
-    salary: "",
+    salary: 0,
     comment: "",
     link: "",
-    selectedVacancyStatus: "",
+    selectedVacancyStatus: 0,
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
@@ -120,40 +105,37 @@ export default class VacancyEditForm extends Component {
     const {vacancy, options} = this.props;
 
     if (this.props !== prevProps) {
-      if (vacancy.platform !== null) {
         const selectedPlatform = options.platforms.find(
-          platform => platform.id === vacancy.platform.id
-        );
+          platform => platform.id === vacancy.platform_id
+        )
 
         this.setState({
           selectPlatform: selectedPlatform
         });
-      }
 
-      if (vacancy.seniority !== null) {
+
         const selectedSeniority = options.seniority.find(
-          seniority => seniority.id === vacancy.seniority.id
+          seniority => seniority.id === vacancy.seniority_id
         );
 
         this.setState({
           selectSeniority: selectedSeniority
         });
-      }
 
-      if (vacancy.company !== null) {
+
         const selectedCompany = options.companies.find(
-          company => company.id === vacancy.company.id
+          company => company.id === vacancy.company_id
         );
 
         this.setState({
           selectCompany: selectedCompany
         });
-      }
 
 
-      if (vacancy.recruiters_ids !== null &&  options.recruiters !== undefined) {
+
+      if (vacancy.user_ids !== null &&  options.recruiters !== undefined) {
         const selectRecruiter = options.recruiters.filter(
-          recruiter => vacancy.recruiters_ids.indexOf(recruiter.id) > -1
+          recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
         );
 
         this.setState({
@@ -161,15 +143,14 @@ export default class VacancyEditForm extends Component {
         });
       }
 
-      if (vacancy.location !== null) {
         const selectedLocation = options.location.find(
-          location => location.id === vacancy.location.id
+          location => location.id === vacancy.location_id
         );
 
         this.setState({
           selectLocation: selectedLocation
         });
-      }
+
 
       const htmlDescription = vacancy.description;
       const descriptionBlock = htmlToDraft(htmlDescription);
@@ -199,10 +180,10 @@ export default class VacancyEditForm extends Component {
         }
       }
 
-      const salary = vacancy.salary !== null ? vacancy.salary : "";
+      const salary =  vacancy.salary;
       const comment = vacancy.comment !== null ? vacancy.comment : "";
-      const link = vacancy.link !== null ? vacancy.link : "";
-      const selectedVacancyStatus = vacancy.status.id;
+      const link = vacancy.link ;
+      const selectedVacancyStatus = vacancy.status;
 
       this.setState({
         salary,

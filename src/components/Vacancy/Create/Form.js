@@ -63,7 +63,7 @@ export default class VacancyCreateForm extends Component {
     selectCompany: [],
     selectLocation: [],
     selectRecruiter: [],
-    salary: "",
+    salary: 0,
     comment: "",
     link: "",
     selectedVacancyStatus: 0,
@@ -73,6 +73,12 @@ export default class VacancyCreateForm extends Component {
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
+  };
+
+  handleSalaryChange = ({target: {name, value}}) => {
+    this.setState({
+      salary: parseInt(value)
+    });
   };
 
   handleDescriptionStateChange = description => {
@@ -150,11 +156,52 @@ export default class VacancyCreateForm extends Component {
       details: detailsEditorState
     };
 
-    document.querySelector('.recruiters_div > div').classList.remove('error');
-    if (vacancy.selectRecruiter.length > 0) {
-      onCreateVacancy(vacancy);
-    } else {
+    let errList = document.querySelector('.error');
+
+    if (errList !== null) {
+      errList.classList.remove('error');
+    }
+
+    let isValid = true;
+
+
+    if (descriptionEditorState.toString().trim() === "<p></p>") {
+      document.querySelector('.description_div + div').classList.add('error');
+      isValid = false;
+    }
+
+    if (detailsEditorState.toString().trim() === "<p></p>") {
+      document.querySelector('.details_div + div').classList.add('error');
+      isValid = false;
+    }
+
+    if ( vacancy.selectPlatform.length === 0) {
+      document.querySelector('.platform_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if ( vacancy.selectSeniority.length === 0) {
+      document.querySelector('.seniority_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if ( vacancy.selectCompany.length === 0) {
+      document.querySelector('.companies_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if ( vacancy.selectLocation.length === 0) {
+      document.querySelector('.location_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (vacancy.selectRecruiter.length === 0) {
       document.querySelector('.recruiters_div > div').classList.add('error');
+      isValid = false;
+    }
+
+    if (isValid) {
+      onCreateVacancy(vacancy);
     }
   };
 
@@ -182,7 +229,7 @@ export default class VacancyCreateForm extends Component {
           <Col md={9}>
             <Card>
               <CardBody>
-                <h6>Description</h6>
+                <h6 className={"description_div"}>Description</h6>
                 <Editor
                   editorState={description}
                   wrapperClassName="wrapper-class"
@@ -196,7 +243,7 @@ export default class VacancyCreateForm extends Component {
                   }}
                   onEditorStateChange={this.handleDescriptionStateChange}
                 />
-                <h6>Description for Freelancers</h6>
+                <h6 className={"details_div"}>Description for Freelancers</h6>
                 <Editor
                   editorState={details}
                   wrapperClassName="wrapper-class"
@@ -215,7 +262,7 @@ export default class VacancyCreateForm extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <FormGroup>
+                    <FormGroup className={"platform_div"}>
                       <Select
                         value={selectPlatform}
                         options={platforms}
@@ -223,7 +270,7 @@ export default class VacancyCreateForm extends Component {
                         onChange={this.handlePlatformChange}
                       />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"seniority_div"}>
                       <Select
                         value={selectSeniority}
                         options={seniority}
@@ -231,7 +278,7 @@ export default class VacancyCreateForm extends Component {
                         onChange={this.handleSeniorityChange}
                       />
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"companies_div"}>
                       <Select
                         value={selectCompany}
                         options={companies}
@@ -250,7 +297,7 @@ export default class VacancyCreateForm extends Component {
                       style={{zIndex: 2}}
                     />
                   </FormGroup>
-                    <FormGroup>
+                    <FormGroup className={"location_div"}>
                       <Select
                         value={selectLocation}
                         options={location}
@@ -263,11 +310,13 @@ export default class VacancyCreateForm extends Component {
                       <Col>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
+                          min={100}
                           name="salary"
                           value={salary}
+                          required={true}
                           placeholder="Salary"
-                          onChange={this.handleInputChange}
+                          onChange={this.handleSalaryChange}
                         />
                         <i
                           style={{
