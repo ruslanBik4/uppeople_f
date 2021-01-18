@@ -18,7 +18,7 @@ export default class CandidateCreate extends Component {
     tags: [],
     reasons: [],
     reject_tag: {},
-    defaultSelectedTag: {}
+    defaultSelectedtag: {}
   };
 
   componentDidMount() {
@@ -28,7 +28,7 @@ export default class CandidateCreate extends Component {
       const tags = optionsForSelects.tags;
       const reasons = optionsForSelects.reject_reasons;
       const reject_tag = optionsForSelects.reject_tag;
-      const defaultSelectedTag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
+      const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
       const vacancies = optionsForSelects.vacancies;
 
       this.setState({
@@ -38,7 +38,7 @@ export default class CandidateCreate extends Component {
         reasons,
         vacancies,
         reject_tag,
-        defaultSelectedTag
+        defaultSelectedtag
       });
     });
   }
@@ -52,12 +52,13 @@ export default class CandidateCreate extends Component {
           console.log(data)
           if (typeof data === 'object') {
             if (data.formErrors !== undefined) {
-              if (typeof data.formErrors === 'object') {
+              if (data.formErrors === 'object') {
                 Object.entries(data.formErrors).forEach(function (elem, i, arr) {
                   if (elem[0].startsWith("Select")) {
                     let s = elem[0].slice(6).toLowerCase()
                     console.log(elem, s)
-                    document.querySelector('label[for='+s+']').classList.add('error');
+                    document.querySelector('.+s+_div > div').classList.add('errorallform')
+                    // document.querySelector(s+'_div').classList.add('error');
                   } else {
                     document.querySelector('input[name='+ elem[0]+']').classList.add('error');
                     document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
@@ -80,7 +81,7 @@ export default class CandidateCreate extends Component {
   };
 
   render() {
-    const {platforms, seniorities, tags, reasons, reject_tag, defaultSelectedTag, vacancies} = this.state;
+    const {platforms, seniorities, tags, reasons, reject_tag, defaultSelectedtag, vacancies} = this.state;
 
     return (
       <>
@@ -91,7 +92,7 @@ export default class CandidateCreate extends Component {
           tags={tags}
           reasons={reasons}
           vacancies={vacancies}
-          defaultSelectedTag={defaultSelectedTag}
+          defaultSelectedtag={defaultSelectedtag}
           reject_tag={reject_tag}
           onUploadAvatar={this.uploadAvatar}
           onCreateCandidate={this.createCandidate}

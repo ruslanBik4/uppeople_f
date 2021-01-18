@@ -180,10 +180,10 @@ export default class VacancyCreateForm extends Component {
       isValid = false;
     }
 
-    if ( vacancy.selectSeniority.length === 0) {
-      document.querySelector('.seniority_div > div').classList.add('error');
-      isValid = false;
-    }
+  //  if ( vacancy.selectSeniority.length === 0) {
+  //    document.querySelector('.seniority_div > div').classList.add('error');
+  //    isValid = false;
+  //  }
 
     if ( vacancy.selectCompany.length === 0) {
       document.querySelector('.companies_div > div').classList.add('error');
@@ -195,10 +195,10 @@ export default class VacancyCreateForm extends Component {
       isValid = false;
     }
 
-    if (vacancy.selectRecruiter.length === 0) {
-      document.querySelector('.recruiters_div > div').classList.add('error');
-      isValid = false;
-    }
+    //if (vacancy.selectRecruiter.length === 0) {
+    //  document.querySelector('.recruiters_div > div').classList.add('error');
+    //  isValid = false;
+   // }
 
     if (isValid) {
       onCreateVacancy(vacancy);

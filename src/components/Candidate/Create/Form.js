@@ -53,7 +53,7 @@ export default class CandidateCreateForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
-    defaultSelectedTag: PropTypes.func.isRequired,
+    defaultSelectedtag: PropTypes.func.isRequired,
     onUploadAvatar: PropTypes.func.isRequired,
     onCreateCandidate: PropTypes.func.isRequired
   };
@@ -61,12 +61,12 @@ export default class CandidateCreateForm extends Component {
   constructor(props) {
     super(props);
     // console.log(props);
-    // if (Object.keys(selectedTag).length === 0 && Object.keys(defaultSelectedTag).length > 0) {
-    //   selectedTag = defaultSelectedTag;
-    //   this.setState({selectedTag:selectedTag});
+    // if (Object.keys(selectedtag).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
+    //   selectedtag = defaultSelectedtag;
+    //   this.setState({selectedtag:selectedtag});
     //
-    //   console.log(selectedTag);
-    //   console.log(this.state.selectedTag);
+    //   console.log(selectedtag);
+    //   console.log(this.state.selectedtag);
     // }
     this.setState({});
   }
@@ -76,7 +76,7 @@ export default class CandidateCreateForm extends Component {
     name: "",
     selectPlatform: [],
     selectSeniority: [],
-    selectedTag: {},
+    selectedtag: {},
     selectedReason: {},
     selectedVacancies: [],
     date: moment().format("YYYY-MM-DD"),
@@ -136,7 +136,7 @@ export default class CandidateCreateForm extends Component {
   };
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    // this.state.selectedTag = this.props.selectedTag;
+    // this.state.selectedtag = this.props.selectedtag;
   }
 
   handleAvatarSelected = event => {
@@ -173,8 +173,8 @@ export default class CandidateCreateForm extends Component {
     });
   };
 
-  handleTagsChange = value => {
-    this.setState({selectedTag: value});
+  handletagsChange = value => {
+    this.setState({selectedtag: value});
     this.setState({selectedReason: undefined});
   };
 
@@ -219,7 +219,7 @@ export default class CandidateCreateForm extends Component {
       resume,
       comment,
       // about,
-      selectedTag,
+      selectedtag,
       selectedReason,
       selectedVacancies
     } = this.state;
@@ -231,38 +231,45 @@ export default class CandidateCreateForm extends Component {
       errList.classList.remove('error');
     }
 
-    if (name == "") {
-      document.querySelector('input[name=name]').classList.add('error');
-      throw new Error("name is required");
+    let isValid = true;
+
+   // if ( newCandidate.selectName.length === 0) {
+   //     document.querySelector('platform_div + div').classList.add('error');
+   //     isValid = false
+   // }
+
+   // if (name == "") {
+   //  document.querySelector('input[name=name]').classList.add('error');
+   //   throw new Error("name is required");
+   // }
+
+    if (selectPlatform.length === 0) {
+      document.querySelector('.platform_div > div').classList.add('error');
+      isValid = false;
     }
 
-    if (typeof selectPlatform !== 'object' ) {
-      document.querySelector('label[for=platform]').classList.add('error');
-      throw new Error("platform is required");
+    if (selectSeniority.length === 0) {
+      document.querySelector('.seniority_div > div').classList.add('error');
+      isValid = false;
     }
 
-    if (typeof selectSeniority !== 'object' ) {
-      document.querySelector('label[for=seniority]').classList.add('error');
-      throw new Error("Seniority is required");
+    if (language.length === 0) {
+      document.querySelector('.language_div > div').classList.add('error');
+      isValid = false;
     }
 
-    if (typeof language !== 'object' ) {
-      document.querySelector('label[for=language]').classList.add('error');
-      throw new Error("language is required");
-    }
-
-    if (typeof selectedTag !== 'object' ) {
-      document.querySelector('label[for=Tag').classList.add('error');
-      throw new Error("Tag is required");
+    if (selectedtag.length === 0) {
+      document.querySelector('.tag_div > div').classList.add('error');
+      isValid = false;
     }
 
     // const aboutEditorState = draftToHtml(
     //   convertToRaw(about.getCurrentContent())
     // );
 
-    if (selectedTag !== undefined && selectedTag.id === 3 && selectedReason !== undefined || selectedTag.id !== 3) {
+    if (selectedtag !== undefined && selectedtag.id === 3 && selectedReason !== undefined || selectedtag.id !== 3) {
 
-      selectedTag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedTag;
+      selectedtag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedtag;
 
       language = typeof language === 'object' ? language.id : '';
 
@@ -270,7 +277,7 @@ export default class CandidateCreateForm extends Component {
         name,
         selectPlatform,
         selectSeniority,
-        selectedTag,
+        selectedtag,
         date,
         salary,
         language,
@@ -293,9 +300,9 @@ export default class CandidateCreateForm extends Component {
 
   ReasonFormGroup = () => {
     const {reasons} = this.props;
-    const {selectedTag, selectedReason} = this.state;
+    const {selectedtag, selectedReason} = this.state;
 
-    if ((selectedTag !== undefined && selectedTag !== null && selectedTag.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
+    if ((selectedtag !== undefined && selectedtag !== null && selectedtag.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
 
       return (
         <FormGroup row>
@@ -336,12 +343,12 @@ export default class CandidateCreateForm extends Component {
       selectedVacancies,
       // about
     } = this.state;
-    let {selectedTag} = this.state;
-    const {platforms, seniorities, tags, defaultSelectedTag} = this.props;
+    let {selectedtag} = this.state;
+    const {platforms, seniorities, tags, defaultSelectedtag} = this.props;
 
-    if (Object.keys(selectedTag).length === 0 && Object.keys(defaultSelectedTag).length > 0) {
-      selectedTag = defaultSelectedTag;
-      this.setState({selectedTag: selectedTag});
+    if (Object.keys(selectedtag).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
+      selectedtag = defaultSelectedtag;
+      this.setState({selectedtag: selectedtag});
     }
 
     return (
@@ -426,11 +433,11 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-user icons font-lg"
                         />
-                      <Label for="nameError" sm={3}>
-                      </Label>
+                      {/* <Label sm={3}>
+                      </Label> */}
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup className={"platform_div"} row>
                       <Label for="platform" sm={3}>
                         Platform<font color="red">*</font>
                       </Label>
@@ -445,7 +452,7 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup className={"seniority_div"} row>
                       <Label for="seniorities" sm={3}>
                         Seniorities<font color="red">*</font>
                       </Label>
@@ -460,7 +467,7 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup className={"language_div"} row>
                       <Label for="language" sm={3}>
                         Language<font color="red">*</font>
                       </Label>
@@ -545,18 +552,18 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                   </Col>
                   <Col lg={6} md={12}>
-                    <FormGroup row>
+                    <FormGroup className={"tag_div"} row>
                       <Label for="tags" sm={3}>
-                        Tag
+                        tag
                       </Label>
                       <Col sm={9}>
                         <Select
                           required
                           id="tags"
                           options={tags}
-                          value={selectedTag}
-                          placeholder="Tag"
-                          onChange={this.handleTagsChange}
+                          value={selectedtag}
+                          placeholder="tag"
+                          onChange={this.handletagsChange}
                         />
                       </Col>
                     </FormGroup>
@@ -577,8 +584,8 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-phone icons font-lg"
                         />
-                        <Label for="phoneError" sm={3}>
-                        </Label>
+                        {/* <Label for="phoneError" sm={3}>
+                        </Label> */}
                       </Col>
                     </FormGroup>
                     <FormGroup row>
@@ -691,7 +698,7 @@ export default class CandidateCreateForm extends Component {
                 {/*    />*/}
                 {/*  </Col>*/}
                 {/*</Row>*/}
-                <Row style={{justifyContent: "flex-end"}}>
+                <Row style={{justifyContent: "flex-start"}}>
                   <FormGroup check>
                     <Col>
                       <Button type="submit" color="primary">
@@ -700,8 +707,6 @@ export default class CandidateCreateForm extends Component {
                     </Col>
                   </FormGroup>
                 </Row>
-              </Form>
-            </CardBody>
           </Card>
         </Col>
       </Row>
