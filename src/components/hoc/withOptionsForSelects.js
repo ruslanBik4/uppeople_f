@@ -20,8 +20,9 @@ const withOptionsForSelects = WrappedComponent =>
     };
 
     componentDidMount() {
-        const options = getOptions();
-        if (options !== null && options.length > 0) {
+        const opts = getOptions();
+        if (pots !== null && pots > "") {
+            const options = JSON.parse(opts);
             this.setState({ ...options });
             return
         }

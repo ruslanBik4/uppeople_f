@@ -142,7 +142,7 @@ const CandidateTableRow = ({
       </td>
       <td>
         {companies &&
-          companies.split(";").map((company, idx) => {
+          companies.map((company, idx) => {
             const parsedCompany = JSON.parse(company);
             return (
               <Link
