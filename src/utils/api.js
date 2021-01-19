@@ -9,11 +9,6 @@ const getOptions = () => localStorage.getItem("optionsForSelects");
  * @returns {Promise} Promise object represents operation result
  */
 export const getOptionsForSelects = async () => {
- const opt = getOptions();
-  if (opt !== null && opt.length > 0) {
-    return JSON.parse(opt)
-  }
-
   const token = getToken();
   try {
     const response = await fetch(`${URL}/main/returnOptionsForSelects`, {
@@ -24,9 +19,7 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-      const options = response.json();
-      localStorage.setItem('optionsForSelects', JSON.stringify(options));
-      return options;
+      return response.json();
     }
     if (response.status === 401) {
       return 401;

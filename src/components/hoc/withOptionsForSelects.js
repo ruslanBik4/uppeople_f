@@ -18,7 +18,13 @@ const withOptionsForSelects = WrappedComponent =>
     };
 
     componentDidMount() {
-      getOptionsForSelects().then(optionsForSelects => {
+        const options = getOptions();
+        if (options !== null && options.length > 0) {
+            this.setState({ ...options });
+            return
+        }
+
+        getOptionsForSelects().then(optionsForSelects => {
           if (optionsForSelects === 401) {
               this.props.history.push('/login/');
               return
@@ -34,6 +40,8 @@ const withOptionsForSelects = WrappedComponent =>
           recruiters:  optionsForSelects.recruiters,
           vacancies: optionsForSelects.vacancies,
         };
+
+          localStorage.setItem('optionsForSelects', JSON.stringify(options));
 
           this.setState({ ...options });
       });

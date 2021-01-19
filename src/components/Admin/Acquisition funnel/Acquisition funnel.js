@@ -72,7 +72,7 @@ export default class AcquisitionFunnel extends Component {
       this.state.selectedVacancy !== prevState.selectedVacancy ||
       this.state.selectedTags !== prevState.selectedTags ||
         (this.state.selectedStartDate !== prevState.selectedStartDate &&
-            moment(this.state.selectedStartDate).toDate() !== undefined) ||
+            typeof moment(this.state.selectedStartDate).toDate() === 'object') ||
       this.state.selectedEndDate !== prevState.selectedEndDate) {
       this.fetchCandidatesData();
     }
