@@ -161,7 +161,7 @@ export default class Candidates extends Component {
     });
 
     getSentCandidates(currentSentPage).then(sentCandidatesData => {
-      if (sentCandidatesData = 401) {
+      if (sentCandidatesData === 401) {
         this.props.history.push('/login/');
         return
       }
