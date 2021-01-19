@@ -88,7 +88,7 @@ export default class AcquisitionFunnel extends Component {
     const users = await getUsers();
 
     if (users.staff !== undefined) {
-      const recruiters = users.staff.filter((user) => user.role_id === 2); // recruiter
+      const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
     } else if (users.recruiters !== undefined) {
       const recruiters = users.recruiters; // recruiter
