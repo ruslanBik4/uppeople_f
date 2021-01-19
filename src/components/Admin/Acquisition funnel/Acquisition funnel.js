@@ -14,6 +14,8 @@ import {
   ChartTooltip,
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
+import moment from "moment";
+
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
 
@@ -69,7 +71,8 @@ export default class AcquisitionFunnel extends Component {
       this.state.selectedCompany !== prevState.selectedCompany ||
       this.state.selectedVacancy !== prevState.selectedVacancy ||
       this.state.selectedTags !== prevState.selectedTags ||
-      this.state.selectedStartDate !== prevState.selectedStartDate ||
+        (this.state.selectedStartDate !== prevState.selectedStartDate &&
+            moment(this.state.selectedStartDate).toDate() === 'Date') ||
       this.state.selectedEndDate !== prevState.selectedEndDate) {
       this.fetchCandidatesData();
     }
@@ -130,7 +133,9 @@ export default class AcquisitionFunnel extends Component {
       selectedCompany ? selectedCompany.id : 0,
       selectedVacancy ? selectedVacancy.id : 0,
       selectedStartDate, selectedEndDate);
-    if (data !== undefined) {
+    if (data === 401) {
+      this.props.history.push('/login/')
+    } else if (data !== undefined) {
       let funnelData = data.data.main;
       let pieChartData = data.data.reject;
 

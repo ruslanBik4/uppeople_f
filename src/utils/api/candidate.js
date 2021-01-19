@@ -263,7 +263,10 @@ export const updateCandidateProfile = (id, candidate) => {
         return response.json();
       }
 
-      throw new Error(`${response.statusText}`);
+      if (response.status === 401) {
+        return 401;
+      }
+        throw new Error(`${response.statusText}`);
     })
     .then(data => {
       const candidate = data[0];
