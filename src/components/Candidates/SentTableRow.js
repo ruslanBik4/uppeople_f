@@ -63,11 +63,11 @@ const CandidateTableRow = ({
     skypeValue = null
   }
 
-  if (status !== "" || null) {
-    let explode = status.split(';');
-    status = JSON.parse(explode[explode.length - 1]);
-  }
-
+  // if (status !== "" || null) {
+  //   let explode = status.split(';');
+  //   status = JSON.parse(explode[explode.length - 1]);
+  // }
+  //
   return (
     <>
       <td>
@@ -88,7 +88,7 @@ const CandidateTableRow = ({
       <td>{moment(date).format("DD.MM.YY")}</td>
       <td>{platform}</td>
       <td>
-        <Link to={`/candidates/${id}`} target="_blank">{name}</Link>
+        <Link to={`/candidates/${id}`} >{name}</Link>
       </td>
       <td>{salary}</td>
       <td>

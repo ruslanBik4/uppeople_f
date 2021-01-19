@@ -24,9 +24,13 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-
+      localStorage.setItem('optionsForSelects', JSON.stringify(options));
       return response.json();
     }
+    if (response.status === 401) {
+      return 401;
+    }
+
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);

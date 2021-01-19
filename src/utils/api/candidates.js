@@ -67,6 +67,9 @@ export const getSentCandidates = page => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })

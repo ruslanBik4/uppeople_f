@@ -161,6 +161,10 @@ export default class Candidates extends Component {
     });
 
     getSentCandidates(currentSentPage).then(sentCandidatesData => {
+      if (sentCandidatesData = 401) {
+        this.props.history.push('/login/');
+        return
+      }
       console.log("sent candidates", sentCandidatesData);
       this.setState({
         sentCandidatesData: {...this.state.sentCandidatesData, ...sentCandidatesData}
