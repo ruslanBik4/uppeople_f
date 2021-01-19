@@ -3,6 +3,8 @@ import React, { Component } from "react";
 // Instruments
 import { getOptionsForSelects } from "../../utils/api";
 
+const getOptions = () => localStorage.getItem("optionsForSelects");
+
 const withOptionsForSelects = WrappedComponent =>
   class withOptionsForSelects extends Component {
     state = {

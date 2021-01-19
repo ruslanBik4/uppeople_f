@@ -1,7 +1,6 @@
 // const URL = "http://f2.uppeople.space/api";
 const URL = "/api";
 const getToken = () => localStorage.getItem("token");
-const getOptions = () => localStorage.getItem("optionsForSelects");
 
 /**
  * Fetches options for selects from an api
