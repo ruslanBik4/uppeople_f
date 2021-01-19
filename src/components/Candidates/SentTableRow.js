@@ -147,7 +147,7 @@ const CandidateTableRow = ({
                 key={`${id}-${companies.id}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {companies.name}
+                  {companies.label}
                 {/*</Badge>*/}
               </Link>
           : null

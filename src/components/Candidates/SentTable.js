@@ -67,7 +67,7 @@ const SentCandidatesTable = ({
                               <CandidateExpandableTableRow
                                 userRole={userRole}
                                 candId={candidate.id}
-                                candidateStatus={candidate.status}
+                                candidateStatus={candidate.status.comments}
                                 statuses={statuses}
                               />
                             </tr>
