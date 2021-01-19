@@ -21,7 +21,7 @@ const withOptionsForSelects = WrappedComponent =>
 
     componentDidMount() {
         const opts = getOptions();
-        if (pots !== null && pots > "") {
+        if (opts !== null && opts > "") {
             const options = JSON.parse(opts);
             this.setState({ ...options });
             return
