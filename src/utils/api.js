@@ -10,7 +10,7 @@ const getOptions = () => localStorage.getItem("optionsForSelects");
  */
 export const getOptionsForSelects = async () => {
  const opt = getOptions();
-  if (opt !== null) {
+  if (opt !== null && opt.length > 0) {
     return JSON.parse(opt)
   }
 
@@ -24,7 +24,7 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-      let options = response.json();
+      const options = response.json();
       localStorage.setItem('optionsForSelects', JSON.stringify(options));
       return options;
     }
