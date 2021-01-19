@@ -72,7 +72,7 @@ export default class AcquisitionFunnel extends Component {
       this.state.selectedVacancy !== prevState.selectedVacancy ||
       this.state.selectedTags !== prevState.selectedTags ||
         (this.state.selectedStartDate !== prevState.selectedStartDate &&
-            moment(this.state.selectedStartDate).toDate() === 'Date') ||
+            moment(this.state.selectedStartDate).toDate() !== null) ||
       this.state.selectedEndDate !== prevState.selectedEndDate) {
       this.fetchCandidatesData();
     }
@@ -136,8 +136,8 @@ export default class AcquisitionFunnel extends Component {
     if (data === 401) {
       this.props.history.push('/login/')
     } else if (data !== undefined) {
-      let funnelData = data.data.main;
-      let pieChartData = data.data.reject;
+      let funnelData = data.main;
+      let pieChartData = data.reject;
 
       this.setState({funnelData});
       this.setState({pieChartData});
