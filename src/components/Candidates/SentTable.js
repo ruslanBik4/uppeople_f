@@ -50,8 +50,7 @@ const SentCandidatesTable = ({
                     {...candidate}
                   />
                 </tr>
-                {candidate.status &&
-                  candidate.status.split(";").map(status => (
+                {candidate.status !== null ?
                     <tr key={candidate.id}>
                       <td colSpan="8">
                         <Table style={{ background: "var(--white)" }} size="sm">
@@ -68,7 +67,7 @@ const SentCandidatesTable = ({
                               <CandidateExpandableTableRow
                                 userRole={userRole}
                                 candId={candidate.id}
-                                candidateStatus={status}
+                                candidateStatus={candidate.status}
                                 statuses={statuses}
                               />
                             </tr>
@@ -76,7 +75,8 @@ const SentCandidatesTable = ({
                         </Table>
                       </td>
                     </tr>
-                  ))}
+                    : null
+                  }
               </>
             ) : (
               <tr key={candidate.id}>

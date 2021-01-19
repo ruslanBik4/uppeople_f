@@ -141,20 +141,17 @@ const CandidateTableRow = ({
       </Badge>
       </td>
       <td>
-        {companies &&
-          companies.length > 0 &&
-          companies.forEach(function (parsedCompany, idx, arr) {
-            return (
+        {companies !== null ?
               <Link
-                to={`/companies/${parsedCompany.id}`}
-                key={`${idx}-${id}-${parsedCompany.id}`}
+                to={`/companies/${companies.id}`}
+                key={`${id}-${companies.id}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {parsedCompany.name}
+                  {companies.name}
                 {/*</Badge>*/}
               </Link>
-            );
-          })}
+          : null
+          }
       </td>
       <td>{recruiter}</td>
     </>
