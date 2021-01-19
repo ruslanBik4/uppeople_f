@@ -24,8 +24,9 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
+      let options = response.json();
       localStorage.setItem('optionsForSelects', JSON.stringify(options));
-      return response.json();
+      return options;
     }
     if (response.status === 401) {
       return 401;
