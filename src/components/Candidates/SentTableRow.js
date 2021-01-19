@@ -142,8 +142,8 @@ const CandidateTableRow = ({
       </td>
       <td>
         {companies &&
-          companies.map((company, idx) => {
-            const parsedCompany = JSON.parse(company);
+          companies.length > 0 &&
+          companies.forEach(function (parsedCompany, idx, arr) {
             return (
               <Link
                 to={`/companies/${parsedCompany.id}`}
