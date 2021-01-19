@@ -87,7 +87,9 @@ export default class AcquisitionFunnel extends Component {
   fetchRecruiters = async () => {
     const users = await getUsers();
 
-    if (users.staff !== undefined) {
+    if (users === 401) {
+      this.props.history.push('/login/')
+    } else if (users.staff !== undefined) {
       const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
     } else if (users.recruiters !== undefined) {
