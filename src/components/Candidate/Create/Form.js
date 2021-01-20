@@ -401,7 +401,7 @@ export default class CandidateCreateForm extends Component {
               <ListGroup flush>
                 {language && (
                   <ListGroupItem>Languages: {language.label}</ListGroupItem>
-                )}
+           )}
                 {comment && <ListGroupItem>Notes: {comment}</ListGroupItem>}
               </ListGroup>
             </CardBody>
@@ -699,17 +699,57 @@ export default class CandidateCreateForm extends Component {
                 {/*  </Col>*/}
                 {/*</Row>*/}
                 <Row style={{justifyContent: "flex-start"}}>
-                  <FormGroup check>
+                  <FormGroup row>
                     <Col>
-                      <Button type="submit" color="primary">
+                      <Button type="submit" color="primary" block>
                         Save
                       </Button>
                     </Col>
                   </FormGroup>
+                  {/* <FormGroup className={"errorlist"} row>
+                      <Label  lg={6} md={12}>
+                        
+                      </Label>
+                      <Col  lg={6} md={12}>
+                        
+                      </Col>
+                    </FormGroup> */}
                 </Row>
+              </Form>
+            </CardBody>
+          </Card>
+          <Card>
+         
+                  <FormGroup className={"errorlist"} row>
+                      <Label  lg={6} md={12}>
+                        
+                      </Label>
+                      <Col  lg={6} md={12}>
+                        
+                      </Col>
+                    </FormGroup>
+                    <FormGroup className={"errorlist1"} row>
+                      <Label  lg={6} md={12}>
+                        
+                      </Label>
+                      <Col  lg={6} md={12}>
+                        
+                      </Col>
+                    </FormGroup>
+                    <FormGroup className={"errorlist2"} row>
+                      <Label  lg={6} md={12}>
+                        
+                      </Label>
+                      <Col  lg={6} md={12}>
+                        
+                      </Col>
+                    </FormGroup>
           </Card>
         </Col>
       </Row>
     );
   }
 }
+
+  
+

@@ -52,19 +52,39 @@ export default class CandidateCreate extends Component {
           console.log(data)
           if (typeof data === 'object') {
             if (data.formErrors !== undefined) {
-              if (data.formErrors === 'object') {
+              if (typeof data.formErrors === 'object') {
                 Object.entries(data.formErrors).forEach(function (elem, i, arr) {
                   if (elem[0].startsWith("Select")) {
                     let s = elem[0].slice(6).toLowerCase()
                     console.log(elem, s)
-                    document.querySelector('.+s+_div > div').classList.add('errorallform')
-                    // document.querySelector(s+'_div').classList.add('error');
-                  } else {
-                    document.querySelector('input[name='+ elem[0]+']').classList.add('error');
-                    document.querySelector('label[for='+ elem[0]+'Error]').textContent = elem[1];
+                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + s);
+                    document.querySelector(".errorlist1 label").textContent = ("Не выбрано" +  elem[0]);
+                    document.querySelector('.'+s+'_div > div').classList.add('error');
+                                        // document.querySelector(s+'_div').classList.add('error');
+                  } 
+                  if (elem[0] === 'name') {
+                    document.querySelector(".errorlist label").textContent = ("Имя кандидата" + " " + elem[1]);
                   }
+                  else if (elem[0] === 'phone') {
+                    document.querySelector(".errorlist label").textContent = ("Номер телефона" + " " +  elem[1]);
+                  }
+                  else if (elem[0] === 'email') {
+                    document.querySelector(".errorlist label").textContent = ("Электронная почта" + " " +  elem[1]);
+                  }
+                  else if (elem[0] === 'linkedIn') {
+                    document.querySelector(".errorlist label").textContent = ("Профиль linkedIn" + " " +  elem[1]);
+                  }
+                  // else {elem[0]+elem[1]};
+                  // else {
+                  //   document.querySelector(".errorlist label").textContent = "This name is already exist";
+                    // document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + s);
+                    // document.querySelector(".errorlist1 label").
+                  }
+                    // document.querySelector(".errorlist label").textContent = "This name is already exist";
+                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + elem[0]);
 
-                })
+                )
               } else {
                 alert(data.formErrors)
               }
