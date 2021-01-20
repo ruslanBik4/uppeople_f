@@ -74,7 +74,9 @@ export default class CandidateCreate extends Component {
                   else if (elem[0] === 'linkedIn') {
                     document.querySelector(".errorlist label").textContent = ("Профиль linkedIn" + " " +  elem[1]);
                   }
-                  // else {elem[0]+elem[1]};
+                  else {
+                    document.querySelector(".errorlist label").textContent = (elem[0] + " " +  elem[1])
+                  };
                   // else {
                   //   document.querySelector(".errorlist label").textContent = "This name is already exist";
                     // document.querySelector('input[name='+ elem[0]+']').classList.add('error');
