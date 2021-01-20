@@ -366,9 +366,7 @@ export default class Candidates extends Component {
   }
 
   filterCand(currentAllPage, filterAndSortCandidates) {
-    console.log(filterAndSortCandidates)
     this.clearEmptyFilter(filterAndSortCandidates);
-    console.log(filterAndSortCandidates)
 
     filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(data => {
       if (data === 401) {
@@ -397,27 +395,38 @@ export default class Candidates extends Component {
     });
   }
 
-  clearEmptyFilter(filterAndSortCandidates) {
-    if (filterAndSortCandidates.selectCompanies && filterAndSortCandidates.selectCompanies.length === 0) {
-      delete filterAndSortCandidates.selectCompanies
+  clearEmptyFilter(filters) {
+    Object.entries(filters).forEach(function (elem, i, arr) {
+      if (elem[1] === "") {
+        delete filters[elem[0]];
+      }
+    });
+
+    if (filters.selectCompanies && filters.selectCompanies.length === 0) {
+      delete filters.selectCompanies
     }
-    if (filterAndSortCandidates.selectPlatforms && filterAndSortCandidates.selectPlatforms.length === 0) {
-      delete filterAndSortCandidates.selectPlatforms
+    if (filters.selectPlatforms && filters.selectPlatforms.length === 0) {
+      delete filters.selectPlatforms
     }
-    if (filterAndSortCandidates.selectStatuses && filterAndSortCandidates.selectStatuses.length === 0) {
-      delete filterAndSortCandidates.selectStatuses
+    if (filters.selectStatuses && filters.selectStatuses.length === 0) {
+      delete filters.selectStatuses
     }
-    if (filterAndSortCandidates.selectRecruiter && filterAndSortCandidates.selectRecruiter.length === 0) {
-      delete filterAndSortCandidates.selectRecruiter
+
+    if (filters.selectRecruiter) {
+     if (filters.selectRecruiter.length > 0) {
+       filters.id_recruiter = filters.selectRecruiter.id;
+     }
+      delete filters.selectRecruiter
     }
-    if (filterAndSortCandidates.selectSeniority && filterAndSortCandidates.selectSeniority.length === 0) {
-      delete filterAndSortCandidates.selectSeniority
+
+    if (filters.selectSeniority && filters.selectSeniority.length === 0) {
+      delete filters.selectSeniority
     }
-    if (filterAndSortCandidates.selectTag && filterAndSortCandidates.selectTag.length === 0) {
-      delete filterAndSortCandidates.selectTag
+    if (filters.selectTag && filters.selectTag.length === 0) {
+      delete filters.selectTag
     }
-    if (filterAndSortCandidates.selectReason && filterAndSortCandidates.selectReason.length === 0) {
-      delete filterAndSortCandidates.selectReason
+    if (filters.selectReason && filters.selectReason.length === 0) {
+      delete filters.selectReason
     }
   }
 
