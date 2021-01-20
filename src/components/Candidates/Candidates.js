@@ -398,25 +398,25 @@ export default class Candidates extends Component {
   }
 
   clearEmptyFilter(filterAndSortCandidates) {
-    if (filterAndSortCandidates.selectCompanies.length === 0) {
+    if (filterAndSortCandidates.selectCompanies && filterAndSortCandidates.selectCompanies.length === 0) {
       delete filterAndSortCandidates.selectCompanies
     }
-    if (filterAndSortCandidates.selectPlatforms.length === 0) {
+    if (filterAndSortCandidates.selectPlatforms && filterAndSortCandidates.selectPlatforms.length === 0) {
       delete filterAndSortCandidates.selectPlatforms
     }
-    if (filterAndSortCandidates.selectStatuses.length === 0) {
+    if (filterAndSortCandidates.selectStatuses && filterAndSortCandidates.selectStatuses.length === 0) {
       delete filterAndSortCandidates.selectStatuses
     }
-    if (filterAndSortCandidates.selectRecruiter.length === 0) {
+    if (filterAndSortCandidates.selectRecruiter && filterAndSortCandidates.selectRecruiter.length === 0) {
       delete filterAndSortCandidates.selectRecruiter
     }
     if (filterAndSortCandidates.selectSeniority && filterAndSortCandidates.selectSeniority.length === 0) {
       delete filterAndSortCandidates.selectSeniority
     }
-    if (filterAndSortCandidates.selectTag.length === 0) {
+    if (filterAndSortCandidates.selectTag && filterAndSortCandidates.selectTag.length === 0) {
       delete filterAndSortCandidates.selectTag
     }
-    if (filterAndSortCandidates.selectReason.length === 0) {
+    if (filterAndSortCandidates.selectReason && filterAndSortCandidates.selectReason.length === 0) {
       delete filterAndSortCandidates.selectReason
     }
   }
