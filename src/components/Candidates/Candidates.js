@@ -428,6 +428,8 @@ export default class Candidates extends Component {
     if (filters.selectReason && filters.selectReason.length === 0) {
       delete filters.selectReason
     }
+
+    console.log(filters);
   }
 
 // all
