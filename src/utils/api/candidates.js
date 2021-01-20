@@ -24,26 +24,11 @@ export const getAllCandidates = page => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      const allCandidatesData = {
-        allCandidates: data.candidates,
-        allCandidatesCount: data.Count,
-        allTotalPages: data.Page,
-        allPerPage: data.perPage,
-        currentAllPage: data.currentPage,
-        allPlatforms: data.platforms,
-        allStatuses: data.statuses,
-        allRecruiters: data.recruiter,
-        allSeniority: data.seniority,
-        tags: data.tags,
-        reasons: data.reasons,
-        loading: false
-      };
-
-      return allCandidatesData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
@@ -73,22 +58,6 @@ export const getSentCandidates = page => {
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
-    .then(data => {
-      const sentCandidatesData = {
-        sentCandidates: data.candidates,
-        sentCandidatesCount: data.Count,
-        sentTotalPages: data.Page,
-        sentPerPage: data.perPage,
-        currentSentPage: data.currentPage,
-        sentPlatforms: data.platforms,
-        sentCompanies: data.company,
-        sentStatuses: data.statuses,
-        sentRecruiters: data.recruiter,
-        loadingSent: false
-      };
-
-      return sentCandidatesData;
-    })
     .catch(error => console.log("error in fetch: ", error));
 };
 
@@ -111,20 +80,11 @@ export const getCandidatesFromFreelancers = page => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      const candidatesFromFreelancersData = {
-        candidatesFF: data.candidates,
-        candidatesCountFF: data.Count,
-        totalPagesFF: data.Page,
-        perPageFF: data.perPage,
-        statusesFF: data.statuses,
-        currentPageFF: data.currentPage
-      };
-
-      return candidatesFromFreelancersData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
@@ -152,24 +112,11 @@ export const filterAndSortAllCandidates = (page, filterAndSort) => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      const allCandidatesData = {
-        allCandidates: data.candidates,
-        allCandidatesCount: data.Count,
-        allTotalPages: data.Page,
-        allPerPage: data.perPage,
-        currentAllPage: data.currentPage,
-        allPlatforms: data.platforms,
-        allStatuses: data.statuses,
-        allRecruiters: data.recruiter,
-        allSeniority: data.seniority,
-        loading: false
-      };
-
-      return allCandidatesData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
@@ -197,25 +144,11 @@ export const filterAndSortSentCandidates = (page, filterAndSort) => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-
-      const sentCandidatesData = {
-        sentCandidates: data.candidates,
-        sentCandidatesCount: data.Count,
-        sentTotalPages: data.Page,
-        sentPerPage: data.perPage,
-        currentSentPage: data.currentPage,
-        sentPlatforms: data.platforms,
-        sentCompanies: data.company,
-        sentStatuses: data.statuses,
-        sentRecruiters: data.recruiter,
-        loadingSent: false
-      };
-
-      return sentCandidatesData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
