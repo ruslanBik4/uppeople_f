@@ -1,7 +1,6 @@
 // const URL = "http://f2.uppeople.space/api";
 const URL = process.env.REACT_APP_API_ENDPOINT;
 const getToken = () => localStorage.getItem("token");
-const getOptions = () => localStorage.getItem("optionsForSelects");
 
 /**
  * Fetches options for selects from an api
@@ -9,11 +8,6 @@ const getOptions = () => localStorage.getItem("optionsForSelects");
  * @returns {Promise} Promise object represents operation result
  */
 export const getOptionsForSelects = async () => {
- const opt = getOptions();
-  if (opt !== null) {
-    return JSON.parse(opt)
-  }
-
   const token = getToken();
   try {
     const response = await fetch(`${URL}/main/returnOptionsForSelects`, {
@@ -24,9 +18,12 @@ export const getOptionsForSelects = async () => {
       }
     });
     if (response.ok) {
-
       return response.json();
     }
+    if (response.status === 401) {
+      return 401;
+    }
+
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);

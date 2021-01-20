@@ -14,6 +14,8 @@ import {
   ChartTooltip,
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
+import moment from "moment";
+
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
 
@@ -69,7 +71,8 @@ export default class AcquisitionFunnel extends Component {
       this.state.selectedCompany !== prevState.selectedCompany ||
       this.state.selectedVacancy !== prevState.selectedVacancy ||
       this.state.selectedTags !== prevState.selectedTags ||
-      this.state.selectedStartDate !== prevState.selectedStartDate ||
+        (this.state.selectedStartDate !== prevState.selectedStartDate &&
+            typeof moment(this.state.selectedStartDate).toDate() === 'object') ||
       this.state.selectedEndDate !== prevState.selectedEndDate) {
       this.fetchCandidatesData();
     }
@@ -87,8 +90,10 @@ export default class AcquisitionFunnel extends Component {
   fetchRecruiters = async () => {
     const users = await getUsers();
 
-    if (users.staff !== undefined) {
-      const recruiters = users.staff.filter((user) => user.role_id === 2); // recruiter
+    if (users === 401) {
+      this.props.history.push('/login/')
+    } else if (users.staff !== undefined) {
+      const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
     } else if (users.recruiters !== undefined) {
       const recruiters = users.recruiters; // recruiter
@@ -128,9 +133,11 @@ export default class AcquisitionFunnel extends Component {
       selectedCompany ? selectedCompany.id : 0,
       selectedVacancy ? selectedVacancy.id : 0,
       selectedStartDate, selectedEndDate);
-    if (data !== undefined) {
-      let funnelData = data.data.main;
-      let pieChartData = data.data.reject;
+    if (data === 401) {
+      this.props.history.push('/login/')
+    } else if (data !== undefined) {
+      let funnelData = data.main;
+      let pieChartData = data.reject;
 
       this.setState({funnelData});
       this.setState({pieChartData});

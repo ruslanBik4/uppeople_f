@@ -161,10 +161,14 @@ export default class Candidates extends Component {
     });
 
     getSentCandidates(currentSentPage).then(sentCandidatesData => {
-      console.log("sent candidates", sentCandidatesData);
-      this.setState({
-        sentCandidatesData: {...this.state.sentCandidatesData, ...sentCandidatesData}
-      });
+      if (sentCandidatesData === 401) {
+        this.props.history.push('/login/');
+        return
+      } else {
+        this.setState({
+          sentCandidatesData: {...this.state.sentCandidatesData, ...sentCandidatesData}
+        });
+      }
     });
 
     getCandidatesFromFreelancers(currentPageFF).then(

@@ -73,7 +73,7 @@ const CandidateTableRow = ({
       <td>{moment(date).format("DD.MM.YY")}</td>
       <td>{platform}</td>
       <td>
-        <Link to={`/candidates/${id}`} target="_blank">{name}</Link>
+        <Link to={`/candidates/${id}`} >{name}</Link>
       </td>
       <td><Badge style={{backgroundColor:tag_color}}>{tag_name}</Badge></td>
       <td>{seniority}</td>

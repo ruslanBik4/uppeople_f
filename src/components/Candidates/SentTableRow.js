@@ -63,11 +63,11 @@ const CandidateTableRow = ({
     skypeValue = null
   }
 
-  if (status !== "" || null) {
-    let explode = status.split(';');
-    status = JSON.parse(explode[explode.length - 1]);
-  }
-
+  // if (status !== "" || null) {
+  //   let explode = status.split(';');
+  //   status = JSON.parse(explode[explode.length - 1]);
+  // }
+  //
   return (
     <>
       <td>
@@ -88,7 +88,7 @@ const CandidateTableRow = ({
       <td>{moment(date).format("DD.MM.YY")}</td>
       <td>{platform}</td>
       <td>
-        <Link to={`/candidates/${id}`} target="_blank">{name}</Link>
+        <Link to={`/candidates/${id}`} >{name}</Link>
       </td>
       <td>{salary}</td>
       <td>
@@ -141,20 +141,17 @@ const CandidateTableRow = ({
       </Badge>
       </td>
       <td>
-        {companies &&
-          companies.split(";").map((company, idx) => {
-            const parsedCompany = JSON.parse(company);
-            return (
+        {companies !== null ?
               <Link
-                to={`/companies/${parsedCompany.id}`}
-                key={`${idx}-${id}-${parsedCompany.id}`}
+                to={`/companies/${companies.id}`}
+                key={`${id}-${companies.id}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {parsedCompany.name}
+                  {companies.label}
                 {/*</Badge>*/}
               </Link>
-            );
-          })}
+          : null
+          }
       </td>
       <td>{recruiter}</td>
     </>

@@ -3,12 +3,15 @@ import React, { Component } from "react";
 // Instruments
 import { getOptionsForSelects } from "../../utils/api";
 
+const getOptions = () => localStorage.getItem("optionsForSelects");
+
 const withOptionsForSelects = WrappedComponent =>
   class withOptionsForSelects extends Component {
     state = {
       platforms: [],
       seniority: [],
       companies: [],
+      recruiters:[],
       vacancies:[],
       location: [],
       tags: [],
@@ -17,7 +20,18 @@ const withOptionsForSelects = WrappedComponent =>
     };
 
     componentDidMount() {
-      getOptionsForSelects().then(optionsForSelects => {
+        const opts = getOptions();
+        if (opts !== null && opts > "") {
+            const options = JSON.parse(opts);
+            this.setState({ ...options });
+            return
+        }
+
+        getOptionsForSelects().then(optionsForSelects => {
+          if (optionsForSelects === 401) {
+              this.props.history.push('/login/');
+              return
+          }
         const options = {
           platforms: optionsForSelects.platforms,
           seniority: optionsForSelects.seniorities,
@@ -29,8 +43,8 @@ const withOptionsForSelects = WrappedComponent =>
           recruiters:  optionsForSelects.recruiters,
           vacancies: optionsForSelects.vacancies,
         };
-          // localStorage.setItem('optionsForSelects', JSON.stringify(options));
 
+          localStorage.setItem('optionsForSelects', JSON.stringify(options));
 
           this.setState({ ...options });
       });
