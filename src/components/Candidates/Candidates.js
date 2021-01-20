@@ -414,7 +414,7 @@ export default class Candidates extends Component {
 
     if (filters.selectRecruiter) {
      if (filters.selectRecruiter.length > 0) {
-       filters.id_recruiter = filters.selectRecruiter.id;
+       Object.defineProperty(filters, 'id_recruiter', { value: filters.selectRecruiter.id, configurable: true, });
      }
       delete filters.selectRecruiter
     }
@@ -434,8 +434,6 @@ export default class Candidates extends Component {
 
   privateFilterAndSortAllCandidates = filterAndSort => {
     const {filterAndSortCandidates} = this.state;
-    console.log('>>>>>Filter from candidates');
-    console.log(filterAndSortCandidates);
     this.setState(
       {
         filterAndSortCandidates: {
