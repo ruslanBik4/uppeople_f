@@ -329,64 +329,99 @@ export default class Candidates extends Component {
           sentCandidatesData: {currentSentPage},
           filterAndSortCandidates
         } = this.state;
-
-        filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(data => {
-              if (data === 401) {
-                this.props.history.push('/login/');
-              } else {
-                const allCandidatesData = {
-                  allCandidates: data.candidates,
-                  allCandidatesCount: data.Count,
-                  allTotalPages: data.Page,
-                  allPerPage: data.perPage,
-                  currentAllPage: data.currentPage,
-                  allPlatforms: data.platforms,
-                  allStatuses: data.statuses,
-                  allRecruiters: data.recruiter,
-                  allSeniority: data.seniority,
-                  loading: false
-                };
-
-                this.setState({
-                  allCandidatesData: {
-                    ...this.state.allCandidatesData,
-                    ...allCandidatesData
-                  }
-                })
-              }
-            });
-
-        filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(data => {
-          if (data === 401) {
-            this.props.history.push('/login/');
-          } else {
-
-            const sentCandidatesData = {
-              sentCandidates: data.candidates,
-              sentCandidatesCount: data.Count,
-              sentTotalPages: data.Page,
-              sentPerPage: data.perPage,
-              currentSentPage: data.currentPage,
-              sentPlatforms: data.platforms,
-              sentCompanies: data.company,
-              sentStatuses: data.statuses,
-              sentRecruiters: data.recruiter,
-              loadingSent: false
-            };
-
-            this.setState({
-              sentCandidatesData: {
-                ...this.state.sentCandidatesData,
-                ...sentCandidatesData
-              }
-            })
-          }
-        });
+        this.filterCand(currentAllPage, filterAndSortCandidates);
+        this.filterSent(currentSentPage, filterAndSortCandidates);
       }
     );
   };
 
-  // all
+  filterSent(currentSentPage, filterAndSortCandidates) {
+    this.clearEmptyFilter(filterAndSortCandidates);
+    filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/');
+      } else {
+
+        const sentCandidatesData = {
+          sentCandidates: data.candidates,
+          sentCandidatesCount: data.Count,
+          sentTotalPages: data.Page,
+          sentPerPage: data.perPage,
+          currentSentPage: data.currentPage,
+          sentPlatforms: data.platforms,
+          sentCompanies: data.company,
+          sentStatuses: data.statuses,
+          sentRecruiters: data.recruiter,
+          loadingSent: false
+        };
+
+        this.setState({
+          sentCandidatesData: {
+            ...this.state.sentCandidatesData,
+            ...sentCandidatesData
+          }
+        })
+      }
+    });
+  }
+
+  filterCand(currentAllPage, filterAndSortCandidates) {
+    console.log(filterAndSortCandidates)
+    this.clearEmptyFilter(filterAndSortCandidates);
+    console.log(filterAndSortCandidates)
+
+    filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/');
+      } else {
+        const allCandidatesData = {
+          allCandidates: data.candidates,
+          allCandidatesCount: data.Count,
+          allTotalPages: data.Page,
+          allPerPage: data.perPage,
+          currentAllPage: data.currentPage,
+          allPlatforms: data.platforms,
+          allStatuses: data.statuses,
+          allRecruiters: data.recruiter,
+          allSeniority: data.seniority,
+          loading: false
+        };
+
+        this.setState({
+          allCandidatesData: {
+            ...this.state.allCandidatesData,
+            ...allCandidatesData
+          }
+        })
+      }
+    });
+  }
+
+  clearEmptyFilter(filterAndSortCandidates) {
+    if (filterAndSortCandidates.allCandidates.length === 0) {
+      delete filterAndSortCandidates.allCandidates
+    }
+    if (filterAndSortCandidates.allPlatforms.length === 0) {
+      delete filterAndSortCandidates.allPlatforms
+    }
+    if (filterAndSortCandidates.allStatuses.length === 0) {
+      delete filterAndSortCandidates.allStatuses
+    }
+    if (filterAndSortCandidates.allRecruiters.length === 0) {
+      delete filterAndSortCandidates.allRecruiters
+    }
+    if (filterAndSortCandidates.allSeniority.length === 0) {
+      delete filterAndSortCandidates.allSeniority
+    }
+    if (filterAndSortCandidates.tags.length === 0) {
+      delete filterAndSortCandidates.tags
+    }
+    if (filterAndSortCandidates.reasons.length === 0) {
+      delete filterAndSortCandidates.reasons
+    }
+  }
+
+// all
 
   privateFilterAndSortAllCandidates = filterAndSort => {
     const {filterAndSortCandidates} = this.state;
@@ -405,16 +440,7 @@ export default class Candidates extends Component {
           filterAndSortCandidates
         } = this.state;
 
-        filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(
-          allCandidatesData => {
-            this.setState({
-              allCandidatesData: {
-                ...this.state.allCandidatesData,
-                ...allCandidatesData
-              }
-            })
-          }
-        );
+        this.filterCand(currentAllPage, filterAndSortCandidates);
       }
     );
   };
@@ -438,16 +464,7 @@ export default class Candidates extends Component {
         } = this.state;
 
 
-        filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(
-          sentCandidatesData => {
-            this.setState({
-              sentCandidatesData: {
-                ...this.state.sentCandidatesData,
-                ...sentCandidatesData
-              }
-            })
-          }
-        );
+        this.filterSent(currentSentPage, filterAndSortCandidates);
       }
     );
   };
@@ -464,16 +481,8 @@ export default class Candidates extends Component {
 
     const {filterAndSortCandidates} = this.state;
 
-    filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(
-      allCandidatesData =>
-        this.setState({
-          allCandidatesData: {
-            ...this.state.allCandidatesData,
-            ...allCandidatesData
-          }
-        })
-    );
-  };
+    this.filterCand(currentAllPage, filterAndSortCandidates);
+  }
 
   onChangeSentCandidatesPage = (currentSentPage) => {
     console.log('onChangeSentCandidatesPage');
@@ -487,15 +496,7 @@ export default class Candidates extends Component {
       }
     }));
 
-    filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(
-      sentCandidatesData =>
-        this.setState({
-          sentCandidatesData: {
-            ...this.state.sentCandidatesData,
-            ...sentCandidatesData
-          }
-        })
-    );
+    this.filterSent(currentSentPage, filterAndSortCandidates);
   };
 
   toggleMySent = () => {
@@ -513,27 +514,9 @@ export default class Candidates extends Component {
           filterAndSortCandidates
         } = this.state;
 
-        filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(
-          allCandidatesData => {
-            this.setState({
-              allCandidatesData: {
-                ...this.state.allCandidatesData,
-                ...allCandidatesData
-              }
-            });
-          }
-        );
+        this.filterCand(currentAllPage, filterAndSortCandidates);
 
-        filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(
-          sentCandidatesData => {
-            this.setState({
-              sentCandidatesData: {
-                ...this.state.sentCandidatesData,
-                ...sentCandidatesData
-              }
-            });
-          }
-        );
+        this.filterSent(currentSentPage, filterAndSortCandidates);
       }
     );
   };
