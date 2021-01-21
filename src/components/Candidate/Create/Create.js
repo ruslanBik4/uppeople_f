@@ -58,7 +58,7 @@ export default class CandidateCreate extends Component {
                     let s = elem[0].slice(6).toLowerCase()
                     console.log(elem, s)
                     // document.querySelector(".errorlist label").textContent = ("Не выбрано" + s);
-                    document.querySelector(".errorlist1 label").textContent = ("Не выбрано" +  elem[0]);
+                    document.querySelector(".errorlist label").textContent = ("Не выбрано" +  elem[0]);
                     document.querySelector('.'+s+'_div > div').classList.add('error');
                                         // document.querySelector(s+'_div').classList.add('error');
                   } 

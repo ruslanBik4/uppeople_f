@@ -719,31 +719,12 @@ export default class CandidateCreateForm extends Component {
             </CardBody>
           </Card>
           <Card>
-         
-                  <FormGroup className={"errorlist"} row>
-                      <Label  lg={6} md={12}>
-                        
-                      </Label>
-                      <Col  lg={6} md={12}>
-                        
-                      </Col>
-                    </FormGroup>
-                    <FormGroup className={"errorlist1"} row>
-                      <Label  lg={6} md={12}>
-                        
-                      </Label>
-                      <Col  lg={6} md={12}>
-                        
-                      </Col>
-                    </FormGroup>
-                    <FormGroup className={"errorlist2"} row>
-                      <Label  lg={6} md={12}>
-                        
-                      </Label>
-                      <Col  lg={6} md={12}>
-                        
-                      </Col>
-                    </FormGroup>
+            <FormGroup className={"errorlist"} row>
+              <Label  lg={6} md={12}>
+                </Label>
+                  <Col  lg={6} md={12}>
+                  </Col>
+            </FormGroup>
           </Card>
         </Col>
       </Row>
