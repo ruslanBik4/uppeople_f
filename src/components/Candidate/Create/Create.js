@@ -57,10 +57,9 @@ export default class CandidateCreate extends Component {
                   if (elem[0].startsWith("Select")) {
                     let s = elem[0].slice(6).toLowerCase()
                     console.log(elem, s)
-                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + s);
                     document.querySelector(".errorlist label").textContent = ("Не выбрано" +  elem[0]);
                     document.querySelector('.'+s+'_div > div').classList.add('error');
-                                        // document.querySelector(s+'_div').classList.add('error');
+                                       
                   } 
                   if (elem[0] === 'name') {
                     document.querySelector(".errorlist label").textContent = ("Имя кандидата" + " " + elem[1]);
@@ -77,14 +76,9 @@ export default class CandidateCreate extends Component {
                   else {
                     document.querySelector(".errorlist label").textContent = (elem[0] + " " +  elem[1])
                   };
-                  // else {
-                  //   document.querySelector(".errorlist label").textContent = "This name is already exist";
-                    // document.querySelector('input[name='+ elem[0]+']').classList.add('error');
-                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + s);
-                    // document.querySelector(".errorlist1 label").
+                  
                   }
-                    // document.querySelector(".errorlist label").textContent = "This name is already exist";
-                    // document.querySelector(".errorlist label").textContent = ("Не выбрано" + elem[0]);
+                    
 
                 )
               } else {

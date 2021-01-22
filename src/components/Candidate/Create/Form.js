@@ -323,6 +323,11 @@ export default class CandidateCreateForm extends Component {
     }
   };
 
+  if (isValid) {
+    onCreateCandidate(newCandidate);
+  }
+};
+
   render() {
     const {
       avatar,
