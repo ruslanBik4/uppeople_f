@@ -158,19 +158,19 @@ export default class CandidateCreateForm extends Component {
       selectPlatform: value
     });
 
-    const {vacancies} = this.props;
-    let platformVacancies = [];
-    if (value !== undefined) {
-      vacancies.map((vacancy) => {
-        if (vacancy.platform_id === value.id) {
-          platformVacancies.push(vacancy);
-        }
-      })
-    }
+    // const {vacancies} = this.props;
+    // let platformVacancies = [];
+    // if (value !== undefined) {
+    //   vacancies.map((vacancy) => {
+    //     if (vacancy.platform_id === value.id) {
+    //       platformVacancies.push(vacancy);
+    //     }
+    //   })
+    // }
 
-    this.setState({
-      platformVacancies: platformVacancies
-    });
+    // this.setState({
+    //   platformVacancies: platformVacancies
+    // });
   };
 
   handletagsChange = value => {
@@ -233,6 +233,24 @@ export default class CandidateCreateForm extends Component {
 
     let isValid = true;
 
+    const newCandidate = {
+      name,
+      selectPlatform,
+      selectSeniority,
+      selectedtag,
+      date,
+      salary,
+      language,
+      phone,
+      skype,
+      email,
+      linkedIn,
+      resume,
+      comment,
+      selectedVacancies
+      // about: aboutEditorState
+    };
+
    // if ( newCandidate.selectName.length === 0) {
    //     document.querySelector('platform_div + div').classList.add('error');
    //     isValid = false
@@ -253,15 +271,38 @@ export default class CandidateCreateForm extends Component {
       isValid = false;
     }
 
-    if (language.length === 0) {
-      document.querySelector('.language_div > div').classList.add('error');
-      isValid = false;
-    }
+    // if (language.length === 0) {
+    //   document.querySelector('.language_div > div').classList.add('error');
+    //   isValid = false;
+    // }
 
     if (selectedtag.length === 0) {
       document.querySelector('.tag_div > div').classList.add('error');
       isValid = false;
     }
+
+    if (isValid) {
+
+      
+      // const newCandidate = {
+      //   name,
+      //   selectPlatform,
+      //   selectSeniority,
+      //   selectedtag,
+      //   date,
+      //   salary,
+      //   language,
+      //   phone,
+      //   skype,
+      //   email,
+      //   linkedIn,
+      //   resume,
+      //   comment,
+      //   selectedVacancies
+      //   // about: aboutEditorState
+      // };
+      onCreateCandidate(newCandidate);
+    } 
 
     // const aboutEditorState = draftToHtml(
     //   convertToRaw(about.getCurrentContent())
@@ -273,28 +314,36 @@ export default class CandidateCreateForm extends Component {
 
       language = typeof language === 'object' ? language.id : '';
 
-      const newCandidate = {
-        name,
-        selectPlatform,
-        selectSeniority,
-        selectedtag,
-        date,
-        salary,
-        language,
-        phone,
-        skype,
-        email,
-        linkedIn,
-        resume,
-        comment,
-        selectedVacancies
-        // about: aboutEditorState
-      };
+      // const newCandidate = {
+      //   name,
+      //   selectPlatform,
+      //   selectSeniority,
+      //   selectedtag,
+      //   date,
+      //   salary,
+      //   language,
+      //   phone,
+      //   skype,
+      //   email,
+      //   linkedIn,
+      //   resume,
+      //   comment,
+      //   selectedVacancies
+      //   // about: aboutEditorState
+      // };
 
+      // console.log(newCandidate);
+      // onCreateCandidate(newCandidate);
+    } 
+      
+           
+      else{
+      document.querySelector('.reasons_div > div').classList.add('error');
+      isValid = false;
+    }
+    if (isValid) {
       console.log(newCandidate);
       onCreateCandidate(newCandidate);
-    } else {
-      document.querySelector('.reasons_div > div').classList.add('error');
     }
   };
 
@@ -321,12 +370,11 @@ export default class CandidateCreateForm extends Component {
         </FormGroup>
       )
     }
+    // if (isValid) {
+    //   onCreateCandidate(newCandidate);
+    // }
   };
 
-  if (isValid) {
-    onCreateCandidate(newCandidate);
-  }
-};
 
   render() {
     const {
@@ -735,7 +783,7 @@ export default class CandidateCreateForm extends Component {
       </Row>
     );
   }
-}
+} 
 
   
 
