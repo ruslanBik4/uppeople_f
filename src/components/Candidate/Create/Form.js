@@ -522,7 +522,7 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                     <FormGroup className={"language_div"} row>
                       <Label for="language" sm={3}>
-                        Language<font color="red">*</font>
+                        Language
                       </Label>
                       <Col sm={9}>
                         <Select
@@ -536,7 +536,7 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    {/* <FormGroup row>
                       <Label for="date" sm={3}>
                         Date
                       </Label>
@@ -549,7 +549,7 @@ export default class CandidateCreateForm extends Component {
                           onChange={this.handleInputChange}
                         />
                       </Col>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup row>
                       <Label for="salary" sm={3}>
                         Salary
@@ -568,25 +568,6 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    {/*<FormGroup row>*/}
-                    {/*  <Label for="language" sm={3}>*/}
-                    {/*    Languages*/}
-                    {/*  </Label>*/}
-                    {/*  <Col sm={9}>*/}
-                    {/*    <Input*/}
-                    {/*      id="language"*/}
-                    {/*      type="text"*/}
-                    {/*      name="language"*/}
-                    {/*      value={language}*/}
-                    {/*      onChange={this.handleInputChange}*/}
-                    {/*    />*/}
-                    {/*    <i*/}
-                    {/*      style={style.icon}*/}
-                    {/*      className="icon-speech icons font-lg"*/}
-                    {/*    />*/}
-                    {/*  </Col>*/}
-                    {/*</FormGroup>*/}
-
                     <FormGroup row>
                       <Label for="language" sm={3}>
                         Vacancies
@@ -713,71 +694,35 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
-                      <Label for="comment" sm={3}>
-                        Comment
-                      </Label>
-                      <Col sm={9}>
-                        <Input
-                          id="comment"
-                          type="textarea"
-                          name="comment"
-                          value={comment}
-                          onChange={this.handleInputChange}
-                        />
-                        <i
-                          style={style.icon}
-                          className="icon-note icons font-lg"
-                        />
-                      </Col>
-                    </FormGroup>
                   </Col>
                 </Row>
-                {/* <Row>*/}
-                {/*   <Col>*/}
-                {/*     <h6>About</h6>*/}
-                {/*     <Editor*/}
-                {/*       editorState={about}*/}
-                {/*       wrapperClassName="wrapper-class"*/}
-                {/*       editorClassName="editor-class"*/}
-                {/*       toolbarClassName="toolbar-class"*/}
-                {/*       // wrapperStyle={<wrapperStyleObject>}*/}
-                {/*      // editorStyle={<editorStyleObject>}*/}
-                {/*      // toolbarStyle={<toolbarStyleObject>}*/}
-                {/*      localization={{*/}
-                {/*        locale: "ru"*/}
-                {/*      }}*/}
-                {/*      onEditorStateChange={this.handleAboutStateChange}*/}
-                {/*    />*/}
-                {/*  </Col>*/}
-                {/*</Row>*/}
-                <Row style={{justifyContent: "flex-start"}}>
-                  <FormGroup row>
-                    <Col>
-                      <Button type="submit" color="primary" block>
+                <Row>
+                  <Col md="12">
+                    <Label for="comment"> Comment </Label>
+                     <Input
+                      id="comment"
+                      type="textarea"
+                      name="comment"
+                      value={comment}
+                      onChange={this.handleInputChange}/>
+                  </Col>
+                </Row>
+                <Row>
+                  <label></label>
+                </Row>
+                <Row>
+                  <Col md="10" className={"errorlist"} row>
+                    <label>
+                    </label>
+                  </Col>
+                  <Col md="2" style={{justifyContent: "flex-end"}}>
+                    <Button type="submit" color="primary" block>
                         Save
-                      </Button>
-                    </Col>
-                  </FormGroup>
-                  {/* <FormGroup className={"errorlist"} row>
-                      <Label  lg={6} md={12}>
-                        
-                      </Label>
-                      <Col  lg={6} md={12}>
-                        
-                      </Col>
-                    </FormGroup> */}
+                    </Button>
+                  </Col>
                 </Row>
               </Form>
             </CardBody>
-          </Card>
-          <Card>
-            <FormGroup className={"errorlist"} row>
-              <Label  lg={6} md={12}>
-                </Label>
-                  <Col  lg={6} md={12}>
-                  </Col>
-            </FormGroup>
           </Card>
         </Col>
       </Row>

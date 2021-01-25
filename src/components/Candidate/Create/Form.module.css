@@ -28,3 +28,7 @@
   alignself: center;
   fontsize: 1rem;
 }
+
+.errorlist {
+  color: red
+}
