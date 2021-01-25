@@ -213,23 +213,7 @@ export default class CandidateCreateForm extends Component {
 
     let isValid = true;
 
-    const newCandidate = {
-      name,
-      selectPlatform,
-      selectSeniority,
-      selectedtag,
-      date,
-      salary,
-      language,
-      phone,
-      skype,
-      email,
-      linkedIn,
-      resume,
-      comment,
-      selectedVacancies
-      // about: aboutEditorState
-    };
+   
 
     if (selectPlatform.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
@@ -246,11 +230,6 @@ export default class CandidateCreateForm extends Component {
       isValid = false;
     }
 
-    // if (isValid) {
-
-    //   onCreateCandidate(newCandidate);
-    // } 
-
     if (selectedtag !== undefined && selectedtag.id === 3 && selectedReason !== undefined || selectedtag.id !== 3) {
 
       selectedtag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedtag;
@@ -260,11 +239,28 @@ export default class CandidateCreateForm extends Component {
     } 
       
            
-      else{
+     else{
       document.querySelector('.reasons_div > div').classList.add('error');
       isValid = false;
     }
     if (isValid) {
+      const newCandidate = {
+        name,
+        selectPlatform,
+        selectSeniority,
+        selectedtag,
+        date,
+        salary,
+        language,
+        phone,
+        skype,
+        email,
+        linkedIn,
+        resume,
+        comment,
+        selectedVacancies
+        // about: aboutEditorState
+      };
       console.log(newCandidate);
       onCreateCandidate(newCandidate);
     }
