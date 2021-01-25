@@ -375,10 +375,6 @@ export default class CandidateCreateForm extends Component {
     // }
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev1
   render() {
     const {
       avatar,
