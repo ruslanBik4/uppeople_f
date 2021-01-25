@@ -60,14 +60,7 @@ export default class CandidateCreateForm extends Component {
 
   constructor(props) {
     super(props);
-    // console.log(props);
-    // if (Object.keys(selectedtag).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
-    //   selectedtag = defaultSelectedtag;
-    //   this.setState({selectedtag:selectedtag});
-    //
-    //   console.log(selectedtag);
-    //   console.log(this.state.selectedtag);
-    // }
+   
     this.setState({});
   }
 
@@ -158,19 +151,6 @@ export default class CandidateCreateForm extends Component {
       selectPlatform: value
     });
 
-    // const {vacancies} = this.props;
-    // let platformVacancies = [];
-    // if (value !== undefined) {
-    //   vacancies.map((vacancy) => {
-    //     if (vacancy.platform_id === value.id) {
-    //       platformVacancies.push(vacancy);
-    //     }
-    //   })
-    // }
-
-    // this.setState({
-    //   platformVacancies: platformVacancies
-    // });
   };
 
   handletagsChange = value => {
@@ -251,16 +231,6 @@ export default class CandidateCreateForm extends Component {
       // about: aboutEditorState
     };
 
-   // if ( newCandidate.selectName.length === 0) {
-   //     document.querySelector('platform_div + div').classList.add('error');
-   //     isValid = false
-   // }
-
-   // if (name == "") {
-   //  document.querySelector('input[name=name]').classList.add('error');
-   //   throw new Error("name is required");
-   // }
-
     if (selectPlatform.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
@@ -271,42 +241,15 @@ export default class CandidateCreateForm extends Component {
       isValid = false;
     }
 
-    // if (language.length === 0) {
-    //   document.querySelector('.language_div > div').classList.add('error');
-    //   isValid = false;
-    // }
-
     if (selectedtag.length === 0) {
       document.querySelector('.tag_div > div').classList.add('error');
       isValid = false;
     }
 
-    if (isValid) {
+    // if (isValid) {
 
-      
-      // const newCandidate = {
-      //   name,
-      //   selectPlatform,
-      //   selectSeniority,
-      //   selectedtag,
-      //   date,
-      //   salary,
-      //   language,
-      //   phone,
-      //   skype,
-      //   email,
-      //   linkedIn,
-      //   resume,
-      //   comment,
-      //   selectedVacancies
-      //   // about: aboutEditorState
-      // };
-      onCreateCandidate(newCandidate);
-    } 
-
-    // const aboutEditorState = draftToHtml(
-    //   convertToRaw(about.getCurrentContent())
-    // );
+    //   onCreateCandidate(newCandidate);
+    // } 
 
     if (selectedtag !== undefined && selectedtag.id === 3 && selectedReason !== undefined || selectedtag.id !== 3) {
 
@@ -314,26 +257,6 @@ export default class CandidateCreateForm extends Component {
 
       language = typeof language === 'object' ? language.id : '';
 
-      // const newCandidate = {
-      //   name,
-      //   selectPlatform,
-      //   selectSeniority,
-      //   selectedtag,
-      //   date,
-      //   salary,
-      //   language,
-      //   phone,
-      //   skype,
-      //   email,
-      //   linkedIn,
-      //   resume,
-      //   comment,
-      //   selectedVacancies
-      //   // about: aboutEditorState
-      // };
-
-      // console.log(newCandidate);
-      // onCreateCandidate(newCandidate);
     } 
       
            
@@ -370,15 +293,9 @@ export default class CandidateCreateForm extends Component {
         </FormGroup>
       )
     }
-    // if (isValid) {
-    //   onCreateCandidate(newCandidate);
-    // }
+   
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev1
   render() {
     const {
       avatar,
@@ -539,20 +456,6 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    {/* <FormGroup row>
-                      <Label for="date" sm={3}>
-                        Date
-                      </Label>
-                      <Col sm={9}>
-                        <Input
-                          id="date"
-                          type="date"
-                          name="date"
-                          value={date}
-                          onChange={this.handleInputChange}
-                        />
-                      </Col>
-                    </FormGroup> */}
                     <FormGroup row>
                       <Label for="salary" sm={3}>
                         Salary
@@ -621,8 +524,6 @@ export default class CandidateCreateForm extends Component {
                           style={style.icon}
                           className="icon-phone icons font-lg"
                         />
-                        {/* <Label for="phoneError" sm={3}>
-                        </Label> */}
                       </Col>
                     </FormGroup>
                     <FormGroup row>
