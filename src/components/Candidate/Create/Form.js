@@ -147,9 +147,8 @@ export default class CandidateCreateForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({
-      selectPlatform: value
-    });
+    this.setState({selectPlatform: value});
+    document.querySelector('.platform_div > div').classList.remove('error');
 
   };
 
@@ -167,9 +166,8 @@ export default class CandidateCreateForm extends Component {
   };
 
   handleSeniorityChange = value => {
-    this.setState({
-      selectSeniority: value
-    });
+    this.setState({selectSeniority: value});
+    document.querySelector('.seniority_div > div').classList.remove('error');
   };
 
   handleAboutStateChange = about => {
@@ -229,6 +227,7 @@ export default class CandidateCreateForm extends Component {
       document.querySelector('.tag_div > div').classList.add('error');
       isValid = false;
     }
+
 
     if (selectedtag !== undefined && selectedtag.id === 3 && selectedReason !== undefined || selectedtag.id !== 3) {
 

@@ -52,13 +52,53 @@ class CandidateEdit extends Component {
   };
 
   updateCandidate = candidate => {
-    const { id } = this.props.match.params;
-console.log(candidate);
-    updateCandidateProfile(id, candidate).then(
-    this.props.history.push(`/candidates/${id}`)
-    );
-  };
+    updateCandidateProfile(candidate).then(data => {
+          console.log(data)
+          if (typeof data === 'object') {
+            if (data.formErrors !== undefined) {
+              if (typeof data.formErrors === 'object') {
+                Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+                      if (elem[0].startsWith("Select")) {
+                        let s = elem[0].slice(6).toLowerCase()
+                        console.log(elem, s)
+                        document.querySelector(".errorlist label").textContent = ("Не выбрано" + elem[0]);
+                        document.querySelector('.' + s + '_div > div').classList.add('error');
+ 
+                      }
+                      if (elem[0] === 'name') {
+                        document.querySelector(".errorlist label").textContent = ("Имя кандидата" + " " + elem[1]);
+                      } else if (elem[0] === 'phone') {
+                        document.querySelector(".errorlist label").textContent = ("Номер телефона" + " " + elem[1]);
+                      } else if (elem[0] === 'email') {
+                        document.querySelector(".errorlist label").textContent = ("Электронная почта" + " " + elem[1]);
+                      } else if (elem[0] === 'linkedIn') {
+                        document.querySelector(".errorlist label").textContent = ("Профиль linkedIn" + " " + elem[1]);
+                      } else {
+                        document.querySelector(".errorlist label").textContent = (elem[0] + " " + elem[1])
+                      }
+                      ;
 
+                      let input = document.querySelector('input[name=' + elem[0] + ']');
+                      if (input !== undefined) {
+                        input.classList.add('error');
+                        input.focus();
+                      }
+
+                    })
+              } else {
+                alert(data.formErrors)
+              }
+            } else {
+              this.props.history.push('/candidates/')
+            }
+          } else if (data === 401) {
+            this.props.history.push('/login/')
+          } else  {
+            alert(data)
+          }
+        }
+    );
+      }
   render() {
     // console.log(this.props);
     const { candidate } = this.state;
