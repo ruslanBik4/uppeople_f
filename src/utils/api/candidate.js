@@ -229,10 +229,10 @@ export const createNewCandidate = async candidate => {
     if (response.ok) {
       return response.json();
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return response.json();
     }
-    if (response.status == 401) {
+    if (response.status === 401) {
       return 401;
     }
     throw new Error(`${response.statusText}`);
@@ -304,7 +304,7 @@ export const deleteCandidateProfile = async id => {
   const token = getToken();
   try {
     const response = await fetch(`${URL}/main/deleteCandidate/${id}`, {
-      method: "GET",
+      method: "POST",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json"
@@ -312,6 +312,12 @@ export const deleteCandidateProfile = async id => {
     });
     if (response.ok) {
       return response.json();
+    }
+    if (response.status === 400) {
+      return response.json();
+    }
+    if (response.status === 401) {
+      return 401;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {

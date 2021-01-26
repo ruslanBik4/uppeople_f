@@ -134,7 +134,14 @@ export default class CandidateProfile extends Component {
   };
 
   deleteCandidate = id => {
-    deleteCandidateProfile(id).then(data => console.log(data));
+    deleteCandidateProfile(id).then(data => {
+    if (data === 401) {
+      this.props.history.push('/login/')
+    } else {
+      alert(data)
+    }
+
+    });
   };
 
   sendResume = (id, content) => {
