@@ -269,10 +269,10 @@ export const updateCandidateProfile = (id, candidate) => {
         throw new Error(`${response.statusText}`);
     })
     .then(data => {
-      const candidate = data[0];
+      const candidate = data[0]; 
 console.log(candidate);
       const candidateInfo = {
-        id: candidate.id,
+        // id: candidate.id,
         name: candidate.name,
         date: candidate.date,
         platform: candidate.platforms,

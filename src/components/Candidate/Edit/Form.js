@@ -30,6 +30,7 @@ import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
 import styles2 from "./Custom.css";
+import { platform } from "chart.js";
 
 const style = {
   icon: {
@@ -92,10 +93,13 @@ export default class CandidateEditForm extends Component {
   state = {
     avatar: null,
     name: "",
-    selectPlatform: [],
-    selectSeniority: [],
-    selectedTag: {},
-    selectedVacancies: [],
+    // selectPlatform: [],
+    // seniority_id: [],
+    // selectedTag: {},
+    // vacancies: [],
+    platform: [],
+    seniority_id: [],
+    vacancies: [],
     date: "",
     salary: "",
     language: "",
@@ -160,9 +164,9 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, platforms, seniorities, tags, reasons, reject_tag, vacancies} = nextProps;
 
-    const selectedPlatform =
-      candidate.platform !== null &&
-      platforms.find(platform => platform.id === candidate.platform.id);
+    // const platform =
+    //   candidate.platform !== null &&
+    //   platforms.find(platform => platform.id === candidate.platform.id);
 
     let selectedTag = candidate.tag;
     let selectedReason = {};
@@ -187,7 +191,7 @@ export default class CandidateEditForm extends Component {
       language.label = candidate.language;
     }
 
-    const selectedSeniority =
+    const seniority_id =
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
@@ -204,9 +208,9 @@ export default class CandidateEditForm extends Component {
     //   }
     // }
     let platformVacancies = [];
-    if ( (selectedPlatform !== undefined)  && (vacancies !== undefined) ){
+    if ( (platform !== undefined)  && (vacancies !== undefined) ){
       vacancies.map((vacancy) => {
-        if (vacancy.platform_id === selectedPlatform.id) {
+        if (vacancy.platform_id === platform.id) {
           platformVacancies.push(vacancy);
         }
       })
@@ -216,8 +220,8 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        selectPlatform: selectedPlatform,
-        selectSeniority: selectedSeniority,
+        platform: platform,
+        seniority_id: seniority_id,
         selectedTag: selectedTag,
         selectedReason: selectedReason,
         date: candidate.date,
@@ -230,7 +234,7 @@ export default class CandidateEditForm extends Component {
         resume: candidate.resume,
         comment: candidate.comment,
         platformVacancies: platformVacancies,
-        selectedVacancies: candidate.vacancies
+        vacancies: candidate.vacancies
           // vacancies.map((vacancy) => {
         //   if (selectedPlatform !== undefined && vacancy.platform_id === selectedPlatform.id) {
         //     return vacancy;
@@ -267,7 +271,7 @@ export default class CandidateEditForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({
-      selectPlatform: value
+      platform: value
     });
 
     const {vacancies} = this.props;
@@ -287,13 +291,13 @@ export default class CandidateEditForm extends Component {
 
   handleVacancyChange = value => {
     this.setState({
-      selectedVacancies: value
+      vacancies: value
     });
   };
 
   handleSeniorityChange = value => {
     this.setState({
-      selectSeniority: value
+      seniority_id: value
     });
   };
 
@@ -329,11 +333,12 @@ export default class CandidateEditForm extends Component {
       resume,
       comment,
       // about,
-      selectPlatform,
-      selectSeniority,
+      // 
+      platform,
+      seniority_id,
       selectedTag,
       selectedReason,
-      selectedVacancies
+      vacancies
     } = this.state;
 
     if (document.querySelector('.reasons_div > div') !== null) {
@@ -353,7 +358,7 @@ export default class CandidateEditForm extends Component {
       //   );
       // }
 
-      const candidateToUpdate = {
+      const candidateInfo = {
         name,
         date,
         salary,
@@ -364,14 +369,17 @@ export default class CandidateEditForm extends Component {
         linkedIn,
         resume,
         comment,
-        selectPlatform,
-        selectSeniority,
-        selectedTag,
-        selectedVacancies
+        // selectPlatform,
+        platform,
+        // seniority_id,
+        seniority_id,
+        // selectedTag,
+        // vacancies
+        vacancies,
         // about: aboutEditorState
       };
-      console.log(candidateToUpdate);
-      onEditCandidate(candidateToUpdate);
+      console.log(candidateInfo);
+      onEditCandidate(candidateInfo);
 
     } else {
       document.querySelector('.reasons_div > div').classList.add('error');
@@ -407,15 +415,15 @@ export default class CandidateEditForm extends Component {
     const {
       avatar,
       name,
-      selectPlatform,
-      selectSeniority,
+      platform,
+      seniority_id,
       selectedTag,
       // date,
       salary,
       language,
       languages,
       platformVacancies,
-      selectedVacancies,
+      vacancies,
       phone,
       skype,
       email,
@@ -453,9 +461,9 @@ export default class CandidateEditForm extends Component {
             </Button>
             <CardBody className={styles.cardBody}>
               <ListGroup flush>
-                {selectPlatform !== undefined && (
+                {platform !== undefined && (
                   <ListGroupItem className={styles.listGroupItem}>
-                    Platform: {selectPlatform.label}
+                    Platform: {platform.label}
                   </ListGroupItem>
                 )}
                 {date && (
@@ -518,7 +526,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="platform"
                           options={platforms}
-                          value={selectPlatform}
+                          value={platform}
                           placeholder="Platform"
                           onChange={this.handlePlatformChange}
                         />
@@ -533,7 +541,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="seniority"
                           options={seniorities}
-                          value={selectSeniority}
+                          value={seniority_id}
                           placeholder="Seniority"
                           onChange={this.handleSeniorityChange}
                         />
@@ -595,7 +603,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="language"
                           isMulti
-                          value={selectedVacancies}
+                          value={vacancies}
                           options={platformVacancies}
                           isClearable
                           placeholder="vacancies"

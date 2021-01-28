@@ -23,7 +23,7 @@ class CandidateEdit extends Component {
       skype: "",
       platform: [],
       seniority_id: [],
-      tag_id: 0,
+      // tag_id: 0,
       language: "",
       salary: null,
       linkedIn: "",
@@ -52,10 +52,11 @@ class CandidateEdit extends Component {
   };
 
   updateCandidate = candidate => {
-    updateCandidateProfile(candidate).then(data => {
+    const { id } = this.props.match.params;
+    updateCandidateProfile(id,candidate).then(data => {
           console.log(data)
           if (typeof data === 'object') {
-            if (data.formErrors === undefined) {
+            if (data.formErrors !== undefined) {
               if (typeof data.formErrors === 'object') {
                 Object.entries(data.formErrors).forEach(function (elem, i, arr) {
                       if (elem[0].startsWith("Select")) {

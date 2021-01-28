@@ -18,7 +18,7 @@ class DefaultFooter extends Component {
           <a href="#" style={{ color: "var(--dark)" }}>UPPeople
           </a>{" "}
           &copy; 2020{" "}
-          <a href="https://pm-db.net/en/" style={{ color: "var(--dark)" }}>BufFix
+          <a href="https://pm-db.net/en/" style={{ color: "var(--dark)" }}>BugFix
           </a>
           .
         </span>
