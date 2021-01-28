@@ -262,6 +262,9 @@ export const updateCandidateProfile = (id, candidate) => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 400) {
+        return response.json();
+      }
 
       if (response.status === 401) {
         return 401;
@@ -286,7 +289,8 @@ console.log(candidate);
         resume: candidate.link,
         comment: candidate.comments,
         about: candidate.text_rezume,
-        vacancies: candidate.vacancies
+        vacancies: candidate.vacancies,
+        formErrors: candidate.formErrors,
       };
 
       return candidateInfo;
