@@ -336,8 +336,10 @@ export default class Candidates extends Component {
   };
 
   filterSent(currentSentPage, filterAndSortCandidates) {
-    this.clearEmptyFilter(filterAndSortCandidates);
-    filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(data => {
+    console.log(filterAndSortCandidates);
+    const filter = this.clearEmptyFilter(filterAndSortCandidates);
+    console.log(filter);
+    filterAndSortSentCandidates(currentSentPage, filter).then(data => {
       if (data === 401) {
         this.props.history.push('/login/');
       } else {
@@ -397,6 +399,7 @@ export default class Candidates extends Component {
 
   clearEmptyFilter(filters) {
     Object.entries(filters).forEach(function (elem, i, arr) {
+  console.log(elem[0]);
       if (elem[1] === "") {
         delete filters[elem[0]];
       }
