@@ -399,7 +399,7 @@ export default class Candidates extends Component {
 
   clearEmptyFilter(filters) {
     Object.entries(filters).forEach(function (elem, i, arr) {
-  console.log(elem[0]);
+  console.log(elem[0], elem[1]);
       if (elem[1] === "") {
         delete filters[elem[0]];
       }
@@ -419,7 +419,7 @@ export default class Candidates extends Component {
      if (filters.selectRecruiter.length > 0) {
        Object.defineProperty(filters, 'id_recruiter', { value: filters.selectRecruiter.id, configurable: true, });
      }
-      delete filters.selectRecruiter
+      // delete filters.selectRecruiter
     }
 
     if (filters.selectSeniority && filters.selectSeniority.length === 0) {
@@ -433,6 +433,7 @@ export default class Candidates extends Component {
     }
 
     console.log(filters);
+    return filters;
   }
 
 // all
