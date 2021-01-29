@@ -226,8 +226,9 @@ export const createNewCandidate = async candidate => {
       },
       body: JSON.stringify(candidate)
     });
-    if (response.ok) {
-      return response.json();
+    // changing successfully
+    if (response.status === 201) {
+      return 201;
     }
     if (response.status === 400) {
       return response.json();
@@ -259,9 +260,13 @@ export const updateCandidateProfile = (id, candidate) => {
     body: JSON.stringify(candidate)
   })
     .then(response => {
-      if (response.ok) {
-        return response.json();
+      // changing successfully
+      if (response.status === 202) {
+        return 202;
       }
+      // if (response.ok) {
+      //   return response.json();
+      // }
       if (response.status === 400) {
         return response.json();
       }
@@ -270,30 +275,6 @@ export const updateCandidateProfile = (id, candidate) => {
         return 401;
       }
         throw new Error(`${response.statusText}`);
-    })
-    .then(data => {
-      const candidate = data[0]; 
-console.log(candidate);
-      const candidateInfo = {
-        // id: candidate.id,
-        name: candidate.name,
-        date: candidate.date,
-        platform: candidate.platforms,
-        seniority_id: candidate.seniority_id,
-        salary: candidate.salary,
-        language: candidate.language,
-        phone: candidate.mobile,
-        email: candidate.email,
-        skype: candidate.skype,
-        linkedIn: candidate.linkedin,
-        resume: candidate.link,
-        comment: candidate.comments,
-        about: candidate.text_rezume,
-        vacancies: candidate.vacancies,
-        formErrors: candidate.formErrors,
-      };
-
-      return candidateInfo;
     })
     .catch(error => console.log("error in fetch: ", error));
 };

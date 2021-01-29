@@ -54,51 +54,57 @@ class CandidateEdit extends Component {
   updateCandidate = candidate => {
     const { id } = this.props.match.params;
     updateCandidateProfile(id,candidate).then(data => {
-          console.log(data)
-          if (typeof data === 'object') {
+        console.log(data)
+        if (data === 202) {
+            this.props.history.push(`/candidates/${id}`)
+        } else if (data === 401) {
+            this.props.history.push('/login/')
+        } else if (typeof data === 'object') {
+            let lblErrors = document.querySelector(".errorlist label");
             if (data.formErrors !== undefined) {
-              if (typeof data.formErrors === 'object') {
-                Object.entries(data.formErrors).forEach(function (elem, i, arr) {
-                      if (elem[0].startsWith("Select")) {
-                        let s = elem[0].slice(6).toLowerCase()
-                        console.log(elem, s)
-                        document.querySelector(".errorlist label").textContent = ("Не выбрано" + elem[0]);
-                        document.querySelector('.' + s + '_div > div').classList.add('error');
- 
-                      }
-                      if (elem[0] === 'name') {
-                        document.querySelector(".errorlist label").textContent = ("Имя кандидата" + " " + elem[1]);
-                      } else if (elem[0] === 'phone') {
-                        document.querySelector(".errorlist label").textContent = ("Номер телефона" + " " + elem[1]);
-                      } else if (elem[0] === 'email') {
-                        document.querySelector(".errorlist label").textContent = ("Электронная почта" + " " + elem[1]);
-                      } else if (elem[0] === 'linkedIn') {
-                        document.querySelector(".errorlist label").textContent = ("Профиль linkedIn" + " " + elem[1]);
-                      } else {
-                        document.querySelector(".errorlist label").textContent = (elem[0] + " " + elem[1])
-                      }
-                      ;
+                if (typeof data.formErrors === 'object') {
+                    Object.entries(data.formErrors).forEach(function (elem, i, arr) {
+                        if (elem[0].startsWith("Select")) {
+                            let s = elem[0].slice(6).toLowerCase()
+                            console.log(elem, s)
+                            lblErrors.textContent = ("Не выбрано" + elem[0]);
+                            document.querySelector('.' + s + '_div > div').classList.add('error');
 
-                      let input = document.querySelector('input[name=' + elem[0] + ']');
-                      if (input !== undefined) {
-                        input.classList.add('error');
-                        input.focus();
-                      }
+                        }
+                        if (elem[0] === 'name') {
+                            lblErrors.textContent = ("Имя кандидата" + " " + elem[1]);
+                        } else if (elem[0] === 'phone') {
+                            lblErrors.textContent = ("Номер телефона" + " " + elem[1]);
+                        } else if (elem[0] === 'email') {
+                            lblErrors.textContent = ("Электронная почта" + " " + elem[1]);
+                        } else if (elem[0] === 'linkedIn') {
+                            lblErrors.textContent = ("Профиль linkedIn" + " " + elem[1]);
+                        } else {
+                            lblErrors.textContent = (elem[0] + " " + elem[1])
+                        }
+
+
+                        let input = document.querySelector('input[name=' + elem[0] + ']');
+                        if (input !== undefined) {
+                            input.classList.add('error');
+                            input.focus();
+                        }
 
                     })
-              } else {
-                alert(data.formErrors)
-              }
+                } else {
+                    alert(data.formErrors)
+                }
+                //    unknown response - alert
             } else {
-              this.props.history.push('/candidates/')
+                console.log(data);
+                Object.entries(data).forEach(function (elem, i, arr) {
+                    lblErrors.textContent += ("unknown error" + elem[0]);
+                });
             }
-          } else if (data === 401) {
-            this.props.history.push('/login/')
-          } else  {
+        } else {
             alert(data)
-          }
         }
-    );
+    });
   };
 
   render() {
