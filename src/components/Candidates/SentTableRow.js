@@ -13,7 +13,7 @@ const CandidateTableRow = ({
   platform,
   salary,
   email,
-  mobile,
+  mobile: phone,
   linkedin,
   skype,
   companies,
@@ -42,12 +42,12 @@ const CandidateTableRow = ({
     e.target.style.color = "var(--green)"
   };
 
-  let mobileValue = mobile;
+  let mobileValue = phone;
   let emailValue = email;
   let linkedinValue = linkedin;
   let skypeValue = skype;
 
-  if(mobile === "" || null){
+  if(phone === "" || null){
     mobileValue = null
   }
 
