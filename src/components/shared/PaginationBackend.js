@@ -48,9 +48,6 @@ class PaginationBackend extends Component {
     ) {
       console.log('condition update from PaginationBackend');
       this.setPage(this.props.initialPage);
-    } else {
-      this.setPage(this.props.initialPage);
-console.log("update Paginator")
     }
   }
 
