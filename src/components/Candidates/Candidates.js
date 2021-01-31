@@ -230,6 +230,7 @@ export default class Candidates extends Component {
           loading: false
         };
 
+        console.log(allCandidatesData)
         this.setState({
           allCandidatesData: {...this.state.allCandidatesData, ...allCandidatesData}
         });
