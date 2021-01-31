@@ -218,7 +218,7 @@ export default class Candidates extends Component {
         const allCandidatesData = {
           allCandidates: data.candidates,
           allCandidatesCount: data.Count,
-          allTotalPages: data.Page,
+          allTotalPages: data.TotalPage,
           allPerPage: data.perPage,
           currentAllPage: data.currentPage,
           allPlatforms: data.platforms,
