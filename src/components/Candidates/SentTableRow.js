@@ -143,8 +143,8 @@ const CandidateTableRow = ({
       <td>
         {status["comp_id"] > 0 ?
               <Link
-                to={`/companies/${status["comp_id"].id}`}
-                key={`${id}-${status["comp_id"].id}`}
+                to={`/companies/${status["comp_id"]}`}
+                key={`${id}-${status["comp_id"]}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
                   {status["compName"]}

@@ -11,7 +11,7 @@ const propTypes = {
   totalPages: PropTypes.number,
   onChangePage: PropTypes.func,
   loading: PropTypes.bool
-  // onPageChange: PropTypes.func
+  onPageChange: PropTypes.func
 };
 
 const defaultProps = {
@@ -21,7 +21,7 @@ const defaultProps = {
   totalItems: null,
   totalPages: null,
   onChangePage: () => null
-  // onPageChange: () => null
+  onPageChange: () => null
 };
 
 class PaginationBackend extends Component {
@@ -30,7 +30,7 @@ class PaginationBackend extends Component {
 
     this.state = { pager: {} };
 
-    console.log((this.state));
+    console.log((this.props));
   }
 
   componentWillMount() {
@@ -49,6 +49,9 @@ class PaginationBackend extends Component {
     ) {
       console.log('condition update from PaginationBackend');
       this.setPage(this.props.initialPage);
+    } else {
+      this.setPage(this.props.initialPage);
+console.log("update Paginator")
     }
   }
 
