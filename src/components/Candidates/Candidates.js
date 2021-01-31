@@ -733,7 +733,7 @@ export default class Candidates extends Component {
                     />
                   </Col>
 
-                  {selectTag !== null && Object.entries(selectTag).length > 0 && selectTag.id === 3 ? (
+                  {selectTag && selectTag.id && selectTag.id === 3 ? (
                     <Col lg={3} md={3} sm={4} xs={12}>
                       <Select
                         isClearable
