@@ -29,6 +29,8 @@ class PaginationBackend extends Component {
     super(props);
 
     this.state = { pager: {} };
+
+    console.log((this.state));
   }
 
   componentWillMount() {
@@ -40,7 +42,6 @@ class PaginationBackend extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('update from PaginationBackend');
     // reset page if initialPage has changed
     if (
       this.props.initialPage !== prevProps.initialPage ||

@@ -141,10 +141,10 @@ const CandidateTableRow = ({
       </Badge>
       </td>
       <td>
-        {status["compId"] > 0 ?
+        {status["comp_id"] > 0 ?
               <Link
-                to={`/companies/${status["compId"].id}`}
-                key={`${id}-${status["compId"].id}`}
+                to={`/companies/${status["comp_id"].id}`}
+                key={`${id}-${status["comp_id"].id}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
                   {status["compName"]}
@@ -180,7 +180,7 @@ CandidateTableRow.defaultProps = {
   name: "",
   platform: "",
   salary: "",
-  mobile: "",
+  phone: "",
   email: "",
   linkedin: "",
   skype: "",
