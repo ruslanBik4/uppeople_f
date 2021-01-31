@@ -10,8 +10,8 @@ const propTypes = {
   totalItems: PropTypes.number,
   totalPages: PropTypes.number,
   onChangePage: PropTypes.func,
-  loading: PropTypes.bool,
-  onPageChange: PropTypes.func
+  loading: PropTypes.bool
+  // onPageChange: PropTypes.func
 };
 
 const defaultProps = {
@@ -20,8 +20,8 @@ const defaultProps = {
   pageSize: 10,
   totalItems: null,
   totalPages: null,
-  onChangePage: () => null,
-  onPageChange: () => null
+  onChangePage: () => null
+  // onPageChange: () => null
 };
 
 class PaginationBackend extends Component {
@@ -30,7 +30,6 @@ class PaginationBackend extends Component {
 
     this.state = { pager: {} };
 
-    console.log((this.props));
   }
 
   componentWillMount() {

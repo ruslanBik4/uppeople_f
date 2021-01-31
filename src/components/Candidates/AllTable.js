@@ -120,7 +120,7 @@ class AllCandidatesTable extends Component {
                 initialPage={currentPage}
                 onChangePage={onChangePage}
                 loading={loading}
-                onPageChange={this.onPageChange}
+                // onPageChange={this.onPageChange}
               />
             </Col>
           </Row>
