@@ -10,7 +10,7 @@ const propTypes = {
   totalItems: PropTypes.number,
   totalPages: PropTypes.number,
   onChangePage: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
   onPageChange: PropTypes.func
 };
 
@@ -20,7 +20,7 @@ const defaultProps = {
   pageSize: 10,
   totalItems: null,
   totalPages: null,
-  onChangePage: () => null
+  onChangePage: () => null,
   onPageChange: () => null
 };
 
