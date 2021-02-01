@@ -164,9 +164,9 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, platforms, seniorities, tags, reasons, reject_tag, vacancies} = nextProps;
 
-    // const platform =
-    //   candidate.platform !== null &&
-    //   platforms.find(platform => platform.id === candidate.platform.id);
+    const platform =
+      candidate.platform !== null &&
+      platforms.find(platform => platform.id === candidate.platform.id);
 
     let selectedTag = candidate.tag;
     let selectedReason = {};
