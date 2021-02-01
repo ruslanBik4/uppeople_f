@@ -31,7 +31,7 @@ const CandidateExpandableTableRow = ({
       : null;
   };
 
-  const parsedStatus = JSON.parse(candidateStatus);
+  const parsedStatus = candidateStatus;
   const { date, compId, compName, vacStat, commentVac } = parsedStatus;
   const comment = commentVac ? commentVac : "";
 

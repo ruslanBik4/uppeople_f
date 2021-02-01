@@ -13,7 +13,7 @@ const CandidateTableRow = ({
   platform,
   salary,
   email,
-  mobile,
+  mobile: phone,
   linkedin,
   skype,
   companies,
@@ -42,12 +42,12 @@ const CandidateTableRow = ({
     e.target.style.color = "var(--green)"
   };
 
-  let mobileValue = mobile;
+  let mobileValue = phone;
   let emailValue = email;
   let linkedinValue = linkedin;
   let skypeValue = skype;
 
-  if(mobile === "" || null){
+  if(phone === "" || null){
     mobileValue = null
   }
 
@@ -141,13 +141,13 @@ const CandidateTableRow = ({
       </Badge>
       </td>
       <td>
-        {companies !== null ?
+        {status["comp_id"] > 0 ?
               <Link
-                to={`/companies/${companies.id}`}
-                key={`${id}-${companies.id}`}
+                to={`/companies/${status["comp_id"]}`}
+                key={`${id}-${status["comp_id"]}`}
               >
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {companies.label}
+                  {status["compName"]}
                 {/*</Badge>*/}
               </Link>
           : null
@@ -180,7 +180,7 @@ CandidateTableRow.defaultProps = {
   name: "",
   platform: "",
   salary: "",
-  mobile: "",
+  phone: "",
   email: "",
   linkedin: "",
   skype: "",

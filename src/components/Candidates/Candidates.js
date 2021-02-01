@@ -218,7 +218,7 @@ export default class Candidates extends Component {
         const allCandidatesData = {
           allCandidates: data.candidates,
           allCandidatesCount: data.Count,
-          allTotalPages: data.Page,
+          allTotalPages: data.TotalPage,
           allPerPage: data.perPage,
           currentAllPage: data.currentPage,
           allPlatforms: data.platforms,
@@ -230,6 +230,7 @@ export default class Candidates extends Component {
           loading: false
         };
 
+        console.log(allCandidatesData)
         this.setState({
           allCandidatesData: {...this.state.allCandidatesData, ...allCandidatesData}
         });
@@ -336,8 +337,10 @@ export default class Candidates extends Component {
   };
 
   filterSent(currentSentPage, filterAndSortCandidates) {
-    this.clearEmptyFilter(filterAndSortCandidates);
-    filterAndSortSentCandidates(currentSentPage, filterAndSortCandidates).then(data => {
+    console.log(filterAndSortCandidates);
+    const filter = this.clearEmptyFilter(filterAndSortCandidates);
+    console.log(filter);
+    filterAndSortSentCandidates(currentSentPage, filter).then(data => {
       if (data === 401) {
         this.props.history.push('/login/');
       } else {
@@ -397,6 +400,7 @@ export default class Candidates extends Component {
 
   clearEmptyFilter(filters) {
     Object.entries(filters).forEach(function (elem, i, arr) {
+  console.log(elem[0], elem[1]);
       if (elem[1] === "") {
         delete filters[elem[0]];
       }
@@ -416,7 +420,7 @@ export default class Candidates extends Component {
      if (filters.selectRecruiter.length > 0) {
        Object.defineProperty(filters, 'id_recruiter', { value: filters.selectRecruiter.id, configurable: true, });
      }
-      delete filters.selectRecruiter
+      // delete filters.selectRecruiter
     }
 
     if (filters.selectSeniority && filters.selectSeniority.length === 0) {
@@ -430,6 +434,7 @@ export default class Candidates extends Component {
     }
 
     console.log(filters);
+    return filters;
   }
 
 // all
@@ -729,7 +734,7 @@ export default class Candidates extends Component {
                     />
                   </Col>
 
-                  {selectTag !== null && Object.entries(selectTag).length > 0 && selectTag.id === 3 ? (
+                  {selectTag && selectTag.id && selectTag.id === 3 ? (
                     <Col lg={3} md={3} sm={4} xs={12}>
                       <Select
                         isClearable
