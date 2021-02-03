@@ -216,11 +216,15 @@ export default class CandidateCreateForm extends Component {
     if (selectPlatform.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
+    } else {
+      selectPlatform = selectPlatform.id
     }
 
     if (selectSeniority.length === 0) {
       document.querySelector('.seniority_div > div').classList.add('error');
       isValid = false;
+    } else {
+      selectSeniority = selectSeniority.id
     }
 
     if (selectedtag.length === 0) {
@@ -260,6 +264,44 @@ export default class CandidateCreateForm extends Component {
         selectedVacancies
         // about: aboutEditorState
       };
+
+      if (salary === "") {
+        delete newCandidate.salary
+      }
+
+      if (language === "") {
+        delete newCandidate.language
+      }
+
+      if (phone === "") {
+        delete newCandidate.phone
+      }
+
+      if (skype === "") {
+        delete newCandidate.skype
+      }
+
+      if (email === "") {
+        delete newCandidate.email
+      }
+
+      if (linkedIn === "") {
+        delete newCandidate.linkedIn
+      }
+
+      if (resume === "") {
+        delete newCandidate.resume
+      }
+
+      if (comment === "") {
+        delete newCandidate.comment
+      }
+
+      if (selectedVacancies.length === 0) {
+        delete newCandidate.selectedVacancies
+      }
+      
+
       console.log(newCandidate);
       onCreateCandidate(newCandidate);
     }
