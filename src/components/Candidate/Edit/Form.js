@@ -95,7 +95,7 @@ export default class CandidateEditForm extends Component {
     name: "",
     // selectPlatform: [],
     // seniority_id: [],
-    // selectedTag: {},
+    // tag_id: {},
     // vacancies: [],
     platform: [],
     seniority_id: [],
@@ -164,22 +164,22 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, platforms, seniorities, tags, reasons, reject_tag, vacancies} = nextProps;
 
-    const platform =
-      candidate.platform !== null &&
-      platforms.find(platform => platform.id === candidate.platform.id);
-
-    let selectedTag = candidate.tag;
+    let platform_id = candidate.platform;
+      if (candidate.platform !== null &&platforms.find) {
+        platform.value = candidate.platform_id;
+      }
+    let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
-      selectedTag.value = candidate.tag.name;
-      selectedTag.label = candidate.tag.name;
+      tag_id.value = candidate.tag.name;
+      tag_id.label = candidate.tag.name;
 
       for (const reason in reasons) {
-        if (reasons[reason].id === selectedTag.id) {
-          selectedReason = selectedTag;
-          selectedReason.label = selectedTag.name;
-          selectedReason.value = selectedTag.name;
-          selectedTag = reject_tag
+        if (reasons[reason].id === tag_id.id) {
+          selectedReason = tag_id;
+          selectedReason.label = tag_id.name;
+          selectedReason.value = tag_id.name;
+          tag_id = reject_tag
         }
       }
     }
@@ -220,9 +220,9 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform: platform,
+        platform_id: platform_id,
         seniority_id: seniority_id,
-        selectedTag: selectedTag,
+        tag_id: tag_id,
         selectedReason: selectedReason,
         date: candidate.date,
         salary: candidate.salary,
@@ -271,7 +271,7 @@ export default class CandidateEditForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({
-      platform: value
+      platform_id: value
     });
 
     const {vacancies} = this.props;
@@ -302,7 +302,7 @@ export default class CandidateEditForm extends Component {
   };
 
   handleTagsChange = value => {
-    this.setState({selectedTag: value});
+    this.setState({tag_id: value});
     this.setState({selectedReason: undefined});
   };
 
@@ -334,63 +334,185 @@ export default class CandidateEditForm extends Component {
       comment,
       // about,
       // 
-      platform,
+      platform_id,
       seniority_id,
-      selectedTag,
+      tag_id,
       selectedReason,
+      selectedVacancies,
       vacancies
     } = this.state;
+
+    let isValid = true;
+
+    if (isValid = true)  {
+      platform_id = platform_id.id
+    }
+
+    if (seniority_id.length !== 0)  {
+      seniority_id = seniority_id.id
+    }
 
     if (document.querySelector('.reasons_div > div') !== null) {
       document.querySelector('.reasons_div > div').classList.remove('error');
     }
 
-    if (selectedTag !== undefined && selectedTag.id === 3 && selectedReason !== undefined || selectedTag.id !== 3) {
+    if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
 
-      selectedTag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedTag;
+      tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
       language = typeof language === 'object' ? language.id : '';
 
+      if (isValid = true)  {
+        tag_id = tag_id.id
+      }
+
       const {onEditCandidate} = this.props;
+
+      if (isValid) {
+        const candidateInfo = {
+          name,
+          platform_id,
+          seniority_id,
+          tag_id,
+          date,
+          salary,
+          language,
+          phone,
+          skype,
+          email,
+          linkedIn,
+          resume,
+          comment,
+          selectedVacancies
+          // about: aboutEditorState
+        };
+  
+        if (salary === "") {
+          delete candidateInfo.salary
+        }
+  
+        if (language === "") {
+          delete candidateInfo.language
+        }
+  
+        if (phone === "") {
+          delete candidateInfo.phone
+        }
+  
+        if (skype === "") {
+          delete candidateInfo.skype
+        }
+  
+        if (email === "") {
+          delete candidateInfo.email
+        }
+  
+        if (linkedIn === "") {
+          delete candidateInfo.linkedIn
+        }
+  
+        if (resume === "") {
+          delete candidateInfo.resume
+        }
+  
+        if (comment === "") {
+          delete candidateInfo.comment
+        }
+  
+        // if (selectedVacancies.length === 0) {
+        //   delete candidateInfo.selectedVacancies
+        // }
+  
+        if (selectedReason === ""){
+          delete candidateInfo.selectedReason
+        }
+  
+        
+  
+        console.log(candidateInfo);
+        onEditCandidate(candidateInfo);
+      }
+    };
       // let aboutEditorState = '';
       // if (about !== null) {
       //   aboutEditorState = draftToHtml(
       //     convertToRaw(about.getCurrentContent())
       //   );
       // }
-
-      const candidateInfo = {
-        name,
-        date,
-        salary,
-        language,
-        phone,
-        skype,
-        email,
-        linkedIn,
-        resume,
-        comment,
-        // selectPlatform,
-        platform,
-        // seniority_id,
-        seniority_id,
-        // selectedTag,
-        // vacancies
-        vacancies,
-        // about: aboutEditorState
-      };
-      console.log(candidateInfo);
-      onEditCandidate(candidateInfo);
-
-    } else {
-      document.querySelector('.reasons_div > div').classList.add('error');
-    }
+    // if (isValid) {
+    //   const candidateInfo = {
+    //     name,
+    //     date,
+    //     salary,
+    //     language,
+    //     phone,
+    //     skype,
+    //     email,
+    //     linkedIn,
+    //     resume,
+    //     comment,
+    //     // selectPlatform,
+    //     platform,
+    //     // seniority_id,
+    //     seniority_id,
+    //     // tag_id,
+    //     // vacancies
+    //     vacancies,
+    //     // about: aboutEditorState
+    //   };
+    //     if (salary === "") {
+    //       delete candidateInfo.salary
+    //     }
+    
+    //     if (language === "") {
+    //       delete candidateInfo.language
+    //     }
+    
+    //     if (phone === "") {
+    //       delete candidateInfo.phone
+    //     }
+    
+    //     if (skype === "") {
+    //       delete candidateInfo.skype
+    //     }
+    
+    //     if (email === "") {
+    //       delete candidateInfo.email
+    //     }
+    
+    //     if (linkedIn === "") {
+    //       delete candidateInfo.linkedIn
+    //     }
+    
+    //     if (resume === "") {
+    //       delete candidateInfo.resume
+    //     }
+    
+    //     if (comment === "") {
+    //       delete candidateInfo.comment
+    //     }
+    
+    //     if (selectedVacancies.length === 0) {
+    //       delete candidateInfo.selectedVacancies
+    //     }
+    
+    //     if (selectedReason === ""){
+    //       delete candidateInfo.selectedReason
+    //     }
+    //   };
+    //   console.log(candidateInfo);
+    //   onEditCandidate(candidateInfo);
+    // }
+    // } else {
+    //   document.querySelector('.reasons_div > div').classList.add('error');
+    // }
+   
   };
 
   ReasonFormGroup = () => {
     const {reasons} = this.props;
-    const {selectedTag, selectedReason} = this.state;
+    const {tag_id, selectedReason} = this.state;
 
-    if ((selectedTag !== undefined && selectedTag !== null && selectedTag.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
+    if ((tag_id !== undefined && tag_id !== null && tag_id.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
       return (
         <FormGroup row>
           <Label for="seniority" sm={3}>
@@ -417,7 +539,7 @@ export default class CandidateEditForm extends Component {
       name,
       platform,
       seniority_id,
-      selectedTag,
+      tag_id,
       // date,
       salary,
       language,
@@ -622,7 +744,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="tags"
                           options={tags}
-                          value={selectedTag}
+                          value={tag_id}
                           placeholder="Tag"
                           onChange={this.handleTagsChange}
                         />
