@@ -67,9 +67,9 @@ export default class CandidateCreateForm extends Component {
   state = {
     avatar: noAvatar,
     name: "",
-    selectPlatform: [],
-    selectSeniority: [],
-    selectedtag: {},
+    platform_id: [],
+    seniority_id: [],
+    tag_id: {},
     selectedReason: {},
     selectedVacancies: [],
     date: moment().format("YYYY-MM-DD"),
@@ -129,7 +129,7 @@ export default class CandidateCreateForm extends Component {
   };
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    // this.state.selectedtag = this.props.selectedtag;
+    // this.state.tag_id = this.props.tag_id;
   }
 
   handleAvatarSelected = event => {
@@ -147,13 +147,13 @@ export default class CandidateCreateForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({selectPlatform: value});
+    this.setState({platform_id: value});
     document.querySelector('.platform_div > div').classList.remove('error');
 
   };
 
   handletagsChange = value => {
-    this.setState({selectedtag: value});
+    this.setState({tag_id: value});
     this.setState({selectedReason: undefined});
   };
 
@@ -166,7 +166,7 @@ export default class CandidateCreateForm extends Component {
   };
 
   handleSeniorityChange = value => {
-    this.setState({selectSeniority: value});
+    this.setState({seniority_id: value});
     document.querySelector('.seniority_div > div').classList.remove('error');
   };
 
@@ -185,8 +185,8 @@ export default class CandidateCreateForm extends Component {
 
     let {
       name,
-      selectPlatform,
-      selectSeniority,
+      platform_id,
+      seniority_id,
       date,
       salary,
       language,
@@ -197,7 +197,7 @@ export default class CandidateCreateForm extends Component {
       resume,
       comment,
       // about,
-      selectedtag,
+      tag_id,
       selectedReason,
       selectedVacancies
     } = this.state;
@@ -213,45 +213,59 @@ export default class CandidateCreateForm extends Component {
 
    
 
-    if (selectPlatform.length === 0) {
+    if (platform_id.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
     } else {
-      selectPlatform = selectPlatform.id
+      platform_id = platform_id.id
     }
 
-    if (selectSeniority.length === 0) {
+    if (seniority_id.length === 0) {
       document.querySelector('.seniority_div > div').classList.add('error');
       isValid = false;
     } else {
-      selectSeniority = selectSeniority.id
+      seniority_id = seniority_id.id
     }
 
-    if (selectedtag.length === 0) {
-      document.querySelector('.tag_div > div').classList.add('error');
-      isValid = false;
-    }
+    // if (tag_id.length === 0) {
+    //   // tag_id = tag_id.id;
+    //   document.querySelector('.tag_div > div').classList.add('error');
+    //   isValid = false;
+    // } else {
+    //   tag_id = tag_id.id
+    // }
 
 
-    if (selectedtag !== undefined && selectedtag.id === 3 && selectedReason !== undefined || selectedtag.id !== 3) {
+    if (tag_id === 3 && selectedReason !== undefined || tag_id !== 3) {
 
-      selectedtag = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : selectedtag;
+      tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
 
       language = typeof language === 'object' ? language.id : '';
 
     } 
+
       
            
      else{
       document.querySelector('.reasons_div > div').classList.add('error');
       isValid = false;
     }
+
+    
+    if (tag_id.length === 0) {
+      // tag_id = tag_id.id;
+      document.querySelector('.tag_div > div').classList.add('error');
+      isValid = false;
+    } else {
+      tag_id = tag_id.id
+    }
+
     if (isValid) {
       const newCandidate = {
         name,
-        selectPlatform,
-        selectSeniority,
-        selectedtag,
+        platform_id,
+        seniority_id,
+        tag_id,
         date,
         salary,
         language,
@@ -300,6 +314,11 @@ export default class CandidateCreateForm extends Component {
       if (selectedVacancies.length === 0) {
         delete newCandidate.selectedVacancies
       }
+
+      if (selectedReason === ""){
+        delete newCandidate.selectedReason
+      }
+
       
 
       console.log(newCandidate);
@@ -309,9 +328,9 @@ export default class CandidateCreateForm extends Component {
 
   ReasonFormGroup = () => {
     const {reasons} = this.props;
-    const {selectedtag, selectedReason} = this.state;
+    const {tag_id, selectedReason} = this.state;
 
-    if ((selectedtag !== undefined && selectedtag !== null && selectedtag.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
+    if ((tag_id !== undefined && tag_id !== null && tag_id.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
 
       return (
         <FormGroup row>
@@ -337,8 +356,8 @@ export default class CandidateCreateForm extends Component {
     const {
       avatar,
       name,
-      selectPlatform,
-      selectSeniority,
+      platform_id,
+      seniority_id,
       date,
       salary,
       language,
@@ -353,12 +372,12 @@ export default class CandidateCreateForm extends Component {
       selectedVacancies,
       // about
     } = this.state;
-    let {selectedtag} = this.state;
+    let {tag_id} = this.state;
     const {platforms, seniorities, tags, defaultSelectedtag} = this.props;
 
-    if (Object.keys(selectedtag).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
-      selectedtag = defaultSelectedtag;
-      this.setState({selectedtag: selectedtag});
+    if (Object.keys(tag_id).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
+      tag_id = defaultSelectedtag;
+      this.setState({tag_id: tag_id});
     }
 
     return (
@@ -382,14 +401,14 @@ export default class CandidateCreateForm extends Component {
             </Button>
             <CardBody className={styles.cardBody}>
               <ListGroup flush>
-                {selectPlatform.label && (
+                {platform_id.label && (
                   <ListGroupItem className={styles.listGroupItem}>
-                    {selectPlatform.label}
+                    {platform_id.label}
                   </ListGroupItem>
                 )}
-                {selectSeniority.label && (
+                {seniority_id.label && (
                   <ListGroupItem className={styles.listGroupItem}>
-                    {selectSeniority.label}
+                    {seniority_id.label}
                   </ListGroupItem>
                 )}
                 {date && (
@@ -455,7 +474,7 @@ export default class CandidateCreateForm extends Component {
                         <Select
                           required
                           id="platform"
-                          value={selectPlatform}
+                          value={platform_id}
                           placeholder="Platform"
                           options={platforms}
                           onChange={this.handlePlatformChange}
@@ -470,7 +489,7 @@ export default class CandidateCreateForm extends Component {
                         <Select
                           required
                           id="seniorities"
-                          value={selectSeniority}
+                          value={seniority_id}
                           placeholder="Seniorities"
                           options={seniorities}
                           onChange={this.handleSeniorityChange}
@@ -538,7 +557,7 @@ export default class CandidateCreateForm extends Component {
                           required
                           id="tags"
                           options={tags}
-                          value={selectedtag}
+                          value={tag_id}
                           placeholder="tag"
                           onChange={this.handletagsChange}
                         />
