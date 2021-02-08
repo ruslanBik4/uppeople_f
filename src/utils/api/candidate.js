@@ -329,13 +329,22 @@ export const getDataForSendResumeForm = id => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 400) {
+        return response.json();
+      }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`${response.statusText}`);
     })
     .then(data => {
+      if (data === 401 || data === 400) {
+        return data
+      }
       const objCompanies = data.companies;
       const companies = Object.keys(objCompanies).map(key => objCompanies[key]);
-      const emailTemplate = data.emailTemplay.text;
+      const emailTemplate = data.emailTemplay;
       const emailSubject = data.subject;
 
       const dataForSendResume = {
