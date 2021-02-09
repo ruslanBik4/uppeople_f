@@ -211,7 +211,6 @@ export default class CandidateCreateForm extends Component {
 
     let isValid = true;
 
-   
 
     if (platform_id.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');

@@ -166,7 +166,7 @@ export const deleteVacancy = async id => {
 export const getVacancies = (company_id, isActive = false, withRecruiters = false) => {
   const token = getToken();
   // try {
-  console.log(token);
+
   return fetch(`${URL}/main/returnAllVacancy`, {
     method: "POST",
     headers: {

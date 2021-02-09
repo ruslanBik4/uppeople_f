@@ -268,7 +268,7 @@ export default class CandidateSendResumeForm extends Component {
       contacts.map(contact => (
         <ListGroupItem
           style={{width: "100%"}}
-          key={`${contact.compId}-${contact.conId}`}
+          key={`${contact.id}-${contact.id}`}
         >
           <CustomInput
             type="checkbox"
