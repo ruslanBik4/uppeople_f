@@ -224,12 +224,12 @@ export default class CandidateSendResumeForm extends Component {
       vacancy.map(vacancy => (
         <ListGroupItem
           style={{width: "100%"}}
-          key={`${vacancy.compId}-${vacancy.id}`}
+          key={`${vacancy.id}-${vacancy.id}`}
         >
           <CustomInput
             type="checkbox"
-            id={vacancy.vacId}
-            checked={checkedVacancies.get(vacancy.vacId)}
+            id={vacancy.id}
+            checked={checkedVacancies.get(vacancy.id)}
             label={`${vacancy.platform !== null ? vacancy.platform : ""} ${
               vacancy.seniority !== null ? vacancy.seniority : ""
             } ${vacancy.salary !== null ? vacancy.salary : ""} ${
