@@ -466,11 +466,11 @@ export default class CandidateCreateForm extends Component {
                       </Label> */}
                       </Col>
                     </FormGroup>
-                    <FormGroup className={"platform_div"} row>
+                    <FormGroup row>
                       <Label for="platform" sm={3}>
                         Platform<font color="red">*</font>
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9}  className={"platform_div"}>
                         <Select
                           required
                           id="platform"
@@ -481,11 +481,11 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup className={"seniority_div"} row>
+                    <FormGroup  row>
                       <Label for="seniorities" sm={3}>
                         Seniorities<font color="red">*</font>
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9}className={"seniority_div"}>
                         <Select
                           required
                           id="seniorities"
