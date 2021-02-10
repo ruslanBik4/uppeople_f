@@ -50,6 +50,7 @@ export default class VacanciesForm extends Component {
     const { vacancyStatus } = this.props;
     const { selectStatuses, selectSeniorities } = this.state;
 
+    console.log(selectSeniorities);
     if (prevProps.vacancyStatus.length === 0) {
       const selectStatuses = vacancyStatus.map(status =>
         status.id === 0 || status.id === 1 ? status : null
