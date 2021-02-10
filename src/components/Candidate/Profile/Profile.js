@@ -135,11 +135,20 @@ export default class CandidateProfile extends Component {
 
   deleteCandidate = id => {
     deleteCandidateProfile(id).then(data => {
-    if (data === 401) {
-      this.props.history.push('/login/')
-    } else {
-      alert(data)
-    }
+      switch (data) {
+        case 202: {
+          alert('Deleted succesfull!y')
+          break;
+        }
+        case 401: {
+          this.props.history.push('/login/')
+          break;
+        }
+        case 400: {
+          console.log(data);
+          alert(data.text)
+        }
+      }
 
     });
   };

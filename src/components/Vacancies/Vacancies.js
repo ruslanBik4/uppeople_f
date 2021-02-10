@@ -100,7 +100,23 @@ export default class Vacancies extends Component {
   };
 
   onDeleteVacancy = id => {
-    deleteVacancy(id);
+    deleteVacancy(id).then(data => {
+      switch (data) {
+        case 202: {
+          alert('Deleted succesfull!y')
+          break;
+        }
+        case 401: {
+          this.props.history.push('/login/')
+          break;
+        }
+        case 400: {
+          console.log(data);
+          alert(data.text)
+        }
+      }
+
+    });
 
     const { vacanciesData } = this.state;
 
