@@ -57,8 +57,8 @@ const VacanciesTableRow = ({
           options={vacancyStatus}
           onChange={value => {
             const content = {
-              id,
-              value
+              id: id,
+              status: value.id
             };
             onChangeVacancyStatus(content);
           }}

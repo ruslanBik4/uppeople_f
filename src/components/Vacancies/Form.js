@@ -48,7 +48,7 @@ export default class VacanciesForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { vacancyStatus } = this.props;
-    const { selectStatuses } = this.state;
+    const { selectStatuses, selectSeniorities } = this.state;
 
     if (prevProps.vacancyStatus.length === 0) {
       const selectStatuses = vacancyStatus.map(status =>
@@ -60,6 +60,12 @@ export default class VacanciesForm extends Component {
     } else if (selectStatuses.length !== prevState.selectStatuses.length) {
       this.setState({
         selectStatuses
+      });
+    }
+
+    if (selectSeniorities.length !== prevState.selectSeniorities.length) {
+      this.setState({
+        selectSeniorities
       });
     }
   }
