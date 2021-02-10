@@ -19,7 +19,7 @@ const WithModalFreelancerSendCandidateForm = withModalForLetter(
 
 const VacanciesTableRow = ({
   id,
-  companyId,
+  company_id,
   company,
   platId,
   platform,
@@ -36,7 +36,7 @@ const VacanciesTableRow = ({
   <>
     <td>
       {userRole !== 4 ? (
-        <Link to={`/companies/${companyId}`}>{company}</Link>
+        <Link to={`/companies/${company_id}`}>{company}</Link>
       ) : (
         company
       )}
@@ -52,7 +52,7 @@ const VacanciesTableRow = ({
       <td>
         <Select
           defaultValue={vacancyStatus.find(
-            vacancyStatus => vacancyStatus.label === status
+            vacancyStatus => vacancyStatus.id === status
           )}
           options={vacancyStatus}
           onChange={value => {

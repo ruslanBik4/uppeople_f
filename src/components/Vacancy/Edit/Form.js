@@ -96,7 +96,7 @@ export default class VacancyEditForm extends Component {
     salary: 0,
     comment: "",
     link: "",
-    selectedVacancyStatus: 0,
+    status: 0,
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
@@ -183,13 +183,13 @@ export default class VacancyEditForm extends Component {
       const salary =  vacancy.salary;
       const comment = vacancy.comment !== null ? vacancy.comment : "";
       const link = vacancy.link ;
-      const selectedVacancyStatus = vacancy.status;
+      const status = vacancy.status;
 
       this.setState({
         salary,
         comment,
         link,
-        selectedVacancyStatus
+        status
       });
     }
   }
@@ -236,8 +236,8 @@ export default class VacancyEditForm extends Component {
     });
   };
 
-  onRadioBtnClick = selectedVacancyStatus => {
-    this.setState({selectedVacancyStatus});
+  onRadioBtnClick = status => {
+    this.setState({status});
   };
 
   handleSubmit = event => {
@@ -276,7 +276,7 @@ export default class VacancyEditForm extends Component {
       salary,
       comment,
       link,
-      selectedVacancyStatus,
+      status,
       description,
       details
     } = this.state;
@@ -432,28 +432,28 @@ export default class VacancyEditForm extends Component {
                     >
                       <Button
                         className="btn-default"
-                        active={selectedVacancyStatus === 0}
+                        active={status === 0}
                         onClick={() => this.onRadioBtnClick(0)}
                       >
                         <i className="fa fa-fire"/>
                       </Button>
                       <Button
                         className="btn-default"
-                        active={selectedVacancyStatus === 1}
+                        active={status === 1}
                         onClick={() => this.onRadioBtnClick(1)}
                       >
                         <i className="fa fa-check-circle"/>
                       </Button>
                       <Button
                         className="btn-default"
-                        active={selectedVacancyStatus === 2}
+                        active={status === 2}
                         onClick={() => this.onRadioBtnClick(2)}
                       >
                         <i className="fa fa-history"/>
                       </Button>
                       <Button
                         className="btn-default"
-                        active={selectedVacancyStatus === 3}
+                        active={status === 3}
                         onClick={() => this.onRadioBtnClick(3)}
                       >
                         <i className="fa fa-ban"/>
