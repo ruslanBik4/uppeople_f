@@ -126,7 +126,7 @@ const VacanciesTableRow = ({
                   isOpenModal: true,
                   title: "Select candidate",
                   platformId: platId,
-                  companyId: companyId,
+                  companyId: company_id,
                   vacancyId: id
                 })
               }
