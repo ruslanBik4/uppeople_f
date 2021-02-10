@@ -295,8 +295,9 @@ export const deleteCandidateProfile = async id => {
         "Content-Type": "application/json"
       }
     });
-    if (response.ok) {
-      return response.json();
+    //accepted successfully
+    if (response.status === 202) {
+      return 202;
     }
     if (response.status === 400) {
       return response.json();

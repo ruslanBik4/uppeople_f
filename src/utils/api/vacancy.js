@@ -139,14 +139,21 @@ export const deleteVacancy = async id => {
   const token = getToken();
   try {
     const response = await fetch(`${URL}/main/deleteVacancy/${id}`, {
-      method: "GET",
+      method: "POST",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json"
       }
     });
-    if (response.ok) {
+    //accepted successfully
+    if (response.status === 202) {
+      return 202;
+    }
+    if (response.status === 400) {
       return response.json();
+    }
+    if (response.status === 401) {
+      return 401;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {
