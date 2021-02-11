@@ -170,23 +170,27 @@ export const getCompanyInfo = id => {
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {
-      const companyInfo = {
-        name: data.name,
-        logo: data.logo,
-        phone: data.phone,
-        email: data.email,
-        skype: data.skype,
-        about: data.about,
-        map: data.map,
-        calendarEvents: data.calendar,
-        sendDetails: data.otpravka,
-        termsOfCooperation: data.uslovia,
-        interviewDetails: data.interview_detail,
-        contacts: data.contacts,
-        managers: data.manager
-      };
+      if (data === 401) {
+        this.props.history.push('/login/');
+      } else {
+        const companyInfo = {
+          name: data.name,
+          logo: data.logo,
+          phone: data.phone,
+          email: data.email,
+          skype: data.skype,
+          about: data.about,
+          map: data.map,
+          calendarEvents: data.calendar,
+          sendDetails: data.otpravka,
+          termsOfCooperation: data.uslovia,
+          interviewDetails: data.interview_detail,
+          contacts: data.contacts,
+          managers: data.managers
+        };
 
-      return companyInfo;
+        return companyInfo;
+      }
     })
     .catch(error => console.log("error in fetch: ", error));
 };
