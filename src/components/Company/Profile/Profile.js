@@ -125,17 +125,15 @@ export default class CompanyProfile extends Component {
   };
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    let { id } = this.props.match.params;
     const { role, companyId } = this.props.user;
     const { filterAndSortVacancies } = this.state;
     const vacanciesCurrentPage = this.state.vacanciesData.currentPage;
     const candidatesCurrentPage = this.state.candidatesData.currentPage;
 
-    role !== 5
-      ? getCompanyInfo(id).then(companyInfo => {
-          this.setState({ ...this.state, companyInfo });
-        })
-      : getCompanyInfo(companyId).then(companyInfo => {
+    id = role !== 5 ? id: companyId;
+
+    getCompanyInfo(id).then(companyInfo => {
           companyInfo && this.setState({ ...this.state, companyInfo });
         });
 

@@ -73,10 +73,10 @@ export const createNewVacancy = async vacancy => {
     if (response.ok) {
       return response.json();
     }
-    if (response.status == 400) {
+    if (response.status === 400) {
       return response.json();
     }
-    if (response.status == 401) {
+    if (response.status === 401) {
       return 401;
     }
     throw new Error(`${response.statusText}`);
@@ -105,6 +105,12 @@ export const updateVacancy = (id, vacancy) => {
     .then(response => {
       if (response.ok) {
         return response.json();
+      }
+      if (response.status === 400) {
+        return response.json();
+      }
+      if (response.status === 401) {
+        return 401;
       }
 
       throw new Error(`${response.statusText}`);

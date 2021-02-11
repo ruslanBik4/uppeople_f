@@ -160,12 +160,18 @@ export const getCompanyInfo = id => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 400) {
+        return response.json();
+      }
+      if (response.status === 401) {
+        return 401;
+      }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {
       const companyInfo = {
-        name: data.nazva,
+        name: data.name,
         logo: data.logo,
         phone: data.phone,
         email: data.email,
