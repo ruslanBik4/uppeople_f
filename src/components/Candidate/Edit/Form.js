@@ -208,7 +208,7 @@ export default class CandidateEditForm extends Component {
     //   }
     // }
     let platformVacancies = [];
-    if ( (platform !== undefined)  && (vacancies !== undefined) ){
+    if ( (platform_id !== undefined)  && (vacancies !== undefined) ){
       vacancies.map((vacancy) => {
         if (vacancy.platform_id === platform.id) {
           platformVacancies.push(vacancy);
@@ -220,7 +220,7 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform: platform_id,
+        platform_id: platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
         selectedReason: selectedReason,
@@ -242,7 +242,9 @@ export default class CandidateEditForm extends Component {
         // })
         // about: about,
       });
-  }
+      console.log(tag_id);
+      console.log(selectedReason);
+      }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
@@ -341,6 +343,9 @@ export default class CandidateEditForm extends Component {
       selectedVacancies,
       vacancies
     } = this.state;
+    console.log(platform_id);
+    console.log(platform)
+    console.log(tag_id);
 
     let isValid = true;
 
@@ -537,7 +542,7 @@ export default class CandidateEditForm extends Component {
     const {
       avatar,
       name,
-      platform,
+      platform_id,
       seniority_id,
       tag_id,
       // date,
@@ -641,14 +646,14 @@ export default class CandidateEditForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="platform" sm={3}>
+                      <Label for="platform_id" sm={3}>
                         Platform
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="platform"
+                          id="platform_id"
                           options={platforms}
-                          value={platform}
+                          value={platform_id}
                           placeholder="Platform"
                           onChange={this.handlePlatformChange}
                         />
