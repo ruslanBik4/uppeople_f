@@ -12,13 +12,16 @@ const getToken = () => localStorage.getItem("token");
  */
 export const getCompanies = (page, isActive, withRecruiters = false) => {
   const token = getToken();
-  ///${isActive}/${withRecruiters}
+  let filter = [];
+  filter.IsActive = isActive;
+  filter.WithRecruiters = withRecruiters
   return fetch(`${URL}/main/returnAllCompanies/${page}`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify(filter)
   })
     .then(response => {
       if (response.ok) {
@@ -66,7 +69,9 @@ export const getCompanies = (page, isActive, withRecruiters = false) => {
  */
 export const filterAllCompanies = (page, isActive, filter, withRecruiters = false) => {
   const token = getToken();
-  return fetch(`${URL}/main/returnAllCompanies/${page}/${isActive}/${withRecruiters}`, {
+  filter.IsActive = isActive;
+  filter.WithRecruiters = withRecruiters
+  return fetch(`${URL}/main/returnAllCompanies/${page}`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
