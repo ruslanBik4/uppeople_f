@@ -16,7 +16,7 @@ const CompaniesListItem = ({ id, logo, name, vacancies, candidates }) => (
   <Card style={{ marginBottom: "1rem" }}>
     <Link to={`/companies/${id}`} logo={logo}>
       <CardBody style={{ padding: "0.5rem" }}>
-        <CardImg top width="100%" src={logo} alt="logo" />
+        <CardImg top width="100%" src="/api/img/"{(logo === null ? "/companies_logo/no_logo.png": logo)} alt="logo" />
         <CardTitle
           style={{
             marginBottom: 0,
