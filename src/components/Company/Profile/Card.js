@@ -17,7 +17,7 @@ const CompanyProfileCard = ({
   <Card className={styles.card}>
     <CardImg
       top
-      src={logo || noLogo}
+      src={"/api/img/" +(logo === null ? "/companies_logo/no_logo.png": logo)}
       className={styles.cardLogo}
       alt="Company logo"
     />
