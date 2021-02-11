@@ -12,8 +12,9 @@ const getToken = () => localStorage.getItem("token");
  */
 export const getCompanies = (page, isActive, withRecruiters = false) => {
   const token = getToken();
-  return fetch(`${URL}/main/returnAllCompanies/${page}/${isActive}/${withRecruiters}`, {
-    method: "GET",
+  ///${isActive}/${withRecruiters}
+  return fetch(`${URL}/main/returnAllCompanies/${page}`, {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json"
@@ -25,32 +26,31 @@ export const getCompanies = (page, isActive, withRecruiters = false) => {
       }
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
-    .then(data => {
-      const companies = data.companies.map(company => ({
-        id: company.id,
-        name: company.nazva,
-        logo: company.logo,
-        email: company.email,
-        skype: company.skype,
-        phone: company.phone,
-        recruiters: company.recruiters,
-        vacancies: company.vacancy_count,
-        candidates: company.candidates_to_company_count
-      }));
-      const companiesCount = data.Count;
-      const totalPages = data.Pages;
-      const currentPage = data.current_page;
-      const perPage = data.per_page;
+    .then(companies => {
+      // const companies = companies.map(company => ({
+      //   id: company.id,
+      //   name: company.name,
+      //   logo: company.logo,
+      //   email: company.email,
+      //   skype: company.skype,
+      //   phone: company.phone,
+      //   recruiters: company.recruiters,
+      //   vacancies: company.vacancy_count,
+      //   candidates: company.candidates_to_company_count
+      // }));
+      // companies.lenght = undefined;
+      const companiesCount = companies.lenght;
+      const totalPages = 1;
+      const currentPage = 1;
+      const perPage = companies.lenght;
 
-      const companiesData = {
+      return {
         companies,
         companiesCount,
         totalPages,
         currentPage,
         perPage
       };
-
-      return companiesData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
@@ -82,31 +82,29 @@ export const filterAllCompanies = (page, isActive, filter, withRecruiters = fals
 
       throw new Error(`${response.statusText}`);
     })
-    .then(data => {
-      const companies = data.companies.map(company => ({
-        id: company.id,
-        name: company.nazva,
-        logo: company.logo,
-        email: company.email,
-        skype: company.skype,
-        phone: company.phone,
-        vacancies: company.vacancy_count,
-        candidates: company.candidates_to_company_count
-      }));
-      const companiesCount = data.Count;
-      const totalPages = data.Pages;
-      const currentPage = data.current_page;
-      const perPage = data.per_page;
+    .then(companies => {
+      // const companies = data.companies.map(company => ({
+      //   id: company.id,
+      //   name: company.nazva,
+      //   logo: company.logo,
+      //   email: company.email,
+      //   skype: company.skype,
+      //   phone: company.phone,
+      //   vacancies: company.vacancy_count,
+      //   candidates: company.candidates_to_company_count
+      // }));
+      const companiesCount = companies.lenght;
+      const totalPages = 1;
+      const currentPage = 1;
+      const perPage = companies.lenght;
 
-      const companiesData = {
+      return {
         companies,
         companiesCount,
         totalPages,
         currentPage,
         perPage
       };
-
-      return companiesData;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
