@@ -461,7 +461,7 @@ export const uploadCompanyLogo = async (id, file) => {
 export const updateCompanyInfo = async (id, companyInfo) => {
   const token = getToken();
   try {
-    const response = await fetch(`${URL}/main/editSettingsCompany/${id}`, {
+    const response = await fetch(`${URL}/main/editCompany/${id}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -698,7 +698,7 @@ export const deleteCompanyContact = async id => {
  */
 export const updateCompanyInfoProfile = (id, content) => {
   const token = getToken();
-  return fetch(`${URL}/main/editInformations/${id}`, {
+  return fetch(`${URL}/main/editCompany/${id}`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
