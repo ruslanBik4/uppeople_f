@@ -204,12 +204,17 @@ export const getCompanyInfo = id => {
  */
 export const getCompanyCandidates = (id, page) => {
   const token = getToken();
-  return fetch(`${URL}/main/viewAllCandidatesForCompany/${id}/${page}`, {
-    method: "GET",
+  let filter = {
+    company_id: parseInt( id )
+  }
+
+  return fetch(`${URL}/main/viewAllCandidatesForCompany/${page}`, {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify(filterAndSort)
   })
     .then(response => {
       if (response.ok) {
