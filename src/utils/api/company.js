@@ -205,7 +205,7 @@ export const getCompanyInfo = id => {
 export const getCompanyCandidates = (id, page) => {
   const token = getToken();
   let filterAndSort = {
-    company_id: id
+    company_id: parseInt( id )
   }
 
   return fetch(`${URL}/main/viewAllCandidatesForCompany/${page}`, {
@@ -274,7 +274,7 @@ export const getCompanyComments = async id => {
  */
 export const filterAndSortCompanyVacancies = (id, page, filterAndSort) => {
   const token = getToken();
-  filterAndSort.company_id = id;
+  filterAndSort.company_id = parseInt( id );
   return fetch(`${URL}/main/viewAllVacancyInCompany/${page}`, {
     method: "POST",
     headers: {
