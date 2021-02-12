@@ -269,7 +269,8 @@ export const getCompanyComments = async id => {
  */
 export const filterAndSortCompanyVacancies = (id, page, filterAndSort) => {
   const token = getToken();
-  return fetch(`${URL}/main/viewAllVacancyInCompany/${id}/${page}`, {
+  filterAndSort.company_id = id;
+  return fetch(`${URL}/main/viewAllVacancyInCompany/${page}`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
