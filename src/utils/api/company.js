@@ -204,7 +204,7 @@ export const getCompanyInfo = id => {
  */
 export const getCompanyCandidates = (id, page) => {
   const token = getToken();
-  let filter = {
+  let filterAndSort = {
     company_id: parseInt( id )
   }
 
