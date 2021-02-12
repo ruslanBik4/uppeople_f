@@ -370,6 +370,10 @@ export default class CandidateEditForm extends Component {
         tag_id = tag_id.id
       }
 
+      if ( !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+        isValid = false
+      } 
+
       const {onEditCandidate} = this.props;
 
       if (isValid) {
@@ -402,7 +406,7 @@ export default class CandidateEditForm extends Component {
         if (phone === "") {
           delete candidateInfo.phone
         }
-  
+   
         if (skype === "") {
           delete candidateInfo.skype
         }

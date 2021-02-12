@@ -180,6 +180,11 @@ export default class CandidateCreateForm extends Component {
     });
   };
 
+  handleSalaryChange = value => {
+    this.setState({salary: value});
+    document.querySelector('.salary_div > div').classList.remove('error');
+  };
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -258,6 +263,17 @@ export default class CandidateCreateForm extends Component {
     } else {
       tag_id = tag_id.id
     }
+
+    if (linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+      isValid = false;
+      document.querySelector('.linkedIn_div').classList.add('error');
+    } 
+
+    if (salary.length !== 0 && !salary.match ('^[1-9]')) {
+      isValid = false;
+      document.querySelector('.salary_div').classList.add('error');
+    }
+    
 
     if (isValid) {
       const newCandidate = {
@@ -511,11 +527,11 @@ export default class CandidateCreateForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup  row>
                       <Label for="salary" sm={3}>
                         Salary
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"salary_div"}>
                         <Input
                           id="salary"
                           type="text"
@@ -621,7 +637,7 @@ export default class CandidateCreateForm extends Component {
                       <Label for="linkedIn" sm={3}>
                         LinkedIn
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"linkedIn_div"}>
                         <Input
                           id="linkedIn"
                           type="url"
