@@ -300,7 +300,7 @@ export const filterAndSortCompanyVacancies = (id, page, filterAndSort) => {
         candidateStatus: data.candidateStatus,
         vacancyStatus: data.vacancyStatus,
         platform: data.platforms,
-        seniority: data.seniorities
+        seniority: data.seniority
       };
 
       return vacanciesData;
