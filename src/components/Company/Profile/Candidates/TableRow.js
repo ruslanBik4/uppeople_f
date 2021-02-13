@@ -40,7 +40,7 @@ const CompanyProfileCandidatesTableRow = ({
     <td style={{ minWidth: "9rem" }}>
       <Select
         defaultValue={candidateStatus.find(
-          candidateStatus => candidateStatus.label === status
+          candidateStatus => candidateStatus.label === status.vacStat
         )}
         options={candidateStatus}
         styles={customStyles}
