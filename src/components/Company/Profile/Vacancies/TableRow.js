@@ -36,7 +36,7 @@ const CompanyProfileVacanciesTableRow = ({
       <td style={{ minWidth: "9rem" }}>
         <Select
           defaultValue={vacancyStatus.find(
-            vacancyStatus => vacancyStatus.label === status
+            vacancyStatus => vacancyStatus.id === status
           )}
           options={vacancyStatus}
           onChange={value => {

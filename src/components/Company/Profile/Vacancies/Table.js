@@ -25,7 +25,7 @@ const CompanyProfileVacanciesTable = ({
           <CompanyProfileVacanciesTableRow
             idx={idx}
             {...vacancy}
-            vacancyStatus={vacancy.status}
+            vacancyStatus={vacancyStatus}
             onChangeVacancyStatus={onChangeVacancyStatus}
           />
         </tr>
