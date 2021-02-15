@@ -94,7 +94,7 @@ export default class Users extends Component {
 
     const tabPanesForAdmin = Object.keys(users).map((key, idx) => {
       const index = (idx + 1).toString();
-      return users[key] !== undefined && users[key] !== NULL ? (
+      return users[key] !== undefined && users[key] !== null ? (
         <TabPane tabId={index} key={key}>
           <UsersTable
             users={users[key]}
