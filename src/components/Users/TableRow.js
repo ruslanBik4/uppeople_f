@@ -24,6 +24,7 @@ const UsersTableRow = ({
   updateCount,
   createCount,
   tel,
+                         id_roles,
   role,
   tabId,
   usersGroup,
@@ -85,7 +86,7 @@ const UsersTableRow = ({
         )
       )}
       <td>
-        {role && role.id === 4 && (
+        {id_roles === 4 && (
           <ModalConsumer>
             {({ showModal }) => (
               <Button

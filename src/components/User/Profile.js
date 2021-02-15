@@ -41,7 +41,7 @@ export default class UserProfile extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     console.log("MY USER id", id);
-    getUser({ id }).then(user => {
+    getUser( id ).then(user => {
       console.log("MY USER", user);
       this.setState({
         id: user.id,

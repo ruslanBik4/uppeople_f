@@ -10,13 +10,11 @@ const getToken = () => localStorage.getItem("token");
  */
 export const getUser = id => {
   const token = getToken();
-  return fetch(`${URL}/admin/view-editUser`, {
+  return fetch(`${URL}/admin/view-editUser/${id}`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
-      "Content-Type": "application/json"
     },
-    body: JSON.stringify(id)
   })
     .then(response => {
       if (response.ok) {
