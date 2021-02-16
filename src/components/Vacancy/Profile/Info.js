@@ -58,7 +58,7 @@ const VacancyProfileInfo = ({
         {seniority && (
           <ListGroupItem>Seniority: {seniority}</ListGroupItem>
         )}
-        {status && <ListGroupItem>Status:
+        <ListGroupItem>Status:
           <ButtonGroup
             style={{display: "flex", marginBottom: "1rem"}}
         >
@@ -91,7 +91,7 @@ const VacancyProfileInfo = ({
             <i className="fa fa-ban"/>
           </Button>
         </ButtonGroup>
-        </ListGroupItem>}
+        </ListGroupItem>
         {location && <ListGroupItem>Location: {location}</ListGroupItem>}
         {salary && <ListGroupItem>Salary: {salary}</ListGroupItem>}
         {link && (
