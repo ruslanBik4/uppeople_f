@@ -24,7 +24,7 @@ import styles from "./SendResumeForm.module.css";
 const INITIAL_STATE = {
   companies: [],
   activeCompany: {
-    compId: null,
+    comp_id: null,
     name: "",
     vacancy: [],
     contacts: [],
@@ -80,19 +80,15 @@ export default class CandidateSendResumeForm extends Component {
         dataForSendResumeForm.companies[0] :
         [];
 
-      let activeVacancy = dataForSendResumeForm.companies !== undefined &&
-      dataForSendResumeForm.companies.length > 0 &&
-      dataForSendResumeForm.companies[0].vacancy !== undefined &&
-      dataForSendResumeForm.companies[0].vacancy.length > 0 ?
-        dataForSendResumeForm.companies[0].vacancy[0] : [];
+      let activeVacancy = activeCompany.length > 0 &&
+          activeCompany.vacancy !== undefined &&
+          activeCompany.vacancy.length > 0 ?
+          activeCompany.vacancy[0] : [];
 
-      let activeRecruiter = dataForSendResumeForm.companies !== undefined &&
-      dataForSendResumeForm.companies.length > 0 &&
-      dataForSendResumeForm.companies[0].vacancy !== undefined &&
-      dataForSendResumeForm.companies[0].vacancy.length > 0 &&
-      dataForSendResumeForm.companies[0].vacancy[0].userIds !== undefined &&
-      dataForSendResumeForm.companies[0].vacancy[0].userIds.length > 0  ?
-        dataForSendResumeForm.companies[0].vacancy[0].userIds[0] : [];
+      let activeRecruiter = activeVacancy.length > 0 &&
+          activeVacancy.user_ids !== undefined &&
+          activeVacancy.user_ids.length > 0  ?
+          activeVacancy.user_ids[0] : [];
 
       this.setState({
         activeCompany: activeCompany,
@@ -118,7 +114,7 @@ export default class CandidateSendResumeForm extends Component {
 
   setActiveCompany = id => {
     const {companies} = this.state;
-    const activeCompany = companies.find(company => company.compId === id);
+    const activeCompany = companies.find(company => company.comp_id === id);
     console.log(companies);
     this.setState({
       activeCompany,
@@ -150,7 +146,7 @@ export default class CandidateSendResumeForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const {
-      activeCompany: {compId},
+      activeCompany: {comp_id},
       checkedVacancies,
       checkedEmails,
       emailSubject,
@@ -171,7 +167,7 @@ export default class CandidateSendResumeForm extends Component {
 
     const freelancerId = freeLancerId ? freeLancerId : null;
     const content = {
-      compId,
+      comp_id,
       freelancerId,
       checkedVacanciesEntries,
       checkedEmailsEntries,
@@ -180,8 +176,11 @@ export default class CandidateSendResumeForm extends Component {
     };
     console.log(candidateId, content);
 
-    if (compId) {
+    if (comp_id) {
       sendResume(candidateId, content);
+    } else {
+      alert('Please, choiche company!');
+      return;
     }
 
     this.setState({dataSaved: true});
@@ -199,7 +198,7 @@ export default class CandidateSendResumeForm extends Component {
     console.log(this.state);
     const {
       companies,
-      activeCompany: {compId, vacancy, contacts, sendDetails},
+      activeCompany: {comp_id, vacancy, contacts, sendDetails},
       emailSubject,
       emailTemplate,
       checkedVacancies,
@@ -210,10 +209,10 @@ export default class CandidateSendResumeForm extends Component {
       companies.length > 0 &&
       companies.map(company => (
         <ListGroupItem
-          key={`${company.compId}-${company.name}`}
-          active={company.compId === compId ? true : false}
+          key={`${company.comp_id}-${company.name}`}
+          active={company.comp_id === comp_id}
           style={{minHeight: 30}}
-          onClick={() => this.setActiveCompany(company.compId)}
+          onClick={() => this.setActiveCompany(company.comp_id)}
         >
           {company.name}
         </ListGroupItem>
@@ -224,7 +223,7 @@ export default class CandidateSendResumeForm extends Component {
       vacancy.map(vacancy => (
         <ListGroupItem
           style={{width: "100%"}}
-          key={`${vacancy.id}-${vacancy.id}`}
+          key={`${comp_id}-${vacancy.id}`}
         >
           <CustomInput
             type="checkbox"
@@ -247,7 +246,7 @@ export default class CandidateSendResumeForm extends Component {
     //   vacancy.userIds.map(vacancy => (
     //     <ListGroupItem
     //       style={{width: "100%"}}
-    //       key={`${vacancy.compId}-${vacancy.vacId}`}
+    //       key={`${vacancy.comp_id}-${vacancy.vacId}`}
     //     >
     //       <CustomInput
     //         type="checkbox"
@@ -269,7 +268,7 @@ export default class CandidateSendResumeForm extends Component {
       contacts.map(contact => (
         <ListGroupItem
           style={{width: "100%"}}
-          key={`${contact.id}-${contact.id}`}
+          key={`${comp_id}-${contact.id}`}
         >
           <CustomInput
             type="checkbox"

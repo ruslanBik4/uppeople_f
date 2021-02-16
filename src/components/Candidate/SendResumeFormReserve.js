@@ -161,7 +161,7 @@ export default class CandidateSendResumeForm extends Component {
       companies.map(company => (
         <ListGroupItem
           key={`${company.compId}-${company.name}`}
-          active={company.compId === compId ? true : false}
+          active={company.compId === compId}
           style={{ minHeight: 30 }}
           onClick={() => this.setActiveCompany(company.compId)}
         >
@@ -174,12 +174,12 @@ export default class CandidateSendResumeForm extends Component {
       vacancy.map(vacancy => (
         <ListGroupItem
           style={{ width: "100%" }}
-          key={`${vacancy.compId}-${vacancy.vacId}`}
+          key={`${vacancy.compId}-${vacancy.id}`}
         >
           <CustomInput
             type="checkbox"
             id={vacancy.vacId}
-            checked={checkedVacancies.get(vacancy.vacId)}
+            checked={checkedVacancies.get(vacancy.id)}
             label={`${vacancy.platform !== null ? vacancy.platform : ""} ${
               vacancy.seniority !== null ? vacancy.seniority : ""
             } ${vacancy.salary !== null ? vacancy.salary : ""} ${
@@ -195,11 +195,11 @@ export default class CandidateSendResumeForm extends Component {
       contacts.map(contact => (
         <ListGroupItem
           style={{ width: "100%" }}
-          key={`${contact.compId}-${contact.conId}`}
+          key={`${contact.compId}-${contact.id}`}
         >
           <CustomInput
             type="checkbox"
-            id={contact.conId}
+            id={contact.id}
             name={contact.email}
             checked={checkedEmails.get(contact.email)}
             label={`${contact.email} ${contact.name}`}

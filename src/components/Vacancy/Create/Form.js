@@ -227,20 +227,10 @@ export default class VacancyCreateForm extends Component {
   //   // user_ids = user_ids.id
   // }
 
-  if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
-    const user_ids = vacancy.user_ids.filter(
-      recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
-    );
-    this.setState({
-      user_ids: user_ids
-    });
-  }
-
     if (vacancy.company_id !== undefined) {
       company_id = company_id.id;
     }
     
-  console.log(user_ids.id);
   console.log(company_id);
   console.log(user_ids);
 
@@ -265,6 +255,17 @@ export default class VacancyCreateForm extends Component {
         // about: aboutEditorState
       };
       console.log(vacancy);
+
+      if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
+        vacancy.user_ids = vacancy.user_ids.filter(
+            recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
+        );
+        this.setState({
+          user_ids: user_ids
+        });
+      }  else {
+        delete vacancy.user_ids;
+      }
 
       if (salary === 0) {
         delete vacancy.salary

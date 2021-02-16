@@ -290,7 +290,6 @@ export default class CompanyProfile extends Component {
             this.props.history.push('/login/')
           } else if (typeof data === 'object') {
             const contacts = this.state.companyInfo.contacts.length > 0 ? [contact, ...this.state.companyInfo.contacts] : [contact];
-            console.log(contacts)
             this.setState({companyInfo: {...this.state.companyInfo, contacts } })
           }
         }
