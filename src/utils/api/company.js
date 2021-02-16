@@ -132,6 +132,15 @@ export const createNewCompany = async company => {
       },
       body: JSON.stringify(company)
     });
+    if (response.status === 201) {
+      return response.json();
+    }
+    if (response.status === 400) {
+      return response.json();
+    }
+    if (response.status === 401) {
+      return 401;
+    }
     if (response.ok) {
       return response.json();
     }

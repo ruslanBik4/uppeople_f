@@ -14,7 +14,7 @@ import {
 const VacancyProfileInfo = ({
   vacancy: {
     id,
-    date,
+    date_create,
     company,
     platform,
     seniority,
@@ -38,9 +38,9 @@ const VacancyProfileInfo = ({
     </CardHeader>
     <CardBody>
       <ListGroup flush>
-        {date && (
+        {date_create && (
           <ListGroupItem>
-            Date: {moment(date).format("DD MMM YYYY")}
+            Date: {moment(date_create).format("DD MMM YYYY")}
           </ListGroupItem>
         )}
         {company && (
@@ -49,7 +49,7 @@ const VacancyProfileInfo = ({
             {userRole !== 4 ? (
               <Link to={`/companies/${company.id}`}>{company.name}</Link>
             ) : (
-              company.nazva
+              company.name
             )}
           </ListGroupItem>
         )}
