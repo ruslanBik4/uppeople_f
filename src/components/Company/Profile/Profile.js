@@ -283,15 +283,15 @@ export default class CompanyProfile extends Component {
   };
 
   addContact = contact => {
-    const { id, contacts } = this.props.match.params;
+    const { id  } = this.props.match.params;
 
     addCompanyContact(id, contact).then(data => {
           if (data === 401) {
             this.props.history.push('/login/')
           } else if (typeof data === 'object') {
-            const contacts = [data, ... contacts];
+            const contacts = this.state.companyInfo.contacts.length > 0 ? [contact, ...this.state.companyInfo.contacts] : [contact];
             console.log(contacts)
-            this.setState({companyInfo: {...this.state.companyInfo, contacts: [contact, ...this.state.companyInfo.contacts]} })
+            this.setState({companyInfo: {...this.state.companyInfo, contacts } })
           }
         }
     );
