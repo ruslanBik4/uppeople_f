@@ -269,9 +269,14 @@ export default class CandidateCreateForm extends Component {
       document.querySelector('.linkedIn_div').classList.add('error');
     } 
 
-    if (salary.length !== 0 && !salary.match ('^[1-9]')) {
+    if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
       isValid = false;
       document.querySelector('.salary_div').classList.add('error');
+    }
+
+    if (email.length !== 0 && !email.match ('[.-\w]+@([\w-]+\.)+[\w]+')) {
+      isValid = false;
+      document.querySelector('.email_div').classList.add('error');
     }
     
 
@@ -619,7 +624,7 @@ export default class CandidateCreateForm extends Component {
                       <Label for="email" sm={3}>
                         Email
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"email_div"}>
                         <Input
                           id="email"
                           type="email"

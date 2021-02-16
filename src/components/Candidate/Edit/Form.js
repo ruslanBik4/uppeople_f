@@ -242,7 +242,7 @@ export default class CandidateEditForm extends Component {
         // })
         // about: about,
       });
-      console.log(tag_id);
+      console.log(candidate.linkedIn);
       console.log(selectedReason);
       }
 
@@ -312,6 +312,10 @@ export default class CandidateEditForm extends Component {
     this.setState({language: value});
   };
 
+  handleLinkedInChange = value => {
+    this.setState({linkedIn: value});
+  };
+
   handleReasonChange = value => {
     this.setState({selectedReason: value});
   };
@@ -343,8 +347,8 @@ export default class CandidateEditForm extends Component {
       selectedVacancies,
       vacancies
     } = this.state;
-    console.log(platform_id);
-    console.log(platform)
+    console.log(linkedIn);
+    console.log(salary)
     console.log(tag_id);
 
     let isValid = true;
@@ -370,9 +374,22 @@ export default class CandidateEditForm extends Component {
         tag_id = tag_id.id
       }
 
-      if ( !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
-        isValid = false
+      if (linkedIn !== null && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/') || linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+        isValid = false;
+        document.querySelector('.linkedIn_div').classList.add('error');
       } 
+  
+      if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
+        isValid = false;
+        document.querySelector('.salary_div').classList.add('error');
+      }
+  
+      // if (email.length !== 0 && !email.match ('[.-\w]+@([\w-]+\.)+[\w]+')) {
+      //   isValid = false;
+      //   document.querySelector('.email_div').classList.add('error');
+      // }
+
+
 
       const {onEditCandidate} = this.props;
 
@@ -712,7 +729,7 @@ export default class CandidateEditForm extends Component {
                       <Label for="salary" sm={3}>
                         Salary
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"salary_div"}>
                         <Input
                           id="salary"
                           type="text"
@@ -818,7 +835,7 @@ export default class CandidateEditForm extends Component {
                       <Label for="linkedIn" sm={3}>
                         LinkedIn
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"linkedIn_div"}>
                         <Input
                           id="linkedIn"
                           type="url"

@@ -55,7 +55,7 @@ class VacancyCreate extends Component {
                             console.log(elem, s)
                             document.querySelector('.'+s+'_div > div').classList.add('error');
                         } else {
-                            document.querySelector('input[name='+ elem[0]+']').classList.add('error');
+                            // document.querySelector('input[name='+ elem[0]+']').classList.add('error');
                         }
 
                     })
@@ -90,3 +90,4 @@ class VacancyCreate extends Component {
 }
 
 export default withOptionsForSelects(VacancyCreate);
+ 

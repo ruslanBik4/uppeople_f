@@ -58,11 +58,11 @@ export default class VacancyCreateForm extends Component {
   };
 
   state = {
-    selectPlatform: [],
-    selectSeniority: [],
+    platform_id: [],
+    seniority_id: [],
     selectCompany: [],
-    selectLocation: [],
-    selectRecruiter: [],
+    location_id: [],
+    user_ids: [],
     salary: 0,
     comment: "",
     link: "",
@@ -70,12 +70,13 @@ export default class VacancyCreateForm extends Component {
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
+  
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
   };
 
-  handleSalaryChange = ({target: {name, value}}) => {
+  handleSalaryChange = ({target: {salary, value}}) => {
     this.setState({
       salary: parseInt(value)
     });
@@ -90,33 +91,31 @@ export default class VacancyCreateForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({
-      selectPlatform: value
-    });
+    this.setState({platform_id: value});
+    document.querySelector('.platform_div > div').classList.remove('error');
   };
 
   handleSeniorityChange = value => {
-    this.setState({
-      selectSeniority: value
-    });
+    this.setState({seniority_id: value});
+    document.querySelector('.seniority_div > div').classList.remove('error');
   };
 
   handleCompanyChange = value => {
-    this.setState({
-      selectCompany: value
-    });
+    this.setState({company_id: value});
   };
 
   handleLocationChange = value => {
-    this.setState({
-      selectLocation: value
-    });
+    this.setState({location_id: value});
+    document.querySelector('.location_div > div').classList.remove('error');
+  };
+
+  handleLinkChange = value => {
+    this.setState({link: value});
+    document.querySelector('.link_div').classList.remove('error');
   };
 
   handleRecruiterChange = value => {
-    this.setState({
-      selectRecruiter: value
-    });
+    this.setState({user_ids: value});
   };
 
   onRadioBtnClick = selectedVacancyStatus => {
@@ -134,6 +133,7 @@ export default class VacancyCreateForm extends Component {
       );
       this.setState({selectCompany: getCurrentCompany});
     }
+  
   }
 
   handleSubmit = event => {
@@ -152,8 +152,8 @@ export default class VacancyCreateForm extends Component {
 
     const vacancy = {
       ...this.state,
-      description: descriptionEditorState,
-      details: detailsEditorState
+      description: descriptionEditorState.toString().trim(),
+      details: detailsEditorState.toString().trim(),
     };
 
     let errList = document.querySelector('.error');
@@ -161,6 +161,24 @@ export default class VacancyCreateForm extends Component {
     if (errList !== null) {
       errList.classList.remove('error');
     }
+
+    let {
+      platform_id,
+      seniority_id,
+      company_id,
+      location_id,
+      user_ids,
+      salary,
+      comment,
+      link,
+      selectedVacancyStatus,
+      // description,
+      // details
+    } = this.state;
+    console.log(company_id);
+  console.log(user_ids);
+  // console.log(user_ids.id);
+
 
     let isValid = true;
 
@@ -170,48 +188,107 @@ export default class VacancyCreateForm extends Component {
       isValid = false;
     }
 
+
     if (detailsEditorState.toString().trim() === "<p></p>") {
       document.querySelector('.details_div + div').classList.add('error');
       isValid = false;
     }
 
-    if ( vacancy.selectPlatform.length === 0) {
+    if ( vacancy.platform_id.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
+    }  else {
+      platform_id = platform_id.id
     }
 
-  //  if ( vacancy.selectSeniority.length === 0) {
-  //    document.querySelector('.seniority_div > div').classList.add('error');
-  //    isValid = false;
-  //  }
+   if ( vacancy.seniority_id.length === 0) {
+     document.querySelector('.seniority_div > div').classList.add('error');
+     isValid = false;
+   }  else {
+    seniority_id = seniority_id.id
+  }
 
-    if ( vacancy.selectCompany.length === 0) {
-      document.querySelector('.companies_div > div').classList.add('error');
-      isValid = false;
-    }
+    // if ( vacancy.selectCompany.length === 0) {
+    //   document.querySelector('.companies_div > div').classList.add('error');
+    //   isValid = false;
+    // }
 
-    if ( vacancy.selectLocation.length === 0) {
+    if ( vacancy.location_id.length === 0) {
       document.querySelector('.location_div > div').classList.add('error');
       isValid = false;
+    }  else {
+      location_id = location_id.id
     }
 
-    //if (vacancy.selectRecruiter.length === 0) {
-    //  document.querySelector('.recruiters_div > div').classList.add('error');
-    //  isValid = false;
-   // }
+  //   if (vacancy.user_ids.length === 0) {
+  //    document.querySelector('.recruiters_div > div').classList.add('error');
+  //    isValid = false;
+  //  }  else {
+  //   // user_ids = user_ids.id
+  // }
+
+  if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
+    const user_ids = vacancy.user_ids.filter(
+      recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
+    );
+    this.setState({
+      user_ids: user_ids
+    });
+  }
+
+    if (vacancy.company_id !== undefined) {
+      company_id = company_id.id;
+    }
+    
+  console.log(user_ids.id);
+  console.log(company_id);
+  console.log(user_ids);
+
+   
+   if (vacancy.link === "") {
+    document.querySelector('.link_div').classList.add('error');
+    isValid = false;
+    }
 
     if (isValid) {
+      const vacancy = {
+        company_id: company_id,
+        platform_id: platform_id,
+        seniority_id: seniority_id,
+        location_id: location_id,
+        salary: salary,
+        link: link,
+        description: descriptionEditorState.toString().trim(),
+        details: detailsEditorState.toString().trim(),
+        user_ids: user_ids
+        
+        // about: aboutEditorState
+      };
+      console.log(vacancy);
+
+      if (salary === 0) {
+        delete vacancy.salary
+      }
+      
+      if (company_id === undefined) {
+        delete vacancy.company_id
+      }
+
+      if (description.length === 0) {
+        delete vacancy.description
+      }
+
       onCreateVacancy(vacancy);
     }
   };
 
   render() {
     const {
-      selectPlatform,
-      selectSeniority,
-      selectCompany,
-      selectLocation,
-      selectRecruiter,
+      platform_id,
+      seniority_id,
+      company_id,
+      location_id,
+      user_ids,
       salary,
       comment,
       link,
@@ -264,7 +341,7 @@ export default class VacancyCreateForm extends Component {
                   <Col>
                     <FormGroup className={"platform_div"}>
                       <Select
-                        value={selectPlatform}
+                        value={platform_id}
                         options={platforms}
                         placeholder="Platform"
                         onChange={this.handlePlatformChange}
@@ -272,7 +349,7 @@ export default class VacancyCreateForm extends Component {
                     </FormGroup>
                     <FormGroup className={"seniority_div"}>
                       <Select
-                        value={selectSeniority}
+                        value={seniority_id}
                         options={seniority}
                         placeholder="Seniority"
                         onChange={this.handleSeniorityChange}
@@ -280,7 +357,7 @@ export default class VacancyCreateForm extends Component {
                     </FormGroup>
                     <FormGroup className={"companies_div"}>
                       <Select
-                        value={selectCompany}
+                        value={company_id}
                         options={companies}
                         placeholder="Company"
                         onChange={this.handleCompanyChange}
@@ -288,7 +365,7 @@ export default class VacancyCreateForm extends Component {
                     </FormGroup>
                     <FormGroup className={"recruiters_div"}>
                     <Select
-                      value={selectRecruiter}
+                      value={user_ids}
                       isMulti
                       options={recruiters}
                       placeholder="Recruiter"
@@ -299,7 +376,7 @@ export default class VacancyCreateForm extends Component {
                   </FormGroup>
                     <FormGroup className={"location_div"}>
                       <Select
-                        value={selectLocation}
+                        value={location_id}
                         options={location}
                         placeholder="Location"
                         onChange={this.handleLocationChange}
@@ -311,11 +388,11 @@ export default class VacancyCreateForm extends Component {
                         <Input
                           id="salary"
                           type="number"
-                          min={100}
+                          min={0}
                           name="salary"
                           value={salary}
-                          required={true}
-                          placeholder="Salary"
+                          // required={true}
+                          placeholder="0"
                           onChange={this.handleSalaryChange}
                         />
                         <i
@@ -350,7 +427,7 @@ export default class VacancyCreateForm extends Component {
                       </Col>
                     </FormGroup> */}
                     <FormGroup row>
-                      <Col>
+                      <Col className={"link_div"}>
                         <Input
                           id="link"
                           type="url"
@@ -430,3 +507,4 @@ export default class VacancyCreateForm extends Component {
     );
   }
 }
+ 
