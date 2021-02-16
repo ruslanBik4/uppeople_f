@@ -8,13 +8,14 @@ import {
   CardHeader,
   CardBody,
   ListGroup,
-  ListGroupItem
+  ListGroupItem, ButtonGroup, Button, Col
 } from "reactstrap";
 
 const VacancyProfileInfo = ({
   vacancy: {
     id,
     date_create,
+    company_id,
     company,
     platform,
     seniority,
@@ -47,18 +48,51 @@ const VacancyProfileInfo = ({
           <ListGroupItem>
             Company:{" "}
             {userRole !== 4 ? (
-              <Link to={`/companies/${company.id}`}>{company.name}</Link>
+              <Link to={`/companies/${company_id}`}>{company}</Link>
             ) : (
-              company.name
+              company
             )}
           </ListGroupItem>
         )}
-        {platform && <ListGroupItem>Platform: {platform.name}</ListGroupItem>}
+        {platform && <ListGroupItem>Platform: {platform}</ListGroupItem>}
         {seniority && (
-          <ListGroupItem>Seniority: {seniority.name}</ListGroupItem>
+          <ListGroupItem>Seniority: {seniority}</ListGroupItem>
         )}
-        {status && <ListGroupItem>Status: {status.status}</ListGroupItem>}
-        {location && <ListGroupItem>Location: {location.name}</ListGroupItem>}
+        {status && <ListGroupItem>Status:
+          <ButtonGroup
+            style={{display: "flex", marginBottom: "1rem"}}
+        >
+          <Button
+              className="btn-default"
+              active={status === 0}
+              onClick={() => this.onRadioBtnClick(0)}
+          >
+            <i className="fa fa-fire"/>
+          </Button>
+          <Button
+              className="btn-default"
+              active={status === 1}
+              onClick={() => this.onRadioBtnClick(1)}
+          >
+            <i className="fa fa-check-circle"/>
+          </Button>
+          <Button
+              className="btn-default"
+              active={status === 2}
+              onClick={() => this.onRadioBtnClick(2)}
+          >
+            <i className="fa fa-history"/>
+          </Button>
+          <Button
+              className="btn-default"
+              active={status === 3}
+              onClick={() => this.onRadioBtnClick(3)}
+          >
+            <i className="fa fa-ban"/>
+          </Button>
+        </ButtonGroup>
+        </ListGroupItem>}
+        {location && <ListGroupItem>Location: {location}</ListGroupItem>}
         {salary && <ListGroupItem>Salary: {salary}</ListGroupItem>}
         {link && (
           <ListGroupItem>
