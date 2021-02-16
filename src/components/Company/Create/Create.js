@@ -7,10 +7,14 @@ import { createNewCompany } from "../../../utils/api/company";
 
 export default class CompanyCreate extends Component {
   createCompany = company => {
-    createNewCompany(company).then(createdCompany => {
-      const { history } = this.props;
+    createNewCompany(company).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else {
+        const {history} = this.props;
 
-      history.push(`/companies/${createdCompany.id}`);
+        history.push(`/companies/${data.id}`);
+      }
     });
   };
 
