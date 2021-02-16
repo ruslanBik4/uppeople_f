@@ -283,10 +283,10 @@ export default class CompanyProfile extends Component {
   };
 
   addContact = contact => {
-    const { id } = this.props.match.params;
+    const { id, contacts } = this.props.match.params;
 
-    addCompanyContact(id, contact).then(contacts =>
-      this.setState({ companyInfo: { ...this.state.companyInfo, contacts } })
+    addCompanyContact(id, contact).then(contact =>
+      this.setState({ companyInfo: { ...this.state.companyInfo, contacts: { ...contacts, contact} } })
     );
   };
 
