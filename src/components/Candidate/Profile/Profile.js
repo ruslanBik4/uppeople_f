@@ -94,7 +94,15 @@ export default class CandidateProfile extends Component {
       });
     });
 
-    getCandidateComments(id).then(comments => this.setState({comments}));
+    getCandidateComments(id).then(comments => {
+      if (comments === 401) {
+        this.props.history.push('/login/')
+      } else if (comments === 204) {
+      } else {
+
+        this.setState({comments})
+      }
+    });
   }
 
   updateAboutContent = content => {
@@ -156,9 +164,15 @@ export default class CandidateProfile extends Component {
   sendResume = (id, content) => {
     // const { id } = this.props.match.params;
 
-    sendCandidateResume(id, content).then(() => {
-      this.setState({dataSaved: true});
-      this.componentDidMount();
+    sendCandidateResume(id, content).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else if (data === 404) {
+        this.setState({dataSaved: false});
+      } else {
+        this.setState({dataSaved: true});
+        this.componentDidMount();
+      }
     });
 
   };

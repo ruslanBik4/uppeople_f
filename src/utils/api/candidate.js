@@ -88,6 +88,9 @@ export const getCandidateComments = async id => {
         "Content-Type": "application/json"
       }
     });
+    if (response.status === 401 || response.status === 404 || response.status === 204) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }
@@ -377,6 +380,9 @@ export const sendCandidateResume = async (id, content) => {
       },
       body: JSON.stringify(content)
     });
+    if (response.status === 401 || response.status === 404 || response.status === 204) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }

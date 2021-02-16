@@ -80,13 +80,11 @@ export default class CandidateSendResumeForm extends Component {
         dataForSendResumeForm.companies[0] :
         [];
 
-      let activeVacancy = activeCompany.length > 0 &&
-          activeCompany.vacancy !== undefined &&
+      let activeVacancy = activeCompany.vacancy !== undefined &&
           activeCompany.vacancy.length > 0 ?
           activeCompany.vacancy[0] : [];
 
-      let activeRecruiter = activeVacancy.length > 0 &&
-          activeVacancy.user_ids !== undefined &&
+      let activeRecruiter = activeVacancy.user_ids !== undefined &&
           activeVacancy.user_ids.length > 0  ?
           activeVacancy.user_ids[0] : [];
 
@@ -176,7 +174,7 @@ export default class CandidateSendResumeForm extends Component {
     };
     console.log(candidateId, content);
 
-    if (comp_id) {
+    if (comp_id && checkedVacanciesEntries && checkedEmailsEntries) {
       sendResume(candidateId, content);
     } else {
       alert('Please, choiche company!');
