@@ -142,14 +142,24 @@ export default class CandidateProfile extends Component {
   };
 
   changeCandidateStatus = content => {
-    updateCandidateStatus(content).then(data => console.log(data));
+    const statusCandidate ={
+      company_id: content.company_id,
+      candidate_id: content.id,
+      status: content.value.id
+    }
+    updateCandidateStatus(statusCandidate).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else {
+        console.log(data)
+      });
   };
 
   deleteCandidate = id => {
     deleteCandidateProfile(id).then(data => {
       switch (data) {
         case 202: {
-          alert('Deleted succesfull!y')
+          alert('Deleted successfully!')
           break;
         }
         case 401: {

@@ -159,23 +159,26 @@ export default class Candidates extends Component {
     getCandidatesFromFreelancers(currentPageFF).then(data => {
       if (data === 401) {
         this.props.history.push('/login/');
+      } else if (data > 400) {
+        alert(data);
       } else {
-        const candidatesFromFreelancersData = {
-          candidatesFF: data.candidates,
-          candidatesCountFF: data.Count,
-          totalPagesFF: data.Page,
-          perPageFF: data.perPage,
-          statusesFF: data.statuses,
-          currentPageFF: data.currentPage
-        };
+          const candidatesFromFreelancersData = {
+            candidatesFF: data.candidates,
+            candidatesCountFF: data.Count,
+            totalPagesFF: data.Page,
+            perPageFF: data.perPage,
+            statusesFF: data.statuses,
+            currentPageFF: data.currentPage
+          };
 
-        this.setState({
-          candidatesFromFreelancersData: {
-            ...this.state.candidatesFromFreelancersData,
-            ...candidatesFromFreelancersData
-          }
-        });
-      }
+          this.setState({
+            candidatesFromFreelancersData: {
+              ...this.state.candidatesFromFreelancersData,
+              ...candidatesFromFreelancersData
+            }
+          });
+        }
+
     });
   };
 
