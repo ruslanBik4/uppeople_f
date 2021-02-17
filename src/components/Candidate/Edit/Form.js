@@ -374,10 +374,16 @@ export default class CandidateEditForm extends Component {
         tag_id = tag_id.id
       }
 
-      if (linkedIn !== null && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/') || linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
-        isValid = false;
-        document.querySelector('.linkedIn_div').classList.add('error');
-      } 
+      if (!linkedIn === null || !linkedIn !== null && linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+        isValid = false
+      }
+      else {
+        isValid = false
+      }
+      // if (linkedIn !== null && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/') || linkedIn.length === 0) {
+      //   isValid = false;
+      //   document.querySelector('.linkedIn_div').classList.add('error');
+      // } 
   
       if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
         isValid = false;

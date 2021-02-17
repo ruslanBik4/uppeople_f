@@ -232,9 +232,6 @@ export default class VacancyCreateForm extends Component {
     //  let result = user_ids.map(user_ids => user_ids.id)
     // user_ids = result
     
-  console.log(company_id);
-  console.log(user_ids);
-  // console.log(result);
 
    
    if (vacancy.link === "") {
@@ -243,7 +240,6 @@ export default class VacancyCreateForm extends Component {
     }
 
     if (isValid) {
-      const result = user_ids.map(user_ids => user_ids.id);
       const vacancy = {
         company_id: company_id,
         platform_id: platform_id,
@@ -253,13 +249,11 @@ export default class VacancyCreateForm extends Component {
         link: link,
         description: descriptionEditorState.toString().trim(),
         details: detailsEditorState.toString().trim(),
-        users_ids: user_ids.map(user_ids => user_ids.id)
+        user_ids: user_ids.map(user_ids => user_ids.id)
         
         // about: aboutEditorState
       };
-      console.log(vacancy);
-      console.log(result);
-      console.log(user_ids);
+      
 
       if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
         vacancy.user_ids = vacancy.user_ids.filter(
@@ -270,7 +264,7 @@ export default class VacancyCreateForm extends Component {
         });
       }  else {
         delete vacancy.user_ids;
-      }
+      } 
 
       if (salary === 0) {
         delete vacancy.salary

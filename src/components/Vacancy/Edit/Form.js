@@ -83,72 +83,89 @@ export default class VacancyEditForm extends Component {
       link: "",
       date: "",
       description: "",
-      details: ""
+      details: "",
+      user_ids: [],
+      users_ids: []
     }
   };
 
   state = {
-    selectPlatform: [],
-    selectSeniority: [],
-    selectCompany: [],
-    selectRecruiter: [],
-    selectLocation: [],
+    platform_id: [],
+    seniority_id: [],
+    company_id: [],
+    user_ids: [],
+    location_id: [],
     salary: 0,
     comment: "",
     link: "",
     status: 0,
     description: EditorState.createEmpty(),
-    details: EditorState.createEmpty()
+    details: EditorState.createEmpty(),
+    users_ids: []
   };
 
   componentDidUpdate(prevProps) {
     const {vacancy, options} = this.props;
 
     if (this.props !== prevProps) {
-        const selectedPlatform = options.platforms.find(
+        const platform_id = options.platforms.find(
           platform => platform.id === vacancy.platform_id
         )
 
         this.setState({
-          selectPlatform: selectedPlatform
+          platform_id: platform_id
         });
+ 
 
-
-        const selectedSeniority = options.seniority.find(
+        const seniority_id = options.seniority.find(
           seniority => seniority.id === vacancy.seniority_id
         );
 
         this.setState({
-          selectSeniority: selectedSeniority
+          seniority_id: seniority_id
         });
 
 
-        const selectedCompany = options.companies.find(
+        const company_id = options.companies.find(
           company => company.id === vacancy.company_id
         );
 
         this.setState({
-          selectCompany: selectedCompany
+          company_id: company_id
         });
+
+        console.log(vacancy);
+        // console.log(user_ids);
+        console.log(vacancy.users_ids)
 
 
 
       if (vacancy.user_ids !== null &&  options.recruiters !== undefined) {
-        const selectRecruiter = options.recruiters.filter(
-          recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
+        const user_ids = options.recruiters.filter(
+          recruiter => vacancy.user_ids.indexOf(user_ids) > -1
         );
 
+        // if (vacancy.users_ids !== null &&  options.recruiters !== undefined) {
+        //   const users_ids = options.recruiters.filter(
+        //     recruiter => vacancy.users_ids.indexOf(users_ids) > -1
+        //   );
+
+          console.log(vacancy);
+        // console.log(user_ids);
+        console.log(vacancy.user_ids);
+
+
         this.setState({
-          selectRecruiter: selectRecruiter
+          user_ids: user_ids
         });
       }
 
-        const selectedLocation = options.location.find(
+        const location_id = options.location.find(
           location => location.id === vacancy.location_id
         );
 
         this.setState({
-          selectLocation: selectedLocation
+          location_id: location_id
         });
 
 
@@ -208,31 +225,31 @@ export default class VacancyEditForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({
-      selectPlatform: value
+      platform_id: value
     });
   };
 
   handleSeniorityChange = value => {
     this.setState({
-      selectSeniority: value
+      seniority_id: value
     });
   };
 
   handleCompanyChange = value => {
     this.setState({
-      selectCompany: value
+      company_id: value
     });
   };
 
   handleRecruiterChange = value => {
     this.setState({
-      selectRecruiter: value
+      user_ids: value
     });
   };
 
   handleLocationChange = value => {
     this.setState({
-      selectLocation: value
+      location_id: value
     });
   };
 
@@ -268,11 +285,11 @@ export default class VacancyEditForm extends Component {
 
   render() {
     const {
-      selectPlatform,
-      selectSeniority,
-      selectCompany,
-      selectRecruiter,
-      selectLocation,
+      platform_id,
+      seniority_id,
+      company_id,
+      user_ids,
+      location_id,
       salary,
       comment,
       link,
@@ -326,7 +343,7 @@ export default class VacancyEditForm extends Component {
                   <Col>
                     <FormGroup>
                       <Select
-                        value={selectPlatform}
+                        value={platform_id}
                         options={platforms}
                         placeholder="Platform"
                         onChange={this.handlePlatformChange}
@@ -334,7 +351,7 @@ export default class VacancyEditForm extends Component {
                     </FormGroup>
                     <FormGroup>
                       <Select
-                        value={selectSeniority}
+                        value={seniority_id}
                         options={seniority}
                         placeholder="Seniority"
                         onChange={this.handleSeniorityChange}
@@ -342,7 +359,7 @@ export default class VacancyEditForm extends Component {
                     </FormGroup>
                     <FormGroup>
                       <Select
-                        value={selectCompany}
+                        value={company_id}
                         options={companies}
                         placeholder="Company"
                         onChange={this.handleCompanyChange}
@@ -350,7 +367,7 @@ export default class VacancyEditForm extends Component {
                     </FormGroup>
                     <FormGroup className={"recruiters_div"}>
                       <Select
-                        value={selectRecruiter}
+                        value={user_ids}
                         isMulti
                         options={recruiters}
                         placeholder="Recruiter"
@@ -361,7 +378,7 @@ export default class VacancyEditForm extends Component {
                     </FormGroup>
                     <FormGroup>
                       <Select
-                        value={selectLocation}
+                        value={location_id}
                         options={location}
                         placeholder="Location"
                         onChange={this.handleLocationChange}
