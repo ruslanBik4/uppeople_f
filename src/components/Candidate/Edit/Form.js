@@ -372,7 +372,7 @@ export default class CandidateEditForm extends Component {
         tag_id = tag_id.id
      
 
-      if (!linkedIn === null || !linkedIn !== null && linkedIn > '') {
+      if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
       }
