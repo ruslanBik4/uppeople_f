@@ -184,14 +184,12 @@ export default class VacancyCreateForm extends Component {
 
 
     if (descriptionEditorState.toString().trim() === "<p></p>") {
-      document.querySelector('.description_div + div').classList.add('error');
-      isValid = false;
+    
     }
 
 
     if (detailsEditorState.toString().trim() === "<p></p>") {
-      document.querySelector('.details_div + div').classList.add('error');
-      isValid = false;
+      
     }
 
     if ( vacancy.platform_id.length === 0) {
@@ -230,9 +228,13 @@ export default class VacancyCreateForm extends Component {
     if (vacancy.company_id !== undefined) {
       company_id = company_id.id;
     }
+
+    //  let result = user_ids.map(user_ids => user_ids.id)
+    // user_ids = result
     
   console.log(company_id);
   console.log(user_ids);
+  // console.log(result);
 
    
    if (vacancy.link === "") {
@@ -241,6 +243,7 @@ export default class VacancyCreateForm extends Component {
     }
 
     if (isValid) {
+      const result = user_ids.map(user_ids => user_ids.id);
       const vacancy = {
         company_id: company_id,
         platform_id: platform_id,
@@ -250,11 +253,13 @@ export default class VacancyCreateForm extends Component {
         link: link,
         description: descriptionEditorState.toString().trim(),
         details: detailsEditorState.toString().trim(),
-        user_ids: user_ids
+        users_ids: user_ids.map(user_ids => user_ids.id)
         
         // about: aboutEditorState
       };
       console.log(vacancy);
+      console.log(result);
+      console.log(user_ids);
 
       if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
         vacancy.user_ids = vacancy.user_ids.filter(
