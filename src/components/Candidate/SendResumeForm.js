@@ -230,7 +230,7 @@ export default class CandidateSendResumeForm extends Component {
             label={`${vacancy.platform !== null ? vacancy.platform : ""} ${
               vacancy.seniority !== null ? vacancy.seniority : ""
             } ${vacancy.salary !== null ? vacancy.salary : ""} ${
-              vacancy.details !== null ? vacancy.details : ""
+              vacancy.details > "" ? vacancy.details : ""
             } ${vacancy.location !== null ? vacancy.location : ""}`}
             onChange={this.handleCheckboxVacancyChange}
           />

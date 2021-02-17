@@ -330,20 +330,20 @@ export const getDataForSendResumeForm = id => {
     }
   })
     .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
       if (response.status === 400) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
+      if (response.status > 400) {
+        return response.status;
       }
 
+      if (response.ok) {
+        return response.json();
+      }
       throw new Error(`${response.statusText}`);
     })
     .then(data => {
-      if (data === 401 || data === 400) {
+      if (data > 400) {
         return data
       }
       const objCompanies = data.companies;

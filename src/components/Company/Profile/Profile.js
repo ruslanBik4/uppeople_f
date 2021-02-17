@@ -311,7 +311,7 @@ export default class CompanyProfile extends Component {
 
   deleteContact = id => {
     deleteCompanyContact(id);
-
+    //todo: add performs response
     this.setState({
       companyInfo: {
         ...this.state.companyInfo,
