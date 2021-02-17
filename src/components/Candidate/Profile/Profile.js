@@ -151,7 +151,8 @@ export default class CandidateProfile extends Component {
       if (data === 401) {
         this.props.history.push('/login/')
       } else {
-        console.log(data)
+          console.log(data)
+      }
       });
   };
 
