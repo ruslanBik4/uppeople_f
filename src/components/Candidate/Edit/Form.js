@@ -347,15 +347,13 @@ export default class CandidateEditForm extends Component {
       selectedVacancies,
       vacancies
     } = this.state;
-    console.log(linkedIn);
-    console.log(salary)
-    console.log(tag_id);
+   
 
     let isValid = true;
 
-    if (isValid = true)  {
-      platform_id = platform_id.id
-    }
+    
+    platform_id = platform_id.id
+   
 
     if (seniority_id.length !== 0)  {
       seniority_id = seniority_id.id
@@ -370,16 +368,15 @@ export default class CandidateEditForm extends Component {
       tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
       language = typeof language === 'object' ? language.id : '';
 
-      if (isValid = true)  {
+      
         tag_id = tag_id.id
-      }
+     
 
-      if (!linkedIn === null || !linkedIn !== null && linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
-        isValid = false
+      if (!linkedIn === null || !linkedIn !== null && linkedIn > '') {
+        isValid = false;
+        document.querySelector('.linkedIn_div').classList.add('error');
       }
-      else {
-        isValid = false
-      }
+      
       // if (linkedIn !== null && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/') || linkedIn.length === 0) {
       //   isValid = false;
       //   document.querySelector('.linkedIn_div').classList.add('error');
