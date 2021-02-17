@@ -591,37 +591,14 @@ export const getContactInfo = id => {
     }
   })
     .then(response => {
+      if (response.status >= 400) {
+        return response.status;
+      }
       if (response.ok) {
         return response.json();
       }
 
       throw new Error(`${response.statusText}`);
-    })
-    .then(data => {
-      const contactState = {
-        contact: {
-          id: data.id,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          skype: data.skype,
-          selectedPlatforms: data.platforms.map(platform => {
-            const arrOfPlatforms = Object.values(platform.platform);
-
-            const selectedPlatforms = {
-              id: arrOfPlatforms[0],
-              label: arrOfPlatforms[1],
-              value: arrOfPlatforms[1].toLowerCase()
-            };
-
-            return selectedPlatforms;
-          })
-        },
-        isChecked: data.all_platforms === 1 ? true : false,
-        isDisabled: data.all_platforms === 1 ? true : false
-      };
-
-      return contactState;
     })
     .catch(error => console.log("error in fetch: ", error));
 };

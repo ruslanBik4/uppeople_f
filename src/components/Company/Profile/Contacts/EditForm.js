@@ -1,21 +1,13 @@
 // Core
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  CustomInput,
-  Input,
-  Label
-} from "reactstrap";
+import {Button, Col, CustomInput, Form, FormGroup, Input, Label} from "reactstrap";
 // Components
 import Select from "../../../shared/Select";
 // HOC
 import withOptionsForSelects from "../../../hoc/withOptionsForSelects";
 // Instruments
-import { getContactInfo } from "../../../../utils/api/company";
+import {getContactInfo} from "../../../../utils/api/company";
 
 class CompanyProfileContactsEditForm extends Component {
   state = {
@@ -33,8 +25,34 @@ class CompanyProfileContactsEditForm extends Component {
 
   componentDidMount() {
     const { contactId } = this.props;
-    getContactInfo(contactId).then(contactState => {
-      this.setState({ ...contactState });
+    getContactInfo(contactId).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else if (data === 404) {
+        alert(data);
+      } else {
+        const contactState = {
+          contact: {
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            skype: data.skype,
+            selectedPlatforms: data.platforms && data.platforms.map(platform => {
+              const arrOfPlatforms = Object.values(platform.platform);
+
+              return {
+                id: arrOfPlatforms[0],
+                label: arrOfPlatforms[1],
+                value: arrOfPlatforms[1].toLowerCase()
+              };
+            })
+          },
+          isChecked: data.all_platforms === 1,
+          isDisabled: data.all_platforms === 1
+        };
+        this.setState({...contactState});
+      }
     });
   }
 
