@@ -19,6 +19,9 @@ export const getCandidateProfile = id => {
     }
   })
     .then(response => {
+      if (response.status === 401 || response.status === 404 || response.status === 204) {
+        return response.status;
+      }
       if (response.ok) {
         return response.json();
       }
@@ -26,18 +29,19 @@ export const getCandidateProfile = id => {
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {
-      const candidate = data[0];
-      const statuses =
-        data.statusesCandidate !== null && data.statusesCandidate;
+      if (data > 200) {
+        return data;
+      }
 
-      const candidateStatuses = statuses.map(candidateStatus => ({
+      const candidate = data[0];
+      const candidateStatuses = data.statuses.map(candidateStatus => ({
         id: candidateStatus.id,
         platform: candidateStatus.platform,
         seniority: candidateStatus.seniority,
         vacancy: candidateStatus.vacancy,
         company: candidateStatus.company,
         dateUpdate: candidateStatus.date_last_change,
-        vacancyStatus: candidateStatus.status_vac,
+        vacancyStatus: candidateStatus.vacancyStatus,
         details: candidateStatus.rej_text
       }));
 

@@ -402,6 +402,9 @@ export const updateCandidateStatus = async content => {
       },
       body: JSON.stringify(content)
     });
+    if (response.status === 401 || response.status === 404 || response.status === 204) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }
