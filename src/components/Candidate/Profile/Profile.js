@@ -77,8 +77,12 @@ export default class CandidateProfile extends Component {
     const {id} = this.props.match.params;
 
     getCandidateProfile(id).then(candidateProfile => {
-      this.setState({...candidateProfile});
-      console.log(candidateProfile);
+      if (candidateProfile === 401) {
+        this.props.history.push('/login/')
+      } else {
+        this.setState({...candidateProfile});
+        console.log(candidateProfile);
+      }
     });
 
 

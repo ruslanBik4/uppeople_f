@@ -22,7 +22,7 @@ const CandidateProfileTableRow = ({
 }) => {
   console.log(vacancy);
   const platformName = vacancy !== null ? vacancy.platforms.nazva : "";
-  const companyName = company !== null ? company.nazva : "";
+  const companyName = company !== null ? company.name : "";
   const salary = vacancy.salary !== null ? vacancy.salary : "0";
   const status = vacancyStatus !== null ? vacancyStatus.status : "";
   const formatedDate = moment(dateUpdate).format("DD.MM.YY");
