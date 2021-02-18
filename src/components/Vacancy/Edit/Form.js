@@ -391,9 +391,9 @@ export default class VacancyEditForm extends Component {
       //   delete vacancy.user_ids;
       // } 
 
-      // if (user_ids.length === 0) {
-      //   delete vacancy.user_ids
-      // }
+      if (user_ids.length === 0) {
+        delete vacancy.user_ids
+      }
 
       if (salary === 0) {
         delete vacancy.salary

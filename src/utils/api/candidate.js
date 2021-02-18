@@ -122,6 +122,9 @@ export const addCandidateComment = async (id, comment) => {
       },
       body: JSON.stringify(comment)
     });
+    if (response.status === 401 || response.status === 404 || response.status === 204) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }
@@ -415,8 +418,10 @@ export const getDataForAppointInterviewForm = async id => {
         }
       }
     );
+    if (response.status > 400) {
+      return response.status;
+    }
     if (response.ok) {
-      console.log("response: ", response);
       return response.json();
     }
     throw new Error(`${response.statusText}`);
