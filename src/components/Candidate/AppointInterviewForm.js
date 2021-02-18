@@ -92,11 +92,11 @@ export default class AppointInterviewForm extends Component {
 
             const optionsForSelectCompany = Object.keys(
               companies
-            ).map(key => {
+            ).map(key => ({
               id: companies[key].comp_id,
               label: companies[key].name,
               value: companies[key].name
-            })
+            }))
             });
 
           console.log(optionsForSelectCompany);
