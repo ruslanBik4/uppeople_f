@@ -88,17 +88,23 @@ export default class AppointInterviewForm extends Component {
         },
         () => {
           const { dataForAppointInterviewForm } = this.state;
+          const companies = dataForAppointInterviewForm["companies"];
 
             const optionsForSelectCompany = Object.keys(
-              dataForAppointInterviewForm["companies"]
-            ).map(key => dataForAppointInterviewForm["companies"][key]);
+              companies
+            ).map(key => {
+              id: companies[key].comp_id,
+              label: companies[key].name,
+              value: companies[key].name
+            })
+            });
 
           console.log(optionsForSelectCompany);
 
           const findActiveCompany = Object.values(
-              dataForAppointInterviewForm["companies"]
+              companies
             ).find(
-              obj =>  obj.comp_id === optionsForSelectCompany[0].comp_id
+              obj =>  obj.comp_id === optionsForSelectCompany[0].id
             );
             console.log(findActiveCompany);
 
