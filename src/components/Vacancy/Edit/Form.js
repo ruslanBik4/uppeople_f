@@ -36,7 +36,8 @@ export default class VacancyEditForm extends Component {
       link: PropTypes.string,
       date: PropTypes.string,
       description: PropTypes.string,
-      details: PropTypes.string
+      details: PropTypes.string,
+      user_ids: PropTypes.array
     }),
     options: PropTypes.shape({
       platforms: PropTypes.arrayOf(
@@ -150,13 +151,12 @@ export default class VacancyEditForm extends Component {
         //     recruiter => vacancy.users_ids.indexOf(users_ids) > -1
         //   );
 
-          console.log(vacancy);
         // console.log(user_ids);
         console.log(vacancy.user_ids);
 
 
         this.setState({
-          user_ids: user_ids
+          user_ids: vacancy.user_ids
         });
       }
 
