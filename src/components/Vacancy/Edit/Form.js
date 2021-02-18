@@ -36,7 +36,8 @@ export default class VacancyEditForm extends Component {
       link: PropTypes.string,
       date: PropTypes.string,
       description: PropTypes.string,
-      details: PropTypes.string
+      details: PropTypes.string,
+      user_ids: PropTypes.array,
     }),
     options: PropTypes.shape({
       platforms: PropTypes.arrayOf(
@@ -85,7 +86,6 @@ export default class VacancyEditForm extends Component {
       description: "",
       details: "",
       user_ids: [],
-      users_ids: []
     }
   };
 
@@ -101,11 +101,11 @@ export default class VacancyEditForm extends Component {
     status: 0,
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty(),
-    users_ids: []
   };
 
   componentDidUpdate(prevProps) {
     const {vacancy, options} = this.props;
+    console.log(this.props);
 
     if (this.props !== prevProps) {
         const platform_id = options.platforms.find(
@@ -134,31 +134,18 @@ export default class VacancyEditForm extends Component {
           company_id: company_id
         });
 
-        console.log(vacancy);
-        // console.log(user_ids);
-        console.log(vacancy.users_ids)
-
-
-
-      if (vacancy.user_ids !== null &&  options.recruiters !== undefined) {
-        const user_ids = options.recruiters.filter(
-          recruiter => vacancy.user_ids.indexOf(user_ids) > -1
-        );
-
-        // if (vacancy.users_ids !== null &&  options.recruiters !== undefined) {
-        //   const users_ids = options.recruiters.filter(
-        //     recruiter => vacancy.users_ids.indexOf(users_ids) > -1
-        //   );
-
-          console.log(vacancy);
-        // console.log(user_ids);
-        console.log(vacancy.user_ids);
-
+        
+          const user_ids = options.recruiters.filter(
+            recruiter => vacancy.user_ids.indexOf(user_ids) > -1)
+          
 
         this.setState({
           user_ids: user_ids
         });
-      }
+
+        
+        console.log(user_ids)
+      
 
         const location_id = options.location.find(
           location => location.id === vacancy.location_id
@@ -211,6 +198,14 @@ export default class VacancyEditForm extends Component {
     }
   }
 
+  handleDescriptionStateChange = description => {
+    this.setState({description});
+  };
+
+  handleDetailsStateChange = details => {
+    this.setState({details});
+  };
+
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
   };
@@ -260,10 +255,8 @@ export default class VacancyEditForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const {salary, description, details} = this.state;
+    const {description, details} = this.state;
     const {onEditVacancy} = this.props;
-
-    const salaryToNum = Number(salary);
 
     const descriptionEditorState = draftToHtml(
       convertToRaw(description.getCurrentContent())
@@ -275,13 +268,153 @@ export default class VacancyEditForm extends Component {
 
     const vacancy = {
       ...this.state,
-      salary: salaryToNum,
-      description: descriptionEditorState,
-      details: detailsEditorState
+      description: descriptionEditorState.toString().trim(),
+      details: detailsEditorState.toString().trim(),
     };
 
-    onEditVacancy(vacancy);
+    let errList = document.querySelector('.error');
+
+    if (errList !== null) {
+      errList.classList.remove('error');
+    }
+
+    let {
+      platform_id,
+      seniority_id,
+      company_id,
+      location_id,
+      user_ids,
+      salary,
+      comment,
+      link,
+      selectedVacancyStatus,
+      // description,
+      // details
+    } = this.state;
+    console.log(company_id);
+  console.log(user_ids);
+  // console.log(user_ids.id);
+
+
+    let isValid = true;
+
+
+    if (descriptionEditorState.toString().trim() === "<p></p>") {
+    
+    }
+
+
+    if (detailsEditorState.toString().trim() === "<p></p>") {
+      
+    }
+
+    if ( vacancy.platform_id.length === 0) {
+      document.querySelector('.platform_div > div').classList.add('error');
+      isValid = false;
+    }  else {
+      platform_id = platform_id.id
+    }
+    console.log(platform_id)
+
+   if ( vacancy.seniority_id.length === 0) {
+     document.querySelector('.seniority_div > div').classList.add('error');
+     isValid = false;
+   }  else {
+    seniority_id = seniority_id.id
+  }
+
+    if ( vacancy.location_id.length === 0) {
+      document.querySelector('.location_div > div').classList.add('error');
+      isValid = false;
+    }  else {
+      location_id = location_id.id
+    }
+
+    if (!vacancy.user_ids.length > 0) {
+     document.querySelector('.recruiters_div > div').classList.add('error');
+     isValid = false;
+   }  else {
+    user_ids = user_ids.map(user_ids => user_ids.id)
+  }
+  console.log(user_ids);
+
+    if (vacancy.company_id !== undefined) {
+      company_id = company_id.id;
+    }
+
+    //  let result = user_ids.map(user_ids => user_ids.id)
+    // user_ids = result
+    
+
+   
+   if (vacancy.link === "") {
+    document.querySelector('.link_div').classList.add('error');
+    isValid = false;
+    }
+
+    let arr = user_ids
+    let result = arr.map(user_ids => user_ids.id)
+
+    console.log(user_ids);
+    console.log(vacancy);
+    console.log(company_id);
+    console.log(result)
+
+
+    if (isValid) {
+      const vacancy = {
+        company_id: company_id,
+        platform_id: platform_id,
+        seniority_id: seniority_id,
+        location_id: location_id,
+        salary: salary,
+        link: link,
+        description: descriptionEditorState.toString().trim(),
+        details: detailsEditorState.toString().trim(),
+        // user_ids: user_ids.map(user_ids => user_ids.id)
+        
+        user_ids: user_ids
+        
+        // about: aboutEditorState
+      };
+      console.log(vacancy);
+      
+
+      // if (vacancy.user_ids !== null &&  vacancy.user_ids !== undefined) {
+      //   vacancy.user_ids = vacancy.user_ids.filter(
+      //       recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
+      //   );
+      //   this.setState({
+      //     user_ids: user_ids
+      //   });
+      // }  else {
+      //   delete vacancy.user_ids;
+      // } 
+
+      // if (user_ids.length === 0) {
+      //   delete vacancy.user_ids
+      // }
+
+      if (salary === 0) {
+        delete vacancy.salary
+      }
+      
+      if (company_id === undefined) {
+        delete vacancy.company_id
+      }
+
+      if (description.length === 0) {
+        delete vacancy.description
+      }
+
+      onEditVacancy(vacancy);
+      console.log(vacancy);
+    }
+    console.log(vacancy);
   };
+    
+
+   
 
   render() {
     const {

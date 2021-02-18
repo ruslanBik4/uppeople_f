@@ -83,7 +83,7 @@ class CandidateEdit extends Component {
                             lblErrors.textContent = (elem[0] + " " + elem[1])
                         }
 
-
+ 
                         let input = document.querySelector('input[name=' + elem[0] + ']');
                         if (input !== undefined) {
                             input.classList.add('error');
