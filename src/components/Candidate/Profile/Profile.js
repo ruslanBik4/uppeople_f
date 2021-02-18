@@ -204,10 +204,14 @@ export default class CandidateProfile extends Component {
   addComment = comment => {
     const {id} = this.props.match.params;
 
-    addCandidateComment(id, comment).then(newComment => {
-      if (newComment === 401) {
+    addCandidateComment(id, comment).then(data => {
+      if (data === 401) {
         this.props.history.push('/login/')
       } else {
+        const newComment = {
+          id: data.id,
+          comments: comment
+        }
         this.setState({
           comments: [newComment, ...this.state.comments]
         })

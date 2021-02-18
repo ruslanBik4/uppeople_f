@@ -82,7 +82,6 @@ export default class AppointInterviewForm extends Component {
         return;
       }
 
-      console.log(dataForAppointInterviewForm);
       this.setState(
         {
           dataForAppointInterviewForm
@@ -97,7 +96,7 @@ export default class AppointInterviewForm extends Component {
             const findActiveCompany = Object.values(
               dataForAppointInterviewForm
             ).find(
-              obj =>  obj["companies"].compId === optionsForSelectCompany[0].compId
+              obj =>  obj["companies"].comp_id === optionsForSelectCompany[0].comp_id
             );
             console.log(findActiveCompany);
 
@@ -136,7 +135,7 @@ export default class AppointInterviewForm extends Component {
   handleCompanyChange = value => {
     const { dataForAppointInterviewForm } = this.state;
     const findActiveCompany = Object.values(dataForAppointInterviewForm).find(
-      obj => obj["company"]["compId"] === value.compId
+      obj => obj["company"]["comp_id"] === value.comp_id
     );
 
     const optionsForSelectVacancy =
