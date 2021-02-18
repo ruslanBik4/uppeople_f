@@ -64,13 +64,13 @@ const CandidateProfileCommentsItem = ({
     <Col xs={10} sm={11} md={11} lg={11}>
       <Link to="#">{name}</Link>
       <p style={{ marginBottom: 0 }}>{comments}</p>
-      <p style={{ fontSize: 12, color: "var(--secondary)" }}>{new Intl.DateTimeFormat("en-GB", {
+      <p style={{ fontSize: 12, color: "var(--secondary)" }}>{created_at ? new Intl.DateTimeFormat("en-GB", {
           year: "numeric",
           month: "long",
           day: "2-digit",
           hour: "2-digit",
           minute: "2-digit"
-        }).format(new Date(created_at))}</p>
+        }).format(new Date(created_at)): ''}</p>
     </Col>
     {(user_id === auth_user_id) ? editButton(id, name, comments, onEditComment) : ''}
     <ModalConsumer>

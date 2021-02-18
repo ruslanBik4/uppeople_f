@@ -97,9 +97,7 @@ export default class AppointInterviewForm extends Component {
             const findActiveCompany = Object.values(
               dataForAppointInterviewForm
             ).find(
-              obj =>
-                obj["companies"]["compId"] ===
-                optionsForSelectCompany[0]["compId"]
+              obj =>  obj["companies"].compId === optionsForSelectCompany[0].compId
             );
             console.log(findActiveCompany);
 
