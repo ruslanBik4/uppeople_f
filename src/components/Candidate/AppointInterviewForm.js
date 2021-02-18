@@ -96,8 +96,7 @@ export default class AppointInterviewForm extends Component {
               id: companies[key].comp_id,
               label: companies[key].name,
               value: companies[key].name
-            }))
-            });
+            }));
 
           console.log(optionsForSelectCompany);
 
