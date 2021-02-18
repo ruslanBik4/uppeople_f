@@ -73,6 +73,15 @@ export default class AppointInterviewForm extends Component {
     } = this.props;
 
     getDataForAppointInterviewForm(id).then(dataForAppointInterviewForm => {
+      if (dataForAppointInterviewForm === 401) {
+        this.props.history.push('/login/');
+        return;
+      }
+      if (isEmpty(dataForAppointInterviewForm)) {
+        alert("Nothing to invite!");
+        return;
+      }
+
       console.log(dataForAppointInterviewForm);
       this.setState(
         {
@@ -81,18 +90,15 @@ export default class AppointInterviewForm extends Component {
         () => {
           const { dataForAppointInterviewForm } = this.state;
 
-          if (isEmpty(dataForAppointInterviewForm)) {
-            return;
-          } else {
             const optionsForSelectCompany = Object.keys(
-              dataForAppointInterviewForm
-            ).map(key => dataForAppointInterviewForm[key]["company"]);
+              dataForAppointInterviewForm["companies"]
+            ).map(key => dataForAppointInterviewForm["companies"][key]);
 
             const findActiveCompany = Object.values(
               dataForAppointInterviewForm
             ).find(
               obj =>
-                obj["company"]["compId"] ===
+                obj["companies"]["compId"] ===
                 optionsForSelectCompany[0]["compId"]
             );
             console.log(findActiveCompany);
@@ -116,7 +122,7 @@ export default class AppointInterviewForm extends Component {
               date: moment().format("YYYY-MM-DD"),
               time: moment().format("HH:mm")
             });
-          }
+
         }
       );
     });
