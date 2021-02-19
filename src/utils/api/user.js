@@ -17,24 +17,14 @@ export const getUser = id => {
     },
   })
     .then(response => {
+      if (response.status > 400) {
+        return response.status;
+      }
       if (response.ok) {
         return response.json();
       }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      console.log("fetched user data", data);
-      const user = {
-        id: data.id,
-        name: data.name,
-        avatar: data.image,
-        email: data.email,
-        phone: data.tel,
-        role: data.role_id
-      };
-
-      return user;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
