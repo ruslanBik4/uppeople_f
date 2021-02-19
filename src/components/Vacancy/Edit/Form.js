@@ -140,12 +140,16 @@ export default class VacancyEditForm extends Component {
         recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1)
 
         // console.log(vacancy.user_ids.indexOf(recruiter.id))
-          
-
-
         this.setState({
           user_ids: user_ids
         });
+       
+      //   const user_ids = recruiters.filter(
+      //     recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1
+      // );
+      // this.setState({
+      //   user_ids: user_ids
+      // });
 
         
         console.log(user_ids)
