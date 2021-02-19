@@ -255,7 +255,7 @@ export default class VacancyCreateForm extends Component {
       
 
       
-      
+
 
       if (salary === 0) {
         delete vacancy.salary
@@ -478,6 +478,12 @@ export default class VacancyCreateForm extends Component {
                         </Button>
                       </Col>
                     </FormGroup>
+                    <Row>
+                  <Col md="10" className={"errorlist"} row>
+                    <label>
+                    </label>
+                  </Col>
+                </Row>
                     <FormGroup row>
                       <Col>
                         <Link

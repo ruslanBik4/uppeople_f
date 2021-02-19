@@ -46,7 +46,7 @@ class VacancyCreate extends Component {
     createNewVacancy(vacancy).then(data => {
       const {history} = this.props;
       console.log(data)
-      if (data === 201) {
+      if (data.id>0) {
           this.props.history.push(`/vacancies/${data.id}`)
       } else if (data === 401) {
           this.props.history.push('/login/')

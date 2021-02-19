@@ -1,6 +1,6 @@
 // Core
 import React, {Component} from "react";
-import PropTypes from "prop-types";
+import PropTypes, { array } from "prop-types";
 import {Link} from "react-router-dom";
 import {
   Button,
@@ -134,10 +134,14 @@ export default class VacancyEditForm extends Component {
           company_id: company_id
         });
 
-        
-          const user_ids = options.recruiters.filter(
-            recruiter => vacancy.user_ids.indexOf(user_ids) > -1)
+        console.log (this.props.vacancy.user_ids)
+                
+        const user_ids = options.recruiters.filter(
+        recruiter => vacancy.user_ids.indexOf(recruiter.id) > -1)
+
+        // console.log(vacancy.user_ids.indexOf(recruiter.id))
           
+
 
         this.setState({
           user_ids: user_ids
@@ -352,14 +356,13 @@ export default class VacancyEditForm extends Component {
     isValid = false;
     }
 
-    let arr = user_ids
-    let result = arr.map(user_ids => user_ids.id)
+    // let arr = user_ids
+    // let result = arr.map(user_ids => user_ids.id)
 
     console.log(user_ids);
     console.log(vacancy);
     console.log(company_id);
-    console.log(result)
-
+   
 
     if (isValid) {
       const vacancy = {
