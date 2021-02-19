@@ -42,15 +42,21 @@ export default class UserProfile extends Component {
     const { id } = this.props.match.params;
     console.log("MY USER id", id);
     getUser( id ).then(user => {
-      console.log("MY USER", user);
-      this.setState({
-        id: user.id,
-        avatar: user.avatar,
-        name: user.name !== null ? user.name : "",
-        email: user.email !== null ? user.email : "",
-        phone: user.phone !== null ? user.phone : "",
-        role: user.role
-      });
+      if (user === 401) {
+        this.props.history.push('/login/')
+      } else if (user > 400){
+        alert("error code" + user)
+      } else {
+
+        this.setState({
+          id: user.id,
+          avatar: `${process.env.REACT_APP_API_ENDPOINT}/img/users/${user.id}`,
+          name: user.name !== null ? user.name : "",
+          email: user.email !== null ? user.email : "",
+          phone: user.phone !== null ? user.phone : "",
+          role: roles.find(role => role.value === user.role_id)
+        });
+      }
     });
   }
 
