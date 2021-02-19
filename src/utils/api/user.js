@@ -38,7 +38,7 @@ export const getUser = id => {
 export const addNewUser = async user => {
   const token = getToken();
   try {
-    const response = await fetch(`${URL}/signup/signup`, {
+    const response = await fetch(`${URL}/admin/newUser/`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -46,12 +46,11 @@ export const addNewUser = async user => {
       },
       body: JSON.stringify(user)
     });
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error(`${response.statusText}`);
-  } catch (error) {
-    return console.log("error in fetch: ", error);
+
+      return {
+        status: response.status,
+        data: response.json()
+      } ;
   }
 };
 

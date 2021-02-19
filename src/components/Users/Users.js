@@ -46,9 +46,17 @@ export default class Users extends Component {
   }
 
   addUser = user => {
-    addNewUser(user).then(createdUser => {
-      if (createdUser.role_id) {
-        this.checkUserRole(createdUser, createdUser.role_id);
+    addNewUser(user).then(response => {
+      switch(response.status) {
+        case 401:
+          this.props.history.push('/login/');
+          break;
+        case 404:
+          alert(response.data);
+          break;
+        case 201:
+        this.checkUserRole(response.data, user.role_id);
+
       }
     });
   };
