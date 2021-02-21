@@ -61,7 +61,7 @@ const UsersTableRow = ({
   email,
   updateCount,
   createCount,
-  tel,
+  phone,
   role_id,
   tabId,
   usersGroup,
@@ -72,6 +72,7 @@ const UsersTableRow = ({
 }) => {
   const index = idx + 1;
   const userLink = `/users/${id}`;
+  console.log(roles, role_id)
   const roleName = roles.find(role => role.id === role_id);
 
   return (
@@ -88,8 +89,8 @@ const UsersTableRow = ({
         <td>{updateCount}/{createCount}</td>
         : null
       }
-      <td>{tel}</td>
-      <td>{roleName}</td>
+      <td>{phone}</td>
+      <td>{roleName.name_en}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
         <td>
           <Select
@@ -185,7 +186,7 @@ UsersTableRow.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string,
-  tel: PropTypes.string,
+  phone: PropTypes.string,
   role: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name_en: PropTypes.string.isRequired
@@ -196,7 +197,7 @@ UsersTableRow.propTypes = {
 
 UsersTableRow.defaultProps = {
   email: "",
-  tel: ""
+  phone: ""
 };
 
 export default UsersTableRow;
