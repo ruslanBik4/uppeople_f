@@ -72,7 +72,7 @@ const UsersTableRow = ({
 }) => {
   const index = idx + 1;
   const userLink = `/users/${id}`;
-  const roleName = roles.find(role => role.id = role_id);
+  const roleName = roles.find(role => role.id === role_id);
 
   return (
     <tr key={id.toString()}>
