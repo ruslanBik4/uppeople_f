@@ -147,7 +147,7 @@ export default class Users extends Component {
         </Row>
         <Row>
           <Col>
-            {role === 1 ? (
+            {role_id === 1 ? (
               <Tabs tabs={tabsForAdmin}>{tabPanesForAdmin}</Tabs>
             ) : (
               <Tabs tabs={tabsForManager}>

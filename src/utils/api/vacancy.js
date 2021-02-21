@@ -22,7 +22,7 @@ export const getVacancyProfile = id => {
       if (response.ok) {
         return response.json();
       }
-      if (response.status == 401) {
+      if (response.status === 401) {
         return 401;
       }
 

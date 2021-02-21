@@ -16,6 +16,44 @@ const WithModalVacanciesFormContainer = withModalForLetter(
   VacanciesFormContainer
 );
 
+const roles = [
+    {
+        "id": 1,
+        "name_en": "Admin",
+        "name": "Админ",
+        "role": "ROLE_ADMIN"
+    },
+    {
+        "id": 2,
+        "name_en": "Recruiter",
+        "name": "Рекрутер",
+        "role": "ROLE_RECRUITER"
+    },
+    {
+        "id": 3,
+        "name_en": "Manager",
+        "name": "Менеджер",
+        "role": "ROLE_MANAGER"
+    },
+    {
+        "id": 4,
+        "name_en": "Freelancer",
+        "name": "Фрилансер",
+        "role": "ROLE_FREELANCER"
+    },
+    {
+        "id": 5,
+        "name_en": "Partner",
+        "name": "Партнер",
+        "role": "ROLE_PARTNER"
+    },
+    {
+        "id": 6,
+        "name_en": "Searcher",
+        "name": "Сьорчер",
+        "role": "ROLE_SEARCHER"
+    }
+]
 const UsersTableRow = ({
   idx,
   id,
@@ -24,8 +62,7 @@ const UsersTableRow = ({
   updateCount,
   createCount,
   tel,
-                         id_roles,
-  role,
+  role_id,
   tabId,
   usersGroup,
   recruiterId,
@@ -35,7 +72,7 @@ const UsersTableRow = ({
 }) => {
   const index = idx + 1;
   const userLink = `/users/${id}`;
-  const roleName = role && role.nazva_en;
+  const roleName = roles.find(role => role.id = role_id);
 
   return (
     <tr key={id.toString()}>
@@ -86,7 +123,7 @@ const UsersTableRow = ({
         )
       )}
       <td>
-        {id_roles === 4 && (
+        {role_id === 4 && (
           <ModalConsumer>
             {({ showModal }) => (
               <Button
@@ -151,7 +188,7 @@ UsersTableRow.propTypes = {
   tel: PropTypes.string,
   role: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    nazva_en: PropTypes.string.isRequired
+    name_en: PropTypes.string.isRequired
   }).isRequired,
   onDeleteUser: PropTypes.func.isRequired,
   onChangeRecruiter: PropTypes.func.isRequired

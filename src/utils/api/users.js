@@ -18,23 +18,13 @@ export const getUsers = () => {
     }
   })
     .then(response => {
+        if (response.status > 400) {
+            return 401;
+        }
       if (response.ok) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
-      }
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      const users = {
-        staff: data.users,
-        partners: data.partners,
-        freelancers: data.freeLancers,
-        recruiters:data.recruiters
-      };
-
-      return users;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
