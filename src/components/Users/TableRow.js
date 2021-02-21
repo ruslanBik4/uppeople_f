@@ -18,40 +18,40 @@ const WithModalVacanciesFormContainer = withModalForLetter(
 
 const roles = [
     {
-        "id": 1,
-        "name_en": "Admin",
-        "name": "Админ",
-        "role": "ROLE_ADMIN"
+        id: 1,
+        name_en: "Admin",
+        name: "Админ",
+        role: "ROLE_ADMIN"
     },
     {
-        "id": 2,
-        "name_en": "Recruiter",
-        "name": "Рекрутер",
-        "role": "ROLE_RECRUITER"
+        id: 2,
+        name_en: "Recruiter",
+        name: "Рекрутер",
+        role: "ROLE_RECRUITER"
     },
     {
-        "id": 3,
-        "name_en": "Manager",
-        "name": "Менеджер",
-        "role": "ROLE_MANAGER"
+        id: 3,
+        name_en: "Manager",
+        name: "Менеджер",
+        role: "ROLE_MANAGER"
     },
     {
-        "id": 4,
-        "name_en": "Freelancer",
-        "name": "Фрилансер",
-        "role": "ROLE_FREELANCER"
+        id: 4,
+        name_en: "Freelancer",
+        name: "Фрилансер",
+        role: "ROLE_FREELANCER"
     },
     {
-        "id": 5,
-        "name_en": "Partner",
-        "name": "Партнер",
-        "role": "ROLE_PARTNER"
+        id: 5,
+        name_en: "Partner",
+        name: "Партнер",
+        role: "ROLE_PARTNER"
     },
     {
-        "id": 6,
-        "name_en": "Searcher",
-        "name": "Сьорчер",
-        "role": "ROLE_SEARCHER"
+        id: 6,
+        name_en: "Searcher",
+        name: "Сьорчер",
+        role: "ROLE_SEARCHER"
     }
 ]
 const UsersTableRow = ({
