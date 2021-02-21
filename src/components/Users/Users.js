@@ -41,7 +41,14 @@ export default class Users extends Component {
 
   componentDidMount() {
     getUsers().then(users => {
-      this.setState({ ...users });
+      console.log(users);
+      if (users === 401) {
+        this.props.history.push('/login/')
+      } else if (users > 400){
+        alert("error code" + users)
+      } else {
+        this.setState({ ...users });
+      }
     });
   }
 
