@@ -35,7 +35,7 @@ export default class UserProfile extends Component {
     password: "",
     email: "",
     phone: "",
-    role: ""
+    role: 0
   };
 
   componentDidMount() {
@@ -54,7 +54,7 @@ export default class UserProfile extends Component {
           name: user.name !== null ? user.name : "",
           email: user.email !== null ? user.email : "",
           phone: user.phone !== null ? user.phone : "",
-          role: roles.find(role => role.value === user.role_id)
+          role: user.role_id
         });
       }
     });

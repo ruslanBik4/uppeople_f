@@ -109,7 +109,9 @@ export default class AppointInterviewForm extends Component {
               findActiveCompany["vacancies"] !== null
                 ? Object.keys( findActiveCompany["vacancies"] ).map(key => ({
                     id: findActiveCompany["vacancies"][key].id,
-                    label: findActiveCompany["vacancies"][key].platform,
+                    label: findActiveCompany["vacancies"][key].platform
+                          + findActiveCompany["vacancies"][key].salary
+                          + findActiveCompany["vacancies"][key].seniority,
                     value: findActiveCompany["vacancies"][key].platform
                   }))
                   : this.state.optionsForSelectVacancy;
@@ -119,7 +121,8 @@ export default class AppointInterviewForm extends Component {
                 ? Object.keys( findActiveCompany["contacts"] ).map(key => ({
                     id: findActiveCompany["contacts"][key].id,
                     label: findActiveCompany["contacts"][key].name,
-                    value: findActiveCompany["contacts"][key].name
+                    value: findActiveCompany["contacts"][key].name,
+                    email: findActiveCompany["contacts"][key].email
                   }))
                   : this.state.optionsForSelectContacts;
 

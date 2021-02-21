@@ -16,7 +16,7 @@ const WithModalVacanciesFormContainer = withModalForLetter(
   VacanciesFormContainer
 );
 
-const roles = [
+ export const roles = [
     {
         id: 1,
         name_en: "Admin",
@@ -72,7 +72,6 @@ const UsersTableRow = ({
 }) => {
   const index = idx + 1;
   const userLink = `/users/${id}`;
-  console.log(roles, role_id)
   const roleName = roles.find(role => role.id === role_id);
 
   return (
