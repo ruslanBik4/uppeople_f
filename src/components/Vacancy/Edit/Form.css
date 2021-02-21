@@ -4,10 +4,12 @@
 
 .fa-check-circle {
   color: #00a65a;
+  
 }
 
 .fa-history {
   color: #f39c12;
+  /* display: none; */
 }
 
 .fa-fire {

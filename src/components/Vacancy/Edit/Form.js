@@ -296,6 +296,7 @@ export default class VacancyEditForm extends Component {
       comment,
       link,
       selectedVacancyStatus,
+      status
       // description,
       // details
     } = this.state;
@@ -378,6 +379,7 @@ export default class VacancyEditForm extends Component {
         link: link,
         description: descriptionEditorState.toString().trim(),
         details: detailsEditorState.toString().trim(),
+        status,
         // user_ids: user_ids.map(user_ids => user_ids.id)
         
         user_ids: user_ids

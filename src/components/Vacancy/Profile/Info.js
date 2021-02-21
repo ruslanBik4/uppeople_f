@@ -10,7 +10,10 @@ import {
   ListGroup,
   ListGroupItem, ButtonGroup, Button, Col
 } from "reactstrap";
+import { lastIndexOf } from "core-js/fn/array";
 
+// let classNames = [{status:0,className: "fa fa-fire"}, {status:1,className: "fa fa-check-circle"}, {status:2,className: "fa fa-history"}, {status:3,className: "fa fa-ban"}]
+let classNames = [ "fire","check-circle", "history", "ban"]
 const VacancyProfileInfo = ({
   vacancy: {
     id,
@@ -62,35 +65,14 @@ const VacancyProfileInfo = ({
           <ButtonGroup
             style={{display: "flex", marginBottom: "1rem"}}
         >
-          <Button
+          
+            <Button
               className="btn-default"
-              active={status === 0}
-              onClick={() => this.onRadioBtnClick(0)}
-          >
-            <i className="fa fa-fire"/>
-          </Button>
-          <Button
-              className="btn-default"
-              active={status === 1}
-              onClick={() => this.onRadioBtnClick(1)}
-          >
-            <i className="fa fa-check-circle"/>
-          </Button>
-          <Button
-              className="btn-default"
-              active={status === 2}
-              onClick={() => this.onRadioBtnClick(2)}
-          >
-            <i className="fa fa-history"/>
-          </Button>
-          <Button
-              className="btn-default"
-              active={status === 3}
-              onClick={() => this.onRadioBtnClick(3)}
-          >
-            <i className="fa fa-ban"/>
-          </Button>
-        </ButtonGroup>
+            >
+          <i className={`fa fa-${classNames[status]}`}/>
+            </Button>
+         
+          </ButtonGroup>
         </ListGroupItem>
         {location && <ListGroupItem>Location: {location}</ListGroupItem>}
         {salary && <ListGroupItem>Salary: {salary}</ListGroupItem>}
