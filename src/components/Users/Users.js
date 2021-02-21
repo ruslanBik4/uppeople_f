@@ -34,7 +34,7 @@ export default class Users extends Component {
   };
 
   state = {
-    staff: [],
+    users: [],
     partners: [],
     freelancers: []
   };
@@ -76,7 +76,7 @@ export default class Users extends Component {
 
       default:
         return this.setState(state => ({
-          staff: [user, ...state.staff]
+          users: [user, ...state.users]
         }));
     }
   };
