@@ -14,6 +14,7 @@ import { lastIndexOf } from "core-js/fn/array";
 
 // let classNames = [{status:0,className: "fa fa-fire"}, {status:1,className: "fa fa-check-circle"}, {status:2,className: "fa fa-history"}, {status:3,className: "fa fa-ban"}]
 let classNames = [ "fire","check-circle", "history", "ban"]
+let statusNames = [ " Hot"," check-circle", " history", " ban"]
 const VacancyProfileInfo = ({
   vacancy: {
     id,
@@ -61,21 +62,30 @@ const VacancyProfileInfo = ({
         {seniority && (
           <ListGroupItem>Seniority: {seniority}</ListGroupItem>
         )}
-        <ListGroupItem>Status:
-          <ButtonGroup
-            style={{display: "flex", marginBottom: "1rem"}}
-        >
+        <ListGroupItem>Status:{`${statusNames[status]}`}
+          {/* <ButtonGroup
+            style={{display: "flex", marginBottom: "1rem", width: 200 }}
+        > */}
           
             <Button
+              style={{display: "flex", marginBottom: "1rem", width: 200 }}
               className="btn-default"
             >
           <i className={`fa fa-${classNames[status]}`}/>
             </Button>
          
-          </ButtonGroup>
+          {/* </ButtonGroup> */}
         </ListGroupItem>
         {location && <ListGroupItem>Location: {location}</ListGroupItem>}
-        {salary && <ListGroupItem>Salary: {salary}</ListGroupItem>}
+        {salary && <ListGroupItem>Salary: {salary} <i
+                          style={{
+                            position: "absolute",
+                            top: "1rem",
+                            borderwidth: "21.00px",
+                            justifyContent: "flex-start"
+                          }}
+                          className="cui-dollar icons font-lg"
+                        /></ListGroupItem>}
         {link && (
           <ListGroupItem>
             Additional information: <a href={link}>link</a>

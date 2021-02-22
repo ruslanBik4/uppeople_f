@@ -346,6 +346,7 @@ export default class VacancyEditForm extends Component {
     user_ids = user_ids.map(user_ids => user_ids.id)
   }
   console.log(user_ids);
+  console.log(company_id);
 
     if (vacancy.company_id !== undefined) {
       company_id = company_id.id;
@@ -419,7 +420,6 @@ export default class VacancyEditForm extends Component {
       onEditVacancy(vacancy);
       console.log(vacancy);
     }
-    console.log(vacancy);
   };
     
 
@@ -539,7 +539,7 @@ export default class VacancyEditForm extends Component {
                         <i
                           style={{
                             position: "absolute",
-                            top: "0.6rem",
+                            // top: "0.6rem",
                             right: "1.75rem"
                           }}
                           className="cui-dollar icons font-lg"
@@ -614,7 +614,7 @@ export default class VacancyEditForm extends Component {
                         className="btn-default"
                         active={status === 3}
                         onClick={() => this.onRadioBtnClick(3)}
-                      >
+                      > 
                         <i className="fa fa-ban"/>
                       </Button>
                     </ButtonGroup>
