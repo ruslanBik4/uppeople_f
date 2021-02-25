@@ -15,6 +15,7 @@ import {
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
 import moment from "moment";
+import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
@@ -58,12 +59,19 @@ export default class AcquisitionFunnel extends Component {
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
+    const {options} = this.props;
     this.fetchRecruiters();
     this.fetchCompanies();
     this.fetchVacancies();
-    this.fetchTags();
+    // this.fetchTags();
+    this.setState({tags: options.tags});
+    this.setState({selectedTags: tags});
+
     this.fetchCandidatesData();
-    this.fetchStatuses();
+    // this.fetchStatuses();
+    this.setState({statuses: options.candidateStatus});
+    this.setState({selectedStatuses: statuses});
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -528,3 +536,5 @@ export default class AcquisitionFunnel extends Component {
 String.prototype.replaceAll = function (search, replace) {
   return this.split(search).join(replace);
 };
+
+export default withOptionsForSelects(AcquisitionFunnel);

@@ -8,15 +8,17 @@ const getOptions = () => localStorage.getItem("optionsForSelects");
 const withOptionsForSelects = WrappedComponent =>
   class withOptionsForSelects extends Component {
     state = {
-      platforms: [],
-      seniority: [],
-      companies: [],
-      recruiters:[],
-      vacancies:[],
-      location: [],
-      tags: [],
-      reasons: [],
-      reject_tag: {}
+        platforms: [],
+        seniority: [],
+        companies: [],
+        recruiters: [],
+        vacancies: [],
+        candidateStatus: [],
+        vacancyStatus: [],
+        location: [],
+        tags: [],
+        reasons: [],
+        reject_tag: {}
     };
 
     componentDidMount() {
@@ -33,15 +35,17 @@ const withOptionsForSelects = WrappedComponent =>
               return
           }
         const options = {
-          platforms: optionsForSelects.platforms,
-          seniority: optionsForSelects.seniorities,
-          companies: optionsForSelects.companies,
-          location: optionsForSelects.location,
-          tags: optionsForSelects.tags,
-          reasons: optionsForSelects.reject_reasons,
-          reject_tag: optionsForSelects.reject_tag[0],
-          recruiters:  optionsForSelects.recruiters,
-          vacancies: optionsForSelects.vacancies,
+            platforms: optionsForSelects.platforms,
+            seniority: optionsForSelects.seniorities,
+            companies: optionsForSelects.companies,
+            candidateStatus: optionsForSelects.candidateStatus,
+            vacancyStatus: optionsForSelects.vacancyStatus,
+            location: optionsForSelects.location,
+            tags: optionsForSelects.tags,
+            reasons: optionsForSelects.reject_reasons,
+            reject_tag: optionsForSelects.reject_tag[0],
+            recruiters: optionsForSelects.recruiters,
+            vacancies: optionsForSelects.vacancies,
         };
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
