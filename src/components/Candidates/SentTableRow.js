@@ -136,7 +136,7 @@ const CandidateTableRow = ({
         </div>
       </td>
       <td>
-        <Badge color={tag_color} style={{backgroundColor:color}}>
+        <Badge color={tag_color} style={{backgroundColor:tag_color}}>
         {status["vacStat"]}
       </Badge>
       </td>
