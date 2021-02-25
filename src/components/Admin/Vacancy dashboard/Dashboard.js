@@ -2,7 +2,7 @@
 import React, {Component} from "react";
 import Select from "react-select";
 import {Col, Row, Table, FormGroup} from "reactstrap";
-// Components
+// Components 
 import TableRow from "./TableRow";
 import {getUsers} from "../../../utils/api/users";
 import {getCompanies} from "../../../utils/api/company";
@@ -43,10 +43,10 @@ export default class Dashboard extends Component {
   fetchRecruiters = async () => {
     const users = await getUsers();
 
-    if (users.staff !== undefined) {
-      const recruiters = users.staff.filter((user) => user.role_id === 2); // recruiter
+    if (users.users.length > 0) {
+      const recruiters = users.users.filter((user) => user.role_id === 2); // recruiter
       this.setState({recruiters});
-    } else if (users.recruiters !== undefined) {
+    } else if (users.recruiters.length > 0) {
       const recruiters = users.recruiters; // recruiter
       this.setState({recruiters});
       this.setState({selectedRecruiter: recruiters[0]});
