@@ -22,7 +22,7 @@ const CandidateTableRow = ({
   open,
   close,
   status,
-  tag_color
+  color
 }) => {
   const getBadge = status => {
     return status === "OFFER" || status === "Hired"
@@ -136,7 +136,7 @@ const CandidateTableRow = ({
         </div>
       </td>
       <td>
-        <Badge color={tag_color} style={{backgroundColor:tag_color}}>
+        <Badge color={color} style={{backgroundColor:color}}>
         {status["vacStat"]}
       </Badge>
       </td>
