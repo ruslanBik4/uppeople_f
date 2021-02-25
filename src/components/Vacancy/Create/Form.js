@@ -169,9 +169,7 @@ export default class VacancyCreateForm extends Component {
       location_id,
       user_ids,
       salary,
-      comment,
       link,
-      selectedVacancyStatus,
       // description,
       // details
     } = this.state;
@@ -283,7 +281,6 @@ export default class VacancyCreateForm extends Component {
       location_id,
       user_ids,
       salary,
-      comment,
       link,
       selectedVacancyStatus,
       description,

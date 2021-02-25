@@ -256,6 +256,13 @@ export default class VacancyEditForm extends Component {
     });
   };
 
+  handleSalaryChange = value => {
+    this.setState({
+      // 
+      salary: parseInt(value)
+    });
+  };
+
   onRadioBtnClick = status => {
     this.setState({status});
   };
@@ -293,9 +300,7 @@ export default class VacancyEditForm extends Component {
       location_id,
       user_ids,
       salary,
-      comment,
       link,
-      selectedVacancyStatus,
       status
       // description,
       // details
@@ -355,7 +360,7 @@ export default class VacancyEditForm extends Component {
     //  let result = user_ids.map(user_ids => user_ids.id)
     // user_ids = result
     
-
+    salary = Number(salary)
    
    if (vacancy.link === "") {
     document.querySelector('.link_div').classList.add('error');
@@ -366,7 +371,7 @@ export default class VacancyEditForm extends Component {
     // let result = arr.map(user_ids => user_ids.id)
 
     console.log(user_ids);
-    console.log(vacancy);
+    console.log(salary);
     console.log(company_id);
    
 
@@ -377,7 +382,7 @@ export default class VacancyEditForm extends Component {
         seniority_id: seniority_id,
         location_id: location_id,
         salary: salary,
-        link: link,
+        link: link, 
         description: descriptionEditorState.toString().trim(),
         details: detailsEditorState.toString().trim(),
         status,
@@ -433,7 +438,6 @@ export default class VacancyEditForm extends Component {
       user_ids,
       location_id,
       salary,
-      comment,
       link,
       status,
       description,
@@ -530,7 +534,7 @@ export default class VacancyEditForm extends Component {
                       <Col>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
                           name="salary"
                           value={salary}
                           placeholder="Salary"

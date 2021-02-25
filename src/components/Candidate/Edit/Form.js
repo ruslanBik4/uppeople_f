@@ -162,7 +162,7 @@ export default class CandidateEditForm extends Component {
   componentWillReceiveProps(nextProps) {
     // componentDidUpdate(prevProps) {
 
-    const {candidate, platforms, seniorities, tags, reasons, reject_tag, vacancies} = nextProps;
+    const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
 
     let platform_id = candidate.platform;
       if (candidate.platform !== null &&platforms.find) {
@@ -344,8 +344,7 @@ export default class CandidateEditForm extends Component {
       seniority_id,
       tag_id,
       selectedReason,
-      selectedVacancies,
-      vacancies
+      selectedVacancies
     } = this.state;
    
 
@@ -513,7 +512,7 @@ export default class CandidateEditForm extends Component {
 
     let {date} = this.state;
 
-    const {candidate, platforms, seniorities, tags, reasons, candidateStatus} = this.props;
+    const {platforms, seniorities, tags} = this.props;
 
     date = date.substring(0, 10);
 

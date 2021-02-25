@@ -19,7 +19,6 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 // Components
-import Select from "../../shared/Select";
 // Instruments
 import styles from "../Profile/Profile.module.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -111,7 +110,6 @@ export default class CompanyCreateForm extends Component {
       skype,
       cooperation,
       map,
-      manager
     } = this.state;
 
     return (

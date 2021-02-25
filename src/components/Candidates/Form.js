@@ -70,15 +70,15 @@ class CandidatesForm extends Component {
     console.log('>>>>>>>>>name', [name]);
     console.log('>>>>>>>>>value', value);
 
-    if([name] == 'dateFromAllCandidates'){
+    if([name] === 'dateFromAllCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateFrom: value }, () => onAllFilter(this.state));
-    }else if([name] == 'dateToAllCandidates'){
+    }else if([name] === 'dateToAllCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateTo: value }, () => onAllFilter(this.state));
-    }else if([name] == 'dateFollowUpFrom'){
+    }else if([name] === 'dateFollowUpFrom'){
       this.setState({ [name]: value }, () => onAllFilter(this.state));
-    }else if([name] == 'dateFollowUpTo'){
+    }else if([name] === 'dateFollowUpTo'){
       this.setState({ [name]: value }, () => onAllFilter(this.state));
     }
 
@@ -89,10 +89,10 @@ class CandidatesForm extends Component {
   handleSentInputChange = ({ target: { name, value } }) => {
     const { onSentFilter } = this.props;
 
-    if([name] == 'dateFromSentCandidates'){
+    if([name] === 'dateFromSentCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateFrom: value }, () => onSentFilter(this.state));
-    }else if([name] == 'dateToSentCandidates'){
+    }else if([name] === 'dateToSentCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateTo: value }, () => onSentFilter(this.state));
     }
