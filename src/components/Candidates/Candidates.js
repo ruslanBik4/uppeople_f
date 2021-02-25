@@ -164,7 +164,7 @@ export default class Candidates extends Component {
       } else {
           const candidatesFromFreelancersData = {
             candidatesFF: data.candidates,
-            candidatesCountFF: data.Count,
+            candidatesCountFF: data.candidates.length,
             totalPagesFF: data.Page,
             perPageFF: data.perPage,
             statusesFF: data.statuses,
@@ -195,7 +195,7 @@ export default class Candidates extends Component {
       } else {
         const sentCandidatesData = {
           sentCandidates: data.candidates,
-          sentCandidatesCount: data.Count,
+          sentCandidatesCount: data.candidates.length,
           sentTotalPages: data.Page,
           sentPerPage: data.perPage,
           currentSentPage: data.currentPage,
@@ -220,7 +220,7 @@ export default class Candidates extends Component {
       } else {
         const allCandidatesData = {
           allCandidates: data.candidates,
-          allCandidatesCount: data.Count,
+          allCandidatesCount: data.candidates.length,
           allTotalPages: data.TotalPage,
           allPerPage: data.perPage,
           currentAllPage: data.currentPage,
