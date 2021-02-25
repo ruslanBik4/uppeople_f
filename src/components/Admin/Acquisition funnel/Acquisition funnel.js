@@ -20,7 +20,7 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
 
-export default class AcquisitionFunnel extends Component {
+class AcquisitionFunnel extends Component {
   constructor(props) {
     super(props);
 
