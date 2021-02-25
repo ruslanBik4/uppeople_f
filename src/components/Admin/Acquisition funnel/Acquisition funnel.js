@@ -65,12 +65,12 @@ class AcquisitionFunnel extends Component {
     this.fetchVacancies();
     // this.fetchTags();
     this.setState({tags: options.tags});
-    this.setState({selectedTags: tags});
+    this.setState({selectedTags: options.tags});
 
     this.fetchCandidatesData();
     // this.fetchStatuses();
     this.setState({statuses: options.candidateStatus});
-    this.setState({selectedStatuses: statuses});
+    this.setState({selectedStatuses: options.statuses});
 
   }
 
