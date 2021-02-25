@@ -327,7 +327,7 @@ export default class Dashboard extends Component {
         </tr>
       ));
 
-    const listOfWorstUsers =
+    const listOfWorstUsers = usersWithoutOfferCandidates &&
       usersWithoutOfferCandidates.length > 0 &&
       usersWithoutOfferCandidates.map(user => (
         <tr key={user.id}>

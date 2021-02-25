@@ -22,7 +22,7 @@ const CandidateTableRow = ({
   open,
   close,
   status,
-  color: (color ? color : tag_color)
+  color: tag_color
 }) => {
   const getBadge = status => {
     return status === "OFFER" || status === "Hired"
