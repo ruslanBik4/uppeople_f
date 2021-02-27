@@ -100,7 +100,7 @@ class AcquisitionFunnel extends Component {
     if (users === 401) {
       this.props.history.push('/login/')
     } else if (users.users !== undefined) {
-      const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
+      const recruiters = users.users.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
     } else if (users.recruiters !== undefined) {
       const recruiters = users.recruiters; // recruiter
@@ -121,7 +121,7 @@ class AcquisitionFunnel extends Component {
   fetchVacancies = async () => {
     const {selectedCompany, selectedRecruiter} = this.state;
     const vacancies_result = await getVacancies(selectedCompany !== null ? selectedCompany.id : null, true, true);
-    const vacancies = vacancies_result.vacancies.filter((vacancy) =>
+    const vacancies = vacancies_result.filter((vacancy) =>
       (selectedRecruiter !== null && vacancy.recruiters.indexOf(selectedRecruiter.id) + 1 > 0 || selectedRecruiter === null)
     );
     this.setState({vacancies});
@@ -470,7 +470,7 @@ class AcquisitionFunnel extends Component {
                   options={vacancies}
                   isClearable
                   getOptionValue={(vacancy) => vacancy.id}
-                  getOptionLabel={(vacancy) => vacancy.label}
+                  getOptionLabel={(vacancy) => vacancy.name}
                   placeholder="Vacancies"
                   onChange={this.handleVacancySelect}
                 />
@@ -483,7 +483,7 @@ class AcquisitionFunnel extends Component {
                   options={tags}
                   isClearable
                   getOptionValue={(tag) => tag.id}
-                  getOptionLabel={(tag) => tag.name}
+                  getOptionLabel={(tag) => tag.label}
                   placeholder="Tags"
                   onChange={this.handleTagsSelect}
                 />
