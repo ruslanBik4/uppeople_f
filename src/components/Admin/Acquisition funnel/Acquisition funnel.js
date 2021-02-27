@@ -66,10 +66,10 @@ class AcquisitionFunnel extends Component {
     this.setState({recruitersIsClearable: false});
     this.fetchCompanies();
     this.fetchVacancies();
-    this.fetchTags();
+    this.fetchTags(options);
 
     this.fetchCandidatesData();
-    this.fetchStatuses();
+    this.fetchStatuses(options);
 
   }
 
@@ -127,7 +127,7 @@ class AcquisitionFunnel extends Component {
     this.setState({vacancies});
   };
 
-  fetchTags = async () => {
+  fetchTags = async (options) => {
     // const tags = await getTags({'main': true});
     this.setState({tags: options.tags});
     this.setState({selectedTags: options.tags});
@@ -155,7 +155,7 @@ class AcquisitionFunnel extends Component {
     }
   };
 
-  fetchStatuses = async () => {
+  fetchStatuses = async (options) => {
     this.setState({statuses: options.candidateStatus});
     this.setState({selectedStatuses: options.statuses});
     // const statuses = await getStatuses();
