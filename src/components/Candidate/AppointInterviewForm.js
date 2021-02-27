@@ -88,7 +88,7 @@ export default class AppointInterviewForm extends Component {
         },
         () => {
           const { dataForAppointInterviewForm } = this.state;
-          const companies = dataForAppointInterviewForm["companies"];
+          const companies = dataForAppointInterviewForm;
 
             const optionsForSelectCompany = Object.keys(
               companies

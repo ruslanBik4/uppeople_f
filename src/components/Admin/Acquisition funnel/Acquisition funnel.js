@@ -60,17 +60,16 @@ class AcquisitionFunnel extends Component {
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     const {options} = this.props;
-    this.fetchRecruiters();
+    // this.fetchRecruiters();
+    this.setState({recruiters: options.recruiters});
+    this.setState({selectedRecruiter: options.recruiters[0]});
+    this.setState({recruitersIsClearable: false});
     this.fetchCompanies();
     this.fetchVacancies();
-    // this.fetchTags();
-    this.setState({tags: options.tags});
-    this.setState({selectedTags: options.tags});
+    this.fetchTags();
 
     this.fetchCandidatesData();
-    // this.fetchStatuses();
-    this.setState({statuses: options.candidateStatus});
-    this.setState({selectedStatuses: options.statuses});
+    this.fetchStatuses();
 
   }
 
@@ -129,9 +128,11 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchTags = async () => {
-    const tags = await getTags({'main': true});
-    this.setState({tags});
-    this.setState({selectedTags: tags});
+    // const tags = await getTags({'main': true});
+    this.setState({tags: options.tags});
+    this.setState({selectedTags: options.tags});
+    // this.setState({tags});
+    // this.setState({selectedTags: tags});
   };
 
   fetchCandidatesData = async () => {
@@ -155,9 +156,11 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchStatuses = async () => {
-    const statuses = await getStatuses();
-    this.setState({statuses});
-    this.setState({selectedStatuses: statuses});
+    this.setState({statuses: options.candidateStatus});
+    this.setState({selectedStatuses: options.statuses});
+    // const statuses = await getStatuses();
+    // this.setState({statuses});
+    // this.setState({selectedStatuses: statuses});
   };
 
 
