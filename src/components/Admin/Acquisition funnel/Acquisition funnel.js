@@ -100,7 +100,7 @@ class AcquisitionFunnel extends Component {
 
     if (users === 401) {
       this.props.history.push('/login/')
-    } else if (users.staff !== undefined) {
+    } else if (users.users !== undefined) {
       const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
     } else if (users.recruiters !== undefined) {
