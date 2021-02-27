@@ -418,7 +418,7 @@ export const getDataForAppointInterviewForm = async id => {
         }
       }
     );
-    if (response.status > 400) {
+    if (response.status === 204 || response.status > 400) {
       return response.status;
     }
     if (response.ok) {

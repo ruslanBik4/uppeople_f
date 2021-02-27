@@ -77,7 +77,7 @@ export default class AppointInterviewForm extends Component {
         this.props.history.push('/login/');
         return;
       }
-      if (isEmpty(dataForAppointInterviewForm)) {
+      if (dataForAppointInterviewForm === 204 || isEmpty(dataForAppointInterviewForm)) {
         alert("Nothing to invite!");
         return;
       }
