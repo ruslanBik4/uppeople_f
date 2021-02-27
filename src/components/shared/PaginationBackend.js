@@ -203,7 +203,6 @@ class PaginationBackend extends Component {
           <PaginationLink
             className="page-link"
             onClick={() => this.setPage(pager.currentPage + 1)}
-            // (pager.currentPage + 1)
           > 
             Next
           </PaginationLink>
@@ -211,8 +210,8 @@ class PaginationBackend extends Component {
         <PaginationItem
           className="page-item"
           disabled={(pager.currentPage === pager.totalPages ? true : false) || this.allDisabled}
-          // active={pager.currentPage === pager.totalPages ? true : false}
-          //   disabled={this.allDisabled}
+          active={pager.currentPage === pager.totalPages ? true : false}
+            disabled={this.allDisabled}
         >
           <PaginationLink
             className="page-link"
