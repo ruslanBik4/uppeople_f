@@ -62,8 +62,6 @@ class AcquisitionFunnel extends Component {
     if (options === undefined || options.recruiters === undefined || options.recruiters.length === 0 ){
       const opts = localStorage.getItem("optionsForSelects");
       options = JSON.parse(opts);
-      this.setProps({...this.props, ... options})
-      console.log(this.props)
     }
 
     console.log(options)
