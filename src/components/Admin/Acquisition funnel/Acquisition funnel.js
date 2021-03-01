@@ -34,21 +34,11 @@ class AcquisitionFunnel extends Component {
     let firstDay = new Date(y, m, 2).toJSON().slice(0, 10);
     let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
 
-    let {options} = props.options;
-    console.log(options)
-
-    if (options === undefined || options.recruiters === undefined ){
-      const opts = localStorage.getItem("optionsForSelects");
-      options = JSON.parse(opts);
-      this.setState(props= {...this.props, ... options})
-      console.log(this.props)
-    }
-
     this.state = {
-      recruiters: options.recruiters,
+      recruiters: [],
       companies: [],
       vacancies: [],
-      tags: options.tags,
+      tags: [],
       // statuses: [],
 
       selectedRecruiter: null,
@@ -68,7 +58,14 @@ class AcquisitionFunnel extends Component {
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    const {options} = this.props;
+    let {options} = this.props;
+    if (options === undefined || options.recruiters === undefined ){
+      const opts = localStorage.getItem("optionsForSelects");
+      options = JSON.parse(opts);
+      this.setProps({...this.props, ... options})
+      console.log(this.props)
+    }
+
     console.log(options)
     this.fetchRecruiters(options);
     this.fetchCompanies();
