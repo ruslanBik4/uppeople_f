@@ -35,7 +35,12 @@ class AcquisitionFunnel extends Component {
     let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
 
     console.log(props)
-    const {options} = props;
+    let {options} = props.options;
+
+    if options.recruiters.length === 0 {
+      const opts = localStorage.getItem("optionsForSelects");
+      options = JSON.parse(opts);
+    }
 
     this.state = {
       recruiters: options.recruiters,
