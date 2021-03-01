@@ -60,7 +60,8 @@ class AcquisitionFunnel extends Component {
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     const {options} = this.props;
-    this.fetchRecruiters();
+    console.log(selectedRecruiter)
+    this.fetchRecruiters(options);
     this.fetchCompanies();
     this.fetchVacancies();
     this.fetchTags(options);
@@ -91,24 +92,25 @@ class AcquisitionFunnel extends Component {
     }
   }
 
-  fetchRecruiters = async () => {
-    const users = await getUsers();
-
-    if (users === 401) {
-      this.props.history.push('/login/')
-    } else if (users.users !== undefined) {
-      const recruiters = users.users.filter((user) => user.id_roles === 2); // recruiter
-      this.setState({recruiters});
-      this.setState({selectedRecruiter: recruiters[0]});
-    } else if (users.recruiters !== undefined) {
-      const recruiters = users.recruiters; // recruiter
-      this.setState({recruiters});
-      this.setState({selectedRecruiter: recruiters[0]});
-      this.setState({recruitersIsClearable: false});
-    }
-    // this.setState({recruiters: options.recruiters});
-    // this.setState({selectedRecruiter: options.recruiters[0]});
-    // this.setState({recruitersIsClearable: false});
+  fetchRecruiters = async (options) => {
+    console.log(options)
+    // const users = await getUsers();
+    //
+    // if (users === 401) {
+    //   this.props.history.push('/login/')
+    // } else if (users.users !== undefined) {
+    //   const recruiters = users.users.filter((user) => user.id_roles === 2); // recruiter
+    //   this.setState({recruiters});
+    //   this.setState({selectedRecruiter: recruiters[0]});
+    // } else if (users.recruiters !== undefined) {
+    //   const recruiters = users.recruiters; // recruiter
+    //   this.setState({recruiters});
+    //   this.setState({selectedRecruiter: recruiters[0]});
+    //   this.setState({recruitersIsClearable: false});
+    // }
+    this.setState({recruiters: options.recruiters});
+    this.setState({selectedRecruiter: options.recruiters[0]});
+    this.setState({recruitersIsClearable: false});
   };
 
   fetchCompanies = async () => {
@@ -116,7 +118,8 @@ class AcquisitionFunnel extends Component {
     const {selectedRecruiter} = this.state;
     console.log(selectedRecruiter)
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
-      (selectedRecruiter !== null && company.recruiters.indexOf(selectedRecruiter.id) > -1 || selectedRecruiter === null));
+      (selectedRecruiter.lenght > 0 && company.recruiters.indexOf(selectedRecruiter.id) > -1
+          || selectedRecruiter === undefined || selectedRecruiter === null));
     this.setState({companies});
   };
 
