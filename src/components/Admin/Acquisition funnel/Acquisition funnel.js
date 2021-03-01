@@ -59,7 +59,7 @@ class AcquisitionFunnel extends Component {
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    const {options} = this.props;
+    const {options} = this.state;
     console.log(options)
     this.fetchRecruiters(options);
     this.fetchCompanies();
@@ -93,7 +93,6 @@ class AcquisitionFunnel extends Component {
   }
 
   fetchRecruiters = async (options) => {
-    console.log(options)
     // const users = await getUsers();
     //
     // if (users === 401) {
