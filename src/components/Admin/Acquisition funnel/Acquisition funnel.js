@@ -102,6 +102,7 @@ class AcquisitionFunnel extends Component {
     } else if (users.users !== undefined) {
       const recruiters = users.users.filter((user) => user.id_roles === 2); // recruiter
       this.setState({recruiters});
+      this.setState({selectedRecruiter: recruiters[0]});
     } else if (users.recruiters !== undefined) {
       const recruiters = users.recruiters; // recruiter
       this.setState({recruiters});
@@ -114,7 +115,7 @@ class AcquisitionFunnel extends Component {
     let companies_result = await getCompanies(0, 1, 1);
     const {selectedRecruiter} = this.state;
     console.log(selectedRecruiter, companies_result)
-    const companies = companies_result.filter((company) => company.vacancies > 0 &&
+    const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
       (selectedRecruiter !== null && company.recruiters.indexOf(selectedRecruiter.id) > -1 || selectedRecruiter === null));
     this.setState({companies});
   };
