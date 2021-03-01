@@ -34,10 +34,10 @@ class AcquisitionFunnel extends Component {
     let firstDay = new Date(y, m, 2).toJSON().slice(0, 10);
     let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
 
-    console.log(props)
     let {options} = props.options;
+    console.log(options)
 
-    if (options.recruiters === undefined ){
+    if (options === undefined || options.recruiters === undefined ){
       const opts = localStorage.getItem("optionsForSelects");
       options = JSON.parse(opts);
     }
