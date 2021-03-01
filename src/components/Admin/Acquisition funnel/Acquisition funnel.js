@@ -59,7 +59,7 @@ class AcquisitionFunnel extends Component {
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     let {options} = this.props;
-    if (options === undefined || options.recruiters === undefined ){
+    if (options === undefined || options.recruiters === undefined || options.recruiters.length === 0 ){
       const opts = localStorage.getItem("optionsForSelects");
       options = JSON.parse(opts);
       this.setProps({...this.props, ... options})
