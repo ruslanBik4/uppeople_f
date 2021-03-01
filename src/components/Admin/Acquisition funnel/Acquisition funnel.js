@@ -60,7 +60,7 @@ class AcquisitionFunnel extends Component {
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     const {options} = this.props;
-    console.log(selectedRecruiter)
+    console.log(options)
     this.fetchRecruiters(options);
     this.fetchCompanies();
     this.fetchVacancies();
