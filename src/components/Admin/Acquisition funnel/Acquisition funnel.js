@@ -119,9 +119,9 @@ class AcquisitionFunnel extends Component {
   fetchCompanies = async () => {
     let companies_result = await getCompanies(0, 1, 1);
     const {selectedRecruiter} = this.state;
-    console.log(selectedRecruiter)
+
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
-      (selectedRecruiter.lenght > 0 && company.recruiters.indexOf(selectedRecruiter.id) > -1
+      (selectedRecruiter !== null && company.recruiters.indexOf(selectedRecruiter.id) > -1
           || selectedRecruiter === undefined || selectedRecruiter === null));
     this.setState({companies});
   };
