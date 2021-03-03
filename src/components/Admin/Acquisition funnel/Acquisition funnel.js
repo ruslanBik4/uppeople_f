@@ -453,10 +453,9 @@ class AcquisitionFunnel extends Component {
                   style={{marginBottom: 15}}
                   value={selectedRecruiter}
                   options={recruiters}
-                  isClearable
-                      // ={recruitersIsClearable}
+                  isClearable={recruitersIsClearable}
                   getOptionValue={(user) => user.id}
-                  getOptionLabel={(user) => user.name}
+                  getOptionLabel={(user) => user.label}
                   placeholder="Recruiters"
                   onChange={this.handleRecruiterSelect}
                 />
