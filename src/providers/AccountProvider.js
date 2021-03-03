@@ -57,13 +57,12 @@ export default class AccountProvider extends Component {
       localStorage.setItem("token", response.access_token);
 
       const user = {
-        id: response.user.id,
-        name: response.user.name,
-        email: response.user.email,
-        avatar: response.user.image,
-        phone: response.user.tel,
-        role: response.user.role_id,
-        companyId: response.user.company_id
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        phone: response.phone,
+        role: response.user.role_id
+        // companyId: response.user.company_id
       };
 
       localStorage.setItem("user", JSON.stringify(user));
