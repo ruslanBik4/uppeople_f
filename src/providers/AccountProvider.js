@@ -61,7 +61,7 @@ export default class AccountProvider extends Component {
         name: response.name,
         email: response.email,
         phone: response.phone,
-        role: response.user.role_id
+        role: response.role_id
         // companyId: response.user.company_id
       };
 
