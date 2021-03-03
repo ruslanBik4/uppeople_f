@@ -406,6 +406,16 @@ export default class CompanyProfile extends Component {
     const candidatesCount = candidatesData && candidatesData.candidatesCount;
     const commentsCount = comments && comments.length;
     const companyName = name && name;
+    let { id } = this.props.match.params;
+    const { companyId } = this.props.user;
+  
+    
+
+    // id = role !== 5 ? id: companyId;
+
+    // getCompanyInfo(id).then(companyInfo => {
+    //       companyInfo && this.setState({ ...this.state, companyInfo });
+    //     });
     return (
       <>
         <Row>
@@ -413,7 +423,7 @@ export default class CompanyProfile extends Component {
             <CompanyProfileCard
               name={name}
               logo={logo}
-              currentCompany={companyName}
+              currentCompany={id}
               onSelectLogo={this.handleLogoSelected}
               onUploadLogo={this.handleUploadLogo}
             />
