@@ -23,7 +23,7 @@ ReactDOM.render(
     <AlertProvider template={AlertTemplate} {...options}>
       <App />
     </AlertProvider>
-  </AccountProvider>,
+  </AccountProvider>
   // document.getElementById("root")
 );
 
