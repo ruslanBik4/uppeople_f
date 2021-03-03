@@ -23,8 +23,8 @@ ReactDOM.render(
     <AlertProvider template={AlertTemplate} {...options}>
       <App />
     </AlertProvider>
-  </AccountProvider>
-  // document.getElementById("root")
+  </AccountProvider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
