@@ -86,7 +86,7 @@ export default class Analytics extends Component {
   fetchRecruiters = async (options) => {
     this.setState({recruiters: options.recruiters});
     this.setState({selectedRecruiter: options.recruiters[0]});
-    this.setState({recruitersIsClearable: false});
+    this.setState({recruitersIsClearable: true});
   };
 
   fetchCompanies = async () => {
@@ -128,7 +128,7 @@ export default class Analytics extends Component {
   };
 
   fetchStatuses = async (options) => {
-    this.setState({statuses: options.candidateStatus});
+    this.setState({statuses: options.statuses});
     this.setState({selectedStatuses: options.statuses});
   };
 
