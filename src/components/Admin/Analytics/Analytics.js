@@ -49,12 +49,17 @@ export default class Analytics extends Component {
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    this.fetchRecruiters();
+    let {options} = this.props;
+    if (options === undefined || options.recruiters === undefined || options.recruiters.length === 0 ){
+      const opts = localStorage.getItem("optionsForSelects");
+      options = JSON.parse(opts);
+    }
+    this.fetchRecruiters(options);
     this.fetchCompanies();
     this.fetchVacancies();
-    this.fetchTags();
+    this.fetchTags(options);
     // this.fetchCandidatesData();
-    this.fetchStatuses();
+    this.fetchStatuses(options);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -78,27 +83,17 @@ export default class Analytics extends Component {
     }
   }
 
-  fetchRecruiters = async () => {
-    const users = await getUsers();
-
-    if (users == 401) {
-      this.props.history.push('/login/')
-    } else if (users.staff !== undefined) {
-      const recruiters = users.staff.filter((user) => user.id_roles === 2); // recruiter
-      this.setState({recruiters});
-    } else if (users.recruiters !== undefined) {
-      const recruiters = users.recruiters; // recruiter
-      this.setState({recruiters});
-      this.setState({selectedRecruiter: recruiters[0]});
-      this.setState({recruitersIsClearable: false});
-    }
+  fetchRecruiters = async (options) => {
+    this.setState({recruiters: options.recruiters});
+    this.setState({selectedRecruiter: options.recruiters[0]});
+    this.setState({recruitersIsClearable: false});
   };
 
   fetchCompanies = async () => {
     let companies_result = await getCompanies(0, 1, 1);
     const {selectedRecruiter} = this.state;
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
-      (selectedRecruiter !== null && company.recruiters.indexOf(selectedRecruiter.id) + 1 > 0 || selectedRecruiter === null));
+      (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));
     this.setState({companies});
   };
 
@@ -106,14 +101,14 @@ export default class Analytics extends Component {
     const {selectedCompany, selectedRecruiter} = this.state;
     const vacancies_result = await getVacancies(selectedCompany !== null ? selectedCompany.id : null, true, true);
     const vacancies = vacancies_result.vacancies.filter((vacancy) =>
-      (selectedRecruiter !== null && vacancy.recruiters.indexOf(selectedRecruiter.id) + 1 > 0 || selectedRecruiter === null)
+      (selectedRecruiter !== null && vacancy.recruiters && vacancy.recruiters.indexOf(selectedRecruiter.id)  > -1 || selectedRecruiter === null)
     );
     this.setState({vacancies});
   };
 
-  fetchTags = async () => {
-    const tags = await getTags();
-    this.setState({tags});
+  fetchTags = async (options) => {
+    this.setState({tags: options.tags});
+    // this.setState({selectedTags: options.tags});
   };
 
   fetchCandidatesData = async () => {
@@ -132,10 +127,9 @@ export default class Analytics extends Component {
     }
   };
 
-  fetchStatuses = async () => {
-    const statuses = await getStatuses();
-    this.setState({statuses});
-    this.setState({selectedStatuses: statuses});
+  fetchStatuses = async (options) => {
+    this.setState({statuses: options.candidateStatus});
+    this.setState({selectedStatuses: options.statuses});
   };
 
 
@@ -263,29 +257,11 @@ export default class Analytics extends Component {
 
 
   render() {
-    // захист
-    // if (Date.now() > 1603379532000) {
-    //   return (
-    //     <>
-    //       <Row style={{marginBottom: "1rem"}}>
-    //         <Col>
-    //           <h1 style={{marginBottom: 0, fontSize: 24}}>Sorry, but this page is not payed yet. Please pay to make it
-    //             available</h1>
-    //         </Col>
-    //       </Row>
-    //     </>
-    //   )
-    // } else {
-
-
-
       const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      const {tags, selectedTag} = this.state;
       const {statuses, selectedStatuses} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
-      const {clearable} = true;
 
       return (
         <>
@@ -304,7 +280,7 @@ export default class Analytics extends Component {
                   options={recruiters}
                   isClearable={recruitersIsClearable}
                   getOptionValue={(user) => user.id}
-                  getOptionLabel={(user) => user.name}
+                  getOptionLabel={(user) => user.label}
                   placeholder="Recruiters"
                   onChange={this.handleRecruiterSelect}
                 />
@@ -328,23 +304,12 @@ export default class Analytics extends Component {
                   options={vacancies}
                   isClearable
                   getOptionValue={(vacancy) => vacancy.id}
-                  getOptionLabel={(vacancy) => vacancy.label}
+                  getOptionLabel={(vacancy) => vacancy.name}
                   placeholder="Vacancies"
                   onChange={this.handleVacancySelect}
                 />
               </FormGroup>
 
-              {/*<FormGroup className="filter-select" >*/}
-              {/*  <Select*/}
-              {/*    style={{marginBottom: "1rem"}}*/}
-              {/*    value={selectedTag}*/}
-              {/*    options={tags}*/}
-              {/*    getOptionValue={(tag) => tag.id}*/}
-              {/*    getOptionLabel={(tag) => tag.name}*/}
-              {/*    placeholder="Tags"*/}
-              {/*    onChange={this.handleTagsSelect}*/}
-              {/*  />*/}
-              {/*</FormGroup>*/}
               <FormGroup className="filter-select">
                 <Select
                   isMulti

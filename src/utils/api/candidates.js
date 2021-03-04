@@ -214,13 +214,13 @@ export const getCandidatesAmountByTags = (selectedRecruiter, selectedCompany, se
     })
   })
     .then(response => {
-      if (response.ok) {
+        if (response.status > 401) {
+            return response.status;
+        }
+
+        if (response.ok) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
-      }
-
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {

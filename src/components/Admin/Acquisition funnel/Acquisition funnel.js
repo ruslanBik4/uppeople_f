@@ -64,7 +64,6 @@ class AcquisitionFunnel extends Component {
       options = JSON.parse(opts);
     }
 
-    console.log(options)
     this.fetchRecruiters(options);
     this.fetchCompanies();
     this.fetchVacancies();
@@ -437,7 +436,6 @@ class AcquisitionFunnel extends Component {
       const {tags, selectedTags} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
 
-      console.log(recruiters)
       return (
         <>
           <Row style={{marginBottom: "1rem"}}>
