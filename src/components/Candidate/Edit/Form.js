@@ -434,7 +434,7 @@ export default class CandidateEditForm extends Component {
           delete candidateInfo.email
         }
   
-        if (linkedIn === "") {
+        if (linkedIn === "" || linkedIn === null) {
           delete candidateInfo.linkedIn
         }
   

@@ -74,12 +74,12 @@ const VacancyProfileInfo = ({
           <i className={`fa fa-${classNames[status]}`}/>
             </Button>
          
-          {/* </ButtonGroup> */}
+          {/* </ButtonGroup> */} 
         </ListGroupItem>
         {location && <ListGroupItem>Location: {location}</ListGroupItem>}
         {salary && <ListGroupItem>Salary: {salary} <i
                           style={{
-                            position: "absolute",
+                            position: "absolute", 
                             top: "1rem",
                             borderwidth: "21.00px",
                             justifyContent: "flex-start"
