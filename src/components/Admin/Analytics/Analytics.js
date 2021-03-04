@@ -100,7 +100,7 @@ export default class Analytics extends Component {
   fetchVacancies = async () => {
     const {selectedCompany, selectedRecruiter} = this.state;
     const vacancies_result = await getVacancies(selectedCompany !== null ? selectedCompany.id : null, true, true);
-    const vacancies = vacancies_result.vacancies.filter((vacancy) =>
+    const vacancies = vacancies_result.filter((vacancy) =>
       (selectedRecruiter !== null && vacancy.recruiters && vacancy.recruiters.indexOf(selectedRecruiter.id)  > -1 || selectedRecruiter === null)
     );
     this.setState({vacancies});
