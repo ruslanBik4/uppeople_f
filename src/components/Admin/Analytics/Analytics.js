@@ -128,8 +128,8 @@ export default class Analytics extends Component {
   };
 
   fetchStatuses = async (options) => {
-    this.setState({statuses: options.statuses});
-    this.setState({selectedStatuses: options.statuses});
+    this.setState({statuses: options.vacancyStatus});
+    this.setState({selectedStatuses: options.vacancyStatus});
   };
 
 
