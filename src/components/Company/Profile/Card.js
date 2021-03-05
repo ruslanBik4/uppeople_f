@@ -38,7 +38,7 @@ const CompanyProfileCard = ({
       <Link
         to={{
           pathname: "/new-vacancy",
-          state: { fromCompany: currentCompany }
+          state: { fromCompany: {currentCompany, name} }
         }}
         style={{ textDecoration: "none" }}
       >

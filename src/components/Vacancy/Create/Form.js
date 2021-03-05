@@ -60,7 +60,7 @@ export default class VacancyCreateForm extends Component {
   state = {
     platform_id: [],
     seniority_id: [],
-    selectCompany: [],
+    company_id: [],
     location_id: [],
     user_ids: [],
     salary: 0,
@@ -70,6 +70,8 @@ export default class VacancyCreateForm extends Component {
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty()
   };
+
+  
   
 
   handleInputChange = ({target: {name, value}}) => {
@@ -126,13 +128,29 @@ export default class VacancyCreateForm extends Component {
     const {companies} = this.props.options;
     if (
       prevProps.options.companies.length !== companies.length &&
-      this.props.location.state
+      this.props.location.state 
     ) {
-      const getCurrentCompany = companies.find(
-        company => company.label === this.props.location.state.fromCompany
-      );
-      this.setState({selectCompany: getCurrentCompany});
+      const getCurrentCompany = this.props.location.state.fromCompany;
+      const company_id = getCurrentCompany;
+      company_id.label = company_id.name;
+      company_id.value = company_id.name;
+
+      console.log(company_id);
+  
+      this.setState({
+        company_id: company_id
+      });
     }
+
+
+    // {
+    //   const getCurrentCompany = this.props.location.state.fromCompany;
+    //   this.setState({company_id: getCurrentCompany});
+    // }
+    // console.log(this.props.location.state.fromCompany);
+    // console.log(this.setState.company_id)
+
+    
   
   }
 
@@ -218,9 +236,14 @@ export default class VacancyCreateForm extends Component {
   //   // user_ids = user_ids.id
   // }
 
-    if (vacancy.company_id !== undefined) {
+    if (company_id.currentCompany !== undefined) {
+      company_id = company_id.currentCompany;
+    }
+
+    if (company_id.id !== undefined) {
       company_id = company_id.id;
     }
+    company_id = Number(company_id);
 
     //  let result = user_ids.map(user_ids => user_ids.id)
     // user_ids = result
@@ -232,7 +255,9 @@ export default class VacancyCreateForm extends Component {
     isValid = false;
     }
     console.log(user_ids);
-    console.log(vacancy)
+    console.log(vacancy);
+
+    
 
     if (isValid) {
       const vacancy = {
@@ -283,12 +308,18 @@ export default class VacancyCreateForm extends Component {
       salary,
       link,
       selectedVacancyStatus,
-      description,
+      description, 
       details
     } = this.state;
     const {
       options: {platforms, seniority, companies, location, recruiters}
     } = this.props;
+    console.log(company_id);
+    
+
+   
+
+
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -347,6 +378,8 @@ export default class VacancyCreateForm extends Component {
                     </FormGroup>
                     <FormGroup className={"companies_div"}>
                       <Select
+                        // value={(fromCompany) => fromCompany.currentCompany}
+                        // label={(fromCompany) => fromCompany.name}
                         value={company_id}
                         options={companies}
                         placeholder="Company"
@@ -356,7 +389,7 @@ export default class VacancyCreateForm extends Component {
                     <FormGroup className={"recruiters_div"}>
                     <Select
                       value={user_ids}
-                      isMulti
+                      isMulti 
                       options={recruiters}
                       placeholder="Recruiter"
                       onChange={this.handleRecruiterChange}

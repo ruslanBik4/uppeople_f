@@ -400,7 +400,7 @@ export default class CompanyProfile extends Component {
     } = this.state;
     console.log("data candidate", this.state);
     const {
-      user: { role }
+      user: { role } 
     } = this.props;
     const vacanciesCount = vacanciesData && vacanciesData.vacanciesCount;
     const candidatesCount = candidatesData && candidatesData.candidatesCount;
@@ -409,7 +409,7 @@ export default class CompanyProfile extends Component {
     let { id } = this.props.match.params;
     const { companyId } = this.props.user;
   
-    
+      
 
     // id = role !== 5 ? id: companyId;
 

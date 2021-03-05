@@ -112,21 +112,6 @@ export default class CompanyProfileVacanciesForm extends Component {
     return (
       <Form>
         <Row>
-          <Col lg={1} md={12}>
-            <FormGroup>
-              {/* <Link to={`/new-vacancy`} >
-                <Button color="success">Add</Button>
-              </Link> */}
-              <Link
-                to={{
-                  pathname: "/new-vacancy",
-                  state: { fromCompany: currentCompany }
-                }}
-              >
-                <Button color="success">Add</Button>
-              </Link>
-            </FormGroup>
-          </Col>
           <Col lg={5} md={12}>
             <FormGroup>
               <Select
