@@ -37,7 +37,7 @@ const CompaniesTable = ({
         </thead>
         <tbody>{companiesJSX}</tbody>
       </Table>
-      {companies.length > 0 ? (
+      {totalItems > 0 ? (
         <Row>
           <Col>
             <PaginationBackend

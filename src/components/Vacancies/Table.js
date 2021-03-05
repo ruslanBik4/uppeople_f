@@ -56,7 +56,7 @@ const VacanciesTable = ({
         </thead>
         <tbody>{vacanciesJSX}</tbody>
       </Table>
-      {vacancies.length > 0 ? (
+      {totalItems > 0 ? (
         <Row>
           <Col>
             <PaginationBackend
