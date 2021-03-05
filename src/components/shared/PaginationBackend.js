@@ -164,7 +164,7 @@ class PaginationBackend extends Component {
       <Pagination style={loading ? loadingStyle : paginationStyle}  className="pagination justify-content-end">
         <PaginationItem
           className="page-item"
-          disabled={pager.currentPage === 1 ? true : false}
+          disabled={pager.currentPage === 1}
         >
           <PaginationLink className="page-link" onClick={() => this.setPage(1)}>
             First
@@ -172,7 +172,7 @@ class PaginationBackend extends Component {
         </PaginationItem>
         <PaginationItem
           className="page-item"
-          disabled={pager.currentPage === 1 ? true : false}
+          disabled={pager.currentPage === 1}
         >
           <PaginationLink
             className="page-link"
@@ -185,7 +185,7 @@ class PaginationBackend extends Component {
           <PaginationItem
             key={index}
             className="page-item"
-            active={pager.currentPage === page ? true : false}
+            active={pager.currentPage === page}
             disabled={this.allDisabled}
           >
             <PaginationLink
@@ -198,7 +198,7 @@ class PaginationBackend extends Component {
         ))}
         <PaginationItem
           className="page-item"
-          disabled={(pager.currentPage === pager.totalPages ? true : false) || this.allDisabled}
+          disabled={(pager.currentPage === pager.totalPages) || this.allDisabled}
         >
           <PaginationLink
             className="page-link"
@@ -209,8 +209,8 @@ class PaginationBackend extends Component {
         </PaginationItem>
         <PaginationItem
           className="page-item"
-          disabled={(pager.currentPage === pager.totalPages ? true : false) || this.allDisabled}
-          active={pager.currentPage === pager.totalPages ? true : false}
+          disabled={(pager.currentPage === pager.totalPages) || this.allDisabled}
+          active={pager.currentPage === pager.totalPages}
             disabled={this.allDisabled}
         >
           <PaginationLink

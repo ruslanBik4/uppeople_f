@@ -195,7 +195,7 @@ export default class Candidates extends Component {
       } else {
         const sentCandidatesData = {
           sentCandidates: data.candidates,
-          sentCandidatesCount: data.candidates.length,
+          sentCandidatesCount: data.Count,
           sentTotalPages: data.Page,
           sentPerPage: data.perPage,
           currentSentPage: data.currentPage,
@@ -220,7 +220,7 @@ export default class Candidates extends Component {
       } else {
         const allCandidatesData = {
           allCandidates: data.candidates,
-          allCandidatesCount: data.candidates.length,
+          allCandidatesCount: data.Count,
           allTotalPages: data.TotalPage,
           allPerPage: data.perPage,
           currentAllPage: data.currentPage,

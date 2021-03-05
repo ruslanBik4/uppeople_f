@@ -304,7 +304,7 @@ export const filterAndSortCompanyVacancies = (id, page, filterAndSort) => {
     .then(data => {
       const vacanciesData = {
         vacancies: data.vacancies,
-        vacanciesCount: data.vacancies.length,
+        vacanciesCount: data.Count,
         totalPages: data.totalPages,
         perPage: data.perPage,
         currentPage: data.currentPage,
