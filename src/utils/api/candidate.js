@@ -62,9 +62,9 @@ export const getCandidateProfile = id => {
           email: candidate.email,
           skype: candidate.skype,
           linkedIn: candidate.linkedin,
-          resume: candidate.link,
           comment: candidate.comments,
-          about: candidate.text_rezume,
+          about: candidate.resume,
+          resume: candidate.resume,
           vacancies:candidate.vacancies
         },
         candidateStatuses,
