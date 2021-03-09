@@ -67,18 +67,17 @@ class CandidatesForm extends Component {
 
   handleAllInputChange = ({ target: { name, value } }) => {
     const { onAllFilter } = this.props;
-    console.log('>>>>>>>>>name', [name]);
-    console.log('>>>>>>>>>value', value);
+    console.log('>>>>>>>>>name', [name], value);
 
-    if([name] === 'dateFromAllCandidates'){
+    if(name === 'dateFromAllCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateFrom: value }, () => onAllFilter(this.state));
-    }else if([name] === 'dateToAllCandidates'){
+    }else if(name === 'dateToAllCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateTo: value }, () => onAllFilter(this.state));
-    }else if([name] === 'dateFollowUpFrom'){
+    }else if(name === 'dateFollowUpFrom'){
       this.setState({ [name]: value }, () => onAllFilter(this.state));
-    }else if([name] === 'dateFollowUpTo'){
+    }else if(name === 'dateFollowUpTo'){
       this.setState({ [name]: value }, () => onAllFilter(this.state));
     }
 
