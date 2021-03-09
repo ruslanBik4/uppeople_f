@@ -33,6 +33,7 @@ const withOptionsForSelects = WrappedComponent =>
                 options.vacancies = data.vacancies;
             })
 
+            console.log(options)
             this.setState({ ...options });
             return
         }
