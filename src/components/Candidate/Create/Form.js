@@ -286,7 +286,6 @@ export default class CandidateCreateForm extends Component {
         platform_id,
         seniority_id,
         tag_id,
-        date,
         salary,
         language,
         phone,
@@ -338,8 +337,6 @@ export default class CandidateCreateForm extends Component {
       if (selectedReason === ""){
         delete newCandidate.selectedReason
       }
-
-      
 
       console.log(newCandidate);
       onCreateCandidate(newCandidate);
