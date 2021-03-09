@@ -163,9 +163,9 @@ export default class CandidateEditForm extends Component {
     const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
 
     let platform_id = candidate.platform;
-      if (candidate.platform !== null &&platforms.find) {
-        platform.value = candidate.platform_id;
-      }
+      // if (candidate.platform !== null && platforms.find) {
+      //   platform.value = candidate.platform_id;
+      // }
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -239,7 +239,7 @@ export default class CandidateEditForm extends Component {
         // })
         // about: about,
       });
-      console.log(candidate.linkedIn);
+      console.log(candidate);
       console.log(selectedReason);
       }
 
