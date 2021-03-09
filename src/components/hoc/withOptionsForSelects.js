@@ -22,17 +22,18 @@ const withOptionsForSelects = WrappedComponent =>
     };
 
     componentDidMount() {
+        getRecruiterVacancies().then(data => {
+            if (data === 401) {
+                this.props.history.push('/login/');
+                return
+            }
+            const vacancies =  data.vacancies;
+            this.setState({ ...vacancies }) ;
+        })
+
         const opts = getOptions();
         if (opts !== null && opts > "") {
             let options = JSON.parse(opts);
-            getRecruiterVacancies().then(data => {
-                if (data === 401) {
-                    this.props.history.push('/login/');
-                    return
-                }
-                options.vacancies = data.vacancies;
-            })
-
             this.setState({ ...options });
             return
         }
@@ -71,8 +72,8 @@ const withOptionsForSelects = WrappedComponent =>
     }
 
     render() {
-        const { options } = this.props
-        console.log(options)
+        const { vacancies } = this.props
+        console.log(vacancies)
 
         return <WrappedComponent options={this.state} {...this.props} />;
     }
