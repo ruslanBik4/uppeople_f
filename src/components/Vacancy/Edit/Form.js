@@ -31,7 +31,7 @@ export default class VacancyEditForm extends Component {
       seniority_id: PropTypes.number,
       company_id: PropTypes.number,
       location_id: PropTypes.number,
-      status: PropTypes.number,
+      status: PropTypes.number, 
       salary: PropTypes.number,
       link: PropTypes.string,
       date: PropTypes.string,

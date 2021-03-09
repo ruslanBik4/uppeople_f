@@ -274,7 +274,7 @@ export default class CandidateCreateForm extends Component {
       document.querySelector('.salary_div').classList.add('error');
     }
 
-    if (email.length !== 0 && !email.match ('[.-\w]+@([\w-]+\.)+[\w]+')) {
+    if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
       isValid = false;
       document.querySelector('.email_div').classList.add('error');
     }
@@ -627,7 +627,7 @@ export default class CandidateCreateForm extends Component {
                       <Col sm={9} className={"email_div"}>
                         <Input
                           id="email"
-                          type="email"
+                          type="text"
                           name="email"
                           value={email}
                           onChange={this.handleInputChange}
@@ -688,7 +688,7 @@ export default class CandidateCreateForm extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <label></label>
+                  <label></label> 
                 </Row>
                 <Row>
                   <Col md="10" className={"errorlist"} row>

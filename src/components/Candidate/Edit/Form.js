@@ -386,12 +386,12 @@ export default class CandidateEditForm extends Component {
         document.querySelector('.salary_div').classList.add('error');
       }
   
-      // if (email.length !== 0 && !email.match ('[.-\w]+@([\w-]+\.)+[\w]+')) {
-      //   isValid = false;
-      //   document.querySelector('.email_div').classList.add('error');
-      // }
+      if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
+        isValid = false;
+        document.querySelector('.email_div').classList.add('error');
+      }
 
-
+ 
 
       const {onEditCandidate} = this.props;
 
