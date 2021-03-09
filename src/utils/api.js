@@ -11,7 +11,7 @@ export const getRecruiterVacancies = async () => {
   const token = getToken();
   try {
     const response = await fetch(`${URL}/get_recruiter_vacancies`, {
-      method: "GET",
+      method: "POST",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json"
