@@ -56,24 +56,16 @@ const withOptionsForSelects = WrappedComponent =>
             recruiters: optionsForSelects.recruiters,
             vacancies: optionsForSelects.vacancies,
         };
-            getRecruiterVacancies().then(data => {
-                if (data === 401) {
-                    this.props.history.push('/login/');
-                    return
-                }
-                options.vacancies = data.vacancies;
-            })
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
 
-            console.log(options)
           this.setState({ ...options });
       });
     }
 
     render() {
-        const { vacancies } = this.props
-        console.log(vacancies)
+        const { vacancies, platforms } = this.props
+        console.log(vacancies, platforms)
 
         return <WrappedComponent options={this.state} {...this.props} />;
     }
