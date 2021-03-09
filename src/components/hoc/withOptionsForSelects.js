@@ -71,7 +71,7 @@ const withOptionsForSelects = WrappedComponent =>
     }
 
     render() {
-        const { options } = this.state
+        const { options } = this.props
         console.log(options)
 
         return <WrappedComponent options={this.state} {...this.props} />;
