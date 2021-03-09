@@ -56,7 +56,7 @@ class CandidateEdit extends Component {
                 return
             }
             const vacancies =  data.vacancies;
-            this.setState({ ...vacancies }) ;
+            this.setState({ vacancies }) ;
         })
     });
   }

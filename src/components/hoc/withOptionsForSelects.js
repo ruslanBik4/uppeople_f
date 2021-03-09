@@ -28,7 +28,7 @@ const withOptionsForSelects = WrappedComponent =>
                 return
             }
             const vacancies =  data.vacancies;
-            this.setState({ ...vacancies }) ;
+            this.setState({ vacancies }) ;
         })
 
         const opts = getOptions();
