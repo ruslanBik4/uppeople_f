@@ -10,6 +10,7 @@ import {
   uploadCandidateAvatar,
   updateCandidateProfile
 } from "../../../utils/api/candidate";
+import {getRecruiterVacancies} from "../../../utils/api";
 
 class CandidateEdit extends Component {
   state = {
@@ -49,6 +50,14 @@ class CandidateEdit extends Component {
                 candidate
             });
         }
+        getRecruiterVacancies().then(data => {
+            if (data === 401) {
+                this.props.history.push('/login/');
+                return
+            }
+            const vacancies =  data.vacancies;
+            this.setState({ ...vacancies }) ;
+        })
     });
   }
 
@@ -115,12 +124,12 @@ class CandidateEdit extends Component {
   };
 
   render() {
-    const { candidate } = this.state;
+    const { candidate, vacancies } = this.state;
     const {
       options
     } = this.props;
 
-    console.log(options)
+    console.log(options, vacancies)
     return (
       <>
         <h3>Edit Candidate</h3>
@@ -131,7 +140,7 @@ class CandidateEdit extends Component {
           tags={options.tags}
           reasons={options.reasons}
           reject_tag={options.reject_tag}
-          vacancies={options.vacancies}
+          vacancies={vacancies}
           onUploadAvatar={this.uploadAvatar}
           onEditCandidate={this.updateCandidate}
         />
