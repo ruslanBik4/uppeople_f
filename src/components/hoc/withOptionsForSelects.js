@@ -21,7 +21,7 @@ const withOptionsForSelects = WrappedComponent =>
         reject_tag: {}
     };
 
-    componentDidMount() {
+      componentWillReceiveProps() {
         const opts = getOptions();
         if (opts !== null && opts > "") {
             let options = JSON.parse(opts);
@@ -66,6 +66,7 @@ const withOptionsForSelects = WrappedComponent =>
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
 
+            console.log(options)
           this.setState({ ...options });
       });
     }

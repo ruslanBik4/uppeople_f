@@ -115,11 +115,10 @@ class CandidateEdit extends Component {
   };
 
   render() {
-    // console.log(this.props);
-    const { candidate, options } = this.state;
-    // const {
-    //   options
-    // } = this.props;
+    const { candidate } = this.state;
+    const {
+      options
+    } = this.props;
 
     console.log(options)
     return (
