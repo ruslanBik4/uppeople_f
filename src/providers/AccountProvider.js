@@ -41,7 +41,7 @@ export default class AccountProvider extends Component {
   state = { ...INITIAL_STATE };
 
   signIn = user => {
-    localStorage.removeItem("optionsForSelects");
+    localStorage.clear();
     userSignIn(user).then(response => {
       if (!response || (response.status && response.status > 401) || response === "Unauthorized" || response.access_token === undefined) {
         this.setState(
