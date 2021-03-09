@@ -54,7 +54,6 @@ const withOptionsForSelects = WrappedComponent =>
             reasons: optionsForSelects.reject_reasons,
             reject_tag: optionsForSelects.reject_tag[0],
             recruiters: optionsForSelects.recruiters,
-            vacancies: optionsForSelects.vacancies,
         };
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
@@ -64,7 +63,7 @@ const withOptionsForSelects = WrappedComponent =>
     }
 
     render() {
-        const { vacancies, platforms } = this.props
+        const { vacancies, platforms } = this.state
         console.log(vacancies, platforms)
 
         return <WrappedComponent options={this.state} {...this.props} />;
