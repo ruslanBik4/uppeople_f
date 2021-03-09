@@ -43,8 +43,9 @@ class CandidateEdit extends Component {
         } else if (data === 401) {
             this.props.history.push('/login/')
         } else if (typeof data === 'object') {
+            const candidate = data.candidate;
             this.setState({
-                candidate: data
+                candidate
             });
         }
     });

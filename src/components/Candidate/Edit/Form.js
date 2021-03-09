@@ -507,7 +507,7 @@ export default class CandidateEditForm extends Component {
 
     const {platforms, seniorities, tags} = this.props;
 
-    console.log(name, vacancies)
+    console.log(name, vacancies, platform_id)
 
     return (
       <Row>
