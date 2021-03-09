@@ -11,15 +11,14 @@ export const userSignIn = user => {
     body: JSON.stringify(user)
   })
     .then(response => {
-      console.log(response)
-      if (response.ok) {
+        if (response.status > 400) {
+            return response;
+        }
+
+        if (response.ok) {
         return response.json();
       }
       return `${response.statusText}`;
-    })
-    .then(data => {
-      console.log(data);
-      return data;
     })
     .catch(error => console.log("[userSignIn error]: ", error));
 };
