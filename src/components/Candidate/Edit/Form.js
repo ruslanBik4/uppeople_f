@@ -59,7 +59,6 @@ export default class CandidateEditForm extends Component {
         PropTypes.array,
         PropTypes.number
       ]),
-      date: PropTypes.string,
       salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       language: PropTypes.string,
       phone: PropTypes.string,
@@ -100,7 +99,6 @@ export default class CandidateEditForm extends Component {
     platform: [],
     seniority_id: [],
     vacancies: [],
-    date: "",
     salary: "",
     language: "",
     languages: [
@@ -224,7 +222,6 @@ export default class CandidateEditForm extends Component {
         seniority_id: seniority_id,
         tag_id: tag_id,
         selectedReason: selectedReason,
-        date: candidate.date,
         salary: candidate.salary,
         language: language,
         phone: candidate.phone,
@@ -329,7 +326,6 @@ export default class CandidateEditForm extends Component {
 
     let {
       name,
-      date,
       salary,
       language,
       phone,
@@ -401,7 +397,6 @@ export default class CandidateEditForm extends Component {
           platform_id,
           seniority_id,
           tag_id,
-          date,
           salary,
           language,
           phone,
@@ -495,7 +490,6 @@ export default class CandidateEditForm extends Component {
       platform_id,
       seniority_id,
       tag_id,
-      // date,
       salary,
       language,
       languages,
@@ -510,11 +504,9 @@ export default class CandidateEditForm extends Component {
       // about
     } = this.state;
 
-    let {date} = this.state;
 
     const {platforms, seniorities, tags} = this.props;
 
-    date = date.substring(0, 10);
 
     return (
       <Row>
@@ -541,11 +533,6 @@ export default class CandidateEditForm extends Component {
                 {platform !== undefined && (
                   <ListGroupItem className={styles.listGroupItem}>
                     Platform: {platform.label}
-                  </ListGroupItem>
-                )}
-                {date && (
-                  <ListGroupItem>
-                    Date: {moment(date).format("Do MMM YYYY")}
                   </ListGroupItem>
                 )}
                 {phone && <ListGroupItem>Phone: {phone}</ListGroupItem>}
@@ -639,21 +626,6 @@ export default class CandidateEditForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    {/* <FormGroup row>
-                      <Label for="date" sm={3}>
-                        Date
-                      </Label>
-                      <Col sm={9}>
-                        <Input
-                          readonly
-                          id="date"
-                          type="date"
-                          name="date"
-                          value={date}
-                          onChange={this.handleInputChange}
-                        />
-                      </Col>
-                    </FormGroup> */}
                     <FormGroup row>
                       <Label for="salary" sm={3}>
                         Salary
