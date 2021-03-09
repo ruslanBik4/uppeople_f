@@ -208,7 +208,7 @@ export default class CandidateEditForm extends Component {
     let platformVacancies = [];
     if ( (platform_id !== undefined)  && (vacancies !== undefined) ){
       vacancies.map((vacancy) => {
-        if (vacancy.platform_id === platform.id) {
+        if (vacancy.platform_id === candidate.platform.id) {
           platformVacancies.push(vacancy);
         }
       })
@@ -239,8 +239,8 @@ export default class CandidateEditForm extends Component {
         // })
         // about: about,
       });
-      console.log(candidate);
-      console.log(selectedReason);
+      console.log(vacancies);
+      console.log(platformVacancies);
       }
 
   componentDidUpdate(prevProps, prevState) {
@@ -507,7 +507,7 @@ export default class CandidateEditForm extends Component {
 
     const {platforms, seniorities, tags} = this.props;
 
-    console.log(name, vacancies, platform_id)
+    console.log(platformVacancies, vacancies, platform_id)
 
     return (
       <Row>
