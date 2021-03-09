@@ -157,8 +157,8 @@ export default class CandidateEditForm extends Component {
 
   };
 
-  componentWillReceiveProps(nextProps) {
-    // componentDidUpdate(prevProps) {
+  // componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps, nextProps) {
 
     const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
 

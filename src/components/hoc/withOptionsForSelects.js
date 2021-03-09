@@ -34,9 +34,6 @@ const withOptionsForSelects = WrappedComponent =>
             })
 
             this.setState({ ...options });
-            const { opt } = this.state
-                console.log(opt)
-
             return
         }
 
@@ -74,7 +71,10 @@ const withOptionsForSelects = WrappedComponent =>
     }
 
     render() {
-      return <WrappedComponent options={this.state} {...this.props} />;
+        const { options } = this.state
+        console.log(options)
+
+        return <WrappedComponent options={this.state} {...this.props} />;
     }
   };
 
