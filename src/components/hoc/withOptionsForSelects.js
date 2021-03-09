@@ -24,7 +24,7 @@ const withOptionsForSelects = WrappedComponent =>
     componentDidMount() {
         const opts = getOptions();
         if (opts !== null && opts > "") {
-            const options = JSON.parse(opts);
+            let options = JSON.parse(opts);
             getRecruiterVacancies().then(data => {
                 if (data === 401) {
                     this.props.history.push('/login/');
@@ -42,7 +42,7 @@ const withOptionsForSelects = WrappedComponent =>
               this.props.history.push('/login/');
               return
           }
-        const options = {
+        let options = {
             platforms: optionsForSelects.platforms,
             seniority: optionsForSelects.seniorities,
             companies: optionsForSelects.companies,

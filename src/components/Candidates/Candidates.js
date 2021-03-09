@@ -161,7 +161,7 @@ export default class Candidates extends Component {
         this.props.history.push('/login/');
       } else if (data > 400) {
         alert(data);
-      } else {
+      } else if (typeof data === 'object') {
           const candidatesFromFreelancersData = {
             candidatesFF: data.candidates,
             candidatesCountFF: data.candidates.length,
