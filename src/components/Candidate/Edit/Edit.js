@@ -31,7 +31,8 @@ class CandidateEdit extends Component {
       comment: "",
       about: "",
       vacancies: []
-    }
+    },
+      vacancies: []
   };
 
   componentDidMount() {
@@ -120,6 +121,7 @@ class CandidateEdit extends Component {
       options
     } = this.props;
 
+    console.log(options)
     return (
       <>
         <h3>Edit Candidate</h3>

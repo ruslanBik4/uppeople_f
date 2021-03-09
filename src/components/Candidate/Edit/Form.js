@@ -162,6 +162,7 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
 
+    console.log(vacancies)
     let platform_id = candidate.platform;
       // if (candidate.platform !== null && platforms.find) {
       //   platform.value = candidate.platform_id;
