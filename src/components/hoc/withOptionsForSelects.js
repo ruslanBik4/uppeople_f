@@ -1,7 +1,7 @@
 // Core
 import React, { Component } from "react";
 // Instruments
-import { getOptionsForSelects } from "../../utils/api";
+import {getOptionsForSelects, getRecruiterVacancies} from "../../utils/api";
 
 const getOptions = () => localStorage.getItem("optionsForSelects");
 
@@ -25,6 +25,14 @@ const withOptionsForSelects = WrappedComponent =>
         const opts = getOptions();
         if (opts !== null && opts > "") {
             const options = JSON.parse(opts);
+            getRecruiterVacancies().then(data => {
+                if (data === 401) {
+                    this.props.history.push('/login/');
+                    return
+                }
+                options.vacancies = data.vacancies;
+            })
+
             this.setState({ ...options });
             return
         }
@@ -47,6 +55,13 @@ const withOptionsForSelects = WrappedComponent =>
             recruiters: optionsForSelects.recruiters,
             vacancies: optionsForSelects.vacancies,
         };
+            getRecruiterVacancies().then(data => {
+                if (data === 401) {
+                    this.props.history.push('/login/');
+                    return
+                }
+                options.vacancies = data.vacancies;
+            })
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
 

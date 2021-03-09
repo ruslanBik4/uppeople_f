@@ -38,10 +38,15 @@ class CandidateEdit extends Component {
     const { id } = this.props.match.params;
 
     getCandidateProfile(id).then(data => {
-      const candidate = data.candidate;
-      this.setState({
-        candidate
-      });
+        if (data === 201) {
+            this.props.history.push(`/candidates/`)
+        } else if (data === 401) {
+            this.props.history.push('/login/')
+        } else if (typeof data === 'object') {
+            this.setState({
+                candidate
+            });
+        }
     });
   }
 
