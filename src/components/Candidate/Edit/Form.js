@@ -282,17 +282,36 @@ export default class CandidateEditForm extends Component {
         }
       })
     }
+    console.log (platformVacancies);
+    console.log (value.id);
 
     this.setState({
       platformVacancies: platformVacancies
     });
+    console.log (value.id);
+    console.log(platformVacancies);
+    
   };
+ 
 
   handleVacancyChange = value => {
     this.setState({
       vacancies: value
     });
+    
+    console.log (this.state.vacancies);
+    var selectedVacancies = this.state.vacancies.map(item => item.id);
+    console.log(selectedVacancies);
+    this.setState({
+      selectedVacancies: value
+    });
+    
+    
   };
+
+  
+  
+ 
 
   handleSeniorityChange = value => {
     this.setState({
@@ -342,11 +361,13 @@ export default class CandidateEditForm extends Component {
       selectedReason,
       selectedVacancies
     } = this.state;
-   
+
+    console.log (selectedVacancies);
+    
 
     let isValid = true;
 
-    
+    console.log (selectedVacancies);
     platform_id = platform_id.id
    
 
@@ -366,7 +387,10 @@ export default class CandidateEditForm extends Component {
       
         tag_id = tag_id.id
      
-
+        if (selectedVacancies !== undefined) {
+        selectedVacancies = this.state.selectedVacancies.map(item => item.id);
+        }
+        
       if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
@@ -386,8 +410,6 @@ export default class CandidateEditForm extends Component {
         isValid = false;
         document.querySelector('.email_div').classList.add('error');
       }
-
- 
 
       const {onEditCandidate} = this.props;
 
