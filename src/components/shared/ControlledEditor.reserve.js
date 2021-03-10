@@ -55,11 +55,11 @@ export default class ControlledEditor extends Component {
 
       onUpdate(contentToUpdate);
     } else if (title === "Interview details") {
-      const interviewDetail = draftToHtml(
+      const interview_detail = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        interviewDetail
+        interview_detail
       };
 
       onUpdate(contentToUpdate);

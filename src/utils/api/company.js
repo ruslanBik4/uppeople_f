@@ -193,7 +193,7 @@ export const getCompanyInfo = id => {
           calendarEvents: data.calendar,
           sendDetails: data.sendDetails,
           termsOfCooperation: data.uslovia,
-          interviewDetails: data.interview_detail,
+          interview_detail: data.interview_detail,
           contacts: data.contacts,
           managers: data.managers
         };
@@ -720,10 +720,10 @@ export const updateCompanyInfoProfile = (id, content) => {
           };
           return sendDetails;
         } else if (key === "interview_detail") {
-          const interviewDetails = {
-            interviewDetails: data[key]
+          const interview_details = {
+            interview_details: data[key]
           };
-          return interviewDetails;
+          return interview_details;
         } else if (key === "about") {
           const about = {
             about: data[key]

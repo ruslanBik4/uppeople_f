@@ -11,7 +11,7 @@ export default class ControlledEditor extends Component {
   constructor(props) {
     super(props);
 
-    const html = props.content === null ? "" : props.content;
+    const html = props.content === null || props.content === undefined ? "" : props.content;
     const contentBlock = htmlToDraft(html);
     if (contentBlock) {
       const contentState = ContentState.createFromBlockArray(
@@ -51,11 +51,11 @@ export default class ControlledEditor extends Component {
 
       onUpdate(contentToUpdate);
     } else if (title === "Interview details") {
-      const interviewDetail = draftToHtml(
+      const interview_detail = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        interviewDetail
+        interview_detail
       };
 
       onUpdate(contentToUpdate);
