@@ -39,7 +39,7 @@ export default class CompanyCreateForm extends Component {
     manager: "",
     sendDetails: EditorState.createEmpty(),
     about: EditorState.createEmpty(),
-    interviewDetail: EditorState.createEmpty()
+    interview_detail: EditorState.createEmpty()
   };
 
   handleInputChange = ({ target: { name, value } }) => {
@@ -54,8 +54,8 @@ export default class CompanyCreateForm extends Component {
     this.setState({ about });
   };
 
-  handleInterviewDetailStateChange = interviewDetail => {
-    this.setState({ interviewDetail });
+  handleinterview_detailStateChange = interview_detail => {
+    this.setState({ interview_detail });
   };
 
   handleSubmit = event => {
@@ -70,7 +70,7 @@ export default class CompanyCreateForm extends Component {
       map,
       sendDetails,
       about,
-      interviewDetail
+      interview_detail
     } = this.state;
     const { onCreateCompany } = this.props;
 
@@ -82,8 +82,8 @@ export default class CompanyCreateForm extends Component {
       convertToRaw(about.getCurrentContent())
     );
 
-    const interviewDetailEditorState = draftToHtml(
-      convertToRaw(interviewDetail.getCurrentContent())
+    const interview_detailEditorState = draftToHtml(
+      convertToRaw(interview_detail.getCurrentContent())
     );
 
     const companySettings = {
@@ -95,7 +95,7 @@ export default class CompanyCreateForm extends Component {
       map,
       sendDetails: sendDetailsEditorState,
       about: aboutEditorState,
-      interviewDetail: interviewDetailEditorState
+      interview_detail: interview_detailEditorState
     };
 
     onCreateCompany(companySettings);
@@ -349,7 +349,7 @@ export default class CompanyCreateForm extends Component {
                   <Col>
                     <h6>Interview details</h6>
                     <Editor
-                      editorState={this.state.interviewDetail}
+                      editorState={this.state.interview_detail}
                       wrapperClassName="wrapper-class"
                       editorClassName="editor-class"
                       toolbarClassName="toolbar-class"
@@ -357,7 +357,7 @@ export default class CompanyCreateForm extends Component {
                         locale: "ru"
                       }}
                       onEditorStateChange={
-                        this.handleInterviewDetailStateChange
+                        this.handleinterview_detailStateChange
                       }
                     />
                   </Col>
