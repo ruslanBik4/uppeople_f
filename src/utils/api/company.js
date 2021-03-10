@@ -13,8 +13,8 @@ const getToken = () => localStorage.getItem("token");
 export const getCompanies = (page, isActive, withRecruiters = false) => {
   const token = getToken();
   let filter = {
-    IsActive: IsActive,
-    WithRecruiters: WithRecruiters
+    IsActive: isActive,
+    WithRecruiters: withRecruiters
   }
   return fetch(`${URL}/main/returnAllCompanies/${page}`, {
     method: "POST",
