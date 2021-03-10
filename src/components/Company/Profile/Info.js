@@ -13,7 +13,7 @@ import withToggleCardBody from "../../hoc/withToggleCardBody";
 const WithToggleCardBodyEditor = withToggleCardBody(ControlledEditor);
 
 const CompanyProfileInfo = ({
-  companyInfo: { about, sendDetails, interviewDetails, map },
+  companyInfo: { about, sendDetails, interview_detail, map },
   onUpdate
 }) => (
   <>
@@ -73,7 +73,7 @@ const CompanyProfileInfo = ({
           render={(isOpen, open, close) =>
             isOpen ? (
               <WithToggleCardBodyEditor
-                content={interviewDetails}
+                content={interview_detail}
                 title="Interview details"
                 isOpen={isOpen}
                 close={close}
@@ -81,7 +81,7 @@ const CompanyProfileInfo = ({
               />
             ) : (
               <InnerHTMLMarkUp
-                content={interviewDetails}
+                content={interview_detail}
                 title="Interview details"
                 isOpen={isOpen}
                 open={open}
@@ -104,7 +104,7 @@ CompanyProfileInfo.propTypes = {
   companyInfo: PropTypes.shape({
     about: PropTypes.string,
     sendDetails: PropTypes.string,
-    interviewDetails: PropTypes.string,
+    interview_detail: PropTypes.string,
     map: PropTypes.string
   }),
   onUpdate: PropTypes.func
