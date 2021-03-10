@@ -7,6 +7,34 @@ const getToken = () => localStorage.getItem("token");
  *
  * @returns {Promise} Promise object represents operation result
  */
+export const getRecruiterVacancies = async () => {
+  const token = getToken();
+  try {
+    const response = await fetch(`${URL}/get_recruiter_vacancies`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      }
+    });
+    if (response.status === 401) {
+      return 401;
+    }
+
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  } catch (error) {
+    return console.log("error in fetch: ", error);
+  }
+};
+
+/**
+ * Fetches options for selects from an api
+ *
+ * @returns {Promise} Promise object represents operation result
+ */
 export const getOptionsForSelects = async () => {
   const token = getToken();
   try {

@@ -59,7 +59,6 @@ export default class CandidateEditForm extends Component {
         PropTypes.array,
         PropTypes.number
       ]),
-      date: PropTypes.string,
       salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       language: PropTypes.string,
       phone: PropTypes.string,
@@ -100,7 +99,6 @@ export default class CandidateEditForm extends Component {
     platform: [],
     seniority_id: [],
     vacancies: [],
-    date: "",
     salary: "",
     language: "",
     languages: [
@@ -165,9 +163,9 @@ export default class CandidateEditForm extends Component {
     const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
 
     let platform_id = candidate.platform;
-      if (candidate.platform !== null &&platforms.find) {
-        platform.value = candidate.platform_id;
-      }
+      // if (candidate.platform !== null && platforms.find) {
+      //   platform.value = candidate.platform_id;
+      // }
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -210,7 +208,7 @@ export default class CandidateEditForm extends Component {
     let platformVacancies = [];
     if ( (platform_id !== undefined)  && (vacancies !== undefined) ){
       vacancies.map((vacancy) => {
-        if (vacancy.platform_id === platform.id) {
+        if (vacancy.platform_id === candidate.platform.id) {
           platformVacancies.push(vacancy);
         }
       })
@@ -224,7 +222,6 @@ export default class CandidateEditForm extends Component {
         seniority_id: seniority_id,
         tag_id: tag_id,
         selectedReason: selectedReason,
-        date: candidate.date,
         salary: candidate.salary,
         language: language,
         phone: candidate.phone,
@@ -242,8 +239,8 @@ export default class CandidateEditForm extends Component {
         // })
         // about: about,
       });
-      console.log(candidate.linkedIn);
-      console.log(selectedReason);
+      console.log(vacancies);
+      console.log(platformVacancies);
       }
 
   componentDidUpdate(prevProps, prevState) {
@@ -329,7 +326,6 @@ export default class CandidateEditForm extends Component {
 
     let {
       name,
-      date,
       salary,
       language,
       phone,
@@ -401,7 +397,6 @@ export default class CandidateEditForm extends Component {
           platform_id,
           seniority_id,
           tag_id,
-          date,
           salary,
           language,
           phone,
@@ -495,7 +490,6 @@ export default class CandidateEditForm extends Component {
       platform_id,
       seniority_id,
       tag_id,
-      // date,
       salary,
       language,
       languages,
@@ -510,11 +504,10 @@ export default class CandidateEditForm extends Component {
       // about
     } = this.state;
 
-    let {date} = this.state;
 
     const {platforms, seniorities, tags} = this.props;
 
-    date = date.substring(0, 10);
+    console.log(platformVacancies, vacancies, platform_id)
 
     return (
       <Row>
@@ -541,11 +534,6 @@ export default class CandidateEditForm extends Component {
                 {platform !== undefined && (
                   <ListGroupItem className={styles.listGroupItem}>
                     Platform: {platform.label}
-                  </ListGroupItem>
-                )}
-                {date && (
-                  <ListGroupItem>
-                    Date: {moment(date).format("Do MMM YYYY")}
                   </ListGroupItem>
                 )}
                 {phone && <ListGroupItem>Phone: {phone}</ListGroupItem>}
@@ -639,21 +627,6 @@ export default class CandidateEditForm extends Component {
                         />
                       </Col>
                     </FormGroup>
-                    {/* <FormGroup row>
-                      <Label for="date" sm={3}>
-                        Date
-                      </Label>
-                      <Col sm={9}>
-                        <Input
-                          readonly
-                          id="date"
-                          type="date"
-                          name="date"
-                          value={date}
-                          onChange={this.handleInputChange}
-                        />
-                      </Col>
-                    </FormGroup> */}
                     <FormGroup row>
                       <Label for="salary" sm={3}>
                         Salary

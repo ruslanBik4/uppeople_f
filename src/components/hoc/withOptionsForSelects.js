@@ -1,7 +1,7 @@
 // Core
 import React, { Component } from "react";
 // Instruments
-import { getOptionsForSelects } from "../../utils/api";
+import {getOptionsForSelects, getRecruiterVacancies} from "../../utils/api";
 
 const getOptions = () => localStorage.getItem("optionsForSelects");
 
@@ -22,9 +22,18 @@ const withOptionsForSelects = WrappedComponent =>
     };
 
     componentDidMount() {
+        getRecruiterVacancies().then(data => {
+            if (data === 401) {
+                this.props.history.push('/login/');
+                return
+            }
+            const vacancies =  data.vacancies;
+            this.setState({ vacancies }) ;
+        })
+
         const opts = getOptions();
         if (opts !== null && opts > "") {
-            const options = JSON.parse(opts);
+            let options = JSON.parse(opts);
             this.setState({ ...options });
             return
         }
@@ -34,7 +43,7 @@ const withOptionsForSelects = WrappedComponent =>
               this.props.history.push('/login/');
               return
           }
-        const options = {
+        let options = {
             platforms: optionsForSelects.platforms,
             seniority: optionsForSelects.seniorities,
             companies: optionsForSelects.companies,
@@ -45,7 +54,6 @@ const withOptionsForSelects = WrappedComponent =>
             reasons: optionsForSelects.reject_reasons,
             reject_tag: optionsForSelects.reject_tag[0],
             recruiters: optionsForSelects.recruiters,
-            vacancies: optionsForSelects.vacancies,
         };
 
           localStorage.setItem('optionsForSelects', JSON.stringify(options));
@@ -55,7 +63,10 @@ const withOptionsForSelects = WrappedComponent =>
     }
 
     render() {
-      return <WrappedComponent options={this.state} {...this.props} />;
+        const { vacancies, platforms } = this.state
+        console.log(vacancies, platforms)
+
+        return <WrappedComponent options={this.state} {...this.props} />;
     }
   };
 

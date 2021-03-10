@@ -41,12 +41,12 @@ export default class AccountProvider extends Component {
   state = { ...INITIAL_STATE };
 
   signIn = user => {
-    localStorage.removeItem("optionsForSelects");
+    localStorage.clear();
     userSignIn(user).then(response => {
-      if (!response || response === "Unauthorized" || response.access_token === undefined) {
+      if (!response || (response.status && response.status > 401) || response === "Unauthorized" || response.access_token === undefined) {
         this.setState(
           {
-            authError: response || 'Unknown error'
+            authError: response.text || response || 'Unknown error'
           },
           () => console.log(this.state.authError)
         );

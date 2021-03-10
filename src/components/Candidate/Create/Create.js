@@ -3,7 +3,7 @@ import React, {Component} from "react";
 // Components
 import CandidateCreateForm from "./Form";
 // Instruments
-import {getOptionsForSelects} from "../../../utils/api";
+import {getOptionsForSelects, getRecruiterVacancies} from "../../../utils/api";
 import {
   uploadCandidateAvatar,
   createNewCandidate
@@ -41,6 +41,14 @@ export default class CandidateCreate extends Component {
         defaultSelectedtag
       });
     });
+      getRecruiterVacancies().then(data => {
+          if (data === 401) {
+              this.props.history.push('/login/');
+              return
+          }
+          const vacancies =  data.vacancies;
+          this.setState({ vacancies }) ;
+      })
   }
 
   uploadAvatar = (id, file) => {
