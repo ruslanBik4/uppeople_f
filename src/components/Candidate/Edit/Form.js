@@ -359,15 +359,14 @@ export default class CandidateEditForm extends Component {
       seniority_id,
       tag_id,
       selectedReason,
+      vacancies,
       selectedVacancies
     } = this.state;
 
-    console.log (selectedVacancies);
+    console.log (vacancies);
     
 
     let isValid = true;
-
-    console.log (selectedVacancies);
     platform_id = platform_id.id
    
 
@@ -388,7 +387,7 @@ export default class CandidateEditForm extends Component {
         tag_id = tag_id.id
      
         if (selectedVacancies !== undefined) {
-        selectedVacancies = this.state.selectedVacancies.map(item => item.id);
+        vacancies = this.state.selectedVacancies.map(item => item.id);
         }
         
       if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
@@ -427,7 +426,7 @@ export default class CandidateEditForm extends Component {
           linkedIn,
           resume,
           comment,
-          selectedVacancies
+          vacancies
           // about: aboutEditorState
         };
   
@@ -471,6 +470,9 @@ export default class CandidateEditForm extends Component {
           delete candidateInfo.selectedReason
         }
   
+        if (selectedVacancies === undefined){
+          delete candidateInfo.vacancies
+        }
         
   
         console.log(candidateInfo);
@@ -673,7 +675,7 @@ export default class CandidateEditForm extends Component {
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="language"
+                          id="vacancies"
                           isMulti
                           value={vacancies}
                           options={platformVacancies}
