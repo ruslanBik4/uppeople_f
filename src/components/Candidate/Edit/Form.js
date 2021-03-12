@@ -45,6 +45,7 @@ export default class CandidateEditForm extends Component {
     candidate: PropTypes.shape({
       id: PropTypes.number,
       avatar: PropTypes.string,
+      file: PropTypes.object,
       name: PropTypes.string,
       // platform: PropTypes.shape({
       //   id: PropTypes.number,
@@ -92,6 +93,7 @@ export default class CandidateEditForm extends Component {
   state = {
     avatar: null,
     name: "",
+    file: [],
     // selectPlatform: [],
     // seniority_id: [],
     // tag_id: {},
@@ -254,14 +256,15 @@ export default class CandidateEditForm extends Component {
 
     getBase64(avatar, result => {
       this.setState({
-        avatar: result
+        avatar: result,
+        file : avatar
         // updateImage: true
       });
     }); 
   };
 
   handleAvatarUpload = () => {
-    this.props.onUploadAvatar(this.state.avatar);
+    this.props.onUploadAvatar(this.state.file);
   };
 
   handleInputChange = ({target: {name, value}}) => {
