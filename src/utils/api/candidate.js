@@ -200,7 +200,7 @@ export const uploadCandidateAvatar = async (id, file) => {
 
   let body = new FormData();
   for (let key in file) {
-    options.body.append(key, file[key]);
+    body.append(key, file[key]);
   }
 
   try {
