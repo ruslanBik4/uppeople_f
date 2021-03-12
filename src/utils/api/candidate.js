@@ -197,19 +197,27 @@ export const deleteCandidateComment = async (id, commentId) => {
  */
 export const uploadCandidateAvatar = async (id, file) => {
   const token = getToken();
-  const obj = {
-    avatar: file
-  };
+
+  let body = new FormData();
+  options.body.append("file", file);
 
   try {
     const response = await fetch(`${URL}/main/addAvatarCandidate/${id}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       },
-      body: JSON.stringify(obj)
+      body: body
     });
+
+    if (response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 400) {
+      return response.status;
+    }
+
     if (response.ok) {
       return response.json();
     }
