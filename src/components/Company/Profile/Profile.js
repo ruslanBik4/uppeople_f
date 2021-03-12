@@ -234,15 +234,15 @@ export default class CompanyProfile extends Component {
   };
 
   handleLogoSelected = ({ target }) => {
-    const avatar = target.files[0];
+    const file = target.files[0];
 
-    getBase64(avatar, result => {
+    getBase64(file, logo => {
       this.setState({
         companyInfo: {
           ...this.state.companyInfo,
-          logo: result
+          logo
         },
-        file : avatar
+        file
         // updateImage: true
       });
     });
@@ -430,7 +430,7 @@ export default class CompanyProfile extends Component {
           <Col md={3}>
             <CompanyProfileCard
               name={name}
-              logo={logo}
+              logo={"/api/img/" +(logo === null ? "/companies_logo/no_logo.png": logo)}
               currentCompany={id}
               onSelectLogo={this.handleLogoSelected}
               onUploadLogo={this.handleUploadLogo}
