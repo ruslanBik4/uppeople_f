@@ -199,7 +199,9 @@ export const uploadCandidateAvatar = async (id, file) => {
   const token = getToken();
 
   let body = new FormData();
-  body.append("file", file);
+  for (let key in file) {
+    options.body.append(key, file[key]);
+  }
 
   try {
     const response = await fetch(`${URL}/main/addAvatarCandidate/${id}`, {
