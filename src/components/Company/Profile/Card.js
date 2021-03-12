@@ -6,6 +6,7 @@ import { Button, Card, CardBody, CardImg, CardTitle, Input } from "reactstrap";
 // Instruments
 import noLogo from "../../../assets/img/no_logo.jpeg";
 import styles from "./Profile.module.css";
+import {getBase64} from "../../../utils/selectors";
 
 const CompanyProfileCard = ({
   currentCompany,
