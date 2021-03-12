@@ -61,7 +61,8 @@ export default class CompanyProfile extends Component {
     user: PropTypes.shape({
       id: PropTypes.number.isRequired,
       role: PropTypes.number.isRequired
-    })
+    }),
+    file: PropTypes.object,
   };
 
   state = {
@@ -233,14 +234,16 @@ export default class CompanyProfile extends Component {
   };
 
   handleLogoSelected = ({ target }) => {
-    const logo = target.files[0];
+    const avatar = target.files[0];
 
-    getBase64(logo, result => {
+    getBase64(avatar, result => {
       this.setState({
         companyInfo: {
           ...this.state.companyInfo,
           logo: result
-        }
+        },
+        file : avatar
+        // updateImage: true
       });
     });
   };
@@ -248,10 +251,15 @@ export default class CompanyProfile extends Component {
   handleUploadLogo = () => {
     const { id } = this.props.match.params;
     const {
-      companyInfo: { logo }
+      file
     } = this.state;
 
-    uploadCompanyLogo(id, logo).then(data => console.log(data));
+    uploadCompanyLogo(id, file).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/');
+      }
+      console.log(data)
+    });
   };
 
   addComment = comment => {

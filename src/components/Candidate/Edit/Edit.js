@@ -64,7 +64,12 @@ class CandidateEdit extends Component {
   uploadAvatar = file => {
     const { id } = this.props.match.params;
 
-    uploadCandidateAvatar(id, file).then(data => console.log(data));
+    uploadCandidateAvatar(id, file).then(data => {
+        if (data === 401) {
+            this.props.history.push('/login/');
+        }
+        console.log(data)
+    });
   };
 
   updateCandidate = candidate => {
