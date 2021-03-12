@@ -162,8 +162,9 @@ export default class CandidateCreateForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
-    let platform_id = this.props.platform_id;
     const {vacancies} = this.props;
+
+    console.log(value, vacancies);
 
     let platformVacancies = [];
     if (value !== undefined && vacancies !== undefined) {
@@ -172,11 +173,10 @@ export default class CandidateCreateForm extends Component {
           platformVacancies.push(vacancy);
         }
       });
+      this.setState({
+        platformVacancies: platformVacancies
+      });
     }
-    this.setState({
-      platformVacancies: platformVacancies
-    });
-
   };
 
   // handlePlatformChange = value => {
