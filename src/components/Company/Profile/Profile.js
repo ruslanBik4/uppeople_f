@@ -430,7 +430,7 @@ export default class CompanyProfile extends Component {
           <Col md={3}>
             <CompanyProfileCard
               name={name}
-              logo={"/api/img/" +(logo === null ? "/companies_logo/no_logo.png": logo)}
+              logo={(logo === null ? "/api/img/companies_logo/no_logo.png":  logo.startsWith('data')? logo : "/api/img/" + logo)}
               currentCompany={id}
               onSelectLogo={this.handleLogoSelected}
               onUploadLogo={this.handleUploadLogo}
