@@ -450,7 +450,7 @@ export const uploadCompanyLogo = async (id, file) => {
   const token = getToken();
 
   let body = new FormData();
-    options.body.append("file", file);
+   body.append("file", file);
 
   try {
     const response = await fetch(`${URL}/main/addLogoCompanies/${id}`, {
