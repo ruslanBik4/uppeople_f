@@ -269,11 +269,14 @@ export default class CandidateEditForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({
-      platform_id: value
-    });
+    this.setState({platform_id: value});
+    let platform_id = this.state.platform_id;
+    console.log (platform_id);
+    console.log (this.state.platform_id);
+    console.log (this.state.platform_id.id);
 
     const {vacancies} = this.props;
+    console.log (vacancies);
     let platformVacancies = [];
     if (value !== undefined) {
       vacancies.map((vacancy) => {

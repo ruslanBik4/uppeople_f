@@ -64,14 +64,18 @@ export default class CandidateCreateForm extends Component {
     this.setState({});
   }
 
+  
+
   state = {
     avatar: noAvatar,
     name: "",
+    platform: [],
     platform_id: [],
     seniority_id: [],
     tag_id: {},
     selectedReason: {},
     selectedVacancies: [],
+    vacancies: [],
     date: moment().format("YYYY-MM-DD"),
     salary: "",
     language: "",
@@ -125,12 +129,22 @@ export default class CandidateCreateForm extends Component {
     linkedIn: "",
     resume: "",
     comment: "",
-    about: EditorState.createEmpty()
+    about: EditorState.createEmpty(),
   };
+
+  
+  // setState ({platform_id: platform_id})
+  
+
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     // this.state.tag_id = this.props.tag_id;
+    const  {vacancies} = this.props;
+    // let platform_id = this.setState ({platform_id: platform_id})
+    console.log (vacancies);
+    // console.log (platform_id);
   }
+  
 
   handleAvatarSelected = event => {
     this.setState({
@@ -148,9 +162,78 @@ export default class CandidateCreateForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
-    document.querySelector('.platform_div > div').classList.remove('error');
+    let platform_id = this.props.platform_id;
+    console.log (platform_id);
+    console.log (this.state.platform_id);
+    console.log (this.state.platform_id.id);
+    console.log (this.state.platform_id.value);
+    const {vacancies} = this.props;
+    console.log (vacancies);
+   
+    
 
+
+    
+    let platformVacancies = [];
+    if (this.state.platform_id.id !== undefined && vacancies !== undefined) {
+      vacancies.map((vacancy) => {
+        if (vacancy.platform_id === this.state.platform_id.id) {
+          platformVacancies.push(vacancy);
+          console.log (platformVacancies);
+          console.log (vacancy.platform_id);
+        }
+      });
+    }
+    // if (value !== undefined) {
+    //   vacancies.map((vacancy) => {
+    //     if (vacancy.platform_id === value.id) {
+    //       platformVacancies.push(vacancy);
+    //     }
+    //   })
+    // }
+    console.log (platformVacancies);
+    console.log (value.id);
+    this.setState({
+      platformVacancies: platformVacancies
+    });
+    console.log (value.id);
+    console.log(platformVacancies);
+    
   };
+
+  // handlePlatformChange = value => {
+  //   this.setState({platform_id: value});
+
+  //   let platform_id = this.setState.platform_id;
+  //   let vacancies = this.state.vacancies;
+  //   console.log (platform_id);
+  //   console.log (this.state.platform_id);
+  //   console.log (this.state.platform_id.id);
+
+   
+  //   let platformVacancies = [];
+    // if (platform_id !== undefined && vacancies !== undefined) {
+    //   this.state.vacancies.map((vacancy) => {
+    //     if (vacancy.platform_id === platform_id) {
+    //       platformVacancies.push(vacancy);
+    //       console.log (platformVacancies);
+    //     }
+    //   });
+    // }
+  // };
+  // handlePlatformChange = value => {
+  //   this.setState({platform_id: value});
+  //   document.querySelector('.platform_div > div').classList.remove('error');
+  //   let platformVacancies = [];
+  //   if ( (this.state.platform_id !== undefined)  && (this.state.vacancies !== undefined) ){
+  //     vacancies.map((this.state.vacancy) => {
+  //       if (vacancy.platform_id === this.state.platform.id) {
+  //         platformVacancies.push(vacancy);
+  //       }
+  //     })
+  //   }
+
+  // }
 
   handletagsChange = value => {
     this.setState({tag_id: value});
@@ -174,7 +257,14 @@ export default class CandidateCreateForm extends Component {
     this.setState({about});
   };
 
+  
   handleVacancyChange = value => {
+    this.setState({
+      selectedVacancies: value
+    });
+    console.log (this.state.vacancies);
+    var selectedVacancies = this.state.vacancies.map(item => item.id);
+    console.log(selectedVacancies);
     this.setState({
       selectedVacancies: value
     });
@@ -184,6 +274,10 @@ export default class CandidateCreateForm extends Component {
     this.setState({salary: value});
     document.querySelector('.salary_div > div').classList.remove('error');
   };
+
+  
+
+  
 
   handleSubmit = event => {
     event.preventDefault();
@@ -204,7 +298,8 @@ export default class CandidateCreateForm extends Component {
       // about,
       tag_id,
       selectedReason,
-      selectedVacancies
+      selectedVacancies,
+      vacancies
     } = this.state;
     const {onCreateCandidate} = this.props;
 
@@ -215,6 +310,9 @@ export default class CandidateCreateForm extends Component {
     }
 
     let isValid = true;
+
+    
+    
 
 
     if (platform_id.length === 0) {
@@ -231,14 +329,6 @@ export default class CandidateCreateForm extends Component {
       seniority_id = seniority_id.id
     }
 
-    // if (tag_id.length === 0) {
-    //   // tag_id = tag_id.id;
-    //   document.querySelector('.tag_div > div').classList.add('error');
-    //   isValid = false;
-    // } else {
-    //   tag_id = tag_id.id
-    // }
-
 
     if (tag_id === 3 && selectedReason !== undefined || tag_id !== 3) {
 
@@ -248,7 +338,9 @@ export default class CandidateCreateForm extends Component {
 
     } 
 
-      
+    if (selectedVacancies !== undefined) {
+      vacancies = this.state.selectedVacancies.map(item => item.id);
+      }
            
      else{
       document.querySelector('.reasons_div > div').classList.add('error');
@@ -294,7 +386,7 @@ export default class CandidateCreateForm extends Component {
         linkedIn,
         resume,
         comment,
-        selectedVacancies
+        vacancies
         // about: aboutEditorState
       };
 
@@ -336,6 +428,10 @@ export default class CandidateCreateForm extends Component {
 
       if (selectedReason === ""){
         delete newCandidate.selectedReason
+      }
+
+      if (vacancies === undefined){
+        delete newCandidate.vacancies
       }
 
       console.log(newCandidate);
