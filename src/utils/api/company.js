@@ -450,15 +450,13 @@ export const uploadCompanyLogo = async (id, file) => {
   const token = getToken();
 
   let body = new FormData();
-  for (let key in file) {
-    body.append(key, file[key]);
-  }
+  body.append("file", file);
+
   try {
     const response = await fetch(`${URL}/main/addLogoCompanies/${id}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "multipart/form-data"
       },
       body: body
     });
