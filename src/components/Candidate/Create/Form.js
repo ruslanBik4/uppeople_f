@@ -163,42 +163,20 @@ export default class CandidateCreateForm extends Component {
   handlePlatformChange = value => {
     this.setState({platform_id: value});
     let platform_id = this.props.platform_id;
-    console.log (platform_id);
-    console.log (this.state.platform_id);
-    console.log (this.state.platform_id.id);
-    console.log (this.state.platform_id.value);
     const {vacancies} = this.props;
-    console.log (vacancies);
-   
-    
 
-
-    
     let platformVacancies = [];
-    if (this.state.platform_id.id !== undefined && vacancies !== undefined) {
+    if (value !== undefined && vacancies !== undefined) {
       vacancies.map((vacancy) => {
-        if (vacancy.platform_id === this.state.platform_id.id) {
+        if (vacancy.platform_id === value.id) {
           platformVacancies.push(vacancy);
-          console.log (platformVacancies);
-          console.log (vacancy.platform_id);
         }
       });
     }
-    // if (value !== undefined) {
-    //   vacancies.map((vacancy) => {
-    //     if (vacancy.platform_id === value.id) {
-    //       platformVacancies.push(vacancy);
-    //     }
-    //   })
-    // }
-    console.log (platformVacancies);
-    console.log (value.id);
     this.setState({
       platformVacancies: platformVacancies
     });
-    console.log (value.id);
-    console.log(platformVacancies);
-    
+
   };
 
   // handlePlatformChange = value => {
