@@ -208,8 +208,8 @@ export const uploadCandidateAvatar = async (id, file) => {
     const response = await fetch(`${URL}/main/addAvatarCandidate/${id}`, {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "multipart/form-data"
+        Authorization: "Bearer " + token
+        // "Content-Type": "multipart/form-data"
       },
       body: body
     });
