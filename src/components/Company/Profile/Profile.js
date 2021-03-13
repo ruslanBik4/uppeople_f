@@ -305,16 +305,22 @@ export default class CompanyProfile extends Component {
   };
 
   editContact = (id, editedContact) => {
-    editCompanyContact(id, editedContact);
+    const { id  } = this.props.match.params;
+    editCompanyContact(id, editedContact).then(data => {
 
-    this.setState({
-      companyInfo: {
-        ...this.state.companyInfo,
-        contacts: this.state.companyInfo.contacts.map(contact =>
-          contact.id === id ? editedContact : contact
-        )
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else {
+        this.setState({
+          companyInfo: {
+            ...this.state.companyInfo,
+            contacts: this.state.companyInfo.contacts.map(contact =>
+                contact.id === editedContact.id ? editedContact : data
+            )
+          }
+        });
       }
-    });
+    })
   };
 
   deleteContact = id => {

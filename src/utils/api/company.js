@@ -631,6 +631,9 @@ export const addCompanyContact = async (id, contact) => {
       },
       body: JSON.stringify(contact)
     });
+    if (response.status >= 400) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }
@@ -658,6 +661,10 @@ export const editCompanyContact = async (id, contact) => {
       },
       body: JSON.stringify(contact)
     });
+
+    if (response.status >= 400) {
+      return response.status;
+    }
     if (response.ok) {
       return response.json();
     }
