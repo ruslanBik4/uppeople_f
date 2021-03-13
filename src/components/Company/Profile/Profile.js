@@ -304,7 +304,7 @@ export default class CompanyProfile extends Component {
     );
   };
 
-  editContact = (editedContact) => {
+  editContact = (contactId, editedContact) => {
     const { id  } = this.props.match.params;
     editCompanyContact(id, editedContact).then(data => {
 
@@ -315,7 +315,7 @@ export default class CompanyProfile extends Component {
           companyInfo: {
             ...this.state.companyInfo,
             contacts: this.state.companyInfo.contacts.map(contact =>
-                contact.id === editedContact.id ? editedContact : data
+                contact.id === contactId ? editedContact : data
             )
           }
         });
