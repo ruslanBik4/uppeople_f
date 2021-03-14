@@ -211,11 +211,12 @@ export default class CandidateEditForm extends Component {
     // }
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
+    const platform = platforms.find( pl => pl.id = candidate.platform_id)
     this
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform: platforms.find( pl => pl.id = candidate.platform_id),
+        platform,
         platform_id: candidate.platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
