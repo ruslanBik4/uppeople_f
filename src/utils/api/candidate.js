@@ -53,6 +53,7 @@ export const getCandidateProfile = id => {
           avatar: candidate.avatar,
           name: candidate.name,
           date: candidate.date,
+          platform_id: candidate.platform_id,
           platform: candidate.platforms,
           seniority_id: candidate.seniority_id,
           tag:candidate.tags,

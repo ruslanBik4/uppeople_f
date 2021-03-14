@@ -47,10 +47,7 @@ export default class CandidateEditForm extends Component {
       avatar: PropTypes.string,
       file: PropTypes.object,
       name: PropTypes.string,
-      // platform: PropTypes.shape({
-      //   id: PropTypes.number,
-      //   nazva: PropTypes.string
-      // }),
+      platform_id: PropTypes.number,
       platform: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
@@ -97,6 +94,7 @@ export default class CandidateEditForm extends Component {
     // selectPlatform: [],
     // seniority_id: [],
     // tag_id: {},
+    platformVacancies: [],
     selectedVacancies: [],
     platform: [],
     seniority_id: [],
@@ -230,7 +228,7 @@ export default class CandidateEditForm extends Component {
         vacancies: vacancies
       });
       console.log(vacancies);
-      console.log(platformVacancies);
+      console.log(platformVacancies, candidate);
       }
 
   componentDidUpdate(prevProps, prevState) {

@@ -134,7 +134,6 @@ class CandidateEdit extends Component {
       options
     } = this.props;
 
-    console.log(options, vacancies)
     return (
       <>
         <h3>Edit Candidate</h3>
