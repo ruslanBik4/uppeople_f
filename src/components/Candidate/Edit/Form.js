@@ -207,7 +207,7 @@ export default class CandidateEditForm extends Component {
     //     about = EditorState.createWithContent(contentState);
     //   }
     // }
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
+    const platformVacancies = candidate.vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
     this
       .setState({
@@ -226,7 +226,7 @@ export default class CandidateEditForm extends Component {
         resume: candidate.resume,
         comment: candidate.comment,
         platformVacancies: platformVacancies,
-        selectedVacancies: platformVacancies,
+        selectedVacancies: candidate.vacancies,
         vacancies: candidate.vacancies
       });
       console.log(vacancies);
