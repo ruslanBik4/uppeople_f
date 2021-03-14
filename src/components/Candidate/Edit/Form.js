@@ -520,6 +520,7 @@ export default class CandidateEditForm extends Component {
       language,
       languages,
       platformVacancies,
+        selectedVacancies,
       vacancies,
       phone,
       skype,
