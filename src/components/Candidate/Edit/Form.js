@@ -1,7 +1,6 @@
 // Core
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import {
   Button,
   Card,
@@ -18,10 +17,6 @@ import {
   ListGroupItem,
   Row
 } from "reactstrap";
-import {Editor} from "react-draft-wysiwyg";
-import {EditorState, convertToRaw, ContentState} from "draft-js";
-import htmlToDraft from "html-to-draftjs";
-import draftToHtml from "draftjs-to-html";
 // Components
 import Select from "../../shared/Select";
 // Instruments
@@ -29,7 +24,6 @@ import noAvatar from "../../../assets/img/no_avatar.png";
 import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
-import styles2 from "./Custom.css";
 import { platform } from "chart.js";
 
 const style = {
@@ -160,12 +154,8 @@ export default class CandidateEditForm extends Component {
   componentWillReceiveProps(nextProps) {
     // componentDidUpdate(prevProps) {
 
-    const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
+    const {candidate, seniorities, reasons, reject_tag, vacancies} = nextProps;
 
-    let platform_id = candidate.platform;
-      // if (candidate.platform !== null && platforms.find) {
-      //   platform.value = candidate.platform_id;
-      // }
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -328,7 +318,7 @@ export default class CandidateEditForm extends Component {
       selectedVacancies
     } = this.state;
 
-    console.log (vacancies, selectedVacancies);
+    console.log ( selectedVacancies);
     
 
     let isValid = true;
@@ -351,10 +341,6 @@ export default class CandidateEditForm extends Component {
       
         tag_id = tag_id.id
      
-        if (selectedVacancies !== undefined) {
-        vacancies = this.state.selectedVacancies.map(item => item.id);
-        }
-        
       if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
@@ -445,7 +431,7 @@ export default class CandidateEditForm extends Component {
         console.log(candidateInfo);
         onEditCandidate(candidateInfo);
       }
-    };
+    }
        
   };
 
@@ -773,7 +759,6 @@ export default class CandidateEditForm extends Component {
                   </Col>
                 </Row>          
                 <Row>
-                  <label></label>
                 </Row>
                 <Row>
                   <Col md="10" className={"errorlist"} row>
