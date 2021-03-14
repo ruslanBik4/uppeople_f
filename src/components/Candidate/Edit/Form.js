@@ -147,7 +147,6 @@ export default class CandidateEditForm extends Component {
     comment: "",
     status: "",
     tag: "",
-    about: EditorState.createEmpty(),
 
   };
 
@@ -201,7 +200,7 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform_id: platform_id,
+        platform_id: candidate.platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
         selectedReason: selectedReason,
