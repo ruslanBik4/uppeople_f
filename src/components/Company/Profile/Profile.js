@@ -135,8 +135,12 @@ export default class CompanyProfile extends Component {
     id = role !== 5 ? id: companyId;
 
     getCompanyInfo(id).then(companyInfo => {
-          companyInfo && this.setState({ ...this.state, companyInfo });
-        });
+      if (companyInfo === 401) {
+        this.props.history.push('/login/');
+      } else {
+        companyInfo && this.setState({...this.state, companyInfo});
+      }
+    });
 
     filterAndSortCompanyVacancies(
       id,
