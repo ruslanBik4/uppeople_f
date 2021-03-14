@@ -97,7 +97,7 @@ export default class CandidateEditForm extends Component {
     // selectPlatform: [],
     // seniority_id: [],
     // tag_id: {},
-    // vacancies: [],
+    selectedVacancies: [],
     platform: [],
     seniority_id: [],
     vacancies: [],
@@ -232,7 +232,7 @@ export default class CandidateEditForm extends Component {
         linkedIn: candidate.linkedIn,
         resume: candidate.resume,
         comment: candidate.comment,
-        platformVacancies: platformVacancies,
+        selectedVacancies: platformVacancies,
         vacancies: candidate.vacancies
           // vacancies.map((vacancy) => {
         //   if (selectedPlatform !== undefined && vacancy.platform_id === selectedPlatform.id) {
@@ -305,7 +305,7 @@ export default class CandidateEditForm extends Component {
     // var selectedVacancies = this.state.vacancies.map(item => item.id);
     console.log(value);
     this.setState({
-      vacancies: value
+      selectedVacancies: value
     });
     
     
@@ -679,7 +679,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="vacancies"
                           isMulti
-                          value={vacancies}
+                          value={selectedVacancies}
                           options={platformVacancies}
                           isClearable
                           placeholder="vacancies"
