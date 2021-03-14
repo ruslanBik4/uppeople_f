@@ -684,6 +684,7 @@ export default class CandidateEditForm extends Component {
                           isClearable
                           placeholder="vacancies"
                           onChange={this.handleVacancyChange}
+                          style={{zIndex: 2}}
                         />
                       </Col>
                     </FormGroup>
