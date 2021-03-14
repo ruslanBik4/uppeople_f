@@ -207,14 +207,7 @@ export default class CandidateEditForm extends Component {
     //     about = EditorState.createWithContent(contentState);
     //   }
     // }
-    let platformVacancies = [];
-    if ( (platform_id !== undefined)  && (vacancies !== undefined) ){
-      vacancies.map((vacancy) => {
-        if (vacancy.platform_id === candidate.platform.id) {
-          platformVacancies.push(vacancy);
-        }
-      })
-    }
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
     this
       .setState({
@@ -232,14 +225,9 @@ export default class CandidateEditForm extends Component {
         linkedIn: candidate.linkedIn,
         resume: candidate.resume,
         comment: candidate.comment,
+        platformVacancies: platformVacancies,
         selectedVacancies: platformVacancies,
         vacancies: candidate.vacancies
-          // vacancies.map((vacancy) => {
-        //   if (selectedPlatform !== undefined && vacancy.platform_id === selectedPlatform.id) {
-        //     return vacancy;
-        //   }
-        // })
-        // about: about,
       });
       console.log(vacancies);
       console.log(platformVacancies);
@@ -273,30 +261,14 @@ export default class CandidateEditForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
-    let platform_id = this.state.platform_id;
-    console.log (platform_id);
-    console.log (this.state.platform_id);
-    console.log (this.state.platform_id.id);
 
     const {vacancies} = this.props;
-    console.log (vacancies);
-    let platformVacancies = [];
-    if (value !== undefined) {
-      vacancies.map((vacancy) => {
-        if (vacancy.platform_id === value.id) {
-          platformVacancies.push(vacancy);
-        }
-      })
-    }
-    console.log (platformVacancies);
-    console.log (value.id);
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({
       platformVacancies: platformVacancies
     });
-    console.log (value.id);
-    console.log(platformVacancies);
-    
+
   };
  
 
@@ -534,7 +506,7 @@ export default class CandidateEditForm extends Component {
 
     const {platforms, seniorities, tags} = this.props;
 
-    console.log(platformVacancies, vacancies, platform_id)
+    console.log(platformVacancies, vacancies)
 
     return (
       <Row>
