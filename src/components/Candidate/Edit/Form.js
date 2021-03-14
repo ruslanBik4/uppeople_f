@@ -277,13 +277,8 @@ export default class CandidateEditForm extends Component {
     this.setState({
       selectedVacancies: value
     });
-    
-    
-  };
 
-  
-  
- 
+  };
 
   handleSeniorityChange = value => {
     this.setState({
@@ -326,12 +321,10 @@ export default class CandidateEditForm extends Component {
       resume,
       comment,
       // about,
-      // 
       platform_id,
       seniority_id,
       tag_id,
       selectedReason,
-      vacancies,
       selectedVacancies
     } = this.state;
 
@@ -385,6 +378,8 @@ export default class CandidateEditForm extends Component {
       const {onEditCandidate} = this.props;
 
       if (isValid) {
+        const vacancies = selectedVacancies !== undefined && selectedVacancies.map(item => item.id)
+
         const candidateInfo = {
           name,
           platform_id,
@@ -398,7 +393,7 @@ export default class CandidateEditForm extends Component {
           linkedIn,
           resume,
           comment,
-          vacancies: selectedVacancies
+          vacancies
           // about: aboutEditorState
         };
   
@@ -651,7 +646,7 @@ export default class CandidateEditForm extends Component {
                           isMulti
                           value={selectedVacancies}
                           options={platformVacancies}
-                          isClearable
+                          // isClearable
                           placeholder="vacancies"
                           onChange={this.handleVacancyChange}
                           style={{zIndex: 2}}
