@@ -225,7 +225,7 @@ export default class AppointInterviewForm extends Component {
       time,
       comment
     } = this.state;
-    console.log("DATA", this.state);
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row>
@@ -267,7 +267,7 @@ export default class AppointInterviewForm extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="vacancy">Contacts</Label>
+              <Label for="contact">Contacts</Label>
               <Select
                 isMulti
                 value={selectedContacts}

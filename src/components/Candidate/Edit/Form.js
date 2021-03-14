@@ -61,7 +61,8 @@ export default class CandidateEditForm extends Component {
       comment: PropTypes.string,
       // about: PropTypes.string,
       status: PropTypes.string,
-      tag: PropTypes.string
+      tag: PropTypes.string,
+      vacancies: PropTypes.array,
     }).isRequired,
     platforms: PropTypes.arrayOf(
       PropTypes.shape({
@@ -71,6 +72,20 @@ export default class CandidateEditForm extends Component {
       }).isRequired
     ).isRequired,
     seniorities: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
+    platformVacancies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
+    selectedVacancies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         label: PropTypes.string.isRequired,
@@ -153,7 +168,7 @@ export default class CandidateEditForm extends Component {
   componentWillReceiveProps(nextProps) {
     // componentDidUpdate(prevProps) {
 
-    const {candidate, seniorities, reasons, reject_tag, vacancies} = nextProps;
+    const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
     let tag_id = candidate.tag;
     let selectedReason = {};
@@ -200,7 +215,7 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform: candidate.platform,
+        platform: platforms.find( pl => pl.id = candidate.platform_id),
         platform_id: candidate.platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
@@ -217,8 +232,6 @@ export default class CandidateEditForm extends Component {
         selectedVacancies: candidate.vacancies,
         vacancies: vacancies
       });
-      console.log(vacancies);
-      console.log(platformVacancies, candidate);
       }
 
   componentDidUpdate(prevProps, prevState) {
@@ -262,7 +275,6 @@ export default class CandidateEditForm extends Component {
 
   handleVacancyChange = value => {
 
-    // var selectedVacancies = this.state.vacancies.map(item => item.id);
     console.log(value);
     this.setState({
       selectedVacancies: value
@@ -623,17 +635,17 @@ export default class CandidateEditForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="salary" sm={3}>
+                      <Label for="vacancies" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
                         <Select
-                          // id="vacancies"
+                          id="vacancies"
                           isMulti
                           value={selectedVacancies}
                           options={platformVacancies}
-                          // isClearable
-                          placeholder="vacancies"
+                          isClearable
+                          placeholder="choice vacancies"
                           onChange={this.handleVacancyChange}
                           style={{zIndex: 2}}
                         />
