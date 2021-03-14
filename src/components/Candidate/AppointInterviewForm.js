@@ -150,7 +150,7 @@ export default class AppointInterviewForm extends Component {
 
   handleCompanyChange = value => {
     const { dataForAppointInterviewForm } = this.state;
-    const findActiveCompany = Object.values(dataForAppointInterviewForm["companies"]).find(
+    const findActiveCompany = Object.values(dataForAppointInterviewForm).find(
       obj => obj.comp_id === value.id
     );
 

@@ -301,12 +301,9 @@ export default class CandidateEditForm extends Component {
  
 
   handleVacancyChange = value => {
-    this.setState({
-      vacancies: value
-    });
-    
+
     console.log (this.state.vacancies);
-    var selectedVacancies = this.state.vacancies.map(item => item.id);
+    // var selectedVacancies = this.state.vacancies.map(item => item.id);
     console.log(selectedVacancies);
     this.setState({
       selectedVacancies: value
