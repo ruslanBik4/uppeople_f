@@ -106,25 +106,10 @@ export default class AppointInterviewForm extends Component {
             );
 
             const optionsForSelectVacancy =
-              findActiveCompany["vacancies"] !== null
-                ? Object.keys( findActiveCompany["vacancies"] ).map(key => ({
-                    id: findActiveCompany["vacancies"][key].id,
-                    label: findActiveCompany["vacancies"][key].platform
-                          + findActiveCompany["vacancies"][key].salary
-                          + findActiveCompany["vacancies"][key].seniority,
-                    value: findActiveCompany["vacancies"][key].platform
-                  }))
-                  : this.state.optionsForSelectVacancy;
+              this.getOptionsForSelectVacancy(findActiveCompany);
 
             const optionsForSelectContacts =
-              findActiveCompany["contacts"] !== null
-                ? Object.keys( findActiveCompany["contacts"] ).map(key => ({
-                    id: findActiveCompany["contacts"][key].id,
-                    label: findActiveCompany["contacts"][key].name,
-                    value: findActiveCompany["contacts"][key].name,
-                    email: findActiveCompany["contacts"][key].email
-                  }))
-                  : this.state.optionsForSelectContacts;
+                this.getOptionsForSelectContacts(findActiveCompany);
 
             this.setState({
               optionsForSelectCompany,
@@ -142,6 +127,18 @@ export default class AppointInterviewForm extends Component {
     console.log(this);
   }
 
+  getOptionsForSelectVacancy(findActiveCompany) {
+    return findActiveCompany["vacancies"] !== null
+        ? Object.keys(findActiveCompany["vacancies"]).map(key => ({
+          id: findActiveCompany["vacancies"][key].id,
+          label: findActiveCompany["vacancies"][key].platform
+              + findActiveCompany["vacancies"][key].salary
+              + findActiveCompany["vacancies"][key].seniority,
+          value: findActiveCompany["vacancies"][key].platform
+        }))
+        : this.state.optionsForSelectVacancy;
+  }
+
   handleInputChange = ({ target: { name, value } }) => {
     this.setState({
       [name]: value
@@ -155,22 +152,10 @@ export default class AppointInterviewForm extends Component {
     );
 
     const optionsForSelectVacancy =
-        findActiveCompany["vacancies"] !== null
-            ? Object.keys( findActiveCompany["vacancies"] ).map(key => ({
-              id: findActiveCompany["vacancies"][key].id,
-              label: findActiveCompany["vacancies"][key].platform,
-              value: findActiveCompany["vacancies"][key].platform
-            }))
-            : this.state.optionsForSelectVacancy;
+        this.getOptionsForSelectVacancy(findActiveCompany);
 
     const optionsForSelectContacts =
-        findActiveCompany["contacts"] !== null
-            ? Object.keys( findActiveCompany["contacts"] ).map(key => ({
-              id: findActiveCompany["contacts"][key].id,
-              label: findActiveCompany["contacts"][key].name,
-              value: findActiveCompany["contacts"][key].name
-            }))
-            : this.state.optionsForSelectContacts;
+        this.getOptionsForSelectContacts(findActiveCompany);
 
     this.setState({
       selectedCompany: value,
@@ -180,6 +165,17 @@ export default class AppointInterviewForm extends Component {
       optionsForSelectContacts
     });
   };
+
+  getOptionsForSelectContacts(findActiveCompany) {
+    return findActiveCompany["contacts"] !== null
+        ? Object.keys(findActiveCompany["contacts"]).map(key => ({
+          id: findActiveCompany["contacts"][key].id,
+          label: findActiveCompany["contacts"][key].name,
+          value: findActiveCompany["contacts"][key].name,
+          email: findActiveCompany["contacts"][key].email
+        }))
+        : this.state.optionsForSelectContacts;
+  }
 
   handleVacancyChange = value => {
     this.setState({ selectedVacancy: value });

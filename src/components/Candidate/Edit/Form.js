@@ -335,7 +335,7 @@ export default class CandidateEditForm extends Component {
       selectedVacancies
     } = this.state;
 
-    console.log (vacancies);
+    console.log (vacancies, selectedVacancies);
     
 
     let isValid = true;
@@ -398,7 +398,7 @@ export default class CandidateEditForm extends Component {
           linkedIn,
           resume,
           comment,
-          vacancies
+          vacancies: selectedVacancies
           // about: aboutEditorState
         };
   
@@ -490,8 +490,7 @@ export default class CandidateEditForm extends Component {
       language,
       languages,
       platformVacancies,
-        selectedVacancies,
-      vacancies,
+      selectedVacancies,
       phone,
       skype,
       email,
@@ -504,7 +503,7 @@ export default class CandidateEditForm extends Component {
 
     const {platforms, seniorities, tags} = this.props;
 
-    console.log(platformVacancies, vacancies)
+    console.log(platformVacancies, selectedVacancies)
 
     return (
       <Row>
@@ -648,7 +647,7 @@ export default class CandidateEditForm extends Component {
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="vacancies"
+                          // id="vacancies"
                           isMulti
                           value={selectedVacancies}
                           options={platformVacancies}
