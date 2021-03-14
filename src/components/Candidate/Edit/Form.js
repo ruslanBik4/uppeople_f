@@ -216,7 +216,7 @@ export default class CandidateEditForm extends Component {
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform,
+        platform: candidate.platform,
         platform_id: candidate.platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
