@@ -63,13 +63,6 @@ export default class CandidateEditForm extends Component {
       tag: PropTypes.string,
       vacancies: PropTypes.array,
     }).isRequired,
-    platforms: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
-      }).isRequired
-    ).isRequired,
     seniorities: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,

@@ -22,7 +22,6 @@ class CandidateEdit extends Component {
       phone: "",
       email: "",
       skype: "",
-      platform: [],
       seniority_id: [],
       // tag_id: 0,
       language: "",
