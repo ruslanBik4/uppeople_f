@@ -192,7 +192,7 @@ export default class CandidateEditForm extends Component {
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
     console.log(platforms)
-    const platform = platforms.find( pl => pl.id = candidate.platform_id)
+    const platform = platforms.find( pl => pl.id === candidate.platform_id)
 
     console.log(platforms)
     this.setState({
