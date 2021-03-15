@@ -212,6 +212,7 @@ export default class CandidateEditForm extends Component {
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
     const platform = platforms.find( pl => pl.id = candidate.platform_id)
+    console.log(platform, candidate.platform)
     this
       .setState({
         avatar: candidate.avatar,
@@ -496,8 +497,6 @@ export default class CandidateEditForm extends Component {
 
 
     const {platforms, seniorities, tags} = this.props;
-
-    console.log(platformVacancies, selectedVacancies)
 
     return (
       <Row>
