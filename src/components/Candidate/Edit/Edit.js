@@ -143,7 +143,7 @@ class CandidateEdit extends Component {
       options
     } = this.props;
 
-      console.log(this.state.options.platforms)
+      console.log(options.platforms)
 
       return (
       <>
