@@ -24,7 +24,6 @@ import noAvatar from "../../../assets/img/no_avatar.png";
 import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
-import { platform } from "chart.js";
 
 const style = {
   icon: {
@@ -219,20 +218,20 @@ export default class CandidateEditForm extends Component {
         name: candidate.name,
         platform,
         platform_id: candidate.platform_id,
-        seniority_id: seniority_id,
-        tag_id: tag_id,
+        seniority_id,
+        tag_id,
         selectedReason: selectedReason,
         salary: candidate.salary,
-        language: language,
+        language,
         phone: candidate.phone,
         skype: candidate.skype,
         email: candidate.email,
         linkedIn: candidate.linkedIn,
         resume: candidate.resume,
         comment: candidate.comment,
-        platformVacancies: platformVacancies,
+        platformVacancies,
         selectedVacancies: candidate.vacancies,
-        vacancies: vacancies
+        vacancies
       });
       }
 
