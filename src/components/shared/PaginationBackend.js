@@ -99,7 +99,7 @@ class PaginationBackend extends Component {
     pageSize = pageSize || 15;
 
     // calculate total pages
-    //  totalPages = Math.ceil(totalItems / pageSize);
+     totalPages = Math.ceil(totalItems / pageSize);
 
     let startPage, endPage;
     if (totalPages <= 10) {
@@ -118,7 +118,7 @@ class PaginationBackend extends Component {
         endPage = currentPage + 4;
     }
 
-    console.log(endPage, startPage);
+    console.log(totalPages, endPage, startPage);
 
     // calculate start and end item indexes
     const startIndex = (currentPage - 1) * pageSize;
