@@ -93,10 +93,10 @@ class PaginationBackend extends Component {
 
   getPager = (totalItems, currentPage, pageSize, totalPages) => {
     // default to first page
-    currentPage = currentPage || 1;
+    // currentPage = currentPage || 1;
 
     // default page size is 10
-    pageSize = pageSize || 15;
+    // pageSize = pageSize || 15;
 
     // calculate total pages
     //  totalPages = Math.ceil(totalItems / pageSize);
