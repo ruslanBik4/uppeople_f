@@ -212,12 +212,12 @@ export default class CandidateEditForm extends Component {
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
     const platform = platforms.find( pl => pl.id = candidate.platform_id)
-    console.log(platform, candidate.platform)
+
     this
       .setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform: candidate.platform,
+        platform,
         platform_id: candidate.platform_id,
         seniority_id: seniority_id,
         tag_id: tag_id,
@@ -478,7 +478,7 @@ export default class CandidateEditForm extends Component {
     const {
       avatar,
       name,
-      platform_id,
+      platform,
       seniority_id,
       tag_id,
       salary,
@@ -580,7 +580,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="platform_id"
                           options={platforms}
-                          value={platform_id}
+                          value={platform}
                           placeholder="Platform"
                           onChange={this.handlePlatformChange}
                         />
