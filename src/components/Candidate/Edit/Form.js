@@ -206,8 +206,7 @@ export default class CandidateEditForm extends Component {
 
     const platform = platforms.find( pl => pl.id = candidate.platform_id)
 
-    this
-      .setState({
+    this.setState({
         avatar: candidate.avatar,
         name: candidate.name,
         platform,
@@ -227,11 +226,13 @@ export default class CandidateEditForm extends Component {
         selectedVacancies: candidate.vacancies,
         vacancies
       });
-      }
+    console.log(platforms)
+
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
-
+      console.log(this.state.platforms)
     }
   }
 

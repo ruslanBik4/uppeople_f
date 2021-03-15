@@ -37,6 +37,7 @@ class CandidateEdit extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+      console.log(this.state.platforms)
 
     getCandidateProfile(id).then(data => {
         if (data === 201) {
@@ -142,7 +143,9 @@ class CandidateEdit extends Component {
       options
     } = this.props;
 
-    return (
+      console.log(this.state.options.platforms)
+
+      return (
       <>
         <h3>Edit Candidate</h3>
         <CandidateEditForm
