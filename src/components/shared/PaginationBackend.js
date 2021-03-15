@@ -56,7 +56,7 @@ class PaginationBackend extends Component {
     this.allDisabled = false;
     let pager = this.state.pager;
 
-    if (page < 1 || page > totalPages) {
+    if (page < 1 || page > pager.totalPages) {
       return;
     }
 
