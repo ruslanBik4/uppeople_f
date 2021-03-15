@@ -106,9 +106,8 @@ class PaginationBackend extends Component {
       // less than 10 total pages so show all
       startPage = 1;
       endPage = totalPages;
-    } else {
       // more than 10 total pages so calculate start and end pages
-      if (currentPage <= 6) {
+    } else   if (currentPage <= 6) {
         startPage = 1;
         endPage = 10;
       } else if (currentPage + 4 >= totalPages) {
@@ -117,7 +116,6 @@ class PaginationBackend extends Component {
       } else {
         startPage = currentPage - 5;
         endPage = currentPage + 4;
-      }
     }
 
     // calculate start and end item indexes
@@ -129,6 +127,7 @@ class PaginationBackend extends Component {
       i => startPage + i
     );
 
+    console.log(pages);
     // return object with all pager properties required by the view
     return {
       totalItems: totalItems,
