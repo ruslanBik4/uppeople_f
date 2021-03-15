@@ -96,7 +96,14 @@ export default class Vacancies extends Component {
   };
 
   changeVacancyStatus = content => {
-    updateVacancyStatus(content).then(data => console.log(data));
+    updateVacancyStatus(content).then(data => 
+      {if (data === 401) {
+      this.props.history.push('/login/')
+      } 
+      else {
+      console.log(data);
+      }
+    })
   };
 
   onDeleteVacancy = id => {

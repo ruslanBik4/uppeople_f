@@ -19,11 +19,11 @@ export const getVacancyProfile = id => {
     }
   })
     .then(response => {
-      if (response.ok) {
+      if (response.ok|| response.status === 400) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
+      if (response.status > 400) {
+        return response.status;
       }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -76,8 +76,8 @@ export const createNewVacancy = async vacancy => {
     if (response.status === 400) {
       return response.json();
     }
-    if (response.status === 401) {
-      return 401;
+    if (response.status > 401) {
+      return response.status;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {
@@ -109,8 +109,8 @@ export const updateVacancy = (id, vacancy) => {
       if (response.status === 400) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
+      if (response.status > 401) {
+        return response.status;
       }
 
       throw new Error(`${response.statusText}`);
@@ -155,11 +155,11 @@ export const deleteVacancy = async id => {
     if (response.status === 202) {
       return 202;
     }
-    if (response.status === 400) {
+    if (response.status === 400||response.ok) {
       return response.json();
     }
-    if (response.status === 401) {
-      return 401;
+    if (response.status > 401) {
+      return response.status;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {
@@ -192,8 +192,11 @@ export const getVacancies = (company_id, isActive = false, withRecruiters = fals
       isActive:isActive
     })
   }).then(response => {
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 401) {
+      return response.status
     }
 
     throw new Error(`${response.statusText}`);
@@ -219,8 +222,11 @@ export const getTags = async params => {
       },
       body: JSON.stringify(params)
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {

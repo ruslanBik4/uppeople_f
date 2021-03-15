@@ -195,6 +195,7 @@ export default class CandidateEditForm extends Component {
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
+
     // let about = candidate.about;
     // const htmlAbout = candidate.about;
     //

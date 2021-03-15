@@ -18,8 +18,11 @@ export const getVacanciesForFreelancer = async id => {
         "Content-Type": "application/json"
       }
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -45,8 +48,11 @@ export const addVacanciesForFreelancer = async (id, vacanciesToAdd) => {
       },
       body: JSON.stringify(vacanciesToAdd)
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status;
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -75,8 +81,11 @@ export const deleteVacanciesFromFreelancer = async (id, vacanciesToDelete) => {
         body: JSON.stringify(vacanciesToDelete)
       }
     );
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -103,8 +112,11 @@ export const getCandidates = async platformId => {
         }
       }
     );
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -129,8 +141,11 @@ export const sendCandidateForVacancy = async content => {
       },
       body: JSON.stringify(content)
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -155,8 +170,11 @@ export const updateRecruiterForFreelancer = async content => {
       },
       body: JSON.stringify(content)
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
@@ -182,8 +200,11 @@ export const getDataForSendResumeForm = (candidateId, vacancyId) => {
     body: JSON.stringify(vacancyId)
   })
     .then(response => {
-      if (response.ok) {
+      if (response.ok||response.status === 400) {
         return response.json();
+      }
+      if (response.status > 400) {
+        return response.status
       }
 
       throw new Error(`${response.statusText}`);
@@ -227,8 +248,11 @@ export const filterFreelancerVacancies = async (id, filter) => {
       },
       body: JSON.stringify(filter)
     });
-    if (response.ok) {
+    if (response.ok||response.status === 400) {
       return response.json();
+    }
+    if (response.status > 400) {
+      return response.status
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
