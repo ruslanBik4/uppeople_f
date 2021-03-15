@@ -17,7 +17,7 @@ const propTypes = {
 const defaultProps = {
   items: [],
   initialPage: 1,
-  pageSize: 10,
+  pageSize: 15,
   totalItems: null,
   totalPages: null,
   onChangePage: () => null
@@ -84,22 +84,22 @@ class PaginationBackend extends Component {
     }
 
     // get new pager object for specified page
-    pager = this.getPager(totalItems, page, pageSize);
+    pager = this.getPager(totalItems, page, pageSize, totalPages);
 
     // update state
     this.setState({ pager });
 
   }
 
-  getPager = (totalItems, currentPage, pageSize) => {
+  getPager = (totalItems, currentPage, pageSize, totalPages) => {
     // default to first page
     currentPage = currentPage || 1;
 
     // default page size is 10
-    pageSize = pageSize || 10;
+    pageSize = pageSize || 15;
 
     // calculate total pages
-    const totalPages = Math.ceil(totalItems / pageSize);
+    //  totalPages = Math.ceil(totalItems / pageSize);
 
     let startPage, endPage;
     if (totalPages <= 10) {
@@ -154,6 +154,7 @@ class PaginationBackend extends Component {
     }
 
     const paginationStyle = {};
+    this.allDisabled = false;
 
     if (!pager.pages || pager.pages.length <= 1) {
       // don't display pager if there is only 1 page
@@ -211,7 +212,6 @@ class PaginationBackend extends Component {
           className="page-item"
           disabled={(pager.currentPage === pager.totalPages) || this.allDisabled}
           active={pager.currentPage === pager.totalPages}
-            disabled={this.allDisabled}
         >
           <PaginationLink
             className="page-link"
