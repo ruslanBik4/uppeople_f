@@ -61,7 +61,7 @@ class PaginationBackend extends Component {
     }
 
     // get new pager object for specified page
-    pager = this.getPager(totalItems, page, pageSize);
+    pager = this.getPager(totalItems, page, pageSize, totalPages);
 
     // update state
     this.setState({ pager });
@@ -187,7 +187,7 @@ class PaginationBackend extends Component {
             key={index}
             className="page-item"
             active={pager.currentPage === page}
-            // disabled={this.allDisabled}
+            disabled={pager.currentPage === page}
           >
             <PaginationLink
               className="page-link"
