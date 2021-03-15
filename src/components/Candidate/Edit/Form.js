@@ -162,7 +162,6 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
-    console.log(platforms)
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -190,22 +189,12 @@ export default class CandidateEditForm extends Component {
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
-    // let about = candidate.about;
-    // const htmlAbout = candidate.about;
-    //
-    // if (htmlAbout) {
-    //   const aboutBlock = htmlToDraft(htmlAbout);
-    //   if (aboutBlock) {
-    //     const contentState = ContentState.createFromBlockArray(
-    //       aboutBlock.contentBlocks
-    //     );
-    //     about = EditorState.createWithContent(contentState);
-    //   }
-    // }
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
+    console.log(platforms)
     const platform = platforms.find( pl => pl.id = candidate.platform_id)
 
+    console.log(platforms)
     this.setState({
         avatar: candidate.avatar,
         name: candidate.name,
@@ -226,7 +215,7 @@ export default class CandidateEditForm extends Component {
         selectedVacancies: candidate.vacancies,
         vacancies
       });
-    console.log(platforms)
+    console.log(platforms, this.state.platform)
 
   }
 
