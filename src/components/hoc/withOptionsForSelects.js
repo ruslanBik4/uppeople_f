@@ -43,6 +43,8 @@ const withOptionsForSelects = WrappedComponent =>
               this.props.history.push('/login/');
               return
           }
+
+          console.log(optionsForSelects)
         let options = {
             platforms: optionsForSelects.platforms,
             seniority: optionsForSelects.seniorities,

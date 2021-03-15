@@ -162,6 +162,7 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
+    console.log(platforms)
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -255,25 +256,22 @@ export default class CandidateEditForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({platform_id: value});
+    this.setState({platform: value});
 
     const {vacancies} = this.props;
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({
-      platformVacancies: platformVacancies
+      platformVacancies
     });
 
   };
  
 
   handleVacancyChange = value => {
-
-    console.log(value);
     this.setState({
       selectedVacancies: value
     });
-
   };
 
   handleSeniorityChange = value => {
