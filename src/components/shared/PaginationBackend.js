@@ -187,7 +187,7 @@ class PaginationBackend extends Component {
             key={index}
             className="page-item"
             active={pager.currentPage === page}
-            disabled={this.allDisabled}
+            // disabled={this.allDisabled}
           >
             <PaginationLink
               className="page-link"
