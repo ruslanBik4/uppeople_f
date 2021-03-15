@@ -127,7 +127,7 @@ class PaginationBackend extends Component {
       i => startPage + i
     );
 
-    console.log(pages);
+    console.log(pages, endPage, startPage);
     // return object with all pager properties required by the view
     return {
       totalItems: totalItems,
