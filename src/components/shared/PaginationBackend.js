@@ -93,10 +93,10 @@ class PaginationBackend extends Component {
 
   getPager = (totalItems, currentPage, pageSize, totalPages) => {
     // default to first page
-    // currentPage = currentPage || 1;
+    currentPage = currentPage || 1;
 
     // default page size is 10
-    // pageSize = pageSize || 15;
+    pageSize = pageSize || 15;
 
     // calculate total pages
     //  totalPages = Math.ceil(totalItems / pageSize);
@@ -107,7 +107,7 @@ class PaginationBackend extends Component {
       startPage = 1;
       endPage = totalPages;
       // more than 10 total pages so calculate start and end pages
-    } else   if (currentPage <= 6) {
+    } else if (currentPage <= 6) {
         startPage = 1;
         endPage = 10;
       } else if (currentPage + 4 >= totalPages) {
@@ -118,6 +118,8 @@ class PaginationBackend extends Component {
         endPage = currentPage + 4;
     }
 
+    console.log(endPage, startPage);
+
     // calculate start and end item indexes
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
@@ -127,7 +129,6 @@ class PaginationBackend extends Component {
       i => startPage + i
     );
 
-    console.log(pages, endPage, startPage);
     // return object with all pager properties required by the view
     return {
       totalItems: totalItems,
