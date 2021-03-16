@@ -6,7 +6,7 @@ import {Table} from "reactstrap";
 import CandidateProfileTableRow from "./TableRow";
 
 const CandidateProfileTable = ({candidateStatuses, ...props}) => {
-  candidateStatuses = candidateStatuses.filter((candidateStatus) => candidateStatus.vacancyStatus.id !== 1);
+  // candidateStatuses = candidateStatuses.filter((candidateStatus) => candidateStatus.vacancyStatus.id !== 1);
   const candidateStatusesJSX =
     candidateStatuses.length > 0 ? (
       candidateStatuses.map((candidateStatus, idx) => (

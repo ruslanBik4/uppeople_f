@@ -217,7 +217,6 @@ export default class CandidateEditForm extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
-      console.log(this.state.platforms)
     }
   }
 
