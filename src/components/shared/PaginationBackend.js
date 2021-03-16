@@ -17,7 +17,7 @@ const propTypes = {
 const defaultProps = {
   items: [],
   initialPage: 1,
-  pageSize: 10,
+  pageSize: 15,
   totalItems: null,
   totalPages: null,
   onChangePage: () => null
@@ -56,12 +56,12 @@ class PaginationBackend extends Component {
     this.allDisabled = false;
     let pager = this.state.pager;
 
-    if (page < 1 || page > totalPages) {
+    if (page < 1 || page > pager.totalPages) {
       return;
     }
 
     // get new pager object for specified page
-    pager = this.getPager(totalItems, page, pageSize);
+    pager = this.getPager(totalItems, page, pageSize, totalPages);
 
     // update state
     this.setState({ pager });
@@ -84,31 +84,30 @@ class PaginationBackend extends Component {
     }
 
     // get new pager object for specified page
-    pager = this.getPager(totalItems, page, pageSize);
+    pager = this.getPager(totalItems, page, pageSize, totalPages);
 
     // update state
     this.setState({ pager });
 
   }
 
-  getPager = (totalItems, currentPage, pageSize) => {
+  getPager = (totalItems, currentPage, pageSize, totalPages) => {
     // default to first page
     currentPage = currentPage || 1;
 
     // default page size is 10
-    pageSize = pageSize || 10;
+    pageSize = pageSize || 15;
 
     // calculate total pages
-    const totalPages = Math.ceil(totalItems / pageSize);
+     totalPages = Math.ceil(totalItems / pageSize);
 
     let startPage, endPage;
     if (totalPages <= 10) {
       // less than 10 total pages so show all
       startPage = 1;
       endPage = totalPages;
-    } else {
       // more than 10 total pages so calculate start and end pages
-      if (currentPage <= 6) {
+    } else if (currentPage <= 6) {
         startPage = 1;
         endPage = 10;
       } else if (currentPage + 4 >= totalPages) {
@@ -117,8 +116,9 @@ class PaginationBackend extends Component {
       } else {
         startPage = currentPage - 5;
         endPage = currentPage + 4;
-      }
     }
+
+    console.log(totalPages, endPage, startPage);
 
     // calculate start and end item indexes
     const startIndex = (currentPage - 1) * pageSize;
@@ -154,6 +154,7 @@ class PaginationBackend extends Component {
     }
 
     const paginationStyle = {};
+    this.allDisabled = false;
 
     if (!pager.pages || pager.pages.length <= 1) {
       // don't display pager if there is only 1 page
@@ -186,7 +187,7 @@ class PaginationBackend extends Component {
             key={index}
             className="page-item"
             active={pager.currentPage === page}
-            disabled={this.allDisabled}
+            disabled={pager.currentPage === page}
           >
             <PaginationLink
               className="page-link"
@@ -211,7 +212,6 @@ class PaginationBackend extends Component {
           className="page-item"
           disabled={(pager.currentPage === pager.totalPages) || this.allDisabled}
           active={pager.currentPage === pager.totalPages}
-            disabled={this.allDisabled}
         >
           <PaginationLink
             className="page-link"

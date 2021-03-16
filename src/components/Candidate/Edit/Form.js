@@ -191,10 +191,8 @@ export default class CandidateEditForm extends Component {
 
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
-    console.log(platforms)
     const platform = platforms.find( pl => pl.id === candidate.platform_id)
 
-    console.log(platforms)
     this.setState({
         avatar: candidate.avatar,
         name: candidate.name,
@@ -215,8 +213,6 @@ export default class CandidateEditForm extends Component {
         selectedVacancies: candidate.vacancies,
         vacancies
       });
-    console.log(platforms, this.state.platform)
-
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -305,7 +301,7 @@ export default class CandidateEditForm extends Component {
       resume,
       comment,
       // about,
-      platform_id,
+      platform,
       seniority_id,
       tag_id,
       selectedReason,
@@ -316,8 +312,6 @@ export default class CandidateEditForm extends Component {
     
 
     let isValid = true;
-    platform_id = platform_id.id
-   
 
     if (seniority_id.length !== 0)  {
       seniority_id = seniority_id.id
@@ -362,7 +356,7 @@ export default class CandidateEditForm extends Component {
 
         const candidateInfo = {
           name,
-          platform_id,
+          platform_id: platform.id,
           seniority_id,
           tag_id,
           salary,
