@@ -367,6 +367,11 @@ export const filterAndSortCompanyCandidates = (id, page, filterAndSort) => {
  */
 export const updateVacancyStatus = async content => {
   const token = getToken();
+  const data = {
+    id: content.id,
+    status: content.value.id
+  }
+
   try {
     const response = await fetch(`${URL}/main/updateStatusVacancy`, {
       method: "POST",
@@ -374,11 +379,12 @@ export const updateVacancyStatus = async content => {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(content)
+      body: JSON.stringify(data)
     });
     if (response.ok) {
       return response.json();
     }
+
     throw new Error(`Error while fetching: ${response.statusText}`);
   } catch (error) {
     return console.log("error in fetch: ", error);
