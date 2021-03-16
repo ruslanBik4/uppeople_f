@@ -20,7 +20,7 @@ export const getUser = id => {
       if (response.status > 400) {
         return response.status;
       }
-      if (response.ok) {
+      if (response.ok||response.status === 0) {
         return response.json();
       }
 

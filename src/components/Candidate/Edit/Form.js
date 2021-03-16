@@ -1,7 +1,6 @@
 // Core
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import {
   Button,
   Card,
@@ -18,10 +17,6 @@ import {
   ListGroupItem,
   Row
 } from "reactstrap";
-import {Editor} from "react-draft-wysiwyg";
-import {EditorState, convertToRaw, ContentState} from "draft-js";
-import htmlToDraft from "html-to-draftjs";
-import draftToHtml from "draftjs-to-html";
 // Components
 import Select from "../../shared/Select";
 // Instruments
@@ -29,8 +24,6 @@ import noAvatar from "../../../assets/img/no_avatar.png";
 import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
-import styles2 from "./Custom.css";
-import { platform } from "chart.js";
 
 const style = {
   icon: {
@@ -47,10 +40,7 @@ export default class CandidateEditForm extends Component {
       avatar: PropTypes.string,
       file: PropTypes.object,
       name: PropTypes.string,
-      // platform: PropTypes.shape({
-      //   id: PropTypes.number,
-      //   nazva: PropTypes.string
-      // }),
+      platform_id: PropTypes.number,
       platform: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
@@ -70,16 +60,24 @@ export default class CandidateEditForm extends Component {
       comment: PropTypes.string,
       // about: PropTypes.string,
       status: PropTypes.string,
-      tag: PropTypes.string
+      tag: PropTypes.string,
+      vacancies: PropTypes.array,
     }).isRequired,
-    platforms: PropTypes.arrayOf(
+    seniorities: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
-    seniorities: PropTypes.arrayOf(
+    platformVacancies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
+    selectedVacancies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         label: PropTypes.string.isRequired,
@@ -97,7 +95,8 @@ export default class CandidateEditForm extends Component {
     // selectPlatform: [],
     // seniority_id: [],
     // tag_id: {},
-    // vacancies: [],
+    platformVacancies: [],
+    selectedVacancies: [],
     platform: [],
     seniority_id: [],
     vacancies: [],
@@ -155,19 +154,14 @@ export default class CandidateEditForm extends Component {
     comment: "",
     status: "",
     tag: "",
-    about: EditorState.createEmpty(),
 
   };
 
   componentWillReceiveProps(nextProps) {
     // componentDidUpdate(prevProps) {
 
-    const {candidate, platforms, seniorities, reasons, reject_tag, vacancies} = nextProps;
+    const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
-    let platform_id = candidate.platform;
-      // if (candidate.platform !== null && platforms.find) {
-      //   platform.value = candidate.platform_id;
-      // }
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
@@ -195,60 +189,39 @@ export default class CandidateEditForm extends Component {
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
-    // let about = candidate.about;
-    // const htmlAbout = candidate.about;
-    //
-    // if (htmlAbout) {
-    //   const aboutBlock = htmlToDraft(htmlAbout);
-    //   if (aboutBlock) {
-    //     const contentState = ContentState.createFromBlockArray(
-    //       aboutBlock.contentBlocks
-    //     );
-    //     about = EditorState.createWithContent(contentState);
-    //   }
-    // }
-    let platformVacancies = [];
-    if ( (platform_id !== undefined)  && (vacancies !== undefined) ){
-      vacancies.map((vacancy) => {
-        if (vacancy.platform_id === candidate.platform.id) {
-          platformVacancies.push(vacancy);
-        }
-      })
-    }
+    console.log(platforms)
+    const platform = platforms.find( pl => pl.id === candidate.platform_id)
 
-    this
-      .setState({
+    console.log(platforms)
+    this.setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform_id: platform_id,
-        seniority_id: seniority_id,
-        tag_id: tag_id,
+        platform,
+        platform_id: candidate.platform_id,
+        seniority_id,
+        tag_id,
         selectedReason: selectedReason,
         salary: candidate.salary,
-        language: language,
+        language,
         phone: candidate.phone,
         skype: candidate.skype,
         email: candidate.email,
         linkedIn: candidate.linkedIn,
         resume: candidate.resume,
         comment: candidate.comment,
-        platformVacancies: platformVacancies,
-        vacancies: candidate.vacancies
-          // vacancies.map((vacancy) => {
-        //   if (selectedPlatform !== undefined && vacancy.platform_id === selectedPlatform.id) {
-        //     return vacancy;
-        //   }
-        // })
-        // about: about,
+        platformVacancies,
+        selectedVacancies: candidate.vacancies,
+        vacancies
       });
-      console.log(vacancies);
-      console.log(platformVacancies);
-      }
+    console.log(platforms, this.state.platform)
+
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
-
+      console.log(this.state.platforms)
     }
   }
 
@@ -273,52 +246,23 @@ export default class CandidateEditForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({platform_id: value});
-    let platform_id = this.state.platform_id;
-    console.log (platform_id);
-    console.log (this.state.platform_id);
-    console.log (this.state.platform_id.id);
+    this.setState({platform: value});
 
     const {vacancies} = this.props;
-    console.log (vacancies);
-    let platformVacancies = [];
-    if (value !== undefined) {
-      vacancies.map((vacancy) => {
-        if (vacancy.platform_id === value.id) {
-          platformVacancies.push(vacancy);
-        }
-      })
-    }
-    console.log (platformVacancies);
-    console.log (value.id);
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({
-      platformVacancies: platformVacancies
+      platformVacancies
     });
-    console.log (value.id);
-    console.log(platformVacancies);
-    
+
   };
  
 
   handleVacancyChange = value => {
     this.setState({
-      vacancies: value
-    });
-    
-    console.log (this.state.vacancies);
-    var selectedVacancies = this.state.vacancies.map(item => item.id);
-    console.log(selectedVacancies);
-    this.setState({
       selectedVacancies: value
     });
-    
-    
   };
-
-  
-  
- 
 
   handleSeniorityChange = value => {
     this.setState({
@@ -361,16 +305,14 @@ export default class CandidateEditForm extends Component {
       resume,
       comment,
       // about,
-      // 
       platform_id,
       seniority_id,
       tag_id,
       selectedReason,
-      vacancies,
       selectedVacancies
     } = this.state;
 
-    console.log (vacancies);
+    console.log ( selectedVacancies);
     
 
     let isValid = true;
@@ -393,10 +335,6 @@ export default class CandidateEditForm extends Component {
       
         tag_id = tag_id.id
      
-        if (selectedVacancies !== undefined) {
-        vacancies = this.state.selectedVacancies.map(item => item.id);
-        }
-        
       if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
@@ -420,6 +358,8 @@ export default class CandidateEditForm extends Component {
       const {onEditCandidate} = this.props;
 
       if (isValid) {
+        const vacancies = selectedVacancies !== undefined && selectedVacancies.map(item => item.id)
+
         const candidateInfo = {
           name,
           platform_id,
@@ -485,7 +425,7 @@ export default class CandidateEditForm extends Component {
         console.log(candidateInfo);
         onEditCandidate(candidateInfo);
       }
-    };
+    }
        
   };
 
@@ -518,14 +458,14 @@ export default class CandidateEditForm extends Component {
     const {
       avatar,
       name,
-      platform_id,
+      platform,
       seniority_id,
       tag_id,
       salary,
       language,
       languages,
       platformVacancies,
-      vacancies,
+      selectedVacancies,
       phone,
       skype,
       email,
@@ -537,8 +477,6 @@ export default class CandidateEditForm extends Component {
 
 
     const {platforms, seniorities, tags} = this.props;
-
-    console.log(platformVacancies, vacancies, platform_id)
 
     return (
       <Row>
@@ -622,7 +560,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="platform_id"
                           options={platforms}
-                          value={platform_id}
+                          value={platform}
                           placeholder="Platform"
                           onChange={this.handlePlatformChange}
                         />
@@ -677,18 +615,19 @@ export default class CandidateEditForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="salary" sm={3}>
+                      <Label for="vacancies" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
                         <Select
                           id="vacancies"
                           isMulti
-                          value={vacancies}
+                          value={selectedVacancies}
                           options={platformVacancies}
                           isClearable
-                          placeholder="vacancies"
+                          placeholder="choice vacancies"
                           onChange={this.handleVacancyChange}
+                          style={{zIndex: 2}}
                         />
                       </Col>
                     </FormGroup>
@@ -812,7 +751,6 @@ export default class CandidateEditForm extends Component {
                   </Col>
                 </Row>          
                 <Row>
-                  <label></label>
                 </Row>
                 <Row>
                   <Col md="10" className={"errorlist"} row>

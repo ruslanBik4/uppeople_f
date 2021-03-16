@@ -22,7 +22,6 @@ class CandidateEdit extends Component {
       phone: "",
       email: "",
       skype: "",
-      platform: [],
       seniority_id: [],
       // tag_id: 0,
       language: "",
@@ -38,6 +37,7 @@ class CandidateEdit extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+      console.log(this.state.platforms)
 
     getCandidateProfile(id).then(data => {
         if (data === 201) {
@@ -90,18 +90,27 @@ class CandidateEdit extends Component {
                             console.log(elem, s)
                             lblErrors.textContent = ("Не выбрано" + elem[0]);
                             document.querySelector('.' + s + '_div > div').classList.add('error');
-
                         }
-                        if (elem[0] === 'name') {
-                            lblErrors.textContent = ("Имя кандидата" + " " + elem[1]);
-                        } else if (elem[0] === 'phone') {
-                            lblErrors.textContent = ("Номер телефона" + " " + elem[1]);
-                        } else if (elem[0] === 'email') {
-                            lblErrors.textContent = ("Электронная почта" + " " + elem[1]);
-                        } else if (elem[0] === 'linkedIn') {
-                            lblErrors.textContent = ("Профиль linkedIn" + " " + elem[1]);
-                        } else {
-                            lblErrors.textContent = (elem[0] + " " + elem[1])
+
+                        switch (elem[0]) {
+                            case 'name':
+                                lblErrors.textContent = ("Имя кандидата" + " " + elem[1]);
+                                break;
+
+                            case  'phone':
+                                lblErrors.textContent = ("Номер телефона" + " " + elem[1]);
+                                break;
+
+                            case 'email':
+                                lblErrors.textContent = ("Электронная почта" + " " + elem[1]);
+                                break;
+
+                            case 'linkedIn':
+                                lblErrors.textContent = ("Профиль linkedIn" + " " + elem[1]);
+                                break;
+
+                            default:
+                                lblErrors.textContent = (elem[0] + " " + elem[1])
                         }
 
  
@@ -134,8 +143,9 @@ class CandidateEdit extends Component {
       options
     } = this.props;
 
-    console.log(options, vacancies)
-    return (
+      console.log(options.platforms)
+
+      return (
       <>
         <h3>Edit Candidate</h3>
         <CandidateEditForm

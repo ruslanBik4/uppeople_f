@@ -38,15 +38,16 @@ class CompanyProfileContactsEditForm extends Component {
             email: data.email,
             phone: data.phone,
             skype: data.skype,
-            selectedPlatforms: data.platforms && data.platforms.map(platform => {
-              const arrOfPlatforms = Object.values(platform.platform);
-
-              return {
-                id: arrOfPlatforms[0],
-                label: arrOfPlatforms[1],
-                value: arrOfPlatforms[1].toLowerCase()
-              };
-            })
+            selectedPlatforms: data.selectedPlatforms,
+            //     data.platforms && data.platforms.map(platform => {
+            //   const arrOfPlatforms = Object.values(platform.platform);
+            //
+            //   return {
+            //     id: arrOfPlatforms[0],
+            //     label: arrOfPlatforms[1],
+            //     value: arrOfPlatforms[1].toLowerCase()
+            //   };
+            // })
           },
           isChecked: data.all_platforms === 1,
           isDisabled: data.all_platforms === 1

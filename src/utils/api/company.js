@@ -172,15 +172,15 @@ export const getCompanyInfo = id => {
       if (response.status === 400) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
+      if (response.status > 400) {
+        return response.status;
       }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(data => {
-      if (data === 401) {
-        this.props.history.push('/login/');
+      if (data >= 400) {
+        return data;
       } else {
         const companyInfo = {
           name: data.name,
@@ -192,7 +192,7 @@ export const getCompanyInfo = id => {
           map: data.map,
           calendarEvents: data.calendar,
           sendDetails: data.sendDetails,
-          termsOfCooperation: data.uslovia,
+          termsOfCooperation: data.cooperation,
           interview_detail: data.interview_detail,
           contacts: data.contacts,
           managers: data.managers
