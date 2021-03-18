@@ -50,7 +50,7 @@ export default class CandidateEditForm extends Component {
         PropTypes.array,
         PropTypes.number
       ]),
-      salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      salary: PropTypes.number,
       language: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
@@ -100,7 +100,7 @@ export default class CandidateEditForm extends Component {
     platform: [],
     seniority_id: [],
     vacancies: [],
-    salary: "",
+    salary: 0,
     language: "",
     languages: [
       {
@@ -333,12 +333,12 @@ export default class CandidateEditForm extends Component {
         document.querySelector('.linkedIn_div').classList.add('error');
       }
       
-      if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
-        isValid = false;
-        document.querySelector('.salary_div').classList.add('error');
-      }
-  
-      if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
+      // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
+      //   isValid = false;
+      //   document.querySelector('.salary_div').classList.add('error');
+      // }
+      //
+      if (email.length > 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
         isValid = false;
         document.querySelector('.email_div').classList.add('error');
       }
@@ -365,7 +365,7 @@ export default class CandidateEditForm extends Component {
           // about: aboutEditorState
         };
   
-        if (salary === "") {
+        if (salary === 0) {
           delete candidateInfo.salary
         }
   
@@ -598,7 +598,7 @@ export default class CandidateEditForm extends Component {
                       <Col sm={9} className={"salary_div"}>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
                           name="salary"
                           value={salary}
                           onChange={this.handleInputChange}
