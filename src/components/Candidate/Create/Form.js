@@ -635,7 +635,7 @@ export default class CandidateCreateForm extends Component {
                       <Col sm={9} className={"salary_div"}>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
                           name="salary"
                           value={salary}
                           onChange={this.handleInputChange}

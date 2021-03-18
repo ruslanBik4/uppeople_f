@@ -238,6 +238,10 @@ export default class CandidateEditForm extends Component {
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
+    let s = [name]
+    document.querySelector('.' + s + '_div').classList.remove('error');
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ")
   };
 
   handlePlatformChange = value => {
@@ -311,6 +315,7 @@ export default class CandidateEditForm extends Component {
     
 
     let isValid = true;
+    let lblErrors = document.querySelector(".errorlist label");
 
     if (seniority_id.length !== 0)  {
       seniority_id = seniority_id.id
@@ -331,16 +336,22 @@ export default class CandidateEditForm extends Component {
       if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
+        lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
       }
       
-      if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
-        isValid = false;
-        document.querySelector('.salary_div').classList.add('error');
-      }
+      // if (salary.length !== 0 && !salary.match('^[1-9]\d*')) {
+      //   isValid = false;
+      //   document.querySelector('.salary_div').classList.add('error');
+      //   lblErrors.textContent = ("Зарплата не может начинаться с 0")
+      // }
+      // else {
+        salary = Number(salary)
+      // }
   
       if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
         isValid = false;
         document.querySelector('.email_div').classList.add('error');
+        lblErrors.textContent = ("Неправильный email")
       }
 
       const {onEditCandidate} = this.props;
@@ -598,7 +609,7 @@ export default class CandidateEditForm extends Component {
                       <Col sm={9} className={"salary_div"}>
                         <Input
                           id="salary"
-                          type="text"
+                          type="number"
                           name="salary"
                           value={salary}
                           onChange={this.handleInputChange}
