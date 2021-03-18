@@ -50,7 +50,7 @@ export default class CandidateEditForm extends Component {
         PropTypes.array,
         PropTypes.number
       ]),
-      salary: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      salary: PropTypes.number,
       language: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
@@ -100,7 +100,7 @@ export default class CandidateEditForm extends Component {
     platform: [],
     seniority_id: [],
     vacancies: [],
-    salary: "",
+    salary: 0,
     language: "",
     languages: [
       {
@@ -339,16 +339,12 @@ export default class CandidateEditForm extends Component {
         lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
       }
       
-      // if (salary.length !== 0 && !salary.match('^[1-9]\d*')) {
+      // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
       //   isValid = false;
       //   document.querySelector('.salary_div').classList.add('error');
-      //   lblErrors.textContent = ("Зарплата не может начинаться с 0")
       // }
-      // else {
-        salary = Number(salary)
-      // }
-  
-      if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
+      //
+      if (email.length > 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
         isValid = false;
         document.querySelector('.email_div').classList.add('error');
         lblErrors.textContent = ("Неправильный email")
@@ -376,7 +372,7 @@ export default class CandidateEditForm extends Component {
           // about: aboutEditorState
         };
   
-        if (salary === "") {
+        if (salary === 0) {
           delete candidateInfo.salary
         }
   
@@ -542,7 +538,7 @@ export default class CandidateEditForm extends Component {
                   <Col lg={6} md={12}>
                     <FormGroup row>
                       <Label for="name" sm={3}>
-                        Name
+                        Name<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Input
@@ -560,7 +556,7 @@ export default class CandidateEditForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="platform_id" sm={3}>
-                        Platform
+                        Platform<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
@@ -575,7 +571,7 @@ export default class CandidateEditForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="seniority" sm={3}>
-                        Seniority
+                        Seniority<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
