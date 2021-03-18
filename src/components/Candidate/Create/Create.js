@@ -57,12 +57,17 @@ export default class CandidateCreate extends Component {
 
   createCandidate = candidate => {
     createNewCandidate(candidate).then(data => {
-        console.log(data)
+        console.log(data);
+        let lblErrors = document.querySelector(".errorlist label");
         if (data === 201) {
             this.props.history.push(`/candidates/`)
         } else if (data === 401) {
             this.props.history.push('/login/')
-        } else if (typeof data === 'object') {
+        }
+          else if (data === 1) {
+            lblErrors.textContent = ("Ошибка ввода: 1");
+          }
+         else if (typeof data === 'object') {
             this.parseResponse(data);
 
         } else {

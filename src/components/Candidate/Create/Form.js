@@ -140,6 +140,7 @@ export default class CandidateCreateForm extends Component {
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     // this.state.tag_id = this.props.tag_id;
     const  {vacancies} = this.props;
+    
     // let platform_id = this.setState ({platform_id: platform_id})
     console.log (vacancies);
     // console.log (platform_id);
@@ -171,7 +172,8 @@ export default class CandidateCreateForm extends Component {
   handlePlatformChange = value => {
     this.setState({platform_id: value});
     const {vacancies} = this.props;
-    // lblErrors.textContent = (" ");
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ");
     document.querySelector('.platform_div > div').classList.remove('error');
 
     console.log(value, vacancies);
@@ -245,7 +247,8 @@ export default class CandidateCreateForm extends Component {
   handleSeniorityChange = value => {
     this.setState({seniority_id: value});
     document.querySelector('.seniority_div > div').classList.remove('error');
-    // lblErrors.textContent = (" ")
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ")
   };
 
   handleAboutStateChange = about => {
