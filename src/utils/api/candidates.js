@@ -21,11 +21,11 @@ export const getAllCandidates = page => {
     }
   })
     .then(response => {
-      if (response.ok) {
+      if (response.ok||response.status === 400) {
         return response.json();
       }
-      if (response.status === 401) {
-        return 401;
+      if (response.status > 401) {
+        return response.status;
       }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -48,14 +48,13 @@ export const getSentCandidates = page => {
       "Content-Type": "application/json"
     }
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      if (response.status === 401) {
-        return 401;
-      }
-
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .catch(error => console.log("error in fetch: ", error));
@@ -76,13 +75,13 @@ export const getCandidatesFromFreelancers = page => {
       "Content-Type": "application/json"
     }
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      if (response.status === 401) {
-        return 401;
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -108,13 +107,13 @@ export const filterAndSortAllCandidates = (page, filterAndSort) => {
     },
     body: JSON.stringify(filterAndSort)
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      if (response.status === 401) {
-        return 401;
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -140,13 +139,13 @@ export const filterAndSortSentCandidates = (page, filterAndSort) => {
     },
     body: JSON.stringify(filterAndSort)
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      if (response.status === 401) {
-        return 401;
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -176,10 +175,13 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
       end_date: endDate,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -214,12 +216,11 @@ export const getCandidatesAmountByTags = (selectedRecruiter, selectedCompany, se
     })
   })
     .then(response => {
-        if (response.status > 401) {
-            return response.status;
-        }
-
-        if (response.ok) {
+      if (response.ok||response.status === 400) {
         return response.json();
+      }
+      if (response.status > 401) {
+        return response.status;
       }
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -243,10 +244,13 @@ export const getStatuses = () => {
       "Content-Type": "application/json"
     },
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -276,10 +280,13 @@ export const getCandidatesAmountByVacancies = (selectedRecruiter, selectedCompan
       company_id: selectedCompany,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -309,10 +316,13 @@ export const getCandidatesGrouped = (selectedRecruiter, selectedCompany) => {
       company_id: selectedCompany,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -343,10 +353,13 @@ export const changeStatus = (candidateId, vacancyId, companyId, statusId) => {
       status_id: statusId
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
@@ -376,10 +389,13 @@ export const deleteSentCandidateFromVacancy = (candidateId, vacancyId, companyId
       company_id: companyId,
     })
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
+  .then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 401) {
+      return response.status;
+    }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
     })

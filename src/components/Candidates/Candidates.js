@@ -891,7 +891,7 @@ export default class Candidates extends Component {
                     onChangePage={this.onChangeSentCandidatesPage}
                   />
                 )}
-              </Localization>
+              </Localization> 
             )}
           </Col>
         </Row>

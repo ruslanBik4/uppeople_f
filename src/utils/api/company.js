@@ -607,10 +607,10 @@ export const getContactInfo = id => {
     }
   })
     .then(response => {
-      if (response.status >= 400) {
+      if (response.status > 400) {
         return response.status;
       }
-      if (response.ok) {
+      if (response.ok||response.status === 400) {
         return response.json();
       }
 

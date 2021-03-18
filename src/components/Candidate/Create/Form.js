@@ -135,15 +135,18 @@ export default class CandidateCreateForm extends Component {
   
   // setState ({platform_id: platform_id})
   
-
+  
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
     // this.state.tag_id = this.props.tag_id;
     const  {vacancies} = this.props;
+    
     // let platform_id = this.setState ({platform_id: platform_id})
     console.log (vacancies);
     // console.log (platform_id);
   }
+
+ 
   
 
   handleAvatarSelected = event => {
@@ -156,13 +159,22 @@ export default class CandidateCreateForm extends Component {
     this.props.onUploadAvatar(this.state.avatar);
   };
 
+ 
+
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
+    let s = [name]
+    document.querySelector('.' + s + '_div').classList.remove('error');
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ")
   };
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
     const {vacancies} = this.props;
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ");
+    document.querySelector('.platform_div > div').classList.remove('error');
 
     console.log(value, vacancies);
 
@@ -222,6 +234,12 @@ export default class CandidateCreateForm extends Component {
     this.setState({language: value});
   };
 
+  // handleLinkedInChange = value => {
+  //   this.setState({linkedIn: value});
+  //   document.querySelector('.linkedIn_div').classList.remove('error');
+    
+  // };
+
   handleReasonChange = value => {
     this.setState({selectedReason: value});
   };
@@ -229,6 +247,8 @@ export default class CandidateCreateForm extends Component {
   handleSeniorityChange = value => {
     this.setState({seniority_id: value});
     document.querySelector('.seniority_div > div').classList.remove('error');
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = (" ")
   };
 
   handleAboutStateChange = about => {
@@ -290,12 +310,13 @@ export default class CandidateCreateForm extends Component {
     let isValid = true;
 
     
+    let lblErrors = document.querySelector(".errorlist label");
     
-
 
     if (platform_id.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
+      lblErrors.textContent = ("platform_id не выбрано")
     } else {
       platform_id = platform_id.id
     }
@@ -303,6 +324,7 @@ export default class CandidateCreateForm extends Component {
     if (seniority_id.length === 0) {
       document.querySelector('.seniority_div > div').classList.add('error');
       isValid = false;
+      lblErrors.textContent = ("seniority_id не выбрано")
     } else {
       seniority_id = seniority_id.id
     }
@@ -337,16 +359,19 @@ export default class CandidateCreateForm extends Component {
     if (linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
       isValid = false;
       document.querySelector('.linkedIn_div').classList.add('error');
+      lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
     } 
 
     if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
       isValid = false;
       document.querySelector('.salary_div').classList.add('error');
+      lblErrors.textContent = ("Зарплата не может начинаться с 0")
     }
 
     if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
       isValid = false;
       document.querySelector('.email_div').classList.add('error');
+      lblErrors.textContent = ("Неправильный email")
     }
     
 
