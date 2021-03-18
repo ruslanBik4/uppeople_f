@@ -367,6 +367,9 @@ export default class CandidateCreateForm extends Component {
       document.querySelector('.salary_div').classList.add('error');
       lblErrors.textContent = ("Зарплата не может начинаться с 0")
     }
+    else {
+      salary = Number(salary);
+    }
 
     if (email.length !== 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
       isValid = false;

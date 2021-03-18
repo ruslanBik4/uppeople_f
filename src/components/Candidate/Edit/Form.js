@@ -542,6 +542,7 @@ export default class CandidateEditForm extends Component {
                       </Label>
                       <Col sm={9}>
                         <Input
+                          required
                           id="name"
                           type="text"
                           name="name"
