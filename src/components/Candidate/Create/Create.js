@@ -78,7 +78,7 @@ export default class CandidateCreate extends Component {
             if (typeof data.formErrors === 'object') {
                 this.parseErrors(data.formErrors, lblErrors);
             } else {
-                alert(data.formErrors);
+                alert("Ошибка" + " " + data);
             }
         } else {
             console.log(data);
