@@ -28,6 +28,12 @@ export const getCompanies = (page, isActive, withRecruiters = false) => {
       if (response.ok) {
         return response.json();
       }
+      if (response.status === 400) {
+        return response.json();
+      }
+      if (response.status > 400) {
+        return response.status;
+      }
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
     .then(companies => {
@@ -84,6 +90,12 @@ export const filterAllCompanies = (page, isActive, filter, withRecruiters = fals
       console.log(response);
       if (response.ok) {
         return response.json();
+      }
+      if (response.status === 400) {
+        return response.json();
+      }
+      if (response.status > 400) {
+        return response.status;
       }
 
       throw new Error(`${response.statusText}`);

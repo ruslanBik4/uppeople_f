@@ -321,6 +321,8 @@ export default class CandidateEditForm extends Component {
       seniority_id = seniority_id.id
     }
 
+    salary = Number(salary);
+
     if (document.querySelector('.reasons_div > div') !== null) {
       document.querySelector('.reasons_div > div').classList.remove('error');
     }

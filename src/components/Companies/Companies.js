@@ -36,13 +36,17 @@ export default class Companies extends Component {
   requestForCompanies = (currentPage, filter, isActive) => {
     // const { filterCompanies } = this.state;
     getCompanies(currentPage, isActive).then(companiesData => {
+      if (companiesData === 401) {
+        this.props.history.push('/login/')
+      } else {
       companiesData.currentPage > companiesData.totalPages
-        ? this.requestForCompanies(
+        ? this.requestForCompanies( 
             1,
             companiesData.filterCompanies,
             companiesData.isActive
           )
         : this.setState({ ...companiesData, filterCompanies: filter });
+      }
     });
   };
 
