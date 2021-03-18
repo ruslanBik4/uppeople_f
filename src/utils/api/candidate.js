@@ -63,7 +63,7 @@ export const getCandidateProfile = id => {
           email: candidate.email,
           skype: candidate.skype,
           linkedIn: candidate.linkedin,
-          comment: candidate.comments,
+          comment: candidate.comment,
           about: candidate.resume,
           resume: candidate.resume,
           vacancies:candidate.vacancies

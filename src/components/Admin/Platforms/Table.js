@@ -19,7 +19,7 @@ const PlatformsTable = ({
     platforms.length > 0 ? (
       platforms.map((platform, idx) => (
         <tr key={platform.id}>
-          <PlatformsTableRow idx={idx} {...platform} onDelete={onDelete} />
+          <PlatformsTableRow idx={idx} id={platform.id} name={platform.nazva} onDelete={onDelete} />
         </tr>
       ))
     ) : (
