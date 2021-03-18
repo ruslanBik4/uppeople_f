@@ -328,16 +328,11 @@ export default class CandidateEditForm extends Component {
       
         tag_id = tag_id.id
      
-      if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+      if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
         isValid = false;
         document.querySelector('.linkedIn_div').classList.add('error');
       }
       
-      // if (linkedIn !== null && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/') || linkedIn.length === 0) {
-      //   isValid = false;
-      //   document.querySelector('.linkedIn_div').classList.add('error');
-      // } 
-  
       if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
         isValid = false;
         document.querySelector('.salary_div').classList.add('error');
@@ -419,8 +414,15 @@ export default class CandidateEditForm extends Component {
         onEditCandidate(candidateInfo);
       }
     }
-       
-  };
+
+    if (!isValid) {
+      let lblErrors = document.querySelector(".errorlist label");
+      if (lblErrors !== undefined) {
+        lblErrors.textContent = 'There are som errors on input data. Please, fix it.'
+      }
+    }
+
+    };
 
   ReasonFormGroup = () => {
     const {reasons} = this.props;
