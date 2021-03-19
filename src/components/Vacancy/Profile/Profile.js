@@ -43,14 +43,15 @@ export default class VacancyProfile extends Component {
     getVacancyProfile(id).then(vacancy => {
       if (vacancy === 401) {
         this.props.history.push('/login/')
-      } else { this.setState({ ...vacancy });
+      } else {
+          this.setState({ ...vacancy });
       }
     });
   }
 
   updateVacancyProfileContent = content => {
     const { id } = this.props.match.params;
-    console.log("content vacanci", content);
+    console.log("content vacancy", content);
     updateVacancy(id, content).then(updatedVacancy => {
       console.log("content vacancy2", updatedVacancy);
       this.setState({

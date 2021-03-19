@@ -69,11 +69,11 @@ export default class ControlledEditor extends Component {
 
       onUpdate(contentToUpdate);
     } else if (title === "Description") {
-      const descriptionOne = draftToHtml(
+      const description = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        descriptionOne
+        description
       };
 
       onUpdate(contentToUpdate);
