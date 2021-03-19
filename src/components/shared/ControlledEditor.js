@@ -60,11 +60,11 @@ export default class ControlledEditor extends Component {
 
       onUpdate(contentToUpdate);
     } else if (title === "About candidate") {
-      const aboutOne = draftToHtml(
+      const about = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        aboutOne
+        about
       };
 
       onUpdate(contentToUpdate);
@@ -78,11 +78,11 @@ export default class ControlledEditor extends Component {
 
       onUpdate(contentToUpdate);
     } else if (title === "Details") {
-      const detailsOne = draftToHtml(
+      const details = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        detailsOne
+        details
       };
 
       onUpdate(contentToUpdate);
