@@ -49,6 +49,8 @@ class CandidateEdit extends Component {
             this.setState({
                 candidate
             });
+            console.log(candidate.platform_id);
+            console.log(candidate)
         }
         getRecruiterVacancies().then(data => {
             if (data === 401) {
@@ -57,6 +59,8 @@ class CandidateEdit extends Component {
             }
             const vacancies =  data.vacancies;
             this.setState({ vacancies }) ;
+            console.log(vacancies)
+            
         })
     });
   }

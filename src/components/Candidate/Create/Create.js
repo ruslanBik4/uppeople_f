@@ -8,8 +8,6 @@ import {
   uploadCandidateAvatar,
   createNewCandidate
 } from "../../../utils/api/candidate";
-import CandidateEditForm from "../Edit/Form";
-import {toLower} from "@progress/kendo-data-query/dist/npm/filter-serialization.common";
 
 export default class CandidateCreate extends Component {
   state = {
@@ -41,14 +39,16 @@ export default class CandidateCreate extends Component {
         defaultSelectedtag
       });
     });
-      getRecruiterVacancies().then(data => {
-          if (data === 401) {
-              this.props.history.push('/login/');
-              return
-          }
-          const vacancies =  data.vacancies;
-          this.setState({ vacancies }) ;
-      })
+    getRecruiterVacancies().then(data => {
+      if (data === 401) {
+          this.props.history.push('/login/');
+          return
+      }
+      const vacancies =  data.vacancies;
+      this.setState({ vacancies }) ;
+      console.log(vacancies)
+      
+  })
   }
 
   uploadAvatar = (id, file) => {

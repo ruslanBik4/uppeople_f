@@ -24,6 +24,7 @@ import noAvatar from "../../../assets/img/no_avatar.png";
 import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
+import { platform } from "chart.js";
 
 const style = {
   icon: {
@@ -162,11 +163,14 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
+    console.log(candidate.platform_id);
+    console.log(candidate)
     let tag_id = candidate.tag;
     let selectedReason = {};
     if (candidate.tag !== undefined && candidate.tag !== null) {
       tag_id.value = candidate.tag.name;
       tag_id.label = candidate.tag.name;
+      
 
       for (const reason in reasons) {
         if (reasons[reason].id === tag_id.id) {
@@ -212,7 +216,11 @@ export default class CandidateEditForm extends Component {
         platformVacancies,
         selectedVacancies: candidate.vacancies,
         vacancies
-      });
+      }); 
+      console.log(candidate.platform_id);
+      console.log(candidate.vacancies);
+      console.log(vacancies);
+        
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -246,6 +254,7 @@ export default class CandidateEditForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform: value});
+    console.log(platform)
 
     const {vacancies} = this.props;
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
