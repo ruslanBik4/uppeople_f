@@ -55,7 +55,8 @@ export default class CandidateCreateForm extends Component {
     ).isRequired,
     defaultSelectedtag: PropTypes.func.isRequired,
     onUploadAvatar: PropTypes.func.isRequired,
-    onCreateCandidate: PropTypes.func.isRequired
+    onCreateCandidate: PropTypes.func.isRequired,
+    vacancies: PropTypes.array
   };
 
   constructor(props) {
@@ -133,30 +134,28 @@ export default class CandidateCreateForm extends Component {
     about: EditorState.createEmpty(),
   };
 
-  componentWillReceiveProps(nextProps) {
-    // componentDidUpdate(prevProps) {
+  // componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
+  //   const {vacancies} = [];
+  //   this.setState({vacancies}); 
+  //   console.log(this.props);
+  //   console.log(this.props.vacancies);
+  //   console.log(this.state.vacancies);
+  //   console.log (vacancies);
 
-    const {vacancies} = nextProps;
+  // }
 
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+    const {vacancies} = this.props;
+    this.setState({vacancies}); 
+    console.log(this.props);
+    console.log(this.props.vacancies);
+    console.log(this.state.vacancies);
+    console.log (vacancies);
     
-
-    this.setState({
-      vacancies
-    });         
+    }
   }
   
-  
-  
-
-  componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-    // this.state.tag_id = this.props.tag_id;
-    const  {vacancies} = this.props;
-
-  }
-
- 
-  
-
   handleAvatarSelected = event => {
     this.setState({
       avatar: event.target.files[0]
@@ -181,11 +180,14 @@ export default class CandidateCreateForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
-    let platform
-    console.log(platform)
-    
-
-    const {vacancies} = this.props;
+    let vacancies = [];
+        // const vacancies = this.state.vacancies;
+    if (this.state.vacancies !== undefined) {
+      vacancies = this.state.vacancies;
+    } else {
+      vacancies = this.props.vacancies;
+    }
+    console.log (vacancies);
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({

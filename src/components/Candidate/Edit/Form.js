@@ -383,7 +383,7 @@ export default class CandidateEditForm extends Component {
           // about: aboutEditorState
         };
   
-        if (salary === 0) {
+        if (salary === "" || salary === null) {
           delete candidateInfo.salary
         }
   
@@ -619,6 +619,7 @@ export default class CandidateEditForm extends Component {
                           id="salary"
                           type="number"
                           name="salary"
+                          min = "0"
                           value={salary}
                           onChange={this.handleInputChange}
                         />
