@@ -21,7 +21,7 @@ export const getUsers = () => {
         if (response.status > 400) {
             return response.status;
         }
-      if (response.ok||response.status === 400) {
+      if (response.ok || response.status === 400) {
         return response.json();
       }
       throw new Error(`Error while fetching: ${response.statusText}`);

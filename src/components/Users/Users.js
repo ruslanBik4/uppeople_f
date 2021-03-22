@@ -107,24 +107,24 @@ export default class Users extends Component {
     const {
       user: { role }
     } = this.props;
-    const users = this.state;
+    const {users} = this.state;
 
-    const tabPanesForAdmin = Object.keys(users).map((key, idx) => {
-      const index = (idx + 1).toString();
-      return users[key] !== undefined && users[key] !== null ? (
-        <TabPane tabId={index} key={key}>
+    const tabPanesForAdmin = //Object.keys(users).map((key, idx) => {
+      // const index = (idx + 1).toString();
+      // return users[key] !== undefined && users[key] !== null ? (
+        <TabPane tabId={1} key={'Staff'}>
           <UsersTable
-            users={users[key]}
-            usersGroup={key}
+            users={users}
+            usersGroup={'Staff'}
             onChangeRecruiter={this.changeRecruiterForFreelancer}
             onDeleteUser={this.deleteUser}
-            tabId={index}
+            tabId={1}
           />
         </TabPane>
-      ) : (
-        <p>`There are no ${key} yet. You could add a new one.`</p>
-      );
-    });
+    //   ) : (
+    //     <p>`There are no ${key} yet. You could add a new one.`</p>
+    //   );
+    // });
 
 
     return (

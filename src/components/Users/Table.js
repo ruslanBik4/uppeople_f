@@ -48,6 +48,7 @@ export default class UsersTable extends Component {
     const { users, tabId, usersGroup, onChangeRecruiter } = this.props;
     const { pageOfItems, currentPage } = this.state;
 
+    console.log(pageOfItems, users)
     const usersJSX =
       users.length > 0 &&
       pageOfItems.map((user, idx) => (

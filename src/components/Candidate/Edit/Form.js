@@ -214,8 +214,8 @@ export default class CandidateEditForm extends Component {
         resume: candidate.resume,
         comment: candidate.comment,
         platformVacancies,
-        selectedVacancies: candidate.vacancies,
-        vacancies
+        selectedVacancies: candidate.selectedVacancies,
+        vacancies: candidate.vacancies
       }); 
       console.log(candidate.platform_id);
       console.log(candidate.vacancies);
