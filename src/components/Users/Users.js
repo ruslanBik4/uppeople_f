@@ -107,7 +107,8 @@ export default class Users extends Component {
     const {
       user: { role }
     } = this.props;
-    const {users} = this.state;
+    const users = this.state;
+    console.log(users)
 
     const tabPanesForAdmin = //Object.keys(users).map((key, idx) => {
       // const index = (idx + 1).toString();
