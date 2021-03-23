@@ -39,11 +39,11 @@ export default class ControlledEditor extends Component {
     console.log("onUpdate: ", onUpdate);
     console.log("close: ", close);
     if (title === "Send details") {
-      const sendDetails = draftToHtml(
+      const send_details = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
       const contentToUpdate = {
-        sendDetails
+        send_details
       };
 
       onUpdate(contentToUpdate);

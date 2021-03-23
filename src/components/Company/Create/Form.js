@@ -37,7 +37,7 @@ export default class CompanyCreateForm extends Component {
     cooperation: "",
     map: "",
     manager: "",
-    sendDetails: EditorState.createEmpty(),
+    send_details: EditorState.createEmpty(),
     about: EditorState.createEmpty(),
     interview_detail: EditorState.createEmpty()
   };
@@ -46,8 +46,8 @@ export default class CompanyCreateForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSendDetailsStateChange = sendDetails => {
-    this.setState({ sendDetails });
+  handlesend_detailsStateChange = send_details => {
+    this.setState({ send_details });
   };
 
   handleAboutStateChange = about => {
@@ -68,14 +68,14 @@ export default class CompanyCreateForm extends Component {
       skype,
       cooperation,
       map,
-      sendDetails,
+      send_details,
       about,
       interview_detail
     } = this.state;
     const { onCreateCompany } = this.props;
 
-    const sendDetailsEditorState = draftToHtml(
-      convertToRaw(sendDetails.getCurrentContent())
+    const send_detailsEditorState = draftToHtml(
+      convertToRaw(send_details.getCurrentContent())
     );
 
     const aboutEditorState = draftToHtml(
@@ -93,7 +93,7 @@ export default class CompanyCreateForm extends Component {
       skype,
       cooperation,
       map,
-      sendDetails: sendDetailsEditorState,
+      send_details: send_detailsEditorState,
       about: aboutEditorState,
       interview_detail: interview_detailEditorState
     };
@@ -316,7 +316,7 @@ export default class CompanyCreateForm extends Component {
                   <Col>
                     <h6>Send details</h6>
                     <Editor
-                      editorState={this.state.sendDetails}
+                      editorState={this.state.send_details}
                       wrapperClassName="wrapper-class"
                       editorClassName="editor-class"
                       toolbarClassName="toolbar-class"
@@ -326,7 +326,7 @@ export default class CompanyCreateForm extends Component {
                       localization={{
                         locale: "ru"
                       }}
-                      onEditorStateChange={this.handleSendDetailsStateChange}
+                      onEditorStateChange={this.handlesend_detailsStateChange}
                     />
                   </Col>
                 </Row>

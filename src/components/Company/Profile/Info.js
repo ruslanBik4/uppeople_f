@@ -103,7 +103,7 @@ const CompanyProfileInfo = ({
 CompanyProfileInfo.propTypes = {
   companyInfo: PropTypes.shape({
     about: PropTypes.string,
-    sendDetails: PropTypes.string,
+    send_details: PropTypes.string,
     interview_detail: PropTypes.string,
     map: PropTypes.string
   }),
