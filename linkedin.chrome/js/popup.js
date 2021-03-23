@@ -11,7 +11,6 @@ if (url_match !== null) {
 
     $( document ).ready(function (){
         chrome.storage.local.get('access_token', function (token) { // отримання локальних даних
-
             if (token !== null && token.access_token !== undefined ) {
                 CheckLoad();
             } else {
@@ -22,35 +21,21 @@ if (url_match !== null) {
 }
 
 let base_interval = setInterval(function () {
-    if (url !== decodeURIComponent(window.location.href)) {
+    let url_new = decodeURIComponent(window.location.href);
+    if (url !== url_new) {
         console.log("new url")
-        let old_url_match = url.match(url_candidate_expr);
-        let new_url_match = decodeURIComponent(window.location.href).match(url_candidate_expr);
+        let new_url_match = url_new.match(url_candidate_expr);
 
-        if (old_url_match !== null && (new_url_match === null || (old_url_match[0] !== new_url_match[0]))) {
-            $('.linkedin_extension_button').hide();
-            $('.linkedin_extension_button').remove();
-            $('.linkedin_extension_sidenav').hide();
-            $('.linkedin_extension_sidenav').remove();
+        if (url_match !== null && (new_url_match === null || (url_match[0] !== new_url_match[0]))) {
+            $('#linkedin_extension_button').hide().remove();
+            $('#linkedin_extension_sidenav').hide().remove();
         }
-        url = decodeURIComponent(window.location.href);
+        url = url_new;
 
-        if (new_url_match !== null && (old_url_match === null || old_url_match[0] !== new_url_match[0])) {
-            let new_cand_interval_id = setInterval(function () {
-                try {
-                    chrome.storage.local.get('ajax_result', function (ajax_result) { // отримання локальних даних
-                        if (ajax_result && ajax_result.ajax_result !== null && ajax_result.ajax_result.api === '/api/get_candidate_info' && ajax_result.ajax_result.status === 'ok') {
-                            create_sidenav(new_url_match[0]);
-                            clearInterval(new_cand_interval_id);
-                        }
-                    });
-                } catch (e) {
-                    console.log(e)
-                    $('#ext_loader span').text(e)
-                }
-            }, 500);
-
+        if (new_url_match !== null && (url_match === null || url_match[0] !== new_url_match[0])) {
+            CheckLoad();
         }
+        url_match = new_url_match;
     }
 }, 500);
 
@@ -421,7 +406,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
 function parser() {
 
-    let url = decodeURIComponent(window.location.href);
+    let url = url_new;
     let url_match = url.match(url_candidate_expr);
     // let rezume_file = $('#linkedin_extension_sidenav #text_rezume');
 
@@ -514,7 +499,7 @@ function open_popup(url) {
 
 function close_popup() {
     $('#linkedin_extension_overlay').remove();
-    let new_url_match = decodeURIComponent(window.location.href).match(url_candidate_expr);
+    let new_url_match = url_new.match(url_candidate_expr);
 
     console.log("try requests again");
     chrome.runtime.sendMessage({

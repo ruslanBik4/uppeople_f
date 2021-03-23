@@ -203,7 +203,7 @@ export const getCompanyInfo = id => {
           about: data.about,
           map: data.map,
           calendarEvents: data.calendar,
-          sendDetails: data.sendDetails,
+          send_details: data.send_details,
           termsOfCooperation: data.cooperation,
           interview_detail: data.interview_detail,
           contacts: data.contacts,
