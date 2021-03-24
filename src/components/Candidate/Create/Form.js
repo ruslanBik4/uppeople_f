@@ -62,7 +62,7 @@ export default class CandidateCreateForm extends Component {
   constructor(props) {
     super(props);
    
-    this.setState({});
+    this.setState({ });
     console.log(this.state);
   }
 
@@ -134,18 +134,9 @@ export default class CandidateCreateForm extends Component {
     about: EditorState.createEmpty(),
   };
 
-  // componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
-  //   const {vacancies} = [];
-  //   this.setState({vacancies}); 
-  //   console.log(this.props);
-  //   console.log(this.props.vacancies);
-  //   console.log(this.state.vacancies);
-  //   console.log (vacancies);
-
-  // }
-
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+  
+    componentWillReceiveProps () {
+    
     const {vacancies} = this.props;
     this.setState({vacancies}); 
     console.log(this.props);
@@ -153,7 +144,9 @@ export default class CandidateCreateForm extends Component {
     console.log(this.state.vacancies);
     console.log (vacancies);
     
-    }
+  }
+
+  componentDidMount () {
   }
   
   handleAvatarSelected = event => {
@@ -161,7 +154,6 @@ export default class CandidateCreateForm extends Component {
       avatar: event.target.files[0]
     });
   };
-;
   handleAvatarUpload = () => {
     this.props.onUploadAvatar(this.state.avatar);
   };
@@ -180,14 +172,9 @@ export default class CandidateCreateForm extends Component {
 
   handlePlatformChange = value => {
     this.setState({platform_id: value});
-    let vacancies = [];
-        // const vacancies = this.state.vacancies;
-    if (this.state.vacancies !== undefined) {
-      vacancies = this.state.vacancies;
-    } else {
-      vacancies = this.props.vacancies;
-    }
-    console.log (vacancies);
+    let vacancies = this.state.vacancies;
+  
+    console.log (vacancies); 
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({
@@ -328,10 +315,14 @@ export default class CandidateCreateForm extends Component {
       tag_id = tag_id.id
     }
 
-    if (linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/')) {
+       // 'https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/'
+    if (linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zа-я%0-9-]{1,}\/[\?A-Za-zа-я%0-9-=]{0,}')) {
+   
+     
       isValid = false;
       document.querySelector('.linkedIn_div').classList.add('error');
       lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
+      
     } 
 
     if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {

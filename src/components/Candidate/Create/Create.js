@@ -10,13 +10,15 @@ import {
 } from "../../../utils/api/candidate";
 
 export default class CandidateCreate extends Component {
+ 
   state = {
     platforms: [],
     seniorities: [],
     tags: [],
     reasons: [],
     reject_tag: {},
-    defaultSelectedtag: {}
+    defaultSelectedtag: {},
+    vacancies: []
   };
 
   componentDidMount() {
@@ -33,7 +35,7 @@ export default class CandidateCreate extends Component {
         platforms,
         seniorities,
         tags,
-        reasons,
+        reasons, 
         vacancies,
         reject_tag,
         defaultSelectedtag
