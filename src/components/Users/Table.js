@@ -48,7 +48,6 @@ export default class UsersTable extends Component {
     const { users, tabId, usersGroup, onChangeRecruiter } = this.props;
     const { pageOfItems, currentPage } = this.state;
 
-    console.log(pageOfItems, users)
     const usersJSX =
       users.length > 0 &&
         users.map((user, idx) => (
@@ -62,6 +61,8 @@ export default class UsersTable extends Component {
           onDeleteUser={() => this.deleteUser(user.id)}
         />
       ));
+
+    console.log(usersJSX)
 
     const loading = () => (
       <Spinner

@@ -74,7 +74,7 @@ const UsersTableRow = ({
   const userLink = `/users/${id}`;
   const roleName = roles.find(role => role.id === role_id);
 
-    console.log(idx, name)
+    console.log(roleName, name)
 
     return (
     <tr key={id.toString()}>
