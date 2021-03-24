@@ -254,9 +254,12 @@ export default class CandidateProfile extends Component {
         params: {id}
       }
     } = this.props;
-    let sendBTNS = ''
+
+    let sendAppoint = '';
+    let sendBTNS = '';
+
         if (user_id === candidate.recruter_id || candidate.tag.id > 2 ) {
-          sendBTNS = (<ModalConsumer>
+          sendAppoint = (<ModalConsumer>
                 {({showModal}) => (
                     <Button
                         color="primary"
@@ -273,7 +276,7 @@ export default class CandidateProfile extends Component {
                     </Button>
                 )}
               </ModalConsumer>)
-              + (<ModalConsumer>
+          sendBTNS = (<ModalConsumer>
                     {({showModal}) => (
                         <Button
                             color="success"
@@ -443,7 +446,7 @@ export default class CandidateProfile extends Component {
               <Row style={{marginBottom: "1.5rem", textAlign: "center"}}>
                 <Col>
                   <ButtonGroup>
-                    {sendBTNS}
+                    {sendAppoint}{sendBTNS}
                     <Link to={`/candidates/${id}/edit`}>
                       <Button color="warning">Edit candidate</Button>
                     </Link>
