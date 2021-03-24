@@ -51,7 +51,7 @@ export default class UsersTable extends Component {
     console.log(pageOfItems, users)
     const usersJSX =
       users.length > 0 &&
-      pageOfItems.map((user, idx) => (
+        users.map((user, idx) => (
         <UserRow
           key={user.id}
           idx={idx}
@@ -96,11 +96,6 @@ export default class UsersTable extends Component {
               <Suspense fallback={loading()}>{usersJSX}</Suspense>
             </tbody>
           </Table>
-          <PaginationFront
-            items={users}
-            initialPage={currentPage}
-            onChangePage={this.onChangePage}
-          />
         </Col>
       </Row>
     );

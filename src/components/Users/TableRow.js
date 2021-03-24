@@ -77,7 +77,7 @@ const UsersTableRow = ({
   return (
     <tr key={id.toString()}>
       <th scope="row">
-        <Link to={userLink}>{index}</Link>
+        <Link to={userLink}>{index}({id})</Link>
       </th>
       <td>
         <Link to={userLink}>{name}</Link>

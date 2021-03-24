@@ -19,7 +19,7 @@ export const getCandidateProfile = id => {
     }
   })
     .then(response => {
-      if (response.status === 401 || response.status === 404 || response.status === 204) {
+      if (response.status > 400 || response.status === 204) {
         return response.status;
       }
       if (response.ok) {
@@ -66,6 +66,7 @@ export const getCandidateProfile = id => {
           comment: candidate.comment,
           about: candidate.resume,
           resume: candidate.resume,
+          recruter_id: candidate.recruter_id,
           vacancies:candidate.vacancies,
           selectedVacancies: candidate.selectedVacancies
         },

@@ -63,6 +63,7 @@ export default class CandidateProfile extends Component {
       linkedIn: "",
       resume: "",
       comment: "",
+      recruter_id: 0,
       about: ""
     },
     dataSaved: false,
@@ -248,7 +249,7 @@ export default class CandidateProfile extends Component {
       dataSaved
     } = this.state;
     const {
-      user: {role},
+      user: {id: user_id, role},
       match: {
         params: {id}
       }
@@ -374,31 +375,6 @@ export default class CandidateProfile extends Component {
                   <CandidateProfileInfo candidate={candidate}/>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
-                  {/* <Row>*/}
-                  {/*   <Col>*/}
-                  {/*     <OpenClose*/}
-                  {/*       render={(isOpen, open, close) =>*/}
-                  {/*        isOpen ? (*/}
-                  {/*          <WithToggleCardBodyEditor*/}
-                  {/*            content={this.state.candidate.about}*/}
-                  {/*            title="About candidate4"*/}
-                  {/*            isOpen={isOpen}*/}
-                  {/*            close={close}*/}
-                  {/*            onUpdate={this.updateAboutContent}*/}
-                  {/*          />*/}
-                  {/*        ) : (*/}
-                  {/*          <InnerHTMLMarkUp*/}
-                  {/*            title="About candidate5"*/}
-                  {/*            content={this.state.candidate.about}*/}
-                  {/*            isOpen={isOpen}*/}
-                  {/*            open={open}*/}
-                  {/*            close={close}*/}
-                  {/*          />*/}
-                  {/*        )*/}
-                  {/*      }*/}
-                  {/*    />*/}
-                  {/*  </Col>*/}
-                  {/*</Row>*/}
                   <Row>
                     <Col>
                       <CandidateProfileTable
@@ -427,6 +403,7 @@ export default class CandidateProfile extends Component {
               <Row style={{marginBottom: "1.5rem", textAlign: "center"}}>
                 <Col>
                   <ButtonGroup>
+                    (user_id === candidate.recruter_id ?
                     <ModalConsumer>
                       {({showModal}) => (
                         <Button
@@ -462,6 +439,7 @@ export default class CandidateProfile extends Component {
                         </Button>
                       )}
                     </ModalConsumer>
+                    :)
                     <Link to={`/candidates/${id}/edit`}>
                       <Button color="warning">Edit candidate</Button>
                     </Link>
