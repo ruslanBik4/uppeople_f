@@ -320,7 +320,7 @@ export default class CandidateEditForm extends Component {
       selectedVacancies
     } = this.state;
 
-    console.log ( selectedVacancies);
+    console.log (this.state);
     
 
     let isValid = true;
@@ -329,7 +329,7 @@ export default class CandidateEditForm extends Component {
     if (seniority_id.length !== 0)  {
       seniority_id = seniority_id.id
     }
-
+ 
     salary = Number(salary);
 
     if (document.querySelector('.reasons_div > div') !== null) {
