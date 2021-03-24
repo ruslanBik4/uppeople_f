@@ -56,7 +56,7 @@ export default class UsersTable extends Component {
           key={user.id}
           idx={idx}
           {...user}
-          tabId={tabId}
+          tabId={1}
           usersGroup={usersGroup}
           onChangeRecruiter={onChangeRecruiter}
           onDeleteUser={() => this.deleteUser(user.id)}
