@@ -254,43 +254,46 @@ export default class CandidateProfile extends Component {
         params: {id}
       }
     } = this.props;
-    const sendBTNS = (user_id === candidate.recruter_id ?
-        <ModalConsumer>
-          {({showModal}) => (
-              <Button
-                  color="primary"
-                  onClick={() =>
-                      showModal(WithModalAppointInterviewForm, {
-                        isOpenModal: true,
-                        title: "appoint interview",
-                        candidate: candidate,
-                        appointInterview: this.appointInterview
-                      })
-                  }
-              >
-                Appoint interview
-              </Button>
-          )}
-        </ModalConsumer>
-        <ModalConsumer>
-          {({showModal}) => (
-              <Button
-                  color="success"
-                  onClick={() =>
-                      showModal(WithModalSendResumeForm, {
-                        isOpenModal: true,
-                        title: "send resume",
-                        candidateId: candidate.id,
-                        dataForSendResumeForm: dataForSendResumeForm,
-                        sendResume: this.sendResume
-                      })
-                  }
-              >
-                Send resume
-              </Button>
-          )}
-        </ModalConsumer>
-  :)
+    let sendBTNS = ''
+        if (user_id === candidate.recruter_id) {
+          sendBTNS = (<ModalConsumer>
+                {({showModal}) => (
+                    <Button
+                        color="primary"
+                        onClick={() =>
+                            showModal(WithModalAppointInterviewForm, {
+                              isOpenModal: true,
+                              title: "appoint interview",
+                              candidate: candidate,
+                              appointInterview: this.appointInterview
+                            })
+                        }
+                    >
+                      Appoint interview
+                    </Button>
+                )}
+              </ModalConsumer>)
+              + (<ModalConsumer>
+                    {({showModal}) => (
+                        <Button
+                            color="success"
+                            onClick={() =>
+                                showModal(WithModalSendResumeForm, {
+                                  isOpenModal: true,
+                                  title: "send resume",
+                                  candidateId: candidate.id,
+                                  dataForSendResumeForm: dataForSendResumeForm,
+                                  sendResume: this.sendResume
+                                })
+                            }
+                        >
+                          Send resume
+                        </Button>
+                    )}
+                  </ModalConsumer>
+              )
+        }
+
     const candidateProfileInterfaceJSX = () => {
       switch (role) {
         case 4:
