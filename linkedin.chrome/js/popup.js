@@ -499,6 +499,7 @@ function open_popup(url) {
 
 function close_popup() {
     $('#linkedin_extension_overlay').remove();
+    let url_new = decodeURIComponent(window.location.href);
     let new_url_match = url_new.match(url_candidate_expr);
 
     console.log("try requests again");
