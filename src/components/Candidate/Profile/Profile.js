@@ -255,7 +255,7 @@ export default class CandidateProfile extends Component {
       }
     } = this.props;
     let sendBTNS = ''
-        if (user_id === candidate.recruter_id || candidate.tag.id === 3 || candidate.tag.id === 4 ) {
+        if (user_id === candidate.recruter_id || candidate.tag.id > 2 ) {
           sendBTNS = (<ModalConsumer>
                 {({showModal}) => (
                     <Button
