@@ -320,127 +320,137 @@ export default class CandidateEditForm extends Component {
       selectedVacancies
     } = this.state;
 
-    console.log ( selectedVacancies);
+    console.log (this.state);
     
 
     let isValid = true;
     let lblErrors = document.querySelector(".errorlist label");
 
-    if (seniority_id.length !== 0)  {
-      seniority_id = seniority_id.id
-    }
+    try {
 
-    salary = Number(salary);
+      if (seniority_id.length !== 0) {
+        seniority_id = seniority_id.id
+      }
 
-    if (document.querySelector('.reasons_div > div') !== null) {
-      document.querySelector('.reasons_div > div').classList.remove('error');
-    }
+      salary = Number(salary);
 
-    if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
+      if (document.querySelector('.reasons_div > div') !== null) {
+        document.querySelector('.reasons_div > div').classList.remove('error');
+      }
 
-      tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
-      language = typeof language === 'object' ? language.id : '';
+      if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
 
-      
+        tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
+        language = typeof language === 'object' ? language.id : '';
+
+
         tag_id = tag_id.id
-     
-      if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
-        isValid = false;
-        document.querySelector('.linkedIn_div').classList.add('error');
-        lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
-      }
-      
-      // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
-      //   isValid = false;
-      //   document.querySelector('.salary_div').classList.add('error');
-      // }
-      //
-      if (email.length > 0 && !email.match ('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
-        isValid = false;
-        document.querySelector('.email_div').classList.add('error');
-        lblErrors.textContent = ("Неправильный email")
-      }
 
-      const {onEditCandidate} = this.props;
+        if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
+          isValid = false;
+          document.querySelector('.linkedIn_div').classList.add('error');
+          lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
+        }
 
-      if (isValid) {
-        const vacancies = selectedVacancies !== undefined && selectedVacancies.map(item => item.id)
-
-        const candidateInfo = {
-          name,
-          platform_id: platform.id,
-          seniority_id,
-          tag_id,
-          salary,
-          language,
-          phone,
-          skype,
-          email,
-          linkedIn,
-          resume,
-          comment,
-          vacancies
-          // about: aboutEditorState
-        };
-  
-        if (salary === "" || salary === null) {
-          delete candidateInfo.salary
-        }
-  
-        if (language === "") {
-          delete candidateInfo.language
-        }
-  
-        if (phone === "") {
-          delete candidateInfo.phone
-        }
-   
-        if (skype === "") {
-          delete candidateInfo.skype
-        }
-  
-        if (email === "") {
-          delete candidateInfo.email
-        }
-  
-        if (linkedIn === "" || linkedIn === null) {
-          delete candidateInfo.linkedIn
-        }
-  
-        if (resume === "") {
-          delete candidateInfo.resume
-        }
-  
-        if (comment === "") {
-          delete candidateInfo.comment
-        }
-  
-        // if (selectedVacancies.length === 0) {
-        //   delete candidateInfo.selectedVacancies
+        // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
+        //   isValid = false;
+        //   document.querySelector('.salary_div').classList.add('error');
         // }
-  
-        if (selectedReason === ""){
-          delete candidateInfo.selectedReason
+        //
+        if (email.length > 0 && !email.match('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
+          isValid = false;
+          document.querySelector('.email_div').classList.add('error');
+          lblErrors.textContent = ("Неправильный email")
         }
-  
-        if (selectedVacancies === undefined){
-          delete candidateInfo.vacancies
-        }
-        
-  
-        console.log(candidateInfo);
-        onEditCandidate(candidateInfo);
-      }
-    }
 
-    if (!isValid) {
-      let lblErrors = document.querySelector(".errorlist label");
+        const {onEditCandidate} = this.props;
+
+        if (isValid) {
+          const vacancies = selectedVacancies !== undefined && selectedVacancies !== null && selectedVacancies.map(item => item.id)
+
+          const candidateInfo = {
+            name,
+            platform_id: platform.id,
+            seniority_id,
+            tag_id,
+            salary,
+            language,
+            phone,
+            skype,
+            email,
+            linkedIn,
+            resume,
+            comment,
+            vacancies
+            // about: aboutEditorState
+          };
+
+          if (salary === "" || salary === null) {
+            delete candidateInfo.salary
+          }
+
+          if (language === "") {
+            delete candidateInfo.language
+          }
+
+          if (phone === "") {
+            delete candidateInfo.phone
+          }
+
+          if (skype === "") {
+            delete candidateInfo.skype
+          }
+
+          if (email === "") {
+            delete candidateInfo.email
+          }
+
+          if (linkedIn === "" || linkedIn === null) {
+            delete candidateInfo.linkedIn
+          }
+
+          if (resume === "") {
+            delete candidateInfo.resume
+          }
+
+          if (comment === "") {
+            delete candidateInfo.comment
+          }
+
+          // if (selectedVacancies.length === 0) {
+          //   delete candidateInfo.selectedVacancies
+          // }
+
+          if (selectedReason === "") {
+            delete candidateInfo.selectedReason
+          }
+
+          if (selectedVacancies === undefined) {
+            delete candidateInfo.vacancies
+          }
+
+
+          console.log(candidateInfo);
+          console.log(vacancies);
+          onEditCandidate(candidateInfo);
+        }
+      }
+
+      if (!isValid) {
+        if (lblErrors !== undefined) {
+          lblErrors.textContent = 'There are som errors on input data. Please, fix it.'
+        }
+      }
+
+    } catch (error) {
+      const errorMsg = 'There are some errors on preparing send data. Hate to developers:' +error
       if (lblErrors !== undefined) {
-        lblErrors.textContent = 'There are som errors on input data. Please, fix it.'
+        lblErrors.textContent = errorMsg
+      } else {
+        alert(errorMsg)
       }
     }
-
-    };
+  };
 
   ReasonFormGroup = () => {
     const {reasons} = this.props;

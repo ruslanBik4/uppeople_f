@@ -48,20 +48,21 @@ export default class UsersTable extends Component {
     const { users, tabId, usersGroup, onChangeRecruiter } = this.props;
     const { pageOfItems, currentPage } = this.state;
 
-    console.log(pageOfItems, users)
     const usersJSX =
       users.length > 0 &&
-      pageOfItems.map((user, idx) => (
+        users.map((user, idx) => (
         <UserRow
           key={user.id}
           idx={idx}
           {...user}
-          tabId={tabId}
+          tabId={1}
           usersGroup={usersGroup}
           onChangeRecruiter={onChangeRecruiter}
           onDeleteUser={() => this.deleteUser(user.id)}
         />
       ));
+
+    console.log(usersJSX)
 
     const loading = () => (
       <Spinner
@@ -96,11 +97,6 @@ export default class UsersTable extends Component {
               <Suspense fallback={loading()}>{usersJSX}</Suspense>
             </tbody>
           </Table>
-          <PaginationFront
-            items={users}
-            initialPage={currentPage}
-            onChangePage={this.onChangePage}
-          />
         </Col>
       </Row>
     );

@@ -74,10 +74,12 @@ const UsersTableRow = ({
   const userLink = `/users/${id}`;
   const roleName = roles.find(role => role.id === role_id);
 
-  return (
+    console.log(roleName, name)
+
+    return (
     <tr key={id.toString()}>
       <th scope="row">
-        <Link to={userLink}>{index}</Link>
+        <Link to={userLink}>{index}({id})</Link>
       </th>
       <td>
         <Link to={userLink}>{name}</Link>
@@ -89,7 +91,7 @@ const UsersTableRow = ({
         : null
       }
       <td>{phone}</td>
-      <td>{roleName.name_en}</td>
+      <td>{roleName.name_en && 'nothing'}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
         <td>
           <Select

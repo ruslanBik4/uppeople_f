@@ -746,12 +746,7 @@ export const updateCompanyInfoProfile = (id, content) => {
     })
     .then(data => {
       for (const key in data) {
-        if (key === "otpravka") {
-          const sendDetails = {
-            sendDetails: data[key]
-          };
-          return sendDetails;
-        } else if (key === "interview_detail") {
+        if (key === "interview_detail") {
           const interview_details = {
             interview_details: data[key]
           };

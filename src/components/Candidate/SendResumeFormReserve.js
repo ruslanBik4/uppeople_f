@@ -27,7 +27,7 @@ const INITIAL_STATE = {
     name: "",
     vacancy: [],
     contacts: [],
-    sendDetails: ""
+    send_details: ""
   },
   emailSubject: "",
   emailTemplate: "",
@@ -149,7 +149,7 @@ export default class CandidateSendResumeForm extends Component {
   render() {
     const {
       companies,
-      activeCompany: { compId, vacancy, contacts, sendDetails },
+      activeCompany: { compId, vacancy, contacts, send_details },
       emailSubject,
       emailTemplate,
       checkedVacancies,
@@ -236,7 +236,7 @@ export default class CandidateSendResumeForm extends Component {
         </Row>
         <Row style={{ marginBottom: "1.5rem" }}>
           <Col>
-            <InnerHTMLMarkUp content={sendDetails} />
+            <InnerHTMLMarkUp content={send_details} />
           </Col>
           <Col>
             <Input

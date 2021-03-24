@@ -63,6 +63,7 @@ export default class CandidateProfile extends Component {
       linkedIn: "",
       resume: "",
       comment: "",
+      recruter_id: 0,
       about: ""
     },
     dataSaved: false,
@@ -248,11 +249,54 @@ export default class CandidateProfile extends Component {
       dataSaved
     } = this.state;
     const {
-      user: {role},
+      user: {id: user_id, role},
       match: {
         params: {id}
       }
     } = this.props;
+
+    let sendAppoint = '';
+    let sendBTNS = '';
+
+        if (user_id === candidate.recruter_id || candidate.tag.id > 2 ) {
+          sendAppoint = (<ModalConsumer>
+                {({showModal}) => (
+                    <Button
+                        color="primary"
+                        onClick={() =>
+                            showModal(WithModalAppointInterviewForm, {
+                              isOpenModal: true,
+                              title: "appoint interview",
+                              candidate: candidate,
+                              appointInterview: this.appointInterview
+                            })
+                        }
+                    >
+                      Appoint interview
+                    </Button>
+                )}
+              </ModalConsumer>)
+          sendBTNS = (<ModalConsumer>
+                    {({showModal}) => (
+                        <Button
+                            color="success"
+                            onClick={() =>
+                                showModal(WithModalSendResumeForm, {
+                                  isOpenModal: true,
+                                  title: "send resume",
+                                  candidateId: candidate.id,
+                                  dataForSendResumeForm: dataForSendResumeForm,
+                                  sendResume: this.sendResume
+                                })
+                            }
+                        >
+                          Send resume
+                        </Button>
+                    )}
+                  </ModalConsumer>
+              )
+        }
+
     const candidateProfileInterfaceJSX = () => {
       switch (role) {
         case 4:
@@ -374,31 +418,6 @@ export default class CandidateProfile extends Component {
                   <CandidateProfileInfo candidate={candidate}/>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
-                  {/* <Row>*/}
-                  {/*   <Col>*/}
-                  {/*     <OpenClose*/}
-                  {/*       render={(isOpen, open, close) =>*/}
-                  {/*        isOpen ? (*/}
-                  {/*          <WithToggleCardBodyEditor*/}
-                  {/*            content={this.state.candidate.about}*/}
-                  {/*            title="About candidate4"*/}
-                  {/*            isOpen={isOpen}*/}
-                  {/*            close={close}*/}
-                  {/*            onUpdate={this.updateAboutContent}*/}
-                  {/*          />*/}
-                  {/*        ) : (*/}
-                  {/*          <InnerHTMLMarkUp*/}
-                  {/*            title="About candidate5"*/}
-                  {/*            content={this.state.candidate.about}*/}
-                  {/*            isOpen={isOpen}*/}
-                  {/*            open={open}*/}
-                  {/*            close={close}*/}
-                  {/*          />*/}
-                  {/*        )*/}
-                  {/*      }*/}
-                  {/*    />*/}
-                  {/*  </Col>*/}
-                  {/*</Row>*/}
                   <Row>
                     <Col>
                       <CandidateProfileTable
@@ -427,41 +446,7 @@ export default class CandidateProfile extends Component {
               <Row style={{marginBottom: "1.5rem", textAlign: "center"}}>
                 <Col>
                   <ButtonGroup>
-                    <ModalConsumer>
-                      {({showModal}) => (
-                        <Button
-                          color="primary"
-                          onClick={() =>
-                            showModal(WithModalAppointInterviewForm, {
-                              isOpenModal: true,
-                              title: "appoint interview",
-                              candidate: candidate,
-                              appointInterview: this.appointInterview
-                            })
-                          }
-                        >
-                          Appoint interview
-                        </Button>
-                      )}
-                    </ModalConsumer>
-                    <ModalConsumer>
-                      {({showModal}) => (
-                        <Button
-                          color="success"
-                          onClick={() =>
-                            showModal(WithModalSendResumeForm, {
-                              isOpenModal: true,
-                              title: "send resume",
-                              candidateId: candidate.id,
-                              dataForSendResumeForm: dataForSendResumeForm,
-                              sendResume: this.sendResume
-                            })
-                          }
-                        >
-                          Send resume
-                        </Button>
-                      )}
-                    </ModalConsumer>
+                    {sendAppoint}{sendBTNS}
                     <Link to={`/candidates/${id}/edit`}>
                       <Button color="warning">Edit candidate</Button>
                     </Link>

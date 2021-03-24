@@ -75,7 +75,7 @@ export default class CompanyProfile extends Component {
       about: null,
       map: "",
       calendarEvents: [],
-      sendDetails: null,
+      send_details: null,
       interview_details: null,
       sending: null,
       termsOfCooperation: "",
