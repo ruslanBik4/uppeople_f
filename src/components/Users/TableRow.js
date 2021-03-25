@@ -89,7 +89,7 @@ const UsersTableRow = ({
         : null
       }
       <td>{phone}</td>
-      <td>{roleName.name_en && 'nothing'}</td>
+      <td>{roleName.name_en}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
         <td>
           <Select
