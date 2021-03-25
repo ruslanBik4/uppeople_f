@@ -1,4 +1,4 @@
-let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/[a-zа-яії0-9-]*\/\.*';
+let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/[\w-]*\/\.*';
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tabs) {
         // chrome.storage.local.set({candidate: null});
