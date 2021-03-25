@@ -55,14 +55,12 @@ export default class UsersTable extends Component {
           key={user.id}
           idx={idx}
           {...user}
-          tabId={1}
+          tabId={tabId}
           usersGroup={usersGroup}
           onChangeRecruiter={onChangeRecruiter}
           onDeleteUser={() => this.deleteUser(user.id)}
         />
       ));
-
-    console.log(usersJSX)
 
     const loading = () => (
       <Spinner
