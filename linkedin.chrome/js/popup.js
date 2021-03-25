@@ -405,7 +405,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 // async function parser() {
 
 function parser() {
-
+    let url_new = decodeURIComponent(window.location.href);
     let url = url_new;
     let url_match = url.match(url_candidate_expr);
     // let rezume_file = $('#linkedin_extension_sidenav #text_rezume');
@@ -499,6 +499,7 @@ function open_popup(url) {
 
 function close_popup() {
     $('#linkedin_extension_overlay').remove();
+    let url_new = decodeURIComponent(window.location.href);
     let new_url_match = url_new.match(url_candidate_expr);
 
     console.log("try requests again");

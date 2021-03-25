@@ -320,7 +320,7 @@ export default class CandidateEditForm extends Component {
       selectedVacancies
     } = this.state;
 
-    console.log ( selectedVacancies);
+    console.log (this.state);
     
 
     let isValid = true;
@@ -366,7 +366,7 @@ export default class CandidateEditForm extends Component {
         const {onEditCandidate} = this.props;
 
         if (isValid) {
-          const vacancies = selectedVacancies !== undefined && selectedVacancies.map(item => item.id)
+          const vacancies = selectedVacancies !== undefined && selectedVacancies !== null && selectedVacancies.map(item => item.id)
 
           const candidateInfo = {
             name,
@@ -431,6 +431,7 @@ export default class CandidateEditForm extends Component {
 
 
           console.log(candidateInfo);
+          console.log(vacancies);
           onEditCandidate(candidateInfo);
         }
       }
