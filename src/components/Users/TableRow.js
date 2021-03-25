@@ -61,6 +61,7 @@ const UsersTableRow = ({
   email,
   updateCount,
   createCount,
+  sendCount,
   phone,
   role_id,
   tabId,
@@ -85,7 +86,7 @@ const UsersTableRow = ({
       <td>{email}</td>
       {
       tabId === "1" ?
-        <td>{updateCount}/{createCount}</td>
+        <td>{updateCount}/{createCount}/{sendCount}</td>
         : null
       }
       <td>{phone}</td>
