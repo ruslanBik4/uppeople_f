@@ -63,6 +63,7 @@ const UsersTableRow = ({
   createCount,
   sendCount,
   phone,
+  last_login,
   role_id,
   tabId,
   usersGroup,
@@ -91,6 +92,7 @@ const UsersTableRow = ({
       }
       <td>{phone}</td>
       <td>{roleName.name_en}</td>
+      <td>{last_login}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
         <td>
           <Select

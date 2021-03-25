@@ -88,6 +88,7 @@ export default class UsersTable extends Component {
                 <th scope="col">Phone</th>
                 <th scope="col">Role</th>
                 {usersGroup === "freelancers" && <th scope="col">Recruiter</th>}
+                <th scope="col">Last login</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
