@@ -112,13 +112,13 @@ export default class Users extends Component {
     const tabPanesForAdmin = //Object.keys(users).map((key, idx) => {
       // const index = (idx + 1).toString();
       // return users[key] !== undefined && users[key] !== null ? (
-        <TabPane tabId={1} key={'Staff'}>
+        <TabPane tabId="1" key='Staff'>
           <UsersTable
             users={users}
             usersGroup={'Staff'}
             onChangeRecruiter={this.changeRecruiterForFreelancer}
             onDeleteUser={this.deleteUser}
-            tabId={1}
+            tabId="1"
           />
         </TabPane>
     //   ) : (
@@ -126,6 +126,7 @@ export default class Users extends Component {
     //   );
     // });
 
+    console.log(role, tabPanesForAdmin)
 
     return (
       <>

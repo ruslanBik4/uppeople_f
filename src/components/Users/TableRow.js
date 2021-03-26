@@ -61,7 +61,9 @@ const UsersTableRow = ({
   email,
   updateCount,
   createCount,
+  sendCount,
   phone,
+  last_login,
   role_id,
   tabId,
   usersGroup,
@@ -74,8 +76,6 @@ const UsersTableRow = ({
   const userLink = `/users/${id}`;
   const roleName = roles.find(role => role.id === role_id);
 
-    console.log(roleName, name)
-
     return (
     <tr key={id.toString()}>
       <th scope="row">
@@ -87,11 +87,12 @@ const UsersTableRow = ({
       <td>{email}</td>
       {
       tabId === "1" ?
-        <td>{updateCount}/{createCount}</td>
+        <td>{updateCount}/{createCount}/{sendCount}</td>
         : null
       }
       <td>{phone}</td>
-      <td>{roleName.name_en && 'nothing'}</td>
+      <td>{roleName.name_en}</td>
+      <td>{last_login}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
         <td>
           <Select
