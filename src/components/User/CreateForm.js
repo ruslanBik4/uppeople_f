@@ -56,6 +56,9 @@ export default class UserCreateForm extends Component {
 
     const { onAddUser, onRequestClose } = this.props;
     const user = this.state;
+    user.role = String(user.role);
+    console.log(user.role)
+
 
     onAddUser(user);
 

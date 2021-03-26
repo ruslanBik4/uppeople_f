@@ -123,7 +123,7 @@ class CandidateEdit extends Component {
                             input.classList.add('error');
                             input.focus();
                         }
-
+ 
                     })
                 } else {
                     alert(data.formErrors)
