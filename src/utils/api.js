@@ -191,6 +191,9 @@ export const getDataForAdminDashboard = async () => {
         "Content-Type": "application/json"
       }
     });
+      if (response.status > 400) {
+        return response.status;
+      }
     if (response.ok) {
       return response.json();
     }

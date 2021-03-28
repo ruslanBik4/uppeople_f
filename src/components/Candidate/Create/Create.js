@@ -64,7 +64,7 @@ export default class CandidateCreate extends Component {
         if (data === 201) {
             this.props.history.push(`/candidates/`)
         } else if (data === 401) {
-            this.props.history.push('/login/')
+          this.props.history.push('/login/');
         }
           else if (data === 1) {
             lblErrors.textContent = ("Ошибка ввода: 1");

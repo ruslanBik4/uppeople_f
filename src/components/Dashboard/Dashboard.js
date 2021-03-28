@@ -51,7 +51,10 @@ export default class Dashboard extends Component {
 
   componentDidMount() {
     getDataForAdminDashboard().then(data => {
-      if (data) {
+      if (data === 401) {
+         this.props.history.push('/login/');
+          return
+      } else {
         const dashboardData = {
           companiesWithCandidates: data.countRevInterComp,
           vacanciesOnCandidates: data.countRevInterVac,
