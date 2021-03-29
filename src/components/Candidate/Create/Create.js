@@ -8,7 +8,7 @@ import {
   uploadCandidateAvatar,
   createNewCandidate
 } from "../../../utils/api/candidate";
-
+ 
 export default class CandidateCreate extends Component {
  
   state = {
@@ -17,7 +17,7 @@ export default class CandidateCreate extends Component {
     tags: [],
     reasons: [],
     reject_tag: {},
-    defaultSelectedtag: {},
+    defaultSelectedtag: {}, 
     vacancies: []
   };
 

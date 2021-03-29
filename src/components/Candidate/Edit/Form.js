@@ -397,6 +397,11 @@ export default class CandidateEditForm extends Component {
             delete candidateInfo.phone
           }
 
+          if (vacancies === false) {
+            delete candidateInfo.vacancies
+          }
+
+
           if (skype === "") {
             delete candidateInfo.skype
           }
