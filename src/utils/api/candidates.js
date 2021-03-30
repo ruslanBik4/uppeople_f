@@ -24,7 +24,11 @@ export const getAllCandidates = page => {
       if (response.ok||response.status === 400) {
         return response.json();
       }
+<<<<<<< HEAD
       if (response.status >= 401) {
+=======
+      if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
         return response.status;
       }
 
@@ -52,7 +56,11 @@ export const getSentCandidates = page => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -79,7 +87,11 @@ export const getCandidatesFromFreelancers = page => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -111,7 +123,11 @@ export const filterAndSortAllCandidates = (page, filterAndSort) => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -143,7 +159,11 @@ export const filterAndSortSentCandidates = (page, filterAndSort) => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -179,7 +199,11 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -219,7 +243,11 @@ export const getCandidatesAmountByTags = (selectedRecruiter, selectedCompany, se
       if (response.ok||response.status === 400) {
         return response.json();
       }
+<<<<<<< HEAD
       if (response.status >= 401) {
+=======
+      if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
         return response.status;
       }
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -248,7 +276,11 @@ export const getStatuses = () => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -284,7 +316,11 @@ export const getCandidatesAmountByVacancies = (selectedRecruiter, selectedCompan
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -320,7 +356,11 @@ export const getCandidatesGrouped = (selectedRecruiter, selectedCompany) => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -357,7 +397,11 @@ export const changeStatus = (candidateId, vacancyId, companyId, statusId) => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 
@@ -393,7 +437,11 @@ export const deleteSentCandidateFromVacancy = (candidateId, vacancyId, companyId
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
 

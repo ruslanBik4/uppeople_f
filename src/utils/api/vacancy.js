@@ -76,7 +76,11 @@ export const createNewVacancy = async vacancy => {
     if (response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
     throw new Error(`${response.statusText}`);
@@ -109,7 +113,11 @@ export const updateVacancy = (id, vacancy) => {
       if (response.status === 400) {
         return response.json();
       }
+<<<<<<< HEAD
       if (response.status >= 401) {
+=======
+      if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
         return response.status;
       }
 
@@ -158,7 +166,11 @@ export const deleteVacancy = async id => {
     if (response.status === 400||response.ok) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
     throw new Error(`${response.statusText}`);
@@ -195,7 +207,11 @@ export const getVacancies = (company_id, isActive = false, withRecruiters = fals
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status
     }
 
@@ -225,7 +241,11 @@ export const getTags = async params => {
     if (response.ok||response.status === 400) {
       return response.json();
     }
+<<<<<<< HEAD
     if (response.status >= 401) {
+=======
+    if (response.status > 400) {
+>>>>>>> 2d2f5bd3a8efa7ba83e2dc9be70b4ecdf6eec4ab
       return response.status;
     }
     throw new Error(`${response.statusText}`);
