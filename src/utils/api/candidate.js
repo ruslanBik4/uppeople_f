@@ -7,7 +7,7 @@ const getToken = () => localStorage.getItem("token");
  * Fetches candidate's profile from an api by id
  *
  * @param {Number} id candidate id
- * @returns {Promise} Promise object represents operation result
+ * @returns {Promise} Promise object represents operation result 
  */
 export const getCandidateProfile = id => {
   const token = getToken();
