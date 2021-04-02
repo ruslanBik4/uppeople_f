@@ -385,54 +385,54 @@ export default class CandidateEditForm extends Component {
             // about: aboutEditorState
           };
 
-          if (salary === "" || salary === null) {
-            delete candidateInfo.salary
-          }
+          // if (salary === "" || salary === null) {
+          //   delete candidateInfo.salary
+          // }
 
-          if (language === "") {
-            delete candidateInfo.language
-          }
+          // if (language === "") {
+          //   delete candidateInfo.language
+          // }
 
-          if (phone === "") {
-            delete candidateInfo.phone
-          }
+          // if (phone === "") {
+          //   delete candidateInfo.phone
+          // }
 
           if (vacancies === false) {
             delete candidateInfo.vacancies
           }
 
 
-          if (skype === "") {
-            delete candidateInfo.skype
-          }
-
-          if (email === "") {
-            delete candidateInfo.email
-          }
-
-          if (linkedIn === "" || linkedIn === null) {
-            delete candidateInfo.linkedIn
-          }
-
-          if (resume === "") {
-            delete candidateInfo.resume
-          }
-
-          if (comment === "") {
-            delete candidateInfo.comment
-          }
-
-          // if (selectedVacancies.length === 0) {
-          //   delete candidateInfo.selectedVacancies
+          // if (skype === "") {
+          //   delete candidateInfo.skype
           // }
 
-          if (selectedReason === "") {
-            delete candidateInfo.selectedReason
-          }
+          // if (email === "") {
+          //   delete candidateInfo.email
+          // }
 
-          if (selectedVacancies === undefined) {
-            delete candidateInfo.vacancies
-          }
+          // if (linkedIn === "" || linkedIn === null) {
+          //   delete candidateInfo.linkedIn
+          // }
+
+          // if (resume === "") {
+          //   delete candidateInfo.resume
+          // }
+
+          // if (comment === "") {
+          //   delete candidateInfo.comment
+          // }
+
+          // // if (selectedVacancies.length === 0) {
+          // //   delete candidateInfo.selectedVacancies
+          // // }
+
+          // if (selectedReason === "") {
+          //   delete candidateInfo.selectedReason
+          // }
+
+          // if (selectedVacancies === undefined) {
+          //   delete candidateInfo.vacancies
+          // }
 
 
           console.log(candidateInfo);

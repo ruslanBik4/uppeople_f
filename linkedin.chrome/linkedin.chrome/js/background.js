@@ -1,8 +1,11 @@
-let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/\S*';
+let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/\.+';
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tabs) {
         // chrome.storage.local.set({candidate: null});
         let url_match = decodeURIComponent(tabs.url).match(url_candidate_expr);
+        console.log (tabs.url)
+        console.log (decodeURIComponent(tabs.url))
+        console.log (url_match)
         if (url_match !== null) {
             if (changeInfo.status === 'loading') {
                 // if (changeInfo.status === 'complete') {

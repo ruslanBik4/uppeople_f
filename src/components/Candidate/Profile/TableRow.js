@@ -92,7 +92,7 @@ CandidateProfileTableRow.propTypes = {
     id: PropTypes.number,
     nazva: PropTypes.string
   }),
-  comapny: PropTypes.shape({
+  company: PropTypes.shape({
     id: PropTypes.number,
     nazva: PropTypes.string
   }),
