@@ -3,12 +3,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import {
+  Button,
   Card,
   CardBody,
   CardImg,
   CardTitle,
+  Col,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Row
 } from "reactstrap";
 // Instruments
 import noAvatar from "../../../assets/img/no_avatar.png";
@@ -43,6 +46,12 @@ const CandidateProfileInfo = ({
           alt="avatar"
         />
       </div>
+      <Row md="12" style={{justifyContent: "flex-center"}}>
+        <Button style={{position: "relative", left: "44%", top: "3px", width: "100px", background: "rgb(96, 134, 234)"}} type="submit" block>
+        <font color="black">Re-contact</font>
+        
+        </Button>
+      </Row>
       <CardTitle style={{textAlign: "center", fontSize: "1rem"}}>
         {name}
       </CardTitle>
@@ -130,3 +139,4 @@ CandidateProfileInfo.defaultProps = {
 };
 
 export default CandidateProfileInfo;
+ 

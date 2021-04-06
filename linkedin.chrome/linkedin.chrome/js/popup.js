@@ -1,7 +1,7 @@
 let url = decodeURIComponent(window.location.href);
 console.log(url)
 let mouse_choice = null;
-let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/\.+';
+let url_candidate_expr = 'https:\/\/www.linkedin.com\/in\/\.+\/';
 let url_match = url.match(url_candidate_expr);
 if (url_match !== null) {
     $('body').prepend("<div id='ext_loader' class='ext_loader'>"
