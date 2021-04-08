@@ -372,7 +372,7 @@ export default class CandidateProfile extends Component {
               </Row>
               <Row>
                 <Col lg={6} md={6} sm={12}>
-                  <CandidateProfileInfo candidate={candidate, HandleReContactClick}/>
+                  <CandidateProfileInfo candidate={candidate} handleRecontactClick={this.handleReContactClick} />
                 </Col>
                 <Col lg={6} md={6} sm={12}>
                   {/* <Row>*/}
@@ -448,7 +448,7 @@ export default class CandidateProfile extends Component {
               </Row>
               <Row>
                 <Col lg={6} md={6} sm={12}>
-                  <CandidateProfileInfo candidate={candidate}/>
+                  <CandidateProfileInfo candidate={candidate} handleRecontactClick={this.handleReContactClick}/>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
                   <Row>
@@ -511,7 +511,7 @@ export default class CandidateProfile extends Component {
                 <Col md={8} sm={12}>
                   <Row>
                     <Col md={12}>
-                      <CandidateProfileInfo candidate={candidate}/>
+                      <CandidateProfileInfo candidate={candidate} handleRecontactClick={this.handleReContactClick}/>
 
                     </Col>
                     {/*<Col md={12}>*/}

@@ -33,19 +33,12 @@ import {
   editCandidateComment,
   deleteCandidateComment,
   reContactCandidate,
-  // handleReContactClick
+  // handleRecontactClick
 } from "../../../utils/api/candidate";
 // import logs from "/Profile.js";
 import noAvatar from "../../../assets/img/no_avatar.png";
 import { ModalConsumer } from "../../../providers/ModalProvider";
 
-// static propTypes = {
-  
-//   handleReContactClick: PropTypes.func.isRequired,
-  
-
-
-// console.log(handleReContactClick)
  
 const CandidateProfileInfo = ({
                                 candidate: {
@@ -63,7 +56,7 @@ const CandidateProfileInfo = ({
                                   resume,
                                   comment
                                 },
-                                HandleReContactClick
+                                handleRecontactClick: handleRecontactClick
                               }) => (
                               
                                 
@@ -83,7 +76,7 @@ const CandidateProfileInfo = ({
          <Row md="12" style={{justifyContent: "flex-center"}}>
             <Button
               style={{position: "relative", left: "44%", top: "3px", width: "100px", background: "rgb(96, 134, 234)"}}
-              onClick={handleReContactClick}
+              onClick={handleRecontactClick}
             >
                 Recontact
             </Button>
@@ -156,35 +149,30 @@ const CandidateProfileInfo = ({
 
 
 CandidateProfileInfo.propTypes = {
-  candidate: PropTypes.shape({
-    avatar: PropTypes.string,
-    name: PropTypes.string,
-    platform: PropTypes.shape({
-      id: PropTypes.number,
-      nazva: PropTypes.string,
-      handleReContactClick: PropTypes.func.isRequired
+    candidate: PropTypes.shape({
+        avatar: PropTypes.string,
+        name: PropTypes.string,
+        platform: PropTypes.shape({
+            id: PropTypes.number,
+            nazva: PropTypes.string,
+        }),
+        date: PropTypes.string,
+        salary: PropTypes.string,
+        language: PropTypes.string,
+        phone: PropTypes.string,
+        email: PropTypes.string,
+        skype: PropTypes.string,
+        linkedIn: PropTypes.string,
+        resume: PropTypes.string,
+        comment: PropTypes.string,
     }),
-    date: PropTypes.string,
-    salary: PropTypes.string,
-    language: PropTypes.string,
-    phone: PropTypes.string,
-    email: PropTypes.string,
-    skype: PropTypes.string,
-    linkedIn: PropTypes.string,
-    resume: PropTypes.string,
-    comment: PropTypes.string,
-    handleReContactClick: PropTypes.func.isRequired
-  })
+    handleRecontactClick: PropTypes.func.isRequired
 };
 
-const {
-  handleReContactClick
-} = this.state;
-console.log(handleReContactClick)
 
 CandidateProfileInfo.defaultProps = {
   candidate: {},
-  handleReContactClick: PropTypes.func.isRequired
+    handleRecontactClick: function (){alert("default")}
 };
 
 export default CandidateProfileInfo 
