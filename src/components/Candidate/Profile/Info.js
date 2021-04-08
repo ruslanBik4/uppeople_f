@@ -31,7 +31,8 @@ const CandidateProfileInfo = ({
                                   linkedIn,
                                   resume,
                                   comment
-                                }
+                                },
+                                HandleReContactClick
                               }) => (
   <Card>
     <CardBody>

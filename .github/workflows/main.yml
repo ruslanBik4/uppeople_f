@@ -19,8 +19,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install all modules
-        run: |
-          npm run build
+        run:  |
+        yarn reset
+        yarn
 
       - name: Build SPA
         run: yarn build:spa
