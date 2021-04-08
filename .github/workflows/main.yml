@@ -1,0 +1,45 @@
+name: SPA
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14.x
+
+      - name: Check out code into the Monorepo directory
+        uses: actions/checkout@v2
+
+      - name: Install all modules
+        run:  |
+        yarn reset
+        yarn
+
+      - name: Build SPA
+        run: yarn build:spa
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: SPA
+          path: build
+
+      - name: Copy SPA via scp
+        uses: appleboy/scp-action@master
+        env:
+          KEY: ${{ secrets.SSH_KEY }}
+          HOST: ${{ secrets.SSH_PROD_HOST }}
+          USERNAME: ${{ secrets.SSH_PROD_USER }}
+        with:
+          rm: true
+          source: "packages/spa/build"
+          target: "/opt/uppeople/www"
+          strip_components: 3

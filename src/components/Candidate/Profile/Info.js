@@ -61,12 +61,9 @@ const CandidateProfileInfo = ({
                                   skype,
                                   linkedIn,
                                   resume,
-                                  comment,
-                                  id,
-                                  logs
+                                  comment
                                 },
-                                // handleReContactClick
-                                
+                                HandleReContactClick
                               }) => (
                               
                                 

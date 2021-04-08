@@ -372,7 +372,7 @@ export default class CandidateProfile extends Component {
               </Row>
               <Row>
                 <Col lg={6} md={6} sm={12}>
-                <CandidateProfileInfo candidate={candidate} handleReContact={this.handleReContactClick}/>
+                  <CandidateProfileInfo candidate={candidate, HandleReContactClick}/>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
                   {/* <Row>*/}
