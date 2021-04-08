@@ -1,8 +1,8 @@
-name: SPA
+name: SPA Dev
 
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
           yarn
 
       - name: Build SPA
-        run: yarn build:spa
+        run: yarn build:spa:dev
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
@@ -40,6 +40,6 @@ jobs:
           USERNAME: ${{ secrets.SSH_PROD_USER }}
         with:
           rm: true
-          source: "packages/spa/build"
-          target: "/opt/uppeople/www"
+          source: "build"
+          target: "/opt/uppeople/dev/www"
           strip_components: 3
