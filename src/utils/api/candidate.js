@@ -137,6 +137,65 @@ export const addCandidateComment = async (id, comment) => {
   }
 };
 
+export const reContactCandidate = (id) => {
+  const token = getToken();
+  try {
+    const response = fetch(`${URL}/main/reContactCandidate/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+    });
+    if (response.status > 400 || response.status === 201) {
+      return response.status;
+    }
+    if (response.ok) {
+      return "response.json()";
+    }
+    throw new Error(`${response.statusText}`);
+  } catch (error) {
+    console.log("error in fetch: ", error);
+    return error;
+  };
+}
+
+export const HandleRecontactClick = (id) => {
+  const token = getToken();
+  
+    const response = fetch(`${URL}/main/reContactCandidate/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+    });   
+    if (response.status === 401 || response.status === 404 || response.status === 204) {
+      return response.status;
+    }
+    if (response.ok) {
+      return response.json();
+    }
+    
+
+
+  const response1 = fetch(`${URL}/admin/returnLogsForCand/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+  });
+  if (response1.status === 401 || response1.status === 404 || response1.status === 204) {
+    return response1.status;
+  }
+  if (response1.ok) {
+    return response1.json();
+  }
+  
+
+};
+
 /**
  * Edit candidates comment
  *
@@ -569,6 +628,7 @@ export const getCadidateLogs = async id => {
     });
     if (response.ok) {
       return response.json();
+      // this.setState({ logs }) ;
     }
     throw new Error(`${response.statusText}`);
   } catch (error) {

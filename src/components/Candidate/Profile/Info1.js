@@ -33,21 +33,27 @@ import {
   editCandidateComment,
   deleteCandidateComment,
   reContactCandidate,
-  // handleReContactClick
+  HandleRecontactClick
 } from "../../../utils/api/candidate";
 // import logs from "/Profile.js";
 import noAvatar from "../../../assets/img/no_avatar.png";
 import { ModalConsumer } from "../../../providers/ModalProvider";
 
-// static propTypes = {
-  
-//   handleReContactClick: PropTypes.func.isRequired,
-  
 
-
-// console.log(handleReContactClick)
  
-const CandidateProfileInfo = ({
+
+
+ 
+ getCadidateLogs(id).then(logs => {
+  this.setState({logs});
+  console.log(this.state.logs)
+});
+
+
+
+
+
+  const CandidateProfileInfo = ({
                                 candidate: {
                                   avatar,
                                   name,
@@ -64,11 +70,8 @@ const CandidateProfileInfo = ({
                                   comment,
                                   id,
                                   logs
-                                },
-                                // handleReContactClick
-                                
+                                }
                               }) => (
-                              
                                 
     <Card>
       <CardBody>
@@ -86,8 +89,27 @@ const CandidateProfileInfo = ({
          <Row md="12" style={{justifyContent: "flex-center"}}>
             <Button
               style={{position: "relative", left: "44%", top: "3px", width: "100px", background: "rgb(96, 134, 234)"}}
-              onClick={handleReContactClick}
-            >
+              // onClick={reContactCandidate(id)}
+              onClick={()  => {reContactCandidate(id).then(data => {
+                if (data === 401) {
+                  this.props.history.push('/login/')
+                } else if (data > 400) {
+                  alert.data
+                } else {
+                    getCadidateLogs(id).then(logs => {
+                        if (logs === 401) {
+                            this.props.history.push('/login/') 
+                        } else if (logs > 401) {
+                            alert.data
+                        } else {
+                            this.setState({logs});
+                            console.log(logs)
+                        }
+                    })
+                }
+              });}}
+              >
+            
                 Recontact
             </Button>
           </Row>
@@ -152,7 +174,8 @@ const CandidateProfileInfo = ({
     </CardBody>
   </Card>
   );
-  
+
+  let id = CandidateProfileInfo.id;
   
  
 
@@ -164,8 +187,7 @@ CandidateProfileInfo.propTypes = {
     name: PropTypes.string,
     platform: PropTypes.shape({
       id: PropTypes.number,
-      nazva: PropTypes.string,
-      handleReContactClick: PropTypes.func.isRequired
+      nazva: PropTypes.string
     }),
     date: PropTypes.string,
     salary: PropTypes.string,
@@ -175,19 +197,12 @@ CandidateProfileInfo.propTypes = {
     skype: PropTypes.string,
     linkedIn: PropTypes.string,
     resume: PropTypes.string,
-    comment: PropTypes.string,
-    handleReContactClick: PropTypes.func.isRequired
+    comment: PropTypes.string
   })
 };
 
-const {
-  handleReContactClick
-} = this.state;
-console.log(handleReContactClick)
-
 CandidateProfileInfo.defaultProps = {
-  candidate: {},
-  handleReContactClick: PropTypes.func.isRequired
+  candidate: {}
 };
 
 export default CandidateProfileInfo 

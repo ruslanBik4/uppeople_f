@@ -32,6 +32,7 @@ import {
   addCandidateComment,
   editCandidateComment,
   deleteCandidateComment,
+  reContactCandidate
 } from "../../../utils/api/candidate";
 import {updateCandidateStatus} from "../../../utils/api/company";
 import CandidateProfileComments from "./Comments";
@@ -77,14 +78,24 @@ export default class CandidateProfile extends Component {
   componentDidMount() {
     const {id} = this.props.match.params;
 
-    getCandidateProfile(id).then(candidateProfile => {
-      if (candidateProfile === 401) {
+    getCandidateProfile(id).then(id => {
+      if (id === 401) {
         this.props.history.push('/login/')
       } else {
-        this.setState({...candidateProfile});
-        console.log(candidateProfile);
+        this.setState({...id});
+        console.log(id);
       }
     });
+
+    // reContactCandidate(id).then(candidateProfile => {
+    //   if (candidateProfile === 401) {
+    //     this.props.history.push('/login/')
+    //   } else {
+    //     import CandidateProfileLogsList from "./LogsList";
+    //     this.setState({...candidateProfile});
+    //     console.log(id);
+    //   }
+    // });
 
 
     getDataForSendResumeForm(id).then(dataForSendResumeForm => {
@@ -97,6 +108,7 @@ export default class CandidateProfile extends Component {
       this.setState({
         logs
       });
+      console.log(this.state.logs)
     });
 
     getCandidateComments(id).then(comments => {
@@ -220,6 +232,27 @@ export default class CandidateProfile extends Component {
     });
   };
 
+  handleReContactClick = () => {
+    const {id} = this.props.match.params;
+    const data = reContactCandidate(id); 
+                  if (data === 401) {
+                    this.props.history.push('/login/')
+                  } else if (data > 400) {
+                    alert(data)
+                  } else {
+                      getCadidateLogs(id).then(logs => {
+                          if (logs === 401) {
+                              this.props.history.push('/login/') 
+                          } else if (logs > 400) {
+                              alert(data)
+                          } else {
+                              this.setState({logs});
+                              console.log(logs)
+                          }
+                      })
+                  }
+  };
+
   deleteComment = commentId => {
     const {id} = this.props.match.params;
 
@@ -339,7 +372,7 @@ export default class CandidateProfile extends Component {
               </Row>
               <Row>
                 <Col lg={6} md={6} sm={12}>
-                  <CandidateProfileInfo candidate={candidate}/>
+                <CandidateProfileInfo candidate={candidate} handleReContact={this.handleReContactClick}/>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
                   {/* <Row>*/}
