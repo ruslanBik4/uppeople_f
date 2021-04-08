@@ -19,12 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install all modules
-        run: |
-          yarn reset
-          yarn
-
-      - name: Build SPA
-        run: yarn build:spa:dev
+        run: npm run build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
