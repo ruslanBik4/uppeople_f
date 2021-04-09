@@ -5,6 +5,14 @@ on:
     branches: [ dev ]
 
 jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 0
+
   build:
     name: Build
     runs-on: ubuntu-latest
