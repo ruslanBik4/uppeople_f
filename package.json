@@ -93,7 +93,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:dev": "env-cmd -f .env.dev yarn build",
+    "build:dev": "CI='' env-cmd -f .env.dev yarn build",
     "reset": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",
