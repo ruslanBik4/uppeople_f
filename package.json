@@ -119,6 +119,5 @@
       "!src/serviceWorker.js",
       "!src/polyfill.js"
     ]
-  },
-
+  }
 }
