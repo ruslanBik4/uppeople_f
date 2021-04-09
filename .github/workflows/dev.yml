@@ -53,4 +53,4 @@ jobs:
           rm: true
           source: "build"
           target: "/opt/uppeople/dev"
-          strip_components: 3
+# strip_components: 3
