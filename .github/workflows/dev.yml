@@ -32,6 +32,8 @@ jobs:
           yarn --suppress-warnings
 
       - name: build all modules
+        env:
+          NODE_NO_WARNINGS: 1
         run: yarn build:dev
 
       - name: Upload a Build Artifact
