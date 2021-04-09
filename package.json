@@ -89,11 +89,11 @@
     "gulp-replace": "^1.0.0",
     "mutationobserver-shim": "^0.3.3",
     "react-app-rewired": "^2.1.8",
-    "react-scripts": "^3.1.1"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "build:dev": "CI='' env-cmd -f .env.dev yarn build",
     "reset": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "test": "react-scripts test",
