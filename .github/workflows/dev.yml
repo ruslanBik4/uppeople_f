@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: 15.x
+        run: npm install --silent
 
       - name: Check out code into the Monorepo directory
         uses: actions/checkout@v2
