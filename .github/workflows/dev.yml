@@ -32,7 +32,7 @@ jobs:
           yarn
 
       - name: build all modules
-        run: yarn build
+        run: yarn build:dev
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
