@@ -1,6 +1,6 @@
 {
-  "name": "@coreui/coreui-pro-react-admin-template",
-  "version": "2.1.5",
+  "name": "@uppeople/crm",
+  "version": "0.0.9",
   "description": "CoreUI Pro React Admin Template",
   "proxy": "https://161.97.144.240:4443",
   "author": {
@@ -88,7 +88,8 @@
     "env-cmd": "^10.1.0",
     "gulp-replace": "^1.0.0",
     "mutationobserver-shim": "^0.3.3",
-    "react-scripts": "^3.1.1"
+    "react-app-rewired": "^2.1.8",
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -119,7 +120,5 @@
       "!src/serviceWorker.js",
       "!src/polyfill.js"
     ]
-  },
-  "loglevel": "silent",
-  "no-warnings": true
+  }
 }
