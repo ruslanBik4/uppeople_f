@@ -5,6 +5,14 @@ on:
     branches: [ dev ]
 
 jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 0
+
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -13,18 +21,30 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2-beta
         with:
-          node-version: 14.x
+          node-version: 15.x
+        env:
+          NODE_NO_WARNINGS: 1
+
+      - run: npm install --silent
+        env:
+          NODE_NO_WARNINGS: 1
 
       - name: Check out code into the Monorepo directory
         uses: actions/checkout@v2
+        env:
+          NODE_NO_WARNINGS: 1
 
       - name: Install all modules
         run: |
-        yarn reset
-        yarn
+          yarn reset
+          yarn --suppress-warnings
+        env:
+          NODE_NO_WARNINGS: 1
 
       - name: build all modules
-        run: yarn build
+        run: CI='' yarn build:dev
+        env:
+          NODE_NO_WARNINGS: 1
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
@@ -35,11 +55,12 @@ jobs:
       - name: Copy SPA via scp
         uses: appleboy/scp-action@master
         env:
-          KEY: ${{ secrets.SSH_KEY }}
           HOST: ${{ secrets.SSH_PROD_HOST }}
           USERNAME: ${{ secrets.SSH_PROD_USER }}
+          PORT: 22
+          KEY: ${{ secrets.SSH_KEY }}
         with:
-          rm: true
+#          rm: true
           source: "build"
           target: "/opt/uppeople/dev/www"
-          strip_components: 3
+#          strip_components: 3
