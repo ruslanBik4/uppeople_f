@@ -39,8 +39,8 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: SPA
-          path: build
+          name: build
+          path: build/
 
       - name: Copy SPA via scp
         uses: appleboy/scp-action@master
