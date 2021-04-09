@@ -612,7 +612,7 @@ export default class VacancyEditForm extends Component {
                         active={status === 2}
                         onClick={() => this.onRadioBtnClick(2)}
                       >
-                        <i className="fa fa-history"/>
+                        <i className="fa fa-pause-circle"/>
                       </Button>
                       <Button
                         className="btn-default"
