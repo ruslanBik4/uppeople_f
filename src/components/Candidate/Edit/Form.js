@@ -246,8 +246,7 @@ export default class CandidateEditForm extends Component {
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
-    let s = name
-    document.querySelector('.' + s + '_div').classList.remove('error');
+    document.querySelector('.name_div').classList.remove('error');
     let lblErrors = document.querySelector(".errorlist label");
     lblErrors.textContent = (" ")
   };
