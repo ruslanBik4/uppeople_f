@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: SPA
-          path: build/
+          path: build
 
       - name: Copy SPA via scp
         uses: appleboy/scp-action@master
@@ -51,6 +51,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           rm: true
-          source: "build/"
+          source: "build"
           target: "/opt/uppeople/dev"
           strip_components: 3
