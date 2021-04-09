@@ -162,7 +162,8 @@ export default class CandidateCreateForm extends Component {
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
-    let s = [name]
+    let s = name
+    console.log(s)
     document.querySelector('.' + s + '_div').classList.remove('error');
     let lblErrors = document.querySelector(".errorlist label");
     lblErrors.textContent = (" ") 
@@ -531,7 +532,7 @@ export default class CandidateCreateForm extends Component {
                       <Label for="name" sm={3}>
                         Name<font color="red">*</font>
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"name_div"}>
                         <Input
                           required  
                           id="name"
