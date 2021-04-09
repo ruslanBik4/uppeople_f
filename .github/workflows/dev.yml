@@ -34,7 +34,7 @@ jobs:
       - name: build all modules
         env:
           NODE_NO_WARNINGS: 1
-        run: yarn build:dev
+        run: yarn build:dev --silent
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
