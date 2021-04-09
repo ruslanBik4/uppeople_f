@@ -30,8 +30,8 @@ jobs:
 
       - name: Install all modules
         run:  |
-        yarn reset
-        yarn
+          yarn reset
+          yarn
 
       - name: Build SPA
         run: yarn build
