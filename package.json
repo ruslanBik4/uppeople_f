@@ -2,7 +2,7 @@
   "name": "@coreui/coreui-pro-react-admin-template",
   "version": "2.1.5",
   "description": "CoreUI Pro React Admin Template",
-  "proxy": "https://161.97.144.240",
+  "proxy": "https://161.97.144.240:4443",
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
@@ -85,6 +85,7 @@
     "yup": "^0.26.10"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "gulp-replace": "^1.0.0",
     "mutationobserver-shim": "^0.3.3",
     "react-scripts": "^3.1.1"
