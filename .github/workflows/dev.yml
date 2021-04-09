@@ -61,6 +61,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           rm: true
-          source: "build/"
-          target: "/opt/uppeople/dev/www/build"
+          source: "build"
+          target: "/opt/uppeople/dev/www/"
           strip_components: 3
