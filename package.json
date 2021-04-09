@@ -1,6 +1,6 @@
 {
-  "name": "@coreui/coreui-pro-react-admin-template",
-  "version": "2.1.5",
+  "name": "UPPEOPLE CRM",
+  "version": "0.0.9",
   "description": "CoreUI Pro React Admin Template",
   "proxy": "https://161.97.144.240:4443",
   "author": {
@@ -92,7 +92,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "yarn build",
+    "build": "react-app-rewired build",
     "build:dev": "CI='' env-cmd -f .env.dev yarn build",
     "reset": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "test": "react-scripts test",
@@ -120,6 +120,5 @@
       "!src/polyfill.js"
     ]
   },
-  "loglevel": "silent",
-  "no-warnings": true
+
 }
