@@ -29,7 +29,7 @@ jobs:
       - name: Install all modules
         run: |
           yarn reset
-          yarn
+          yarn --suppress-warnings
 
       - name: build all modules
         run: yarn build:dev
