@@ -16,8 +16,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
     steps:
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2-beta
         with:
@@ -61,6 +61,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
 #          rm: true
-          source: "build"
-          target: "/opt/uppeople/dev/www"
+          source: "build/"
+          target: "/opt/uppeople/dev/www/"
 #          strip_components: 3
