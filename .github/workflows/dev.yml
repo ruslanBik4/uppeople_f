@@ -62,5 +62,5 @@ jobs:
         with:
           rm: true
           source: "build"
-          target: "/opt/uppeople/dev/www/"
+          target: "/opt/uppeople/dev/"
           strip_components: 3
