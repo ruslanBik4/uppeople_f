@@ -88,10 +88,10 @@ class CandidatesForm extends Component {
   handleSentInputChange = ({ target: { name, value } }) => {
     const { onSentFilter } = this.props;
 
-    if([name] === 'dateFromSentCandidates'){
+    if(name === 'dateFromSentCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateFrom: value }, () => onSentFilter(this.state));
-    }else if([name] === 'dateToSentCandidates'){
+    }else if(name === 'dateToSentCandidates'){
       this.setState({ [name]: value });
       this.setState({ dateTo: value }, () => onSentFilter(this.state));
     }
