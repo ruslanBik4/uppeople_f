@@ -24,7 +24,9 @@ import noAvatar from "../../../assets/img/no_avatar.png";
 import {getBase64} from "../../../utils/selectors";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "./Form.module.css";
+import styles2 from "./Custom.css";
 import { platform } from "chart.js";
+import { is } from "core-js/core/object";
 
 const style = {
   icon: {
@@ -246,7 +248,7 @@ export default class CandidateEditForm extends Component {
 
   handleInputChange = ({target: {name, value}}) => {
     this.setState({[name]: value});
-    document.querySelector('.name_div').classList.remove('error');
+    document.querySelector('.email_div').classList.remove('error');
     let lblErrors = document.querySelector(".errorlist label");
     lblErrors.textContent = (" ")
   };
@@ -292,6 +294,7 @@ export default class CandidateEditForm extends Component {
 
   handleReasonChange = value => {
     this.setState({selectedReason: value});
+    document.querySelector('.reasons_div').classList.remove('error');
   };
 
   // handleAboutStateChange = about => {
@@ -333,17 +336,32 @@ export default class CandidateEditForm extends Component {
 
       salary = Number(salary);
 
-      if (document.querySelector('.reasons_div > div') !== null) {
-        document.querySelector('.reasons_div > div').classList.remove('error');
-      }
+      // if (document.querySelector('.reasons_div > div') !== null) {
+      //   document.querySelector('.reasons_div > div').classList.remove('error');
+      // }
 
       if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
 
         tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
-        language = typeof language === 'object' ? language.id : '';
+        // language = typeof language === 'object' ? language.id : '';
+      }
+
+      // if (tag_id.id === 3) {
+      //   document.querySelector('.reasons_div > div').classList.add('error');
+      //   isValid = false;
+      // }
+
+      
 
 
         tag_id = tag_id.id
+        language = language.id
+
+        if (tag_id === 3) {
+          document.querySelector('.reasons_div').classList.add('error');
+          isValid = false;
+          lblErrors.textContent = ("Нужно выбрать reason")
+        }
 
         if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
           isValid = false;
@@ -354,8 +372,12 @@ export default class CandidateEditForm extends Component {
         // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
         //   isValid = false;
         //   document.querySelector('.salary_div').classList.add('error');
+        //   lblErrors.textContent = ("Зарплата не может начинаться с 0")
         // }
-        //
+        // else {
+        //   salary = Number(salary);
+        // }
+        
         if (email.length > 0 && !email.match('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
           isValid = false;
           document.querySelector('.email_div').classList.add('error');
@@ -388,9 +410,9 @@ export default class CandidateEditForm extends Component {
           //   delete candidateInfo.salary
           // }
 
-          // if (language === "") {
-          //   delete candidateInfo.language
-          // }
+          if (language === "") {
+            delete candidateInfo.language
+          }
 
           // if (phone === "") {
           //   delete candidateInfo.phone
@@ -425,9 +447,9 @@ export default class CandidateEditForm extends Component {
           // //   delete candidateInfo.selectedVacancies
           // // }
 
-          // if (selectedReason === "") {
-          //   delete candidateInfo.selectedReason
-          // }
+          if (selectedReason === "") {
+            delete candidateInfo.selectedReason
+          }
 
           // if (selectedVacancies === undefined) {
           //   delete candidateInfo.vacancies
@@ -438,7 +460,7 @@ export default class CandidateEditForm extends Component {
           console.log(vacancies);
           onEditCandidate(candidateInfo);
         }
-      }
+      
 
       if (!isValid) {
         if (lblErrors !== undefined) {
@@ -463,7 +485,7 @@ export default class CandidateEditForm extends Component {
     if ((tag_id !== undefined && tag_id !== null && tag_id.id === 3) || (selectedReason !== undefined && selectedReason.length > 0)) {
       return (
         <FormGroup row>
-          <Label for="seniority" sm={3}>
+          <Label for="reasons" sm={3}>
             Reason
           </Label>
           <Col sm={9} className={"reasons_div"}>
@@ -718,10 +740,10 @@ export default class CandidateEditForm extends Component {
                       <Label for="email" sm={3}>
                         Email
                       </Label>
-                      <Col sm={9}>
+                      <Col sm={9} className={"email_div"}>
                         <Input
                           id="email"
-                          type="email"
+                          // type="email"
                           name="email"
                           value={email}
                           onChange={this.handleInputChange}

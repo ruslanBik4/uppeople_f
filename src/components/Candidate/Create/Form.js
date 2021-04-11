@@ -296,12 +296,18 @@ export default class CandidateCreateForm extends Component {
 
     } 
 
+    if (selectedReason === undefined) {
+      document.querySelector('.reasons_div').classList.add('error');
+      isValid = false;
+      lblErrors.textContent = ("Нужно выбрать reason")
+    }
+
     if (selectedVacancies !== undefined) {
       vacancies = this.state.selectedVacancies.map(item => item.id);
     }
            
      else{
-      document.querySelector('.reasons_div > div').classList.add('error');
+      document.querySelector('.reasons_div').classList.add('error');
       isValid = false;
     }
 
@@ -415,7 +421,7 @@ export default class CandidateCreateForm extends Component {
 
       return (
         <FormGroup row>
-          <Label for="seniority" sm={3}>
+          <Label for="reasons" sm={3}>
             Reason
           </Label>
           <Col sm={9} className={"reasons_div"}>
