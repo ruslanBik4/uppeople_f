@@ -53,7 +53,7 @@ class Header extends Component {
     }
   };
   render() {
-    const { avatar, email, userRole } = this.props.user;
+    const { avatar, email, userRole, ver } = this.props.user;
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -98,7 +98,7 @@ class Header extends Component {
                   className="header_logo"
                   alt="company_logo"
                 />
-                <span className="logo_text">UPPeople</span>
+                <span className="logo_text">UPPeople {ver}</span>
               </DropdownToggle>
               <DropdownMenu right style={{ right: "auto" }}>
                 <DropdownItem header tag="div" className="text-center">

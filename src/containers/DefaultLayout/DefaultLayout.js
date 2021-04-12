@@ -31,7 +31,7 @@ import routesForPartner from "../../routes/routes_partner";
 // импорт Инпута с Глобальным поиском
 import FormGlobalSearch from "../../components/FormGlobalSearch/FormGlobalSearch";
 // импорт функции для фетча на сервер для глобального поиска
-import { getDataFromGlobalSearch } from "../../utils/api";
+import { getDataFromGlobalSearch, getCfgOptions, getBackVersion } from "../../utils/api";
 import "./DefaultLayout.style.css";
 
 const DefaultHeader = React.lazy(() =>
@@ -45,7 +45,7 @@ export const GlobalContext = createContext({
   token: null
 });
 
-const INITIAL_STATE = { user: {} };
+const INITIAL_STATE = { user: {}, ver: "" };
 
 class DefaultLayout extends Component {
   static contextType = AccountContext;
@@ -58,6 +58,15 @@ class DefaultLayout extends Component {
 
   componentDidMount() {
     this.checkAuthentication();
+    let ver = ""
+    getCfgOptions().then(cfg => {
+      ver += cfg.Name;
+    })
+    getBackVersion().then(version => {
+      ver += version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
+    })
+
+    this.setState({ ver});
   }
 
   globalSeatchChange = e => {
@@ -298,6 +307,7 @@ class DefaultLayout extends Component {
             <Suspense fallback={this.loading()}>
               <DefaultHeader
                 user={this.state.user}
+                ver={this.state.ver}
                 onLogout={e => this.logOut(e)}
                 {...this.props}
               />
