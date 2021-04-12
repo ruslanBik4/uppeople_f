@@ -38,7 +38,7 @@ export const getRecruiterVacancies = async () => {
 export const getCfgOptions = async () => {
   const token = getToken();
   try {
-    const response = await fetch(`${URL}/httpgo/cfg/`, {
+    const response = await fetch(`/httpgo/cfg/`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -65,7 +65,7 @@ export const getCfgOptions = async () => {
 export const getBackVersion = async () => {
   const token = getToken();
   try {
-    const response = await fetch(`${URL}/api/version()`, {
+    const response = await fetch(`${URL}/version()`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
