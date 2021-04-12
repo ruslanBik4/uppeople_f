@@ -54,7 +54,7 @@ class Header extends Component {
   };
   render() {
     const { avatar, email, userRole } = this.props.user;
-    const ver = this.state.ver;
+    const ver = this.props.ver;
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />

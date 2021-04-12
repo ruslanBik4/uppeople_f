@@ -59,9 +59,9 @@ class DefaultLayout extends Component {
   componentDidMount() {
     this.checkAuthentication();
     let ver = ""
-    getCfgOptions().then(cfg => {
-      ver += cfg.Name;
-    });
+    // getCfgOptions().then(cfg => {
+    //   ver += cfg.Name;
+    // });
 
     getBackVersion().then(version => {
       ver += version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
