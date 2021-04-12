@@ -40,7 +40,7 @@ export default class CompanyCreateForm extends Component {
     send_details: EditorState.createEmpty(),
     about: EditorState.createEmpty(),
     interview_detail: EditorState.createEmpty()
-  };
+  }; 
 
   handleInputChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });

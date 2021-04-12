@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Col, FormGroup, Input, Row} from "reactstrap";
+import {Button,Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
@@ -495,6 +495,11 @@ class AcquisitionFunnel extends Component {
                   onChange={this.handleTagsSelect}
                 />
               </FormGroup>
+              <Button
+              style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
+            >
+                Export
+            </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="3" xl="3">
               <Row style={{marginBottom: "1rem"}}>
