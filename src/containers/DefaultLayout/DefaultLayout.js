@@ -61,10 +61,12 @@ class DefaultLayout extends Component {
     let ver = ""
     getCfgOptions().then(cfg => {
       ver += cfg.Name;
-    })
+    });
+
     getBackVersion().then(version => {
       ver += version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
-    })
+    });
+    console.log(ver)
 
     this.setState({ ver});
   }
