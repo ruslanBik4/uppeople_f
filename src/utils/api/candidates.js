@@ -220,6 +220,8 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
     if (response.status > 400) {
       return response.status;
     }
+
+    return response.blob();
     if (response.file !== undefined) {
       window.open(response.file);
       return response.file;
