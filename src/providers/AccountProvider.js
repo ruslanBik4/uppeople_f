@@ -46,7 +46,7 @@ export default class AccountProvider extends Component {
       if (!response || (response.status && response.status >= 401) || response === "Unauthorized" || response.access_token === undefined) {
         this.setState(
           {
-            authError: response.text || response || 'Unknown error'
+            authError: (response && response.text) || (!response && 'Unknown error') || response
           },
           () => console.log(this.state.authError)
         );

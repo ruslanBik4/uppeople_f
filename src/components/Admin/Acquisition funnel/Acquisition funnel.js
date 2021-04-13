@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Button,Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
+import { saveAs } from 'file-saver';
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
-import {getStatuses, getCandidatesAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
+import {getStatuses, getCandidatesAmountByTags, getReportAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
 import {
   Chart,
   ChartTitle,
@@ -162,12 +163,24 @@ class AcquisitionFunnel extends Component {
     }
   };
 
+  handleExportClick = async () => {
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+     await getReportAmountByTags(
+        selectedRecruiter ? selectedRecruiter.id : 0,
+        selectedCompany ? selectedCompany.id : 0,
+        selectedVacancy ? selectedVacancy.id : 0,
+        selectedStartDate, selectedEndDate).then(blob => saveAs(blob, 'report.csv'));
+  };
+
   fetchStatuses = async (options) => {
-    this.setState({statuses: options.candidateStatus});
-    this.setState({selectedStatuses: options.statuses});
-    // const statuses = await getStatuses();
-    // this.setState({statuses});
-    // this.setState({selectedStatuses: statuses});
+    if (options.candidateStatus.lenght === 0) {
+      this.setState({statuses: options.candidateStatus});
+      this.setState({selectedStatuses: options.statuses});
+    } else {
+      const statuses = await getStatuses();
+      this.setState({statuses});
+      this.setState({selectedStatuses: statuses});
+    }
   };
 
 
@@ -495,11 +508,12 @@ class AcquisitionFunnel extends Component {
                   onChange={this.handleTagsSelect}
                 />
               </FormGroup>
-              <Button
+                <Button
               style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
-            >
+              onClick={this.handleExportClick}
+              >
                 Export
-            </Button>
+              </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="3" xl="3">
               <Row style={{marginBottom: "1rem"}}>

@@ -31,6 +31,60 @@ export const getRecruiterVacancies = async () => {
 };
 
 /**
+ * Fetches options for web-server
+ *
+ * @returns {Promise} Promise object represents operation result
+ */
+export const getCfgOptions = async () => {
+  const token = getToken();
+  try {
+    const response = await fetch(`/httpgo/cfg/`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      }
+    });
+    if (response.ok) {
+      return response.json();
+    }
+    if (response.status === 401) {
+      return 401;
+    }
+
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  } catch (error) {
+    return console.log("error in fetch: ", error);
+  }
+};
+/**
+ * Fetches options for web-server
+ *
+ * @returns {Promise} Promise object represents operation result
+ */
+export const getBackVersion = async () => {
+  const token = getToken();
+  try {
+    const response = await fetch(`${URL}/version()`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      }
+    });
+    if (response.ok) {
+      return response.json();
+    }
+    if (response.status === 401) {
+      return 401;
+    }
+
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  } catch (error) {
+    return console.log("error in fetch: ", error);
+  }
+};
+/**
  * Fetches options for selects from an api
  *
  * @returns {Promise} Promise object represents operation result

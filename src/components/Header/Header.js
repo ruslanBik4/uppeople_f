@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  Badge,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -53,15 +52,15 @@ class Header extends Component {
     }
   };
   render() {
-    const { avatar, email, userRole } = this.props.user;
+    const { email, userRole } = this.props.user;
+    const ver = this.props.ver;
+
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
           onClick={this.redirectToHomePage}
           style={{ color: "var(--white)", cursor: "pointer" }}
-          // full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
-          // minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
         >
           <span style={{ fontWeight: "bold" }}>UP</span>People
         </AppNavbarBrand>
@@ -75,6 +74,7 @@ class Header extends Component {
             </NavItem>
           </Nav>
         )}
+        <span style={{ fontWeight: "italic" }}> <a href="/apis" target="_blank" style={{color: "white"}}>{ver}</a></span>
         <Nav className="ml-auto" navbar>
           {/*<NavItem className="d-md-down-none">
             <NavLink href="#">
@@ -84,7 +84,7 @@ class Header extends Component {
               </Badge>
             </NavLink>
           </NavItem> */}
-           <h6 style={{ marginBottom: 0, marginRight: 50 }}>{email}</h6>
+          <h6 style={{ marginBottom: 0, marginRight: 50 }}>{email}</h6>
           <AppHeaderDropdown direction="down">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle
@@ -98,7 +98,7 @@ class Header extends Component {
                   className="header_logo"
                   alt="company_logo"
                 />
-                <span className="logo_text">UPPeople</span>
+                <span className="logo_text">UPPeople:</span>
               </DropdownToggle>
               <DropdownMenu right style={{ right: "auto" }}>
                 <DropdownItem header tag="div" className="text-center">
