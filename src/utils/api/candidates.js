@@ -214,7 +214,7 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
       start_date: startDate,
       end_date: endDate,
     })
-  })
+  }).then(response => {window.open(response.file);})
 }
 /**
  * Filters and sorts sent candidates
