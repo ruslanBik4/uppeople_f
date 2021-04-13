@@ -61,8 +61,6 @@ class Header extends Component {
         <AppNavbarBrand
           onClick={this.redirectToHomePage}
           style={{ color: "var(--white)", cursor: "pointer" }}
-          // full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
-          // minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
         >
           <span style={{ fontWeight: "bold" }}>UP</span>People
         </AppNavbarBrand>
@@ -76,7 +74,7 @@ class Header extends Component {
             </NavItem>
           </Nav>
         )}
-        <span style={{ fontWeight: "italic" }}> <a href="/apis" target="_blank" style="color:white">{ver}</a></span>
+        <span style={{ fontWeight: "italic" }}> <a href="/apis" target="_blank" style={{color: "white"}}>{ver}</a></span>
         <Nav className="ml-auto" navbar>
           {/*<NavItem className="d-md-down-none">
             <NavLink href="#">
