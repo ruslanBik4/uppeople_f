@@ -200,7 +200,6 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
 export const getReportAmountByTags = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
   const token = getToken();
   return fetch(`${URL}/reports/by_tags`, {
-    // return fetch("https://enpg0sbpob31.x.pipedream.net/", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
@@ -214,8 +213,21 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
       start_date: startDate,
       end_date: endDate,
     })
-  }).then(response => {window.open(response.file);})
-}
+  }).then(response => {
+    if (response.ok||response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 400) {
+      return response.status;
+    }
+    if (response.file !== undefined) {
+      window.open(response.file);
+      return response.status;
+    }
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  })
+      .catch(error => console.log("error in fetch: ", error));
+};
 /**
  * Filters and sorts sent candidates
  *

@@ -164,19 +164,22 @@ class AcquisitionFunnel extends Component {
 
   handleExportClick = async () => {
     const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
-    let data = await getReportAmountByTags(
+     await getReportAmountByTags(
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
-        selectedStartDate, selectedEndDate);
-  }
+        selectedStartDate, selectedEndDate).then(data => alert(data));
+  };
 
   fetchStatuses = async (options) => {
-    this.setState({statuses: options.candidateStatus});
-    this.setState({selectedStatuses: options.statuses});
-    // const statuses = await getStatuses();
-    // this.setState({statuses});
-    // this.setState({selectedStatuses: statuses});
+    if (options.candidateStatus.lenght === 0) {
+      this.setState({statuses: options.candidateStatus});
+      this.setState({selectedStatuses: options.statuses});
+    } else {
+      const statuses = await getStatuses();
+      this.setState({statuses});
+      this.setState({selectedStatuses: statuses});
+    }
   };
 
 
@@ -509,7 +512,7 @@ class AcquisitionFunnel extends Component {
               onClick={this.handleExportClick}
               >
                 Export
-            </Button>
+              </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="3" xl="3">
               <Row style={{marginBottom: "1rem"}}>
