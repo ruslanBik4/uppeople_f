@@ -222,7 +222,7 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
     }
     if (response.file !== undefined) {
       window.open(response.file);
-      return response.status;
+      return response.file;
     }
     throw new Error(`Error while fetching: ${response.statusText}`);
   })
