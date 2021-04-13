@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Button,Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
+import { saveAs } from 'file-saver';
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
@@ -168,7 +169,7 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
-        selectedStartDate, selectedEndDate).then(blob => saveAs(data, report.csv));
+        selectedStartDate, selectedEndDate).then(blob => saveAs(blob, report.csv));
   };
 
   fetchStatuses = async (options) => {
