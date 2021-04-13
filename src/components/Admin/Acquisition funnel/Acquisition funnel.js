@@ -4,7 +4,7 @@ import Select from "react-select";
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
-import {getStatuses, getCandidatesAmountByTags, getCandidatesAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
+import {getStatuses, getCandidatesAmountByTags, getReportAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
 import {
   Chart,
   ChartTitle,
@@ -164,7 +164,7 @@ class AcquisitionFunnel extends Component {
 
   handleExportClick = async () => {
     const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
-    let data = await getCandidatesAmountByTags(
+    let data = await getReportAmountByTags(
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
