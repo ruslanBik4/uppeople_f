@@ -64,8 +64,9 @@ class DefaultLayout extends Component {
     // });
 
     getBackVersion().then(version => {
-      const ver = version.UPPeople + version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
-    this.setState({ ver});
+      const ver = version.UPPeople + version.Version + ", build at:" + version.BuildTime.substring(1,20)
+          + ", start at: " + version.StartTime.substring(1,20)
+      this.setState({ ver});
   });
   }
 

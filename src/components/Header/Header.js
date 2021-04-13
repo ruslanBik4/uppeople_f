@@ -58,14 +58,6 @@ class Header extends Component {
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
-          onClick={this.redirectToHomePage}
-          style={{ color: "var(--white)", cursor: "pointer" }}
-          // full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
-          // minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
-        >
-          <span style={{ fontWeight: "bold" }}>UP</span>People<span style={{ fontWeight: "bold" }}> {ver}</span>
-        </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg" />
         {userRole === 1 && (
           <Nav className="d-md-down-none" navbar>
@@ -85,6 +77,14 @@ class Header extends Component {
               </Badge>
             </NavLink>
           </NavItem> */}
+          <AppNavbarBrand
+              onClick={"/apis"}
+              style={{ color: "var(--white)", cursor: "pointer" }}
+              // full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
+              // minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
+          >
+          <span style={{ fontWeight: "bold" }}>UP</span>People<span style={{ fontWeight: "italic" }}> {ver}</span>
+        </AppNavbarBrand>
            <h6 style={{ marginBottom: 0, marginRight: 50 }}>{email}</h6>
           <AppHeaderDropdown direction="down">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
