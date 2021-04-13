@@ -58,17 +58,17 @@ class DefaultLayout extends Component {
 
   componentDidMount() {
     this.checkAuthentication();
-    let ver = ""
+    // let ver = ""
     // getCfgOptions().then(cfg => {
     //   ver += cfg.Name;
     // });
 
     getBackVersion().then(version => {
-      ver += version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
-    });
+      const ver = version.Version + ", build at:" + version.BuildTime + ", start at: " + version.StartTime
     console.log(ver)
 
     this.setState({ ver});
+  });
   }
 
   globalSeatchChange = e => {

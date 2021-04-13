@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  Badge,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -53,8 +52,9 @@ class Header extends Component {
     }
   };
   render() {
-    const { avatar, email, userRole } = this.props.user;
+    const { email, userRole } = this.props.user;
     const ver = this.props.ver;
+    console.log(ver)
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
