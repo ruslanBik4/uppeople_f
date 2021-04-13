@@ -443,10 +443,9 @@ function parser() {
             name: $('#linkedin_extension_sidenav #name').val(),
             // text_rezume: rezume_file.prop('files').length > 0 ? await toBase64(rezume_file.prop('files')[0]) : '',
             link: $('#linkedin_extension_sidenav #CV').val(),
-            // tag_id: parseInt($('#linkedin_extension_sidenav #reason_id').length > 0 ?
-                // $('#linkedin_extension_sidenav #reason_id').val() :
-                // $('#linkedin_extension_sidenav #tag_id').val() ),
-                tag_id: 1,
+            tag_id: parseInt($('#linkedin_extension_sidenav #reason_id').length > 0 ?
+                $('#linkedin_extension_sidenav #reason_id').val() :
+                $('#linkedin_extension_sidenav #tag_id').val() ),
             location: '',
             salary: parseInt($('#linkedin_extension_sidenav #salary').val() ),
             language: $('#linkedin_extension_sidenav #language').val(),
@@ -825,20 +824,20 @@ function create_sidenav(page_url) {
             '<input type="hidden" id="full_vacancies_amount" value="' + selected_vacancies_amount + '"/> ' +
             '</div>' +
             '\n' +
-            // '<div class="' + (reason_html.length > 0 ? 'col-md-6 ' : 'col-md-12 ') + 'tag_div" >' +
-            // '            <label><b>Tag</b></label>\n' +
-            // '            <select id="tag_id"  data-f_name="tag" data-f-type="text" class="platform_list">' +
-            // tag_html +
-            // '</select>\n' +
-            // '</div>' +
-            // '\n' +
-            // reason_html +
-            // '\n' +
-            // '<div class="col-md-12" >' +
-            // '            <label><b>Salary</b></label>\n' +
-            // '            <input type="number" placeholder="Salary" id="salary" value="' + (data.get('salary') || '') + '" >\n' +
-            // '</div>' +
-            // '\n' +
+            '<div class="' + (reason_html.length > 0 ? 'col-md-6 ' : 'col-md-12 ') + 'tag_div" >' +
+            '            <label><b>Tag</b></label>\n' +
+            '            <select id="tag_id"  data-f_name="tag" data-f-type="text" class="platform_list">' +
+            tag_html +
+            '</select>\n' +
+            '</div>' +
+            '\n' +
+            reason_html +
+            '\n' +
+            '<div class="col-md-12" >' +
+            '            <label><b>Salary</b></label>\n' +
+            '            <input type="number" placeholder="Salary" id="salary" value="' + (data.get('salary') || '') + '" >\n' +
+            '</div>' +
+            '\n' +
             '<div class="col-md-12" >' +
             '            <label><b>English level</b>' + '</label>\n' +
             '               <select id="language" >' +
