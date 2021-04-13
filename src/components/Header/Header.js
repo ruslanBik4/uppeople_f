@@ -54,7 +54,7 @@ class Header extends Component {
   render() {
     const { email, userRole } = this.props.user;
     const ver = this.props.ver;
-    console.log(ver)
+
     return (
       <>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -64,7 +64,7 @@ class Header extends Component {
           // full={{ src: logo, width: 89, height: 25, alt: "CoreUI Logo" }}
           // minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
         >
-          <span style={{ fontWeight: "bold" }}>UP</span>People
+          <span style={{ fontWeight: "bold" }}>UP</span>People<span style={{ fontWeight: "bold" }}> {ver}</span>
         </AppNavbarBrand>
         <AppSidebarToggler className="d-md-down-none" display="lg" />
         {userRole === 1 && (
@@ -99,7 +99,7 @@ class Header extends Component {
                   className="header_logo"
                   alt="company_logo"
                 />
-                <span className="logo_text">UPPeople: {ver}</span>
+                <span className="logo_text">UPPeople:</span>
               </DropdownToggle>
               <DropdownMenu right style={{ right: "auto" }}>
                 <DropdownItem header tag="div" className="text-center">
