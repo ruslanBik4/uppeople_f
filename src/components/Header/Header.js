@@ -86,8 +86,7 @@ class Header extends Component {
             </NavLink>
           </NavItem> */}
           <span style={{ fontWeight: "italic" }}> <a href="/apis" target="_blank">{ver}</a></span>
-        </AppNavbarBrand>
-           <h6 style={{ marginBottom: 0, marginRight: 50 }}>{email}</h6>
+          <h6 style={{ marginBottom: 0, marginRight: 50 }}>{email}</h6>
           <AppHeaderDropdown direction="down">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle

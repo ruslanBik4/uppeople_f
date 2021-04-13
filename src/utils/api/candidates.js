@@ -197,6 +197,30 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
  *
  * @returns {Promise} Promise object represents operation result
  */
+export const getReportAmountByTags = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
+  const token = getToken();
+  return fetch(`${URL}/reports/by_tags`, {
+    // return fetch("https://enpg0sbpob31.x.pipedream.net/", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      recruiter_id: selectedRecruiter,
+      company_id: selectedCompany,
+      vacancy_id: selectedVacancy,
+      // tag_id: selectedTag,
+      start_date: startDate,
+      end_date: endDate,
+    })
+  })
+}
+/**
+ * Filters and sorts sent candidates
+ *
+ * @returns {Promise} Promise object represents operation result
+ */
 export const getCandidatesAmountByTags = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
   const token = getToken();
   return fetch(`${URL}/main/getCandidatesAmountByTags`, {

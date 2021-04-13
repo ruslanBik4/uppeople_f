@@ -162,6 +162,15 @@ class AcquisitionFunnel extends Component {
     }
   };
 
+  handleExportClick = async () => {
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+    let data = await getCandidatesAmountByTags(
+        selectedRecruiter ? selectedRecruiter.id : 0,
+        selectedCompany ? selectedCompany.id : 0,
+        selectedVacancy ? selectedVacancy.id : 0,
+        selectedStartDate, selectedEndDate);
+  }
+
   fetchStatuses = async (options) => {
     this.setState({statuses: options.candidateStatus});
     this.setState({selectedStatuses: options.statuses});
@@ -497,7 +506,8 @@ class AcquisitionFunnel extends Component {
               </FormGroup>
               <Button
               style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
-            >
+              onClick={this.handleExportClick}
+              >
                 Export
             </Button>
             </Col>
