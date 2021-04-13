@@ -214,7 +214,7 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
       end_date: endDate,
     })
   }).then(response => {
-    if (response.ok||response.status === 400) {
+    if (response.status === 400) {
       return response.json();
     }
     if (response.status > 400) {
