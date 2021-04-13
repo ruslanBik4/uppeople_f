@@ -507,12 +507,18 @@ class AcquisitionFunnel extends Component {
                   onChange={this.handleTagsSelect}
                 />
               </FormGroup>
-                <Button
-              style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
-              onClick={this.handleExportClick}
+              <a
+                  target="_blank"
+                  href="api/reports/by_tags"
+                  rel="noopener noreferrer"
               >
-                Export
-              </Button>
+                <Button
+                  style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
+                  onClick={this.handleExportClick}
+                  >
+                    Export
+                </Button>
+              </a>
             </Col>
             <Col xs="12" sm="12" md="12" lg="3" xl="3">
               <Row style={{marginBottom: "1rem"}}>
