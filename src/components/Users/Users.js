@@ -91,10 +91,16 @@ export default class Users extends Component {
   };
 
   deleteUser = id => {
-    deleteUserById(id).then(users => {
-      this.setState({
-        ...users
-      });
+    deleteUserById(id).then(data => {
+      if (data === 202) {
+        //  todo: del users from table
+      } else if (data === 401) {
+        this.props.history.push('/login/')
+      } else if (typeof data === 'object') {
+        console.log(data)
+      } else {
+        alert(data)
+      }
     });
   };
 

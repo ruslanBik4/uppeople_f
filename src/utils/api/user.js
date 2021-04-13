@@ -88,27 +88,21 @@ export const updateUser = async user => {
 export const deleteUserById = id => {
   const token = getToken();
   return fetch(`${URL}/admin/deleteUser/${id}`, {
-    method: "GET",
+    method: "POST",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json"
     }
   })
     .then(response => {
-      if (response.ok) {
+      if (response.status === 202 || response.status > 400) {
+        return response.status;
+      }
+      if (response.status === 400) {
         return response.json();
       }
 
       throw new Error(`${response.statusText}`);
-    })
-    .then(data => {
-      const users = {
-        staff: data.users,
-        partners: data.partners,
-        freelancers: data.freeLancers
-      };
-
-      return users;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
