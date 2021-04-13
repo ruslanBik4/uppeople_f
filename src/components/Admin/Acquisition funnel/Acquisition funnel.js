@@ -4,7 +4,7 @@ import Select from "react-select";
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
-import {getStatuses, getCandidatesAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
+import {getStatuses, getCandidatesAmountByTags, getCandidatesAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
 import {
   Chart,
   ChartTitle,
