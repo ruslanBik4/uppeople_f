@@ -169,9 +169,11 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
-        selectedStartDate, selectedEndDate).then(blob => saveAs(blob, 'report.csv'));
+        selectedStartDate, selectedEndDate).then(blob =>
+         saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
+             (selectedCompany ? selectedCompany.name :
+                 (selectedVacancy ? selectedVacancy.name : selectedStartDate))) + '.csv'));
   };
-  lenght;
 
   fetchStatuses = async (options) => {
     if (options.candidateStatus.lenght === 0) {
