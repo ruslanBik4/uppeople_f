@@ -13,7 +13,7 @@ import {
 import { lastIndexOf } from "core-js/fn/array";
 
 // let classNames = [{status:0,className: "fa fa-fire"}, {status:1,className: "fa fa-check-circle"}, {status:2,className: "fa fa-history"}, {status:3,className: "fa fa-ban"}]
-let classNames = [ "fire","check-circle", "history", "ban"]
+let classNames = [ "fire","check-circle", "pause-circle", "ban"]
 let statusNames = [ " Hot"," Open", " Paused", " Closed"]
 const VacancyProfileInfo = ({
   vacancy: {

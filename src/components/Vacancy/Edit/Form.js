@@ -95,10 +95,10 @@ export default class VacancyEditForm extends Component {
     company_id: [],
     user_ids: [],
     location_id: [],
-    salary: 0,
+    salary: "",
     comment: "",
     link: "",
-    status: 0,
+    status: 0, 
     description: EditorState.createEmpty(),
     details: EditorState.createEmpty(),
   };
@@ -306,7 +306,7 @@ export default class VacancyEditForm extends Component {
       // details
     } = this.state;
     console.log(company_id);
-  console.log(user_ids);
+    console.log(user_ids);
   // console.log(user_ids.id);
 
 
@@ -385,9 +385,7 @@ export default class VacancyEditForm extends Component {
         link: link, 
         description: descriptionEditorState.toString().trim(),
         details: detailsEditorState.toString().trim(),
-        status,
-        // user_ids: user_ids.map(user_ids => user_ids.id)
-        
+        status: status,
         user_ids: user_ids
         
         // about: aboutEditorState
