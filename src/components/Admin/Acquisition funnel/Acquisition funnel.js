@@ -26,6 +26,13 @@ class AcquisitionFunnel extends Component {
 
   static propTypes = {
     options: PropTypes.shape({
+      platforms: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
       recruiters: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
@@ -82,11 +89,13 @@ class AcquisitionFunnel extends Component {
       companies: [],
       vacancies: [],
       tags: [],
+      platforms: [],
       // statuses: [],
 
       selectedCompany: null,
       selectedVacancy: null,
       selectedTags: null,
+      platform_id: null,
       selectedStartDate: firstDay,
       selectedEndDate: lastDay,
 
@@ -188,7 +197,7 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchCandidatesData = async () => {
-    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, platform_id} = this.state;
     let data = await getCandidatesAmountByTags(
       selectedRecruiter ? selectedRecruiter.id : 0,
       selectedCompany ? selectedCompany.id : 0,
@@ -208,7 +217,7 @@ class AcquisitionFunnel extends Component {
   };
 
   handleExportClick = async () => {
-    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, platform_id} = this.state;
      await getReportAmountByTags(
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
@@ -250,6 +259,10 @@ class AcquisitionFunnel extends Component {
 
   handleTagsSelect = (selectedTags) => {
     this.setState({selectedTags});
+  };
+
+  handlePlatformsSelect = (platform_id) => {
+    this.setState({platform_id});
   };
 
   handleStatusChange = (selectedStatuses) => {
@@ -494,11 +507,13 @@ class AcquisitionFunnel extends Component {
       // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
+      const platform_id = this.dtate;
       // const {tags, selectedTags} = this.state;
       // const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
+        platforms,
         recruitersIsClearable,
         tags,
         selectedTags,
@@ -559,10 +574,20 @@ class AcquisitionFunnel extends Component {
                   value={selectedTags}
                   options={tags}
                   isClearable
-                  getOptionValue={(tag) => tag.id}
-                  getOptionLabel={(tag) => tag.label}
+                  // getOptionValue={(tag) => tag.id}
+                  // getOptionLabel={(tag) => tag.label}
                   placeholder="Tags"
                   onChange={this.handleTagsSelect}
+                />
+              </FormGroup>
+              <FormGroup className="filter-select">
+                <Select
+                  style={{marginBottom: "1rem"}}
+                  value={platform_id}
+                  options={platforms}
+                  isClearable
+                  placeholder="Platforms"
+                  onChange={this.handlePlatformsSelect}
                 />
               </FormGroup>
                 <Button
