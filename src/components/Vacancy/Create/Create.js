@@ -41,7 +41,7 @@ class VacancyCreate extends Component {
       ).isRequired
     }).isRequired
   };
-
+ 
   createVacancy = vacancy => {
     createNewVacancy(vacancy).then(data => {
       const {history} = this.props;

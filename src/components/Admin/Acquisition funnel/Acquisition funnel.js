@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import {Button,Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
 import { saveAs } from 'file-saver';
@@ -22,6 +23,47 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 import {styles} from "../../../assets/css/analitycs.css";
 
 class AcquisitionFunnel extends Component {
+
+  static propTypes = {
+    options: PropTypes.shape({
+      recruiters: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
+      companies: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
+      location: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired
+    }).isRequired,
+    onCreateVacancy: PropTypes.func.isRequired
+  };
+
+  state = {
+    platform_id: [],
+    seniority_id: [],
+    company_id: [],
+    location_id: [],
+    user_ids: [],
+    salary: 0,
+    comment: "",
+    link: "",
+    selectedVacancyStatus: 0,
+    
+  };
+
   constructor(props) {
     super(props);
 
@@ -42,7 +84,6 @@ class AcquisitionFunnel extends Component {
       tags: [],
       // statuses: [],
 
-      selectedRecruiter: null,
       selectedCompany: null,
       selectedVacancy: null,
       selectedTags: null,
@@ -443,11 +484,20 @@ class AcquisitionFunnel extends Component {
     // } else {
 
 
-      const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
+      // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      const {tags, selectedTags} = this.state;
-      const {selectedStartDate, selectedEndDate} = this.state;
+      // const {tags, selectedTags} = this.state;
+      // const {selectedStartDate, selectedEndDate} = this.state;
+      const {
+        recruiters,
+        selectedRecruiter,
+        recruitersIsClearable,
+        tags,
+        selectedTags,
+        selectedStartDate,
+        selectedEndDate
+       } = this.props.options;
 
       return (
         <>

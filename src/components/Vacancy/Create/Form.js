@@ -21,7 +21,7 @@ import Select from "../../shared/Select";
 // Instruments
 import "./Form.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
+ 
 export default class VacancyCreateForm extends Component {
   static propTypes = {
     options: PropTypes.shape({

@@ -312,13 +312,14 @@ export default class CandidateCreateForm extends Component {
     }
 
     
-    if (tag_id.length === 0) {
-      // tag_id = tag_id.id;
-      document.querySelector('.tag_div > div').classList.add('error');
-      isValid = false;
-    } else {
-      tag_id = tag_id.id
-    }
+    // if (tag_id.length === 0) {
+    //   // tag_id = tag_id.id;
+    //   document.querySelector('.tag_div > div').classList.add('error');
+    //   isValid = false;
+    // } else {
+    //   tag_id = tag_id.id
+    // }
+    tag_id = 1;
 
        // 'https:\/\/www.linkedin.com\/in\/[A-Za-z%0-9-]*\/'
     if (linkedIn.length !== 0 && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zа-я%0-9-]{1,}\/[\?A-Za-zа-я%0-9-=]{0,}')) {
@@ -635,7 +636,7 @@ export default class CandidateCreateForm extends Component {
                     </FormGroup>
                   </Col>
                   <Col lg={6} md={12}>
-                    <FormGroup className={"tag_div"} row>
+                    {/* <FormGroup className={"tag_div"} row>
                       <Label for="tags" sm={3}>
                         tag
                       </Label>
@@ -649,7 +650,7 @@ export default class CandidateCreateForm extends Component {
                           onChange={this.handletagsChange}
                         />
                       </Col>
-                    </FormGroup>
+                    </FormGroup> */}
                     {this.ReasonFormGroup()}
                     <FormGroup row>
                       <Label for="phone" sm={3}>
