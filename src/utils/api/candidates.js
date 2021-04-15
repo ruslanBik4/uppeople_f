@@ -229,6 +229,43 @@ export const getReportAmountByTags = (selectedRecruiter, selectedCompany, select
     throw new Error(`Error while fetching: ${response.statusText}`);
   })
       .catch(error => console.log("error in fetch: ", error));
+};/**
+ * Filters and sorts sent candidates
+ *
+ * @returns {Promise} Promise object represents operation result
+ */
+export const getReportAmountByStatus = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
+  const token = getToken();
+  return fetch(`${URL}/reports/by_status`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      recruiter_id: selectedRecruiter,
+      company_id: selectedCompany,
+      vacancy_id: selectedVacancy,
+      // tag_id: selectedTag,
+      start_date: startDate,
+      end_date: endDate,
+    })
+  }).then(response => {
+    if (response.status === 400) {
+      return response.json();
+    }
+    if (response.status > 400) {
+      return response.status;
+    }
+
+    return response.blob();
+    if (response.file !== undefined) {
+      window.open(response.file);
+      return response.file;
+    }
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  })
+      .catch(error => console.log("error in fetch: ", error));
 };
 /**
  * Filters and sorts sent candidates

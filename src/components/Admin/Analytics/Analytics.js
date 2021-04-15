@@ -1,10 +1,15 @@
 import React, {Component} from "react";
-import {Col, FormGroup, Input, Row} from "reactstrap";
+import {Button, Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
 import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
-import {getStatuses, getCandidatesAmountByStatuses} from "../../../utils/api/candidates"; // вакансии и теги
+import {
+  getStatuses,
+  getCandidatesAmountByStatuses,
+  getReportAmountByStatus
+} from "../../../utils/api/candidates"; // вакансии и теги
+import { saveAs } from 'file-saver';
 import {
   Chart,
   ChartTitle,
@@ -165,29 +170,29 @@ export default class Analytics extends Component {
     const {funnelData, selectedStatuses} = this.state;
 
     if (funnelData !== null && funnelData !== undefined) {
-      const result = Object.entries(funnelData).reduceRight(
-        (acc, [currentKey, currentValue], index, array) => {
-          const prev = array[index + 1];
-          if (prev) {
-            const [prevKey] = prev;
-            acc[currentKey] = {
-              ...currentValue,
-              count: acc[prevKey].count + currentValue.count,
-            };
-          } else {
-            acc[currentKey] = currentValue;
-          }
-          return acc;
-        },
-        {}
-      );
+      // const result = Object.entries(funnelData).reduceRight(
+      //   (acc, [currentKey, currentValue], index, array) => {
+      //     const prev = array[index + 1];
+      //     if (prev) {
+      //       const [prevKey] = prev;
+      //       acc[currentKey] = {
+      //         ...currentValue,
+      //         count: acc[prevKey].count + currentValue.count,
+      //       };
+      //     } else {
+      //       acc[currentKey] = currentValue;
+      //     }
+      //     return acc;
+      //   },
+      //   {}
+      // );
 
       let data = [];
-      for (const [status, value] of Object.entries(result).reverse()) {
-        let in_statuses = selectedStatuses.filter((selectedStatus) => selectedStatus.label === status);
+      for (const [index, value] of Object.entries(funnelData).reverse()) {
+        let in_statuses = selectedStatuses.filter((selectedStatus) => selectedStatus.label === value.name);
         if (in_statuses.length > 0) {
           data.push({
-            stat: status,
+            stat: value.name,
             count: value.count,
             color: value.color,
             percentage: 100
@@ -255,6 +260,20 @@ export default class Analytics extends Component {
 
   };
 
+  handleExportClick = async () => {
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+    await getReportAmountByStatus(
+        selectedRecruiter ? selectedRecruiter.id : 0,
+        selectedCompany ? selectedCompany.id : 0,
+        selectedVacancy ? selectedVacancy.id : 0,
+        selectedStartDate, selectedEndDate).then(blob =>
+        saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
+            (selectedCompany ? selectedCompany.name :
+                (selectedVacancy ? selectedVacancy.name : ''))) + ' ' +
+            + selectedStartDate + '-' + selectedEndDate + '.csv'));
+  };
+
+
 
   render() {
       const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
@@ -319,6 +338,12 @@ export default class Analytics extends Component {
                   onChange={this.handleStatusChange}
                 />
               </FormGroup>
+              <Button
+                  style={{position: "relative", left: "30%", top: "3px", width: "100px", background: "#4dbd74"}}
+                  onClick={this.handleExportClick}
+              >
+                Export
+              </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="4" xl="4">
               <Row style={{marginBottom: "1rem"}}>
