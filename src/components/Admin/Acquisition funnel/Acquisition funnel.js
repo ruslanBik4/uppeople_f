@@ -117,7 +117,7 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchCompanies = async () => {
-    let companies_result = await getCompanies(0, true, true);
+    let companies_result = await getCompanies(0, false, true);
     const {selectedRecruiter} = this.state;
 
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
@@ -128,7 +128,10 @@ class AcquisitionFunnel extends Component {
 
   fetchVacancies = async () => {
     const {selectedCompany, selectedRecruiter} = this.state;
-    const vacancies_result = await getVacancies(selectedCompany !== null ? selectedCompany.id : null, false, true);
+    const vacancies_result = await getVacancies(
+        selectedCompany !== null ? selectedCompany.id : null,
+        false,
+        true);
     const vacancies = vacancies_result.filter((vacancy) =>
       (selectedRecruiter !== null && vacancy.recruiters && vacancy.recruiters.indexOf(selectedRecruiter.id) > -1 || selectedRecruiter === null)
     );
@@ -172,7 +175,8 @@ class AcquisitionFunnel extends Component {
         selectedStartDate, selectedEndDate).then(blob =>
          saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
              (selectedCompany ? selectedCompany.name :
-                 (selectedVacancy ? selectedVacancy.name : selectedStartDate))) + '.csv'));
+                 (selectedVacancy ? selectedVacancy.name : ''))) + ' '
+             + selectedStartDate + '-' + selectedEndDate + '.csv'));
   };
 
   fetchStatuses = async (options) => {

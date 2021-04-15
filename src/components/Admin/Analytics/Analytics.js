@@ -269,7 +269,8 @@ export default class Analytics extends Component {
         selectedStartDate, selectedEndDate).then(blob =>
         saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
             (selectedCompany ? selectedCompany.name :
-                (selectedVacancy ? selectedVacancy.name : selectedStartDate))) + '.csv'));
+                (selectedVacancy ? selectedVacancy.name : ''))) + ' ' +
+            + selectedStartDate + '-' + selectedEndDate + '.csv'));
   };
 
 
