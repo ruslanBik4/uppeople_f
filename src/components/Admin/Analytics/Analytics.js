@@ -19,10 +19,11 @@ import {
   ChartTooltip,
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
+import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
 
-export default class Analytics extends Component {
+class Analytics extends Component {
   constructor(props) {
     super(props);
 
@@ -276,11 +277,18 @@ export default class Analytics extends Component {
 
 
   render() {
-      const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
+      // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      const {statuses, selectedStatuses} = this.state;
+      // const {statuses, selectedStatuses} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
+      const {
+        recruiters,
+        selectedRecruiter,
+        statuses,
+        selectedStatuses,
+        vacancyStatus
+       } = this.props.options;
       
       
       return (
@@ -298,7 +306,7 @@ export default class Analytics extends Component {
                   style={{marginBottom: 15}}
                   value={selectedRecruiter}
                   options={recruiters}
-                  isClearable={recruitersIsClearable}
+                  // isClearable={recruitersIsClearable}
                   getOptionValue={(user) => user.id}
                   getOptionLabel={(user) => user.label}
                   placeholder="Recruiters"
@@ -334,7 +342,7 @@ export default class Analytics extends Component {
                 <Select
                   isMulti
                   value={selectedStatuses}
-                  options={statuses}
+                  options={vacancyStatus}
                   placeholder="Statuses"
                   onChange={this.handleStatusChange}
                 />
@@ -382,3 +390,4 @@ export default class Analytics extends Component {
     }
   // }
 }
+export default withOptionsForSelects(Analytics);

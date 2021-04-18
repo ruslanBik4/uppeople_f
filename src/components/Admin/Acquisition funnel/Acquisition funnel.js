@@ -47,7 +47,7 @@ class AcquisitionFunnel extends Component {
           value: PropTypes.string.isRequired
         }).isRequired
       ).isRequired,
-      location: PropTypes.arrayOf(
+      tags: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
           label: PropTypes.string.isRequired,
@@ -106,6 +106,7 @@ class AcquisitionFunnel extends Component {
       dynamicSlope: true,
       dynamicHeight: false
     };
+    console.log(this.props)
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
@@ -114,6 +115,7 @@ class AcquisitionFunnel extends Component {
       const opts = localStorage.getItem("optionsForSelects");
       options = JSON.parse(opts);
     }
+    console.log(this.props)
 
     this.fetchRecruiters(options);
     this.fetchCompanies();
@@ -483,22 +485,22 @@ class AcquisitionFunnel extends Component {
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
       const platform_id = this.state;
-      const {tags, selectedTags} = this.state;
+      // const {tags, selectedTags} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
         platforms,
         recruitersIsClearable,
-        // tags,
-        // selectedTags,
+        tags,
+        selectedTags,
         // selectedStartDate,
         // selectedEndDate
        } = this.props.options;
        console.log(this.props);
        console.log(this.props.options)
-       this.state.tags = this.props.tags;
-       this.state.selectedTags = this.props.selectedTags;
+      //  this.state.tags = this.props.tags;
+      //  this.state.selectedTags = this.props.selectedTags;
 
 
 
