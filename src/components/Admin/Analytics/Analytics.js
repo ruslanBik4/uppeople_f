@@ -281,7 +281,8 @@ export default class Analytics extends Component {
       const {vacancies, selectedVacancy} = this.state;
       const {statuses, selectedStatuses} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
-
+      
+      
       return (
         <>
           <Row style={{marginBottom: "1rem"}}>

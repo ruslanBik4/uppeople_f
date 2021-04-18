@@ -147,20 +147,7 @@ class AcquisitionFunnel extends Component {
   }
 
   fetchRecruiters = async (options) => {
-    // const users = await getUsers();
-    //
-    // if (users === 401) {
-    //   this.props.history.push('/login/')
-    // } else if (users.users !== undefined) {
-    //   const recruiters = users.users.filter((user) => user.id_roles === 2); // recruiter
-    //   this.setState({recruiters});
-    //   this.setState({selectedRecruiter: recruiters[0]});
-    // } else if (users.recruiters !== undefined) {
-    //   const recruiters = users.recruiters; // recruiter
-    //   this.setState({recruiters});
-    //   this.setState({selectedRecruiter: recruiters[0]});
-    //   this.setState({recruitersIsClearable: false});
-    // }
+    
     this.setState({recruiters: options.recruiters});
     this.setState({selectedRecruiter: options.recruiters[0]});
     this.setState({recruitersIsClearable: false});
@@ -192,6 +179,7 @@ class AcquisitionFunnel extends Component {
     // const tags = await getTags({'main': true});
     this.setState({tags: options.tags});
     this.setState({selectedTags: options.tags});
+    // this.setState({selectedTag: options.tags})
     // this.setState({tags});
     // this.setState({selectedTags: tags});
   };
@@ -489,37 +477,30 @@ class AcquisitionFunnel extends Component {
 
 
   render() {
-    // захист
-    // if (Date.now() > 1603379532000) {
-    //   return (
-    //     <>
-    //       <Row style={{marginBottom: "1rem"}}>
-    //         <Col>
-    //           <h1 style={{marginBottom: 0, fontSize: 24}}>Sorry, but this page is not payed yet. Please pay to make it
-    //             available</h1>
-    //         </Col>
-    //       </Row>
-    //     </>
-    //   )
-    // } else {
-
+  
 
       // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      const platform_id = this.dtate;
-      // const {tags, selectedTags} = this.state;
-      // const {selectedStartDate, selectedEndDate} = this.state;
+      const platform_id = this.state;
+      const {tags, selectedTags} = this.state;
+      const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
         platforms,
         recruitersIsClearable,
-        tags,
-        selectedTags,
-        selectedStartDate,
-        selectedEndDate
+        // tags,
+        // selectedTags,
+        // selectedStartDate,
+        // selectedEndDate
        } = this.props.options;
+       console.log(this.props);
+       console.log(this.props.options)
+       this.state.tags = this.props.tags;
+       this.state.selectedTags = this.props.selectedTags;
+
+
 
       return (
         <>
@@ -557,6 +538,7 @@ class AcquisitionFunnel extends Component {
               </FormGroup>
               <FormGroup className="filter-select">
                 <Select
+                  isMulti
                   style={{marginBottom: "1rem"}}
                   value={selectedVacancy}
                   options={vacancies}
@@ -569,8 +551,8 @@ class AcquisitionFunnel extends Component {
               </FormGroup>
               <FormGroup className="filter-select">
                 <Select
-                  style={{marginBottom: "1rem"}}
                   isMulti
+                  style={{marginBottom: "1rem"}}
                   value={selectedTags}
                   options={tags}
                   isClearable
@@ -585,8 +567,7 @@ class AcquisitionFunnel extends Component {
                   style={{marginBottom: "1rem"}}
                   value={platform_id}
                   options={platforms}
-                  isClearable
-                  placeholder="Platforms"
+                  placeholder="Tags"
                   onChange={this.handlePlatformsSelect}
                 />
               </FormGroup>
