@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button, Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
-import {getUsers} from "../../../utils/api/users"; // вакансии
+// import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
 import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
 import {
@@ -125,9 +125,17 @@ class Analytics extends Component {
       selectedVacancy ? selectedVacancy.id : 0,
       selectedTag ? selectedTag.id : 0,
       selectedStartDate, selectedEndDate);
-    if (funnelData !== undefined) {
+      if (funnelData === 401) {
+    this.props.history.push('/login/')
+    } else if (funnelData !== undefined) {
+      console.log(funnelData)
+      let total = funnelData.total
       funnelData = funnelData.data;
       this.setState({funnelData});
+      this.setState({total});
+      console.log(funnelData)
+      console.log(total)
+      console.log(this.state)
     } else {
       this.setState({funnelData: null});
     }
@@ -171,54 +179,46 @@ class Analytics extends Component {
     const {funnelData, selectedStatuses} = this.state;
 
     if (funnelData !== null && funnelData !== undefined) {
-      // const result = Object.entries(funnelData).reduceRight(
-      //   (acc, [currentKey, currentValue], index, array) => {
-      //     const prev = array[index + 1];
-      //     if (prev) {
-      //       const [prevKey] = prev;
-      //       acc[currentKey] = {
-      //         ...currentValue,
-      //         count: acc[prevKey].count + currentValue.count,
-      //       };
-      //     } else {
-      //       acc[currentKey] = currentValue;
-      //     }
-      //     return acc;
-      //   },
-      //   {}
-      // );
-
       let data = [];
+      if (this.state.total !== 0) {
+        data.push({
+          stat: "Total",
+          count: this.state.total,
+          color: "#edf0f4",
+          percentage: 100
+        });
+      } 
       for (const [index, value] of Object.entries(funnelData).reverse()) {
         let in_statuses = selectedStatuses.filter((selectedStatus) => selectedStatus.label === value.name);
+        
         if (in_statuses.length > 0) {
           data.push({
             stat: value.name,
             count: value.count,
             color: value.color,
-            percentage: 100
+            percentage: value.percent,
           });
         }
       }
 
-      data = data.reduce(
-        (acc_, currentValue, index, array) => {
-          const prev = array[index - 1];
+      // data = data.reduce(
+      //   (acc_, currentValue, index, array) => {
+      //     const prev = array[index - 1];
 
-          if (prev) {
-            if (prev.count > 0) {
-              currentValue.percentage = (parseFloat(currentValue.count) * 100 / parseFloat(prev.count)).toFixed(0)
-            } else {
-              currentValue.percentage = 0;
-            }
-          }
+      //     if (prev) {
+      //       if (prev.count > 0) {
+      //         currentValue.percentage = (parseFloat(currentValue.count) * 100 / parseFloat(prev.count)).toFixed(0)
+      //       } else {
+      //         currentValue.percentage = 0;
+      //       }
+      //     }
 
-          acc_[index] = currentValue;
+      //     acc_[index] = currentValue;
 
-          return acc_;
-        },
-        {}
-      );
+      //     return acc_;
+      //   },
+      //   {}
+      // );
 
       let final_data = [];
       for (const [index, value] of Object.entries(data)) {
@@ -281,13 +281,14 @@ class Analytics extends Component {
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
       // const {statuses, selectedStatuses} = this.state;
+      const {vacancyStatus, selectedStatuses} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
         statuses,
-        selectedStatuses,
-        vacancyStatus
+        // selectedStatuses,
+        // vacancyStatus
        } = this.props.options;
       
       

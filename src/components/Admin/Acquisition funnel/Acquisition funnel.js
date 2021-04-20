@@ -92,6 +92,7 @@ class AcquisitionFunnel extends Component {
       platforms: [],
       // statuses: [],
 
+      selectedRecruiter: null,
       selectedCompany: null,
       selectedVacancy: null,
       selectedTags: null,
@@ -179,7 +180,7 @@ class AcquisitionFunnel extends Component {
 
   fetchTags = async (options) => {
     // const tags = await getTags({'main': true});
-    this.setState({tags: options.tags});
+    // this.setState({tags: options.tags});
     this.setState({selectedTags: options.tags});
     // this.setState({selectedTag: options.tags})
     // this.setState({tags});
@@ -187,11 +188,12 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchCandidatesData = async () => {
-    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, platform_id} = this.state;
+    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
     let data = await getCandidatesAmountByTags(
       selectedRecruiter ? selectedRecruiter.id : 0,
       selectedCompany ? selectedCompany.id : 0,
       selectedVacancy ? selectedVacancy.id : 0,
+      // platform_id ? platform_id.id : 0,
       selectedStartDate, selectedEndDate);
     if (data === 401) {
       this.props.history.push('/login/')
@@ -516,7 +518,7 @@ class AcquisitionFunnel extends Component {
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
       // const platform_id = this.state;
-      // const {tags, selectedTags} = this.state;
+      const {selectedTags} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
@@ -524,8 +526,8 @@ class AcquisitionFunnel extends Component {
         platforms,
         platform_id,
         recruitersIsClearable,
-        tags,
-        selectedTags,
+        tags
+        // selectedTags,
         // selectedStartDate,
         // selectedEndDate
        } = this.props.options;
@@ -586,10 +588,10 @@ class AcquisitionFunnel extends Component {
               <FormGroup className="filter-select">
                 <Select
                   isMulti
-                  style={{marginBottom: "1rem"}}
+                  // style={{marginBottom: "1rem"}}
                   value={selectedTags}
                   options={tags}
-                  isClearable
+                  // isClearable
                   // getOptionValue={(tag) => tag.id}
                   // getOptionLabel={(tag) => tag.label}
                   placeholder="Tags"
