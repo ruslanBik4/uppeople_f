@@ -96,7 +96,7 @@ class Analytics extends Component {
   };
 
   fetchCompanies = async () => {
-    let companies_result = await getCompanies(0, true, true);
+    let companies_result = await getCompanies(0, false, true);
     const {selectedRecruiter} = this.state;
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
       (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));

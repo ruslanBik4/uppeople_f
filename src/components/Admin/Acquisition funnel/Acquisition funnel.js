@@ -198,9 +198,12 @@ class AcquisitionFunnel extends Component {
     } else if (data !== undefined) {
       let funnelData = data.main;
       let pieChartData = data.reject;
+      let total = data.total;
 
       this.setState({funnelData});
       this.setState({pieChartData});
+      this.setState({total})
+      console.log(data)
     } else {
       this.setState({funnelData: null});
     }
@@ -267,6 +270,7 @@ class AcquisitionFunnel extends Component {
   renderPieChart = () => {
 
     const {pieChartData} = this.state;
+    console.log(pieChartData)
     let total = 0;
     if (pieChartData !== undefined && pieChartData !== null) {
       for (const [index, value] of Object.entries(pieChartData)) {
@@ -278,7 +282,7 @@ class AcquisitionFunnel extends Component {
         if (value.count > 0) {
           series.push({
             category: value.name,
-            value: value.count / total,
+            value: value.percent,
             color: value.color,
             count: value.count
           });
@@ -286,12 +290,14 @@ class AcquisitionFunnel extends Component {
       }
 
       const labelContent = (props) => {
-        let formatedNumber = Number(props.dataItem.value).toLocaleString(undefined, {
+        let formatedNumber = Number((props.dataItem.value)/100).toLocaleString(undefined, {
           style: 'percent',
           minimumFractionDigits: 2
         });
+        // let formatedNumber = this.state.value.percent
         // return `${props.dataItem.category.replaceAll(" ", "\n") + "\n"} ${props.dataItem.count} -  ${formatedNumber}`;
-        return `${this.formatLabel(props.dataItem.category)} \n ${props.dataItem.count} -  ${formatedNumber}`;
+        return `${this.formatLabel(props.dataItem.category)} \n ${props.dataItem.count} - ${formatedNumber}`;
+        // -  ${formatedNumber}
         // return `${props.dataItem.category.replaceAll(" ", "\n")} ${props.dataItem.value}`;
 
       };
@@ -330,6 +336,22 @@ class AcquisitionFunnel extends Component {
 
   renderFunnelChart = () => {
     const {funnelData, selectedTags} = this.state;
+    const total = this.state.total;
+    console.log(total)
+  
+  
+    let arrtotal = [{color: "gray", count: total, id: "0", name: "Total", parent_id: "0", percent: "100"}]
+    console.log(arrtotal)
+    let arr = arrtotal.find(item => item.id == 0);
+    console.log(arr)
+    // funnelData.unshift([arr])
+    // arr.push(funnelData)
+    // funnelData.push(arrtotal)
+    console.log(arrtotal)
+    console.log(funnelData)
+    // console.log(funnelData1)
+    console.log(total)
+    console.log(this.state.total)
 
     if (funnelData !== null && funnelData !== undefined) {
 
@@ -339,31 +361,40 @@ class AcquisitionFunnel extends Component {
       // console.log(funnelData);
       let final_data = [];
 
-      let total = 0;
-      for (const [index, value] of Object.entries(funnelData)) {
-        total += value.count;
-      }
-
+      // let total = 0;
+      // for (const [index, value] of Object.entries(funnelData)) {
+      //   total += value.count;
+      // }
+      if (this.state.total !== 0) {
+        final_data.push({
+          stat: "Total",
+          count: this.state.total,
+          color: "#edf0f4",
+          percentage: 100
+        });
+      } 
 
       for (const [index, value] of Object.entries(funnelData)) {
         if (selectedTags !== null) {
           let in_tags = selectedTags.filter((selectedTag) => selectedTag.id === value.id);
           if (in_tags.length > 0) {
             // console.log(index);
-            if (parseInt(index) === 0) {
+           
+             if (parseInt(index) === 0) {
               final_data.push({
-                stat: value.name,
-                count: total,
+                stat: value.name + ' ' + value.percent,
+                //  + ' ' + parseFloat(parseInt(value.count) / total * 100).toFixed(2) + '%',
+                count: value.count,
                 color: value.color,
-                percentage: 100
+                percentage: value.percent
               });
             }
             if (index > 0) {
               final_data.push({
-                stat: value.name + ' ' + parseFloat(parseInt(value.count) / total * 100).toFixed(2) + '%',
+                stat: value.name + ' ' + value.percent,
                 count: value.count,
                 color: value.color,
-                percentage: parseInt(value.count) / total * 100
+                percentage: value.percent
               });
             }
             // data.push({
@@ -484,13 +515,14 @@ class AcquisitionFunnel extends Component {
       // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      const platform_id = this.state;
+      // const platform_id = this.state;
       // const {tags, selectedTags} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
         platforms,
+        platform_id,
         recruitersIsClearable,
         tags,
         selectedTags,
@@ -569,7 +601,7 @@ class AcquisitionFunnel extends Component {
                   style={{marginBottom: "1rem"}}
                   value={platform_id}
                   options={platforms}
-                  placeholder="Tags"
+                  placeholder="Platforms"
                   onChange={this.handlePlatformsSelect}
                 />
               </FormGroup>
