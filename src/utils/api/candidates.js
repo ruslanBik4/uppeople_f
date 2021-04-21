@@ -272,35 +272,34 @@ export const getReportAmountByStatus = (selectedRecruiter, selectedCompany, sele
  *
  * @returns {Promise} Promise object represents operation result
  */
-export const getCandidatesAmountByTags = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
+//todo 1. поставить даты впереди везде и во всех вызовах этой функции. 2. добавить platform_id, tags_ids
+
+export const getCandidatesAmountByTags = (startDate, endDate, selectedRecruiter, selectedCompany, selectedVacancy, platform_id, selectedTags) => {
   const token = getToken();
   return fetch(`${URL}/main/getCandidatesAmountByTags`, {
-    // return fetch("https://enpg0sbpob31.x.pipedream.net/", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
+      start_date: startDate,
+      end_date: endDate,
       recruiter_id: selectedRecruiter,
       company_id: selectedCompany,
       vacancy_id: selectedVacancy,
-      // tag_id: selectedTag,
-      start_date: startDate,
-      end_date: endDate,
+      platform_id: platform_id,
+      includes: selectedTags
     })
   })
     .then(response => {
       if (response.ok||response.status === 400) {
         return response.json();
       }
-      if (response.status > 400) {
+      if (response.status > 400 || response.status === 204) {
         return response.status;
       }
       throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .then(data => {
-      return data;
     })
     .catch(error => console.log("error in fetch: ", error));
 };
@@ -344,7 +343,6 @@ export const getStatuses = () => {
 export const getCandidatesAmountByVacancies = (selectedRecruiter, selectedCompany) => {
   const token = getToken();
   return fetch(`${URL}/main/getCandidatesAmountByVacancies`, {
-    // return fetch("https://enpg0sbpob31.x.pipedream.net/", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,

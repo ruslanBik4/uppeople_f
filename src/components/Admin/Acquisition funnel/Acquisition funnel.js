@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import {Button,Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
 import { saveAs } from 'file-saver';
-import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
-import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
+import {getVacancies} from "../../../utils/api/vacancy"; // вакансии и теги
 import {getStatuses, getCandidatesAmountByTags, getReportAmountByTags} from "../../../utils/api/candidates"; // вакансии и теги
 import {
   Chart,
@@ -21,6 +20,7 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
+import { platform } from "chart.js";
 
 class AcquisitionFunnel extends Component {
 
@@ -132,6 +132,7 @@ class AcquisitionFunnel extends Component {
     if (this.state.selectedRecruiter !== prevState.selectedRecruiter ||
       this.state.selectedCompany !== prevState.selectedCompany ||
       this.state.selectedVacancy !== prevState.selectedVacancy ||
+      this.state.platform_id !== prevState.platform_id ||
       this.state.selectedTags !== prevState.selectedTags ||
         (this.state.selectedStartDate !== prevState.selectedStartDate &&
             typeof moment(this.state.selectedStartDate).toDate() === 'object') ||
@@ -186,17 +187,20 @@ class AcquisitionFunnel extends Component {
     // this.setState({tags});
     // this.setState({selectedTags: tags});
   };
-
+// todo 1. Порядок запросов соблюсти 2. даты сверху. 3. обработка 204 4. таги - массивом
   fetchCandidatesData = async () => {
-    const {selectedRecruiter, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate} = this.state;
+    const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
     let data = await getCandidatesAmountByTags(
+      selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
       selectedCompany ? selectedCompany.id : 0,
       selectedVacancy ? selectedVacancy.id : 0,
-      // platform_id ? platform_id.id : 0,
-      selectedStartDate, selectedEndDate);
+      platform_id ? platform_id.id : 0,
+      selectedTags ? selectedTags.map(item => item.id) : 0)
     if (data === 401) {
       this.props.history.push('/login/')
+    } else if (data === 204) {
+      alert("Нет данных для таких опций выбора")
     } else if (data !== undefined) {
       let funnelData = data.main;
       let pieChartData = data.reject;
@@ -217,7 +221,8 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
-        selectedStartDate, selectedEndDate).then(blob =>
+        selectedStartDate, selectedEndDate,
+        platform_id ? platform_id.id : 0).then(blob =>
          saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
              (selectedCompany ? selectedCompany.name :
                  (selectedVacancy ? selectedVacancy.name : ''))) + ' '
@@ -591,7 +596,7 @@ class AcquisitionFunnel extends Component {
                   // style={{marginBottom: "1rem"}}
                   value={selectedTags}
                   options={tags}
-                  // isClearable
+                  isClearable
                   // getOptionValue={(tag) => tag.id}
                   // getOptionLabel={(tag) => tag.label}
                   placeholder="Tags"
@@ -603,6 +608,7 @@ class AcquisitionFunnel extends Component {
                   style={{marginBottom: "1rem"}}
                   value={platform_id}
                   options={platforms}
+                  isClearable
                   placeholder="Platforms"
                   onChange={this.handlePlatformsSelect}
                 />
