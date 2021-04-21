@@ -80,9 +80,12 @@ class AcquisitionFunnel extends Component {
     // let start_date = date.toJSON().slice(0, 10);
 
 
-    let date = new Date(), y = date.getFullYear(), m = date.getMonth();
-    let firstDay = new Date(y, m, 2).toJSON().slice(0, 10);
-    let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
+    let date = new Date()
+    // , y = date.getFullYear(), m = date.getMonth();
+    let firstDay = new Date()
+    // .toJSON().slice(0, 10);
+    let lastDay = new Date()
+    // .toJSON().slice(0, 10);
 
     this.state = {
       recruiters: [],
@@ -196,7 +199,7 @@ class AcquisitionFunnel extends Component {
       selectedCompany ? selectedCompany.id : 0,
       selectedVacancy ? selectedVacancy.id : 0,
       platform_id ? platform_id.id : 0,
-      selectedTags ? selectedTags.map(item => item.id) : 0)
+      selectedTags ? selectedTags.map(item => item.id) : null)
     if (data === 401) {
       this.props.history.push('/login/')
     } else if (data === 204) {
