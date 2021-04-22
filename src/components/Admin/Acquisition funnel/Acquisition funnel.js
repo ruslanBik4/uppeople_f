@@ -21,6 +21,7 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
 import { platform } from "chart.js";
+import { isEmpty } from "../../../utils/selectors";
 
 class AcquisitionFunnel extends Component {
 
@@ -202,8 +203,9 @@ class AcquisitionFunnel extends Component {
       selectedTags ? selectedTags.map(item => item.id) : null)
     if (data === 401) {
       this.props.history.push('/login/')
-    } else if (data === 204) {
+    } else if (data === null || isEmpty(getCandidatesAmountByTags)) {
       alert("Нет данных для таких опций выбора")
+      console.log(data)
     } else if (data !== undefined) {
       let funnelData = data.main;
       let pieChartData = data.reject;
