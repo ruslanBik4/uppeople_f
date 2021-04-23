@@ -81,12 +81,14 @@ class AcquisitionFunnel extends Component {
     // let start_date = date.toJSON().slice(0, 10);
 
 
-    let date = new Date()
+    let date = new Date(), y = date.getFullYear(), m = date.getMonth(), d = date.getDate()
     // , y = date.getFullYear(), m = date.getMonth();
-    let firstDay = new Date()
+    let firstDay = new Date(y, m, d + 1, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
-    let lastDay = new Date()
+    let lastDay = new Date(y, m, d + 2, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
+    console.log(firstDay)
+    console.log(lastDay)
 
     this.state = {
       recruiters: [],
@@ -203,7 +205,8 @@ class AcquisitionFunnel extends Component {
       selectedTags ? selectedTags.map(item => item.id) : null)
     if (data === 401) {
       this.props.history.push('/login/')
-    } else if (data === null || isEmpty(getCandidatesAmountByTags)) {
+    } else if (data === 204 ) {
+      //  isEmpty(getCandidatesAmountByTags)) {
       alert("Нет данных для таких опций выбора")
       console.log(data)
     } else if (data !== undefined) {

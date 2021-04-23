@@ -30,6 +30,8 @@ class Analytics extends Component {
     let date = new Date(), y = date.getFullYear(), m = date.getMonth();
     let firstDay = new Date(y, m, 2).toJSON().slice(0, 10);
     let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
+    console.log(firstDay)
+    console.log(lastDay)
 
     this.state = {
       recruiters: [],
