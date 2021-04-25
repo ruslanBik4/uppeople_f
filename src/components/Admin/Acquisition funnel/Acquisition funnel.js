@@ -159,7 +159,7 @@ class AcquisitionFunnel extends Component {
   fetchRecruiters = async (options) => {
     
     this.setState({recruiters: options.recruiters});
-    this.setState({selectedRecruiter: options.recruiters[0]});
+    // this.setState({selectedRecruiter: options.recruiters[0]});
     this.setState({recruitersIsClearable: false});
   };
 
@@ -196,6 +196,9 @@ class AcquisitionFunnel extends Component {
 // todo 1. Порядок запросов соблюсти 2. даты сверху. 3. обработка 204 4. таги - массивом
   fetchCandidatesData = async () => {
     const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
+    if (this.state.selectedRecruiter = "") {
+      delete this.fetchCandidatesData.selectedRecruiter
+    }
     let data = await getCandidatesAmountByTags(
       selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
@@ -205,7 +208,7 @@ class AcquisitionFunnel extends Component {
       selectedTags ? selectedTags.map(item => item.id) : null)
     if (data === 401) {
       this.props.history.push('/login/')
-    } else if (data === 204 ) {
+    } else if (data === 204) {
       //  isEmpty(getCandidatesAmountByTags)) {
       alert("Нет данных для таких опций выбора")
       console.log(data)

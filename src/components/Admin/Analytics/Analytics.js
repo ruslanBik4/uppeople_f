@@ -190,7 +190,7 @@ class Analytics extends Component {
           percentage: 100
         });
       } 
-      for (const [index, value] of Object.entries(funnelData).reverse()) {
+      for (const [index, value] of Object.entries(funnelData)) {
         let in_statuses = selectedStatuses.filter((selectedStatus) => selectedStatus.label === value.name);
         
         if (in_statuses.length > 0) {
