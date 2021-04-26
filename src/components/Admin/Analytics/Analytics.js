@@ -107,7 +107,10 @@ class Analytics extends Component {
 
   fetchVacancies = async () => {
     const {selectedCompany, selectedRecruiter} = this.state;
-    const vacancies_result = await getVacancies(selectedCompany !== null ? selectedCompany.id : null, true, true);
+    const vacancies_result = await getVacancies(
+      selectedCompany !== null ? selectedCompany.id : null,
+      false, 
+      true);
     const vacancies = vacancies_result.filter((vacancy) =>
       (selectedRecruiter !== null && vacancy.recruiters && vacancy.recruiters.indexOf(selectedRecruiter.id)  > -1 || selectedRecruiter === null)
     );
@@ -292,6 +295,10 @@ class Analytics extends Component {
         // selectedStatuses,
         // vacancyStatus
        } = this.props.options;
+       console.log(this.props);
+       console.log(this.props.options);
+       console.log(this.state);
+       console.log(this.state.options)
       
       
       return (
@@ -309,7 +316,7 @@ class Analytics extends Component {
                   style={{marginBottom: 15}}
                   value={selectedRecruiter}
                   options={recruiters}
-                  // isClearable={recruitersIsClearable}
+                  isClearable
                   getOptionValue={(user) => user.id}
                   getOptionLabel={(user) => user.label}
                   placeholder="Recruiters"

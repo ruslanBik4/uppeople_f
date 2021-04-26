@@ -163,13 +163,21 @@ class AcquisitionFunnel extends Component {
     this.setState({recruitersIsClearable: false});
   };
 
+  // fetchCompanies = async () => {
+  //   let companies_result = await getCompanies(0, true, false);
+  //   const {selectedRecruiter} = this.state;
+
+  //   const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
+  //     (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1
+  //         || selectedRecruiter === undefined || selectedRecruiter === null));
+  //   this.setState({companies});
+  // };
+
   fetchCompanies = async () => {
     let companies_result = await getCompanies(0, true, false);
     const {selectedRecruiter} = this.state;
-
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
-      (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1
-          || selectedRecruiter === undefined || selectedRecruiter === null));
+      (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));
     this.setState({companies});
   };
 
@@ -196,9 +204,9 @@ class AcquisitionFunnel extends Component {
 // todo 1. Порядок запросов соблюсти 2. даты сверху. 3. обработка 204 4. таги - массивом
   fetchCandidatesData = async () => {
     const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
-    if (this.state.selectedRecruiter = "") {
-      delete this.fetchCandidatesData.selectedRecruiter
-    }
+    // if (this.state.selectedRecruiter = "") {
+    //   delete this.fetchCandidatesData.selectedRecruiter
+    // }
     let data = await getCandidatesAmountByTags(
       selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
@@ -548,7 +556,9 @@ class AcquisitionFunnel extends Component {
         // selectedEndDate
        } = this.props.options;
        console.log(this.props);
-       console.log(this.props.options)
+       console.log(this.props.options);
+       console.log(this.state);
+       console.log(this.state.options)
       //  this.state.tags = this.props.tags;
       //  this.state.selectedTags = this.props.selectedTags;
 
