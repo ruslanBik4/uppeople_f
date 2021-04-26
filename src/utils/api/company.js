@@ -10,7 +10,7 @@ const getToken = () => localStorage.getItem("token");
  * @param {Boolean}  withRecruiters find recruiters working with with company- true, with out recruiters - false
  * @returns {Promise} Promise object represents operation result
  */
-export const getCompanies = (page, isActive, withRecruiters = false) => {
+export const getCompanies = (page, isActive = false, withRecruiters = false) => {
   const token = getToken();
   let filter = {
     IsActive: isActive,

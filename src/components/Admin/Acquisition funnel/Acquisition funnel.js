@@ -179,7 +179,7 @@ class AcquisitionFunnel extends Component {
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
       (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));
     this.setState({companies});
-  };
+  }; 
 
   fetchVacancies = async () => {
     const {selectedCompany, selectedRecruiter} = this.state;
@@ -231,6 +231,7 @@ class AcquisitionFunnel extends Component {
       console.log(data)
     } else {
       this.setState({funnelData: null});
+      this.setState({pieChartData: null});
     }
   };
 

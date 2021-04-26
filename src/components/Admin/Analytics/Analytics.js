@@ -63,7 +63,7 @@ class Analytics extends Component {
       options = JSON.parse(opts);
     }
     this.fetchRecruiters(options);
-    this.fetchCompanies();
+    this.fetchCompanies(options);
     this.fetchVacancies();
     this.fetchTags(options);
     // this.fetchCandidatesData();
@@ -93,12 +93,15 @@ class Analytics extends Component {
 
   fetchRecruiters = async (options) => {
     this.setState({recruiters: options.recruiters});
-    this.setState({selectedRecruiter: options.recruiters[0]});
+    // this.setState({selectedRecruiter: options.recruiters[0]});
     this.setState({recruitersIsClearable: true});
   };
 
   fetchCompanies = async () => {
-    let companies_result = await getCompanies(0, true, false);
+    let companies_result = await getCompanies(
+      0,
+      false,
+      true);
     const {selectedRecruiter} = this.state;
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
       (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));
@@ -206,25 +209,6 @@ class Analytics extends Component {
         }
       }
 
-      // data = data.reduce(
-      //   (acc_, currentValue, index, array) => {
-      //     const prev = array[index - 1];
-
-      //     if (prev) {
-      //       if (prev.count > 0) {
-      //         currentValue.percentage = (parseFloat(currentValue.count) * 100 / parseFloat(prev.count)).toFixed(0)
-      //       } else {
-      //         currentValue.percentage = 0;
-      //       }
-      //     }
-
-      //     acc_[index] = currentValue;
-
-      //     return acc_;
-      //   },
-      //   {}
-      // );
-
       let final_data = [];
       for (const [index, value] of Object.entries(data)) {
         final_data.push({
@@ -283,7 +267,7 @@ class Analytics extends Component {
 
   render() {
       // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
-      const {companies, selectedCompany} = this.state;
+      const { companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
       // const {statuses, selectedStatuses} = this.state;
       const {vacancyStatus, selectedStatuses} = this.state;
@@ -292,6 +276,7 @@ class Analytics extends Component {
         recruiters,
         selectedRecruiter,
         statuses,
+       
         // selectedStatuses,
         // vacancyStatus
        } = this.props.options;
