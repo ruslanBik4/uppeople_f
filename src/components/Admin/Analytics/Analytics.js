@@ -29,7 +29,7 @@ class Analytics extends Component {
 
     let date = new Date(), y = date.getFullYear(), m = date.getMonth();
     let firstDay = new Date(y, m, 2).toJSON().slice(0, 10);
-    let lastDay = new Date(y, m + 1, 0).toJSON().slice(0, 10);
+    let lastDay = new Date(y, m + 1, 1).toJSON().slice(0, 10);
     console.log(firstDay)
     console.log(lastDay)
 
@@ -98,7 +98,7 @@ class Analytics extends Component {
   };
 
   fetchCompanies = async () => {
-    let companies_result = await getCompanies(0, false, true);
+    let companies_result = await getCompanies(0, true, false);
     const {selectedRecruiter} = this.state;
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&
       (selectedRecruiter !== null && company.recruiters && company.recruiters.indexOf(selectedRecruiter.id) > -1  || selectedRecruiter === null));

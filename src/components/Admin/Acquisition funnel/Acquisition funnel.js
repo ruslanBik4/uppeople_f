@@ -83,9 +83,9 @@ class AcquisitionFunnel extends Component {
 
     let date = new Date(), y = date.getFullYear(), m = date.getMonth(), d = date.getDate()
     // , y = date.getFullYear(), m = date.getMonth();
-    let firstDay = new Date(y, m, d + 1, 0, 0, 0).toJSON().slice(0, 10);
+    let firstDay = new Date(y, m, 2, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
-    let lastDay = new Date(y, m, d + 2, 0, 0, 0).toJSON().slice(0, 10);
+    let lastDay = new Date(y, m + 1, 1, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
     console.log(firstDay)
     console.log(lastDay)
@@ -164,7 +164,7 @@ class AcquisitionFunnel extends Component {
   };
 
   fetchCompanies = async () => {
-    let companies_result = await getCompanies(0, false, true);
+    let companies_result = await getCompanies(0, true, false);
     const {selectedRecruiter} = this.state;
 
     const companies = companies_result.companies.filter((company) => company.vacancies > 0 &&

@@ -291,7 +291,7 @@ export default class CandidateProfile extends Component {
     let sendAppoint = '';
     let sendBTNS = '';
 
-        if (user_id === candidate.recruter_id || candidate.tag.id > 2 ) {
+        
           sendAppoint = (<ModalConsumer>
                 {({showModal}) => (
                     <Button
@@ -328,7 +328,7 @@ export default class CandidateProfile extends Component {
                     )}
                   </ModalConsumer>
               )
-        }
+        
 
     const candidateProfileInterfaceJSX = () => {
       switch (role) {
