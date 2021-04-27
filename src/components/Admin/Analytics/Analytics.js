@@ -3,9 +3,9 @@ import {Button, Col, FormGroup, Input, Row} from "reactstrap";
 import Select from "react-select";
 // import {getUsers} from "../../../utils/api/users"; // вакансии
 import {getCompanies} from "../../../utils/api/company"; // компании
-import {getVacancies, getTags} from "../../../utils/api/vacancy"; // вакансии и теги
+import {getVacancies} from "../../../utils/api/vacancy"; // вакансии и теги
 import {
-  getStatuses,
+  // getStatuses, get Tags
   getCandidatesAmountByStatuses,
   getReportAmountByStatus
 } from "../../../utils/api/candidates"; // вакансии и теги
@@ -21,7 +21,7 @@ import {
 } from "@progress/kendo-react-charts";
 import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
-import {styles} from "../../../assets/css/analitycs.css";
+// import {styles} from "../../../assets/css/analitycs.css";
 
 class Analytics extends Component {
   constructor(props) {
@@ -266,19 +266,15 @@ class Analytics extends Component {
 
 
   render() {
-      // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const { companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      // const {statuses, selectedStatuses} = this.state;
-      const {vacancyStatus, selectedStatuses} = this.state;
+      const {selectedStatuses} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
         recruiters,
         selectedRecruiter,
-        statuses,
-       
-        // selectedStatuses,
-        // vacancyStatus
+        // statuses,
+        vacancyStatus
        } = this.props.options;
        console.log(this.props);
        console.log(this.props.options);

@@ -20,8 +20,8 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
-import { platform } from "chart.js";
-import { isEmpty } from "../../../utils/selectors";
+// import { platform } from "chart.js";
+// import { isEmpty } from "../../../utils/selectors";
 
 class AcquisitionFunnel extends Component {
 
@@ -81,7 +81,8 @@ class AcquisitionFunnel extends Component {
     // let start_date = date.toJSON().slice(0, 10);
 
 
-    let date = new Date(), y = date.getFullYear(), m = date.getMonth(), d = date.getDate()
+    let date = new Date(), y = date.getFullYear(), m = date.getMonth()
+    //  d = date.getDate()
     // , y = date.getFullYear(), m = date.getMonth();
     let firstDay = new Date(y, m, 2, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
@@ -301,7 +302,7 @@ class AcquisitionFunnel extends Component {
     let total = 0;
     if (pieChartData !== undefined && pieChartData !== null) {
       for (const [index, value] of Object.entries(pieChartData)) {
-        total += value.count;
+        // total += value.count;
       }
 
       let series = [];
@@ -550,7 +551,7 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter,
         platforms,
         platform_id,
-        recruitersIsClearable,
+        // recruitersIsClearable,
         tags
         // selectedTags,
         // selectedStartDate,
