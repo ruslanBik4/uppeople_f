@@ -195,7 +195,7 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
 /**
  * Filters and sorts sent candidates
  *
- * @returns {Promise} Promise object represents operation result
+ * @returns {Promise} Promise object represents operation result 
  */
 export const getReportAmountByTags = (selectedRecruiter, selectedCompany, selectedVacancy, startDate, endDate) => {
   const token = getToken();

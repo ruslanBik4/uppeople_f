@@ -186,7 +186,6 @@ class AcquisitionFunnel extends Component {
     const {selectedCompany, selectedRecruiter} = this.state;
     const vacancies_result = await getVacancies(
         selectedCompany !== null ? selectedCompany.id : null,
-        //  selectedCompany !== null ? selectedCompany : null,
         false,
         true);
     const vacancies = vacancies_result.filter((vacancy) =>
@@ -203,12 +202,10 @@ class AcquisitionFunnel extends Component {
     // this.setState({tags});
     // this.setState({selectedTags: tags});
   };
+  // selectedVacancy = selectedVacancy.id
 // todo 1. Порядок запросов соблюсти 2. даты сверху. 3. обработка 204 4. таги - массивом
   fetchCandidatesData = async () => {
     const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
-    // if (this.state.selectedRecruiter = "") {
-    //   delete this.fetchCandidatesData.selectedRecruiter
-    // }
     let data = await getCandidatesAmountByTags(
       selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
@@ -235,6 +232,7 @@ class AcquisitionFunnel extends Component {
       this.setState({funnelData: null});
       this.setState({pieChartData: null});
     }
+    console.log(data)
   };
 
   handleExportClick = async () => {
@@ -243,6 +241,7 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter ? selectedRecruiter.id : 0,
         selectedCompany ? selectedCompany.id : 0,
         selectedVacancy ? selectedVacancy.id : 0,
+        // selectedVacancy,
         selectedStartDate, selectedEndDate,
         platform_id ? platform_id.id : 0).then(blob =>
          saveAs(blob, (selectedRecruiter ? selectedRecruiter.label :
@@ -270,7 +269,7 @@ class AcquisitionFunnel extends Component {
   handleCompanySelect = (selectedCompany) => {
     this.setState({selectedCompany});
   };
-
+ 
   handleVacancySelect = (selectedVacancy) => {
     let {selectedCompany, companies} = this.state;
     if (selectedVacancy !== null) {
@@ -539,9 +538,6 @@ class AcquisitionFunnel extends Component {
 
 
   render() {
-  
-
-      // const {recruiters, selectedRecruiter, recruitersIsClearable} = this.state;
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
       // const platform_id = this.state;
@@ -603,12 +599,12 @@ class AcquisitionFunnel extends Component {
               </FormGroup>
               <FormGroup className="filter-select">
                 <Select
-                  isMulti
+
                   style={{marginBottom: "1rem"}}
                   value={selectedVacancy}
                   options={vacancies}
                   isClearable
-                  // getOptionValue={(vacancy) => vacancy.id}
+                  getOptionValue={(vacancy) => vacancy.id}
                   getOptionLabel={(vacancy) => vacancy.name}
                   placeholder="Vacancies"
                   onChange={this.handleVacancySelect}
