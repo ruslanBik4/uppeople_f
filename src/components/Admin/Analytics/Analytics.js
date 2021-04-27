@@ -21,7 +21,7 @@ import {
 } from "@progress/kendo-react-charts";
 import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
-// import {styles} from "../../../assets/css/analitycs.css";
+import {styles} from "../../../assets/css/analitycs.css";
 
 class Analytics extends Component {
   constructor(props) {

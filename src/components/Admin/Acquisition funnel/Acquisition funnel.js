@@ -186,6 +186,7 @@ class AcquisitionFunnel extends Component {
     const {selectedCompany, selectedRecruiter} = this.state;
     const vacancies_result = await getVacancies(
         selectedCompany !== null ? selectedCompany.id : null,
+        //  selectedCompany !== null ? selectedCompany : null,
         false,
         true);
     const vacancies = vacancies_result.filter((vacancy) =>
@@ -607,7 +608,7 @@ class AcquisitionFunnel extends Component {
                   value={selectedVacancy}
                   options={vacancies}
                   isClearable
-                  getOptionValue={(vacancy) => vacancy.id}
+                  // getOptionValue={(vacancy) => vacancy.id}
                   getOptionLabel={(vacancy) => vacancy.name}
                   placeholder="Vacancies"
                   onChange={this.handleVacancySelect}
