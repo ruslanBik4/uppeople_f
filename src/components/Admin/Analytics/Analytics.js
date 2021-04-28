@@ -22,6 +22,7 @@ import {
 import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
+import Label from "reactstrap/lib/Label";
 
 class Analytics extends Component {
   constructor(props) {
@@ -135,7 +136,16 @@ class Analytics extends Component {
       selectedStartDate, selectedEndDate);
       if (funnelData === 401) {
     this.props.history.push('/login/')
+    } else if (funnelData === 204) {
+      this.setState({funnelData: null});
+      this.setState({total: null});
+      let lblErrors = document.querySelector(".errorlist label");
+      document.querySelector(".errorlist label").classList.add('error');
+      lblErrors.textContent = ("Значения не выбраны")
     } else if (funnelData !== undefined) {
+      let lblErrors = document.querySelector(".errorlist label");
+      lblErrors.textContent = ("")
+      document.querySelector(".errorlist label").classList.remove('error');
       console.log(funnelData)
       let total = funnelData.total
       funnelData = funnelData.data;
@@ -146,6 +156,9 @@ class Analytics extends Component {
       console.log(this.state)
     } else {
       this.setState({funnelData: null});
+      let lblErrors = document.querySelector(".errorlist label");
+      document.querySelector(".errorlist label").classList.add('error');
+      lblErrors.textContent = ("Значения не выбраны")
     }
   };
 
@@ -346,6 +359,11 @@ class Analytics extends Component {
               </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="4" xl="4">
+              <Row>
+                <Col className={"errorlist"} row>
+                  <Label></Label>
+                </Col>
+              </Row>
               <Row style={{marginBottom: "1rem"}}>
                 {this.renderChart()}
               </Row>

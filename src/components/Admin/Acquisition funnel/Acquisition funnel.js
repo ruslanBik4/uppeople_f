@@ -20,6 +20,8 @@ import withOptionsForSelects from "../../hoc/withOptionsForSelects";
 
 // Import the styles
 import {styles} from "../../../assets/css/analitycs.css";
+// import styles from "./Form.module.css";
+import Label from "reactstrap/lib/Label";
 // import { platform } from "chart.js";
 // import { isEmpty } from "../../../utils/selectors";
 
@@ -216,10 +218,16 @@ class AcquisitionFunnel extends Component {
     if (data === 401) {
       this.props.history.push('/login/')
     } else if (data === 204) {
-      //  isEmpty(getCandidatesAmountByTags)) {
-      alert("Нет данных для таких опций выбора")
-      console.log(data)
+      this.setState({funnelData: null});
+      this.setState({pieChartData: null});
+      this.setState({total: null});
+      let lblErrors = document.querySelector(".errorlist label");
+      document.querySelector(".errorlist label").classList.add('error');
+      lblErrors.textContent = ("Значения не выбраны")
     } else if (data !== undefined) {
+      let lblErrors = document.querySelector(".errorlist label");
+      lblErrors.textContent = ("")
+      document.querySelector(".errorlist label").classList.remove('error');
       let funnelData = data.main;
       let pieChartData = data.reject;
       let total = data.total;
@@ -231,8 +239,13 @@ class AcquisitionFunnel extends Component {
     } else {
       this.setState({funnelData: null});
       this.setState({pieChartData: null});
+      this.setState({total: null});
+      let lblErrors = document.querySelector(".errorlist label");
+      document.querySelector(".errorlist label").classList.add('error');
+      lblErrors.textContent = ("Значения не выбраны")
     }
     console.log(data)
+    // console.log(response)
   };
 
   handleExportClick = async () => {
@@ -508,7 +521,9 @@ class AcquisitionFunnel extends Component {
       const tooltipRender = (({point = {}}) => (point.category));
 
       const {dynamicSlope, dynamicHeight} = this.state;
+      let lblErrors = document.querySelector(".errorlist label");
       return (
+        
 
         <Chart style={{margin: "25px auto 0", width: 300, height: 350}} className={"pie_chart"}>
           <ChartTitle text="Acquisition funnel"/>
@@ -641,11 +656,18 @@ class AcquisitionFunnel extends Component {
               </Button>
             </Col>
             <Col xs="12" sm="12" md="12" lg="3" xl="3">
+              <Row>
+                <Col className={"errorlist"} row>
+                  <Label></Label>
+                </Col>
+              </Row>
               <Row style={{marginBottom: "1rem"}}>
                 {this.renderFunnelChart()}
               </Row>
+              
             </Col>
             <Col lg={6} md={6}>
+              
               <Row style={{marginBottom: "1rem"}}>
                 <Col lg={6} md={6}>
                   <FormGroup>

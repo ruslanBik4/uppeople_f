@@ -176,11 +176,12 @@ export const getCandidatesAmountByStatuses = (selectedRecruiter, selectedCompany
     })
   })
   .then(response => {
+    if (response.status > 400 || response.status === 204) {
+      return response.status;
+    }
     if (response.ok||response.status === 400) {
       return response.json();
-    }
-    if (response.status > 400) {
-      return response.status;
+    
     }
 
       throw new Error(`Error while fetching: ${response.statusText}`);
@@ -293,11 +294,15 @@ export const getCandidatesAmountByTags = (startDate, endDate, selectedRecruiter,
     })
   })
     .then(response => {
-      if (response.ok||response.status === 400) {
-        return response.json();
-      }
       if (response.status > 400 || response.status === 204) {
         return response.status;
+      // if (response.ok||response.status === 400) {
+      //   return response.json();
+      }
+      if (response.ok||response.status === 400) {
+          return response.json();
+      // if (response.status > 400 || response.status === 204) {
+      //   return response.status;
       }
       throw new Error(`Error while fetching: ${response.statusText}`);
     })
