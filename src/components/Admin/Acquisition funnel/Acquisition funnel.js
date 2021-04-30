@@ -242,7 +242,7 @@ class AcquisitionFunnel extends Component {
       this.setState({total: null});
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
-      lblErrors.textContent = ("Значения не выбраны")
+      lblErrors.textContent = ("Значения не  выбраны")
     }
     console.log(data)
     // console.log(response)
