@@ -224,6 +224,7 @@ class CandidatesForm extends Component {
                     <label htmlFor={dateFrom} className="date-filter-label">Date FollowUp From</label>
                     <Input
                       id="date-from"
+                      isClearable
                       type="date"
                       name="dateFollowUpFrom"
                       value={dateFollowUpFrom}
@@ -236,6 +237,7 @@ class CandidatesForm extends Component {
                     <label htmlFor={dateTo} className="date-filter-label">Date FollowUp To</label>
                     <Input
                       id="date-to"
+                      isClearable
                       type="date"
                       name="dateFollowUpTo"
                       value={dateFollowUpTo}

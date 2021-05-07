@@ -53,10 +53,17 @@ export default class CandidateCreateForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
+    vacancies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
     defaultSelectedtag: PropTypes.func.isRequired,
     onUploadAvatar: PropTypes.func.isRequired,
     onCreateCandidate: PropTypes.func.isRequired,
-    vacancies: PropTypes.array
+    // vacancies: PropTypes.array
   };
 
   constructor(props) {
@@ -138,6 +145,7 @@ export default class CandidateCreateForm extends Component {
     componentWillReceiveProps () {
     
     const {vacancies} = this.props;
+    // const {vacancies} = this.state;
     this.setState({vacancies}); 
     console.log(this.props);
     console.log(this.props.vacancies);
