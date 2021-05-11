@@ -349,6 +349,12 @@ export default class CandidateEditForm extends Component {
 
         name = name.trim();
 
+        if (name === "") {
+          // document.querySelector('.reasons_div').classList.add('error');
+          isValid = false;
+          lblErrors.textContent = ("name не должно быть пустым")
+        }
+
         tag_id = tag_id.id
         language = language.id
 
