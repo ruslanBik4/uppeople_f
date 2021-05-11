@@ -336,10 +336,6 @@ export default class CandidateEditForm extends Component {
 
       salary = Number(salary);
 
-      // if (document.querySelector('.reasons_div > div') !== null) {
-      //   document.querySelector('.reasons_div > div').classList.remove('error');
-      // }
-
       if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
 
         tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
@@ -348,11 +344,10 @@ export default class CandidateEditForm extends Component {
 
       // if (tag_id.id === 3) {
       //   document.querySelector('.reasons_div > div').classList.add('error');
-      //   isValid = false;
+      //   isValid = fal se;
       // }
 
-      
-
+        name = name.trim();
 
         tag_id = tag_id.id
         language = language.id
@@ -368,6 +363,8 @@ export default class CandidateEditForm extends Component {
           document.querySelector('.linkedIn_div').classList.add('error');
           lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
         }
+
+       
 
         // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
         //   isValid = false;

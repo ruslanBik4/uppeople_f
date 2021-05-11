@@ -339,6 +339,7 @@ export default class CandidateCreateForm extends Component {
       
     } 
 
+   
     if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
       isValid = false;
       document.querySelector('.salary_div').classList.add('error');
@@ -352,6 +353,14 @@ export default class CandidateCreateForm extends Component {
       isValid = false;
       document.querySelector('.email_div').classList.add('error');
       lblErrors.textContent = ("Неправильный email")
+    }
+
+    name = name.trim();
+
+    if (name === "") {
+      // document.querySelector('.reasons_div').classList.add('error');
+      isValid = false;
+      lblErrors.textContent = ("name не должно быть пустым")
     }
     
 

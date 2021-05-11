@@ -208,6 +208,8 @@ class AcquisitionFunnel extends Component {
 // todo 1. Порядок запросов соблюсти 2. даты сверху. 3. обработка 204 4. таги - массивом
   fetchCandidatesData = async () => {
     const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
+    let names = 'selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags'
+    console.log(names)
     let data = await getCandidatesAmountByTags(
       selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
@@ -215,6 +217,13 @@ class AcquisitionFunnel extends Component {
       selectedVacancy ? selectedVacancy.id : 0,
       platform_id ? platform_id.id : 0,
       selectedTags ? selectedTags.map(item => item.id) : null)
+      // let value = String( selectedEndDate)
+      // let value = data.join(';')
+      // console.log(value)
+      console.log(data)
+      console.log(getCandidatesAmountByTags)
+      console.log(selectedRecruiter)
+      console.log(platform_id, selectedCompany)
     if (data === 401) {
       this.props.history.push('/login/')
     } else if (data === 204) {
@@ -223,7 +232,13 @@ class AcquisitionFunnel extends Component {
       this.setState({total: null});
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
-      lblErrors.textContent = ("Нет данных по выбланным параметрам")
+      lblErrors.textContent = ("Нет данных по выбранным параметрам")
+      if (selectedRecruiter.length > 0) {
+        lblErrors.textContent = ("selectedRecruiter")
+      }
+      
+      // let result = names.filter(item => item.id == 1)
+      // console.log(result)
     } else if (data !== undefined) {
       let lblErrors = document.querySelector(".errorlist label");
       lblErrors.textContent = ("")
@@ -242,7 +257,7 @@ class AcquisitionFunnel extends Component {
       this.setState({total: null});
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
-      lblErrors.textContent = ("Нет данных по выбланным параметрам")
+      lblErrors.textContent = ("Нет данных по выбранным параметрам")
     }
     console.log(data)
     // console.log(response)

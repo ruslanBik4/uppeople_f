@@ -141,7 +141,7 @@ class Analytics extends Component {
       this.setState({total: null});
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
-      lblErrors.textContent = ("Нет данных по выбланным параметрам")
+      lblErrors.textContent = ("Нет данных по выбранным параметрам")
     } else if (funnelData !== undefined) {
       let lblErrors = document.querySelector(".errorlist label");
       lblErrors.textContent = ("")
@@ -158,7 +158,7 @@ class Analytics extends Component {
       this.setState({funnelData: null});
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
-      lblErrors.textContent = ("Нет данных по выбланным параметрам")
+      lblErrors.textContent = ("Нет данных по выбранным параметрам")
     }
   };
 
