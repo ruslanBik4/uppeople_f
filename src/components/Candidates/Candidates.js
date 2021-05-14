@@ -13,6 +13,7 @@ import Select from "../shared/Select";
 // Context Provider
 import Localization from "../../providers/Localization";
 import {Spinner} from "reactstrap";
+import {getOptionsForSelects} from "../../utils/api";
 
 // Instruments
 import {
@@ -138,6 +139,26 @@ export default class Candidates extends Component {
       user: {role}
     } = this.props;
 
+    getOptionsForSelects().then(optionsForSelects => {
+      const platforms = optionsForSelects.platforms;
+      const seniorities = optionsForSelects.seniorities;
+      const tags = optionsForSelects.tags;
+      const reasons = optionsForSelects.reject_reasons;
+      const reject_tag = optionsForSelects.reject_tag;
+      const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
+      const vacancies = optionsForSelects.vacancies;
+
+      this.setState({
+        platforms,
+        seniorities,
+        tags,
+        reasons, 
+        vacancies,
+        reject_tag,
+        defaultSelectedtag
+      });
+    });
+
     const {
       allCandidatesData: {currentAllPage},
       sentCandidatesData: {currentSentPage},
@@ -228,9 +249,9 @@ export default class Candidates extends Component {
           allStatuses: data.statuses,
           allRecruiters: data.recruiter,
           allSeniority: data.seniority,
-          tags: data.tags,
-          reasons: data.reasons,
-          loading: false
+          // tags: data.tags,
+          // reasons: data.reasons,
+          // loading: false
         };
 
         console.log(allCandidatesData)

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "LinkedIn Parser",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Расширение UPPeople, для мгновенного добавления кандидатов из LinkedIn в вашу базу. UPPeople - power UP your recruitment!",
   "permissions": [
     "storage", "https://www.linkedin.com/in/*/*", "http://antonmlz.beget.tech/*", "webNavigation", "tabs",
