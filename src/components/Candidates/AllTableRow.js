@@ -1,89 +1,95 @@
 // Core
-import React from "react";
-import PropTypes from "prop-types";
-import moment from "moment";
-import {Link} from "react-router-dom";
-import {Badge} from "reactstrap";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import './Candidates.css'
-import {useAlert} from 'react-alert'
+import React from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { Badge } from 'reactstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import './Candidates.css';
 
-const CandidateTableRow = ({
-                             id,
-                             date,
-                             name,
-                             seniority,
-                             platform,
-                             email,
-                             mobile,
-                             linkedin,
-                             tag_name,
-                             tag_color,
-                             skype,
-                             recruiter,
-                             isOpen,
-                             open,
-                             close
-                           }) => {
-
-
+const CandidateTableRow = (
+  {
+    id,
+    date,
+    name,
+    seniority,
+    platform,
+    email,
+    mobile,
+    linkedin,
+    tag_name,
+    tag_color,
+    vacancies,
+    skype,
+    recruiter,
+    isOpen,
+    open,
+    close,
+  },
+) => {
+  
   const contactCopied = e => {
-    e.target.style.color = "var(--green)"
+    e.target.style.color = 'var(--green)';
   };
-
+  
   let mobileValue = mobile;
   let emailValue = email;
   let linkedinValue = linkedin;
   let skypeValue = skype;
-
-  if (mobile === "" || null) {
-    mobileValue = null
+  
+  if (mobile === '' || null) {
+    mobileValue = null;
   }
-
-  if (email === "" || null) {
-    emailValue = null
+  
+  if (email === '' || null) {
+    emailValue = null;
   }
-
-  if (linkedin === "" || null) {
-    linkedinValue = null
+  
+  if (linkedin === '' || null) {
+    linkedinValue = null;
   }
-
-  if (skype === "" || null) {
-    skypeValue = null
+  
+  if (skype === '' || null) {
+    skypeValue = null;
   }
-
-
   return (
     <>
       <td>
         {isOpen ? (
           <i
-            className="icon-close icons font-xl"
-            style={{color: "var(--red)", cursor: "pointer"}}
+            className='icon-close icons font-xl'
+            style={{ color: 'var(--red)', cursor: 'pointer' }}
             onClick={close}
           />
         ) : (
           <i
-            className="icon-plus icons font-xl"
-            style={{color: "var(--green)", cursor: "pointer"}}
+            className='icon-plus icons font-xl'
+            style={{ color: 'var(--green)', cursor: 'pointer' }}
             onClick={open}
           />
         )}
       </td>
-      <td>{moment(date).format("DD.MM.YY")}</td>
+      <td>{moment(date).format('DD.MM.YY')}</td>
       <td>{platform}</td>
       <td>
-        <Link to={`/candidates/${id}`} >{name}</Link>
+        <Link to={`/candidates/${id}`}>{name}</Link>
       </td>
-      <td><Badge style={{backgroundColor:tag_color}}>{tag_name}</Badge></td>
+      <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
       <td>
-        <div className="contacts-col-icons-wrap">
+        {vacancies.map(el => (
+          <Link to={`/vacancies/${el.value}`}>
+            {el.label}
+          </Link>
+        ))}
+      </td>
+      <td>
+        <div className='contacts-col-icons-wrap'>
           {
             mobileValue !== null ?
               <CopyToClipboard text={mobileValue}>
-                <i className="icon-phone icons font-xl contact-icon"
-                   style={{color: "var(--black)", cursor: "pointer"}}
+                <i className='icon-phone icons font-xl contact-icon'
+                   style={{ color: 'var(--black)', cursor: 'pointer' }}
                    onClick={contactCopied}
                 />
               </CopyToClipboard>
@@ -92,8 +98,8 @@ const CandidateTableRow = ({
           {
             emailValue !== null ?
               <CopyToClipboard text={emailValue}>
-                <i className="icon-envelope icons font-xl contact-icon"
-                   style={{color: "var(--black)", cursor: "pointer"}}
+                <i className='icon-envelope icons font-xl contact-icon'
+                   style={{ color: 'var(--black)', cursor: 'pointer' }}
                    onClick={contactCopied}
                 />
               </CopyToClipboard>
@@ -101,9 +107,9 @@ const CandidateTableRow = ({
           }
           {
             linkedinValue !== null ?
-              <a href={linkedinValue} target="_blank">
-                <i className="icon-social-linkedin icons font-xl contact-icon"
-                   style={{color: "var(--blue)", cursor: "pointer"}}
+              <a href={linkedinValue} target='_blank' rel='noreferrer'>
+                <i className='icon-social-linkedin icons font-xl contact-icon'
+                   style={{ color: 'var(--blue)', cursor: 'pointer' }}
                    onClick={contactCopied}
                 />
               </a>
@@ -112,8 +118,8 @@ const CandidateTableRow = ({
           {
             skypeValue !== null ?
               <CopyToClipboard text={skypeValue}>
-                <i className="icon-social-skype icons font-xl contact-icon"
-                   style={{color: "var(--blue)", cursor: "pointer"}}
+                <i className='icon-social-skype icons font-xl contact-icon'
+                   style={{ color: 'var(--blue)', cursor: 'pointer' }}
                    onClick={contactCopied}
                 />
               </CopyToClipboard>
@@ -135,25 +141,27 @@ CandidateTableRow.propTypes = {
   mobile: PropTypes.string,
   email: PropTypes.string,
   linkedin: PropTypes.string,
+  vacancies: PropTypes.array,
   skype: PropTypes.string,
   recruiter: PropTypes.string,
   open: PropTypes.func,
   close: PropTypes.func,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
 };
 
 CandidateTableRow.defaultProps = {
-  date: "",
-  name: "",
-  seniority: "",
-  platform: "",
-  recruiter: "",
-  mobile: "",
-  email: "",
-  linkedin: "",
-  skype: "",
+  date: '',
+  name: '',
+  seniority: '',
+  platform: '',
+  vacancies: [],
+  recruiter: '',
+  mobile: '',
+  email: '',
+  linkedin: '',
+  skype: '',
   open: () => null,
-  close: () => null
+  close: () => null,
 };
 
 export default CandidateTableRow;

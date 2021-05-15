@@ -128,8 +128,7 @@ export default class VacanciesForm extends Component {
       selectStatuses
     } = this.state;
     const { userRole } = this.props;
-    console.log("[VacanciesForm] props: ", this.props);
-    console.log("[VacanciesForm] state: ", this.state);
+  
     return (
       <Form>
         <Row>

@@ -48,8 +48,9 @@ const localesAllCandidates = [
   "Name",
   "Tag/Reason",
   "Seniority",
+  "Vacancies",
   "Contacts",
-  "Recruiter"
+  "Recruiter",
 ];
 
 const localesSentCandidates = [

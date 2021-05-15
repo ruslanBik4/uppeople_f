@@ -1,6 +1,7 @@
 // const URL = "http://f2.uppeople.space/api";
-const URL = process.env.REACT_APP_API_ENDPOINT;
 const getToken = () => localStorage.getItem("token");
+require('dotenv').config();
+const URL = process.env.REACT_APP_API_ENDPOINT;
 
 /**
  * Fetches options for selects from an api
@@ -57,6 +58,7 @@ export const getCfgOptions = async () => {
     return console.log("error in fetch: ", error);
   }
 };
+
 /**
  * Fetches options for web-server
  *
@@ -84,6 +86,7 @@ export const getBackVersion = async () => {
     return console.log("error in fetch: ", error);
   }
 };
+
 /**
  * Fetches options for selects from an api
  *
@@ -205,7 +208,6 @@ export const sendEmail = async content => {
   }
 };
 
-
 /**
  * Fetches events for calendar from an api
  *
@@ -274,7 +276,6 @@ export const filterDataForAdminDashboard = async filter => {
       },
       body: JSON.stringify(filter)
     });
-    console.log(response);
     if (response.ok) {
       return response.json();
     }

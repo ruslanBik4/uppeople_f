@@ -2,7 +2,6 @@
 const URL = process.env.REACT_APP_API_ENDPOINT;
 const getToken = () => localStorage.getItem("token");
 
-
 /**
  * Fetches candidate's profile from an api by id
  *
