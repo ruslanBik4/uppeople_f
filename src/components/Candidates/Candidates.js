@@ -147,6 +147,8 @@ export default class Candidates extends Component {
       const reject_tag = optionsForSelects.reject_tag;
       const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
       const vacancies = optionsForSelects.vacancies;
+      const recruiters = optionsForSelects.recruiters;
+      const sendRecruiters = optionsForSelects.recruiters;
 
       this.setState({
         platforms,
@@ -155,8 +157,12 @@ export default class Candidates extends Component {
         reasons, 
         vacancies,
         reject_tag,
-        defaultSelectedtag
+        defaultSelectedtag,
+        recruiters,
+        sendRecruiters
       });
+      console.log(optionsForSelects)
+      console.log(this.state)
     });
 
     const {
@@ -249,7 +255,8 @@ export default class Candidates extends Component {
           allStatuses: data.statuses,
           allRecruiters: data.recruiter,
           allSeniority: data.seniority,
-          // tags: data.tags,
+          tags: this.state.tags,
+          sentRecruiters: this.state.recruiters
           // reasons: data.reasons,
           // loading: false
         };
@@ -388,6 +395,7 @@ export default class Candidates extends Component {
             ...sentCandidatesData
           }
         })
+        console.log(sentCandidatesData)
       }
     });
   }
@@ -614,6 +622,7 @@ export default class Candidates extends Component {
         allSeniority,
         tags,
         reasons,
+        sentRecruiters,
         loading
       },
       sentCandidatesData: {
@@ -625,7 +634,7 @@ export default class Candidates extends Component {
         sentStatuses,
         sentPlatforms,
         sentCompanies,
-        sentRecruiters,
+        // sentRecruiters,
         loadingSent
       },
       candidatesFromFreelancersData: {
@@ -639,6 +648,7 @@ export default class Candidates extends Component {
       filterAndSortCandidates: {selectRecruiter, mySent, selectTag, selectReason},
       activeTabId
     } = this.state;
+    console.log(this.state)
 
 
     const {

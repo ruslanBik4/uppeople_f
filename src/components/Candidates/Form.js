@@ -203,6 +203,7 @@ class CandidatesForm extends Component {
                       name="dateFromAllCandidates"
                       value={dateFromAllCandidates}
                       onChange={this.handleAllInputChange}
+                      isClearable
                     />
                   </FormGroup>
                 </Col>
@@ -215,6 +216,7 @@ class CandidatesForm extends Component {
                       name="dateToAllCandidates"
                       value={dateToAllCandidates}
                       onChange={this.handleAllInputChange}
+                      isClearable
                     />
                   </FormGroup>
                 </Col>
@@ -229,6 +231,7 @@ class CandidatesForm extends Component {
                       name="dateFollowUpFrom"
                       value={dateFollowUpFrom}
                       onChange={this.handleAllInputChange}
+                      isClearable
                     />
                   </FormGroup>
                 </Col>
@@ -242,6 +245,7 @@ class CandidatesForm extends Component {
                       name="dateFollowUpTo"
                       value={dateFollowUpTo}
                       onChange={this.handleAllInputChange}
+                      isClearable
                     />
                   </FormGroup>
                 </Col>
