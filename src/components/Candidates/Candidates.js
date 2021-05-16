@@ -148,9 +148,28 @@ export default class Candidates extends Component {
       const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
       const vacancies = optionsForSelects.vacancies;
       const recruiters = optionsForSelects.recruiters;
-      const sendRecruiters = optionsForSelects.recruiters;
+      const companies = optionsForSelects.companies;
+      const statuses = optionsForSelects.vacancyStatus;
+     
+       
+        // allPlatforms: data.platforms,
+        // allStatuses: data.statuses,
+        // allSeniority: this.state.seniorities;
+        // allRecruiters: this.state.recruiters,
+        // // allSeniority: data.seniority,
+        // tags: this.state.tags,
+        // sentRecruiters: this.state.recruiters
+        // reasons: data.reasons,
+        // loading: false
+    
 
       this.setState({
+        allRecruiters: optionsForSelects.recruiters,
+        allPlatforms: optionsForSelects.platforms,
+        allSeniority: optionsForSelects.seniorities,
+        allSeniority: this.state.seniorities,
+        allRecruiters: this.state.recruiters,
+        tags: this.state.tags,
         platforms,
         seniorities,
         tags,
@@ -159,7 +178,9 @@ export default class Candidates extends Component {
         reject_tag,
         defaultSelectedtag,
         recruiters,
-        sendRecruiters
+        companies,
+        statuses,
+        // sendRecruiters
       });
       console.log(optionsForSelects)
       console.log(this.state)
@@ -194,7 +215,7 @@ export default class Candidates extends Component {
             candidatesCountFF: data.candidates.length,
             totalPagesFF: data.Page,
             perPageFF: data.perPage,
-            statusesFF: data.statuses,
+            // statusesFF: data.statuses,
             currentPageFF: data.currentPage
           };
 
@@ -226,11 +247,11 @@ export default class Candidates extends Component {
           sentTotalPages: data.Page,
           sentPerPage: data.perPage,
           currentSentPage: data.currentPage,
-          sentPlatforms: data.platforms,
-          sentCompanies: data.company,
-          sentStatuses: data.statuses,
-          sentRecruiters: data.recruiter,
-          loadingSent: false
+          // sentPlatforms: data.platforms,
+          // sentCompanies: data.company,
+          // sentStatuses: data.statuses,
+          // sentRecruiters: data.recruiter,
+          // loadingSent: false
         };
 
         this.setState({
@@ -251,12 +272,13 @@ export default class Candidates extends Component {
           allTotalPages: data.TotalPage,
           allPerPage: data.perPage,
           currentAllPage: data.currentPage,
-          allPlatforms: data.platforms,
-          allStatuses: data.statuses,
-          allRecruiters: data.recruiter,
-          allSeniority: data.seniority,
-          tags: this.state.tags,
-          sentRecruiters: this.state.recruiters
+          // allPlatforms: data.platforms,
+          // allStatuses: data.statuses,
+          // allSeniority: this.state.seniorities,
+          // allRecruiters: this.state.recruiters,
+          // // allSeniority: data.seniority,
+          // tags: this.state.tags,
+          // sentRecruiters: this.state.recruiters
           // reasons: data.reasons,
           // loading: false
         };
@@ -612,17 +634,27 @@ export default class Candidates extends Component {
 
   render() {
     const {
+      platforms,
+      seniorities,
+      recruiters,
+      tags,
+      reasons,
+      companies,
+      allRecruiters,
+      statuses,
+
       allCandidatesData: {
         allCandidates,
         allCandidatesCount,
         allTotalPages,
         allPerPage,
         currentAllPage,
-        allPlatforms,
-        allSeniority,
-        tags,
-        reasons,
-        sentRecruiters,
+        // allPlatforms,
+        // allSeniority,
+        // tags,
+        // reasons,
+        // allRecruiters,
+        // sentRecruiters,
         loading
       },
       sentCandidatesData: {
@@ -633,9 +665,9 @@ export default class Candidates extends Component {
         currentSentPage,
         sentStatuses,
         sentPlatforms,
-        sentCompanies,
-        // sentRecruiters,
+        // statuses,
         loadingSent
+      
       },
       candidatesFromFreelancersData: {
         candidatesFF,
@@ -687,12 +719,12 @@ export default class Candidates extends Component {
           <Col xl={12}>
             <CandidatesForm
               userRole={role}
-              platforms={sentPlatforms}
-              companies={sentCompanies}
-              statuses={sentStatuses}
-              seniority={allSeniority}
+              platforms={platforms}
+              companies={companies}
+              statuses={statuses}
+              seniority={seniorities}
               activeTabId={activeTabId}
-              onFilter={this.filterAndSortCandidates}
+              // onFilter={this.filterAndSortCandidates}
               onAllFilter={this.privateFilterAndSortAllCandidates}
               onSentFilter={this.privateFilterAndSortSentCandidates}
             />
@@ -752,7 +784,7 @@ export default class Candidates extends Component {
                     <Select
                       isClearable
                       value={selectRecruiter}
-                      options={sentRecruiters}
+                      options={recruiters}
                       placeholder="Choose recruiter"
                       onChange={this.privateAllHandleRecruiterChange}
                     />
@@ -785,7 +817,7 @@ export default class Candidates extends Component {
                   <Select
                     isClearable
                     value={selectRecruiter}
-                    options={sentRecruiters}
+                    options={recruiters}
                     placeholder="Choose recruiter"
                     onChange={this.privateSentHandleRecruiterChange}
                   />
@@ -794,7 +826,7 @@ export default class Candidates extends Component {
                 <Col lg={3} md={3} sm={4} xs={12}>
                   <Select
                     value={selectRecruiter}
-                    options={sentRecruiters}
+                    options={recruiters}
                     placeholder="Choose recruiter"
                     // onChange={this.handleRecruiterChange}
                   />
@@ -871,7 +903,7 @@ export default class Candidates extends Component {
                       <SentCandidatesTable
                         userRole={role}
                         candidates={sentCandidates}
-                        statuses={sentStatuses}
+                        statuses={statuses}
                         headerColumns={localesSentCandidates}
                         totalItems={sentCandidatesCount}
                         pageSize={sentPerPage}
