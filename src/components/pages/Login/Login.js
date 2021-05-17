@@ -15,7 +15,6 @@ import {
 } from "reactstrap";
 import { AccountContext } from "../../../providers/AccountProvider";
 import "./Login.css";
-import companyLogo from "../../../assets/img/Rock-IT_logo_for_login.svg";
 
 export default class Login extends Component {
   static contextType = AccountContext;
@@ -41,7 +40,7 @@ export default class Login extends Component {
     const { email, password } = this.state;
     const { signIn } = this.context;
 
-    if (email === "" || password === "") return;
+    if (email === "" || password === "") return alert('Please provide Login and Password');
 
     const user = {
       email,
@@ -81,9 +80,6 @@ export default class Login extends Component {
                 <Card className="p-4">
                   <CardBody>
                     <Form onSubmit={this.handleSubmit}>
-                      {/*<h1>
-                        <b>Rock</b>-IT
-                      </h1>*/}
 					            <h1><b>UP</b>People</h1>
                       {authError ? (
                         <p style={{ color: "#f00" }}>{showError}</p>

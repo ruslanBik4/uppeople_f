@@ -27,7 +27,6 @@ const defaultProps = {
 class PaginationBackend extends Component {
   constructor(props) {
     super(props);
-
     this.state = { pager: {} };
 
   }
@@ -46,7 +45,6 @@ class PaginationBackend extends Component {
       this.props.initialPage !== prevProps.initialPage ||
       this.props.totalItems !== prevProps.totalItems
     ) {
-      console.log('condition update from PaginationBackend');
       this.setPage(this.props.initialPage);
     }
   }
@@ -117,9 +115,7 @@ class PaginationBackend extends Component {
         startPage = currentPage - 5;
         endPage = currentPage + 4;
     }
-
-    console.log(totalPages, endPage, startPage);
-
+    
     // calculate start and end item indexes
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
