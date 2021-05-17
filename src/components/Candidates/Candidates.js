@@ -1,46 +1,36 @@
-import React, {Component} from "react";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import {Button, Col, Row, TabPane} from "reactstrap";
-import {AppSwitch} from "@coreui/react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Button, Col, Row, Spinner, TabPane } from 'reactstrap';
+import { AppSwitch } from '@coreui/react';
 // Components
-import CandidatesForm from "./Form";
-import AllCandidatesTable from "./AllTable";
-import SentCandidatesTable from "./SentTable";
-import CandidatesFromFreelancersTable from "./FromFreelancers/Table";
-import Tabs from "../shared/Tabs/Tabs";
-import Select from "../shared/Select";
+import CandidatesForm from './Form';
+import AllCandidatesTable from './AllTable';
+import SentCandidatesTable from './SentTable';
+import CandidatesFromFreelancersTable from './FromFreelancers/Table';
+import Tabs from '../shared/Tabs/Tabs';
+import Select from '../shared/Select';
 // Context Provider
-import Localization from "../../providers/Localization";
-import {Spinner} from "reactstrap";
-import {getOptionsForSelects} from "../../utils/api";
-
+import Localization from '../../providers/Localization';
+import { getOptionsForSelects } from '../../utils/api';
 // Instruments
 import {
+  filterAndSortAllCandidates,
+  filterAndSortSentCandidates,
   getAllCandidates,
   getSentCandidates,
-  getCandidatesFromFreelancers,
-  filterAndSortAllCandidates,
-  filterAndSortSentCandidates
-} from "../../utils/api/candidates";
-import {
-  sendCandidateResume,
-  cancelCandidateFromFreelancer
-} from "../../utils/api/candidate";
+} from '../../utils/api/candidates';
+import { cancelCandidateFromFreelancer, sendCandidateResume } from '../../utils/api/candidate';
 
 const tabs = [
   {
-    id: "1",
-    name: "All candidates"
+    id: '1',
+    name: 'All candidates',
   },
   {
-    id: "2",
-    name: "Sent candidates"
+    id: '2',
+    name: 'Sent candidates',
   },
-  {
-    id: "3",
-    name: "Candidates from freelancers"
-  }
 ];
 
 const localesAllCandidates = [
@@ -55,14 +45,14 @@ const localesAllCandidates = [
 ];
 
 const localesSentCandidates = [
-  "Date",
-  "Platform",
-  "Name",
-  "Salary",
-  "Contacts",
-  "Status",
-  "Companies",
-  "Recruiter"
+  'Date',
+  'Platform',
+  'Name',
+  'Salary',
+  'Contacts',
+  'Status',
+  'Companies',
+  'Recruiter',
 ];
 
 export default class Candidates extends Component {
@@ -70,10 +60,10 @@ export default class Candidates extends Component {
     user: PropTypes.shape({
       id: PropTypes.number.isRequired,
       role: PropTypes.number.isRequired,
-      companyId: PropTypes.number
-    })
+      companyId: PropTypes.number,
+    }),
   };
-
+  
   state = {
     allCandidatesData: {
       allCandidates: [],
@@ -87,7 +77,7 @@ export default class Candidates extends Component {
       allSeniority: [],
       tags: [],
       reasons: [],
-      loading: true
+      loading: true,
     },
     sentCandidatesData: {
       sentCandidates: [],
@@ -99,45 +89,45 @@ export default class Candidates extends Component {
       sentCompanies: [],
       sentStatuses: [],
       sentRecruiters: [],
-      loadingSent: false
+      loadingSent: false,
     },
-
+    
     candidatesFromFreelancersData: {
       candidatesFF: [],
       candidatesCountFF: null,
       totalPagesFF: null,
       perPageFF: null,
       statusesFF: [],
-      currentPageFF: 1
+      currentPageFF: 1,
     },
     filterAndSortCandidates: {
-      search: "",
-      dateFrom: "",
-      dateTo: "",
+      search: '',
+      dateFrom: '',
+      dateTo: '',
       selectCompanies: [],
       selectPlatforms: [],
       selectStatuses: [],
-      selectRecruiter: "",
+      selectRecruiter: '',
       selectTag: [],
       selectReason: [],
-      mySent: false
+      mySent: false,
     },
     filterAndSortCandidatesFF: {
-      search: "",
-      dateFrom: "",
-      dateTo: "",
+      search: '',
+      dateFrom: '',
+      dateTo: '',
       selectCompanies: [],
       selectPlatforms: [],
-      selectRecruiter: ""
+      selectRecruiter: '',
     },
     dataForSendResumeForm: {},
     isActive: true,
-    activeTabId: "1"
+    activeTabId: '1',
   };
-
+  
   componentDidMount() {
     const {
-      user: {role}
+      user: { role },
     } = this.props;
 
     //todo: refatoring
@@ -184,25 +174,20 @@ export default class Candidates extends Component {
         statuses,
         // sendRecruiters
       });
-      console.log(optionsForSelects)
-      console.log(this.state)
-    });
-
+    
     const {
-      allCandidatesData: {currentAllPage},
-      sentCandidatesData: {currentSentPage},
-      candidatesFromFreelancersData: {currentPageFF},
+      allCandidatesData: { currentAllPage },
+      sentCandidatesData: { currentSentPage },
+      candidatesFromFreelancersData: { currentPageFF },
     } = this.state;
-
-    console.log('ROLE: ', role);
-
+    
     role !== 4 && role !== 5
       ? this.requestForCandidatesForStaff(currentAllPage, currentSentPage, currentPageFF)
       : this.requestForCandidates(currentAllPage, currentSentPage);
   }
-
+  
   requestForCandidatesForStaff = (currentAllPage, currentSentPage, currentPageFF) => {
-
+    
     this.getAll(currentAllPage);
     this.getSend(currentSentPage);
 
@@ -231,13 +216,13 @@ export default class Candidates extends Component {
 
     });
   };
-
+  
   requestForCandidates = (currentAllPage, currentSentPage) => {
     this.getAll(currentAllPage);
     this.getSend(currentSentPage);
-
+    
   };
-
+  
   getSend(currentSentPage) {
     getSentCandidates(currentSentPage).then(data => {
       if (data === 401) {
@@ -255,14 +240,14 @@ export default class Candidates extends Component {
           // sentRecruiters: data.recruiter,
           // loadingSent: false
         };
-
+        
         this.setState({
-          sentCandidatesData: {...this.state.sentCandidatesData, ...sentCandidatesData}
+          sentCandidatesData: { ...this.state.sentCandidatesData, ...sentCandidatesData },
         });
       }
     });
   }
-
+  
   getAll(currentAllPage) {
     getAllCandidates(currentAllPage).then(data => {
       if (data === 401) {
@@ -284,122 +269,111 @@ export default class Candidates extends Component {
           // reasons: data.reasons,
           // loading: false
         };
-
-        console.log(allCandidatesData)
+        
         this.setState({
-          allCandidatesData: {...this.state.allCandidatesData, ...allCandidatesData}
+          allCandidatesData: { ...this.state.allCandidatesData, ...allCandidatesData },
         });
       }
     });
   }
 
 // all
-
   privateAllHandleRecruiterChange = value => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('privateAllHandleRecruiterChange state:', filterAndSortCandidates);
-
+    const { filterAndSortCandidates } = this.state;
+    
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          selectRecruiter: value
-        }
+          selectRecruiter: value,
+        },
       },
       () => {
-        const {filterAndSortCandidates} = this.state;
+        const { filterAndSortCandidates } = this.state;
         this.privateFilterAndSortAllCandidates(filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   privateAllHandleTagChange = value => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('privateAllHandleRecruiterChange state:', filterAndSortCandidates);
-
+    const { filterAndSortCandidates } = this.state;
+    
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          selectTag: value
-        }
+          selectTag: value,
+        },
       },
       () => {
-        const {filterAndSortCandidates} = this.state;
+        const { filterAndSortCandidates } = this.state;
         this.privateFilterAndSortAllCandidates(filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   privateAllHandleReasonChange = value => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('privateAllHandleReasonChange state:', filterAndSortCandidates);
-
+    const { filterAndSortCandidates } = this.state;
+    
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          selectReason: value
-        }
+          selectReason: value,
+        },
       },
       () => {
-        const {filterAndSortCandidates} = this.state;
+        const { filterAndSortCandidates } = this.state;
         this.privateFilterAndSortAllCandidates(filterAndSortCandidates);
-      }
+      },
     );
   };
-
-  // sent
-
+  
   privateSentHandleRecruiterChange = value => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('privateSentHandleRecruiterChange state:', filterAndSortCandidates);
-
+    const { filterAndSortCandidates } = this.state;
+    
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          selectRecruiter: value
-        }
+          selectRecruiter: value,
+        },
       },
       () => {
-        const {filterAndSortCandidates} = this.state;
+        const { filterAndSortCandidates } = this.state;
         this.privateFilterAndSortSentCandidates(filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   filterAndSortCandidates = filterAndSort => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('>>>>>Filter from candidates');
+    const { filterAndSortCandidates } = this.state;
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          ...filterAndSort
-        }
+          ...filterAndSort,
+        },
       },
       () => {
         const {
-          allCandidatesData: {currentAllPage},
-          sentCandidatesData: {currentSentPage},
-          filterAndSortCandidates
+          allCandidatesData: { currentAllPage },
+          sentCandidatesData: { currentSentPage },
+          filterAndSortCandidates,
         } = this.state;
         this.filterCand(currentAllPage, filterAndSortCandidates);
         this.filterSent(currentSentPage, filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   filterSent(currentSentPage, filterAndSortCandidates) {
-    console.log(filterAndSortCandidates);
     const filter = this.clearEmptyFilter(filterAndSortCandidates);
-    console.log(filter);
     filterAndSortSentCandidates(currentSentPage, filter).then(data => {
       if (data === 401) {
         this.props.history.push('/login/');
       } else {
-
+        
         const sentCandidatesData = {
           sentCandidates: data.candidates,
           sentCandidatesCount: data.Count,
@@ -410,23 +384,22 @@ export default class Candidates extends Component {
           sentCompanies: data.company,
           sentStatuses: data.statuses,
           sentRecruiters: data.recruiter,
-          loadingSent: false
+          loadingSent: false,
         };
-
+        
         this.setState({
           sentCandidatesData: {
             ...this.state.sentCandidatesData,
-            ...sentCandidatesData
-          }
-        })
-        console.log(sentCandidatesData)
+            ...sentCandidatesData,
+          },
+        });
       }
     });
   }
-
+  
   filterCand(currentAllPage, filterAndSortCandidates) {
     this.clearEmptyFilter(filterAndSortCandidates);
-
+    
     filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates).then(data => {
       if (data === 401) {
         this.props.history.push('/login/');
@@ -441,199 +414,185 @@ export default class Candidates extends Component {
           allStatuses: data.statuses,
           allRecruiters: data.recruiter,
           allSeniority: data.seniority,
-          loading: false
+          loading: false,
         };
-
+        
         this.setState({
           allCandidatesData: {
             ...this.state.allCandidatesData,
-            ...allCandidatesData
-          }
-        })
+            ...allCandidatesData,
+          },
+        });
       }
     });
   }
-
+  
   clearEmptyFilter(filters) {
-    Object.entries(filters).forEach(function (elem, i, arr) {
-  console.log(elem[0], elem[1]);
-      if (elem[1] === "") {
+    Object.entries(filters).forEach(function(elem, i, arr) {
+      if (elem[1] === '') {
         delete filters[elem[0]];
       }
     });
-
+    
     if (filters.selectCompanies && filters.selectCompanies.length === 0) {
-      delete filters.selectCompanies
+      delete filters.selectCompanies;
     }
     if (filters.selectPlatforms && filters.selectPlatforms.length === 0) {
-      delete filters.selectPlatforms
+      delete filters.selectPlatforms;
     }
     if (filters.selectStatuses && filters.selectStatuses.length === 0) {
-      delete filters.selectStatuses
+      delete filters.selectStatuses;
     }
-
+    
     if (filters.selectRecruiter) {
-     if (filters.selectRecruiter.length > 0) {
-       Object.defineProperty(filters, 'id_recruiter', { value: filters.selectRecruiter.id, configurable: true, });
-     }
+      if (filters.selectRecruiter.length > 0) {
+        Object.defineProperty(filters, 'id_recruiter', { value: filters.selectRecruiter.id, configurable: true });
+      }
       // delete filters.selectRecruiter
     }
-
+    
     if (filters.selectSeniority && filters.selectSeniority.length === 0) {
-      delete filters.selectSeniority
+      delete filters.selectSeniority;
     }
     if (filters.selectTag && filters.selectTag.length === 0) {
-      delete filters.selectTag
+      delete filters.selectTag;
     }
     if (filters.selectReason && filters.selectReason.length === 0) {
-      delete filters.selectReason
+      delete filters.selectReason;
     }
-
-    console.log(filters);
+    
     return filters;
   }
-
-// all
-
+  
   privateFilterAndSortAllCandidates = filterAndSort => {
-    const {filterAndSortCandidates} = this.state;
+    const { filterAndSortCandidates } = this.state;
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          ...filterAndSort
-        }
+          ...filterAndSort,
+        },
       },
       () => {
         const {
-          allCandidatesData: {currentAllPage},
-          filterAndSortCandidates
+          allCandidatesData: { currentAllPage },
+          filterAndSortCandidates,
         } = this.state;
-
+        
         this.filterCand(currentAllPage, filterAndSortCandidates);
-      }
+      },
     );
   };
-
-  // sent
-
+  
   privateFilterAndSortSentCandidates = filterAndSort => {
-    const {filterAndSortCandidates} = this.state;
-    console.log('>>>>>Filter from candidates');
+    const { filterAndSortCandidates } = this.state;
     this.setState(
       {
         filterAndSortCandidates: {
           ...filterAndSortCandidates,
-          ...filterAndSort
-        }
+          ...filterAndSort,
+        },
       },
       () => {
         const {
-          sentCandidatesData: {currentSentPage},
-          filterAndSortCandidates
+          sentCandidatesData: { currentSentPage },
+          filterAndSortCandidates,
         } = this.state;
-
-
+        
+        
         this.filterSent(currentSentPage, filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   onChangeAllCandidatesPage = (currentAllPage) => {
-    console.log('onChangeAllCandidatesPage');
-
-    this.setState(({allCandidatesData}) => ({
+    
+    this.setState(({ allCandidatesData }) => ({
       allCandidatesData: {
         ...allCandidatesData,
-        loading: true
-      }
+        loading: true,
+      },
     }));
-
-    const {filterAndSortCandidates} = this.state;
-
+    
+    const { filterAndSortCandidates } = this.state;
+    
     this.filterCand(currentAllPage, filterAndSortCandidates);
-  }
-
+  };
+  
   onChangeSentCandidatesPage = (currentSentPage) => {
-    console.log('onChangeSentCandidatesPage');
-
-    const {filterAndSortCandidates} = this.state;
-
-    this.setState(({sentCandidatesData}) => ({
+    
+    const { filterAndSortCandidates } = this.state;
+    
+    this.setState(({ sentCandidatesData }) => ({
       sentCandidatesData: {
         ...sentCandidatesData,
-        loadingSent: true
-      }
+        loadingSent: true,
+      },
     }));
-
+    
     this.filterSent(currentSentPage, filterAndSortCandidates);
   };
-
+  
   toggleMySent = () => {
     this.setState(
       state => ({
         filterAndSortCandidates: {
           ...state.filterAndSortCandidates,
-          mySent: !state.filterAndSortCandidates.mySent
-        }
+          mySent: !state.filterAndSortCandidates.mySent,
+        },
       }),
       () => {
         const {
-          allCandidatesData: {currentAllPage},
-          sentCandidatesData: {currentSentPage},
-          filterAndSortCandidates
+          allCandidatesData: { currentAllPage },
+          sentCandidatesData: { currentSentPage },
+          filterAndSortCandidates,
         } = this.state;
-
+        
         this.filterCand(currentAllPage, filterAndSortCandidates);
-
+        
         this.filterSent(currentSentPage, filterAndSortCandidates);
-      }
+      },
     );
   };
-
+  
   toggleIsActive = () => {
     this.setState(
       state => ({
-        isActive: !state.isActive
+        isActive: !state.isActive,
       }),
-      () => console.log(this.state.isActive)
     );
-    console.log(this.state.isActive);
   };
-
+  
   activeTabToggle = (tab) => {
-    this.setState({activeTabId: tab});
+    this.setState({ activeTabId: tab });
   };
-
-
+  
   sendResume = (id, content) => {
     sendCandidateResume(id, content);
-
+    
     this.setState(prevState => ({
       candidatesFromFreelancersData: {
         candidatesFF: prevState.candidatesFromFreelancersData.candidatesFF.filter(
-          candidate => candidate.id !== id
-        )
-      }
+          candidate => candidate.id !== id,
+        ),
+      },
     }));
   };
-
+  
   rejectCandidate = (id, content) => {
-    // console.log(content);
     cancelCandidateFromFreelancer(id, content).then(data => {
-      // console.log(data);
       data
         ? this.setState(prevState => ({
           candidatesFromFreelancersData: {
             candidatesFF: prevState.candidatesFromFreelancersData.candidatesFF.filter(
-              candidate => candidate.id !== id
-            )
-          }
+              candidate => candidate.id !== id,
+            ),
+          },
         }))
         : console.log(data);
     });
   };
-
+  
   render() {
     const {
       platforms,
@@ -651,6 +610,7 @@ export default class Candidates extends Component {
         allTotalPages,
         allPerPage,
         currentAllPage,
+
         // allPlatforms,
         // allSeniority,
         // tags,
@@ -669,7 +629,7 @@ export default class Candidates extends Component {
         sentPlatforms,
         // statuses,
         loadingSent
-      
+
       },
       candidatesFromFreelancersData: {
         candidatesFF,
@@ -677,43 +637,41 @@ export default class Candidates extends Component {
         totalPagesFF,
         perPageFF,
         currentPageFF,
-        statusesFF
+        statusesFF,
       },
-      filterAndSortCandidates: {selectRecruiter, mySent, selectTag, selectReason},
-      activeTabId
+      filterAndSortCandidates: { selectRecruiter, mySent, selectTag, selectReason },
+      activeTabId,
     } = this.state;
-    console.log(this.state)
-
-
+    
     const {
-      user: {role}
+      user: { role },
     } = this.props;
-
+    
     const divStyle = {
       color: 'yellow',
     };
-
+    
     return (
       <>
         <Row>
           <Col
             style={{
-              display: "flex",
-              justifyContent: "space-between",
+              display: 'flex',
+              justifyContent: 'space-between',
               maxWidth: 200,
-              marginBottom: "0.5rem"
+              marginBottom: '0.5rem',
             }}
           >
-            <h1 style={{marginBottom: 0, fontSize: 24}}>Candidates</h1>
+            <h1 style={{ marginBottom: 0, fontSize: 24 }}>Candidates</h1>
             <span
               style={{
-                alignSelf: "flex-end",
-                color: "var(--gray)"
+                alignSelf: 'flex-end',
+                color: 'var(--gray)',
               }}
             >
-              {activeTabId === "1" ? allCandidatesCount : null}
-              {activeTabId === "2" ? sentCandidatesCount : null}
-              {activeTabId === "3" ? candidatesCountFF : null}
+              {activeTabId === '1' ? allCandidatesCount : null}
+              {activeTabId === '2' ? sentCandidatesCount : null}
+              {activeTabId === '3' ? candidatesCountFF : null}
             </span>
           </Col>
         </Row>
@@ -732,46 +690,46 @@ export default class Candidates extends Component {
             />
           </Col>
         </Row>
-        <Row style={{marginBottom: "1rem"}}>
+        <Row style={{ marginBottom: '1rem' }}>
           {role !== 4 ? (
-            <Col lg={activeTabId !== "1" ? 4 : 3} md={6} sm={4} xs={6}>
+            <Col lg={activeTabId !== '1' ? 4 : 3} md={6} sm={4} xs={6}>
               <Link
-                to="/new-candidate"
-                className="btn btn-success pull-left"
-                style={{marginRight: "0.4rem"}}
+                to='/new-candidate'
+                className='btn btn-success pull-left'
+                style={{ marginRight: '0.4rem' }}
               >
-                <i className="fa fa-plus-circle"/> Create
+                <i className='fa fa-plus-circle' /> Create
               </Link>
-              <Button color="light" onClick={() => null}>
+              <Button color='light' onClick={() => null}>
                 Export
               </Button>
             </Col>
           ) : (
             <Col>
-              <Link to="/new-candidate" className="btn btn-success pull-left">
-                <i className="fa fa-plus-circle"/> Create
+              <Link to='/new-candidate' className='btn btn-success pull-left'>
+                <i className='fa fa-plus-circle' /> Create
               </Link>
             </Col>
           )}
           {role !== 4 ? (
             <>
               {
-                activeTabId !== "1" ?
+                activeTabId !== '1' ?
                   <Col lg={3} md={3} sm={4} xs={6}>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        alignItems: "center",
-                        margin: "0 0.5rem",
-                        padding: "0.5rem",
-                        color: "var(--gray)"
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        margin: '0 0.5rem',
+                        padding: '0.5rem',
+                        color: 'var(--gray)',
                       }}
-                      className="my-events"
+                      className='my-events'
                     >
                       <AppSwitch
-                        className="mx-1"
-                        color="primary"
+                        className='mx-1'
+                        color='primary'
                         checked={mySent}
                         onChange={this.toggleMySent}
                       />
@@ -791,24 +749,24 @@ export default class Candidates extends Component {
                       onChange={this.privateAllHandleRecruiterChange}
                     />
                   </Col>
-
+                  
                   <Col lg={3} md={3} sm={4} xs={12}>
                     <Select
                       isClearable
                       value={selectTag}
                       options={tags}
-                      placeholder="Tag"
+                      placeholder='Tag'
                       onChange={this.privateAllHandleTagChange}
                     />
                   </Col>
-
+                  
                   {selectTag && selectTag.id && selectTag.id === 3 ? (
                     <Col lg={3} md={3} sm={4} xs={12}>
                       <Select
                         isClearable
                         value={selectReason}
                         options={reasons}
-                        placeholder="Reason"
+                        placeholder='Reason'
                         onChange={this.privateAllHandleReasonChange}
                       />
                     </Col>) : (<></>)
@@ -834,38 +792,38 @@ export default class Candidates extends Component {
                   />
                 </Col>
               ))
-
+              
               }
-
+            
             </>
           ) : null}
         </Row>
         <Row>
-          <Col style={activeTabId === "1" ? {marginTop: 4} : null}>
+          <Col style={activeTabId === '1' ? { marginTop: 4 } : null}>
             {role !== 4 ? (
               <Tabs tabs={tabs}
                     onClick={this.toggleIsActive}
                     activeTabToggle={this.activeTabToggle}
                     activeTabId={activeTabId}>
-                <TabPane tabId="1">
+                <TabPane tabId='1'>
                   <Localization
                     locales={localesAllCandidates}
                     onSort={this.filterAndSortCandidates}
                   >
                     {loading ? (
-                      <div className="animated pt-3 text-center">
+                      <div className='animated pt-3 text-center'>
                         <Spinner
-                          color="info"
+                          color='info'
                           style={{
-                            position: "absolute",
-                            top: "55%",
-                            left: "50%",
-                            zIndex: "999"
+                            position: 'absolute',
+                            top: '55%',
+                            left: '50%',
+                            zIndex: '999',
                           }}
                         />
                       </div>
                     ) : <></>}
-
+                    
                     {allCandidates.length > 0 && (
                       <AllCandidatesTable style={divStyle}
                                           userRole={role}
@@ -881,26 +839,26 @@ export default class Candidates extends Component {
                     )}
                   </Localization>
                 </TabPane>
-                <TabPane tabId="2">
+                <TabPane tabId='2'>
                   <Localization
                     locales={localesSentCandidates}
                     onSort={this.filterAndSortCandidates}
                   >
-
+                    
                     {loadingSent ? (
-                      <div className="animated pt-3 text-center">
+                      <div className='animated pt-3 text-center'>
                         <Spinner
-                          color="info"
+                          color='info'
                           style={{
-                            position: "absolute",
-                            top: "55%",
-                            left: "50%",
-                            zIndex: "999"
+                            position: 'absolute',
+                            top: '55%',
+                            left: '50%',
+                            zIndex: '999',
                           }}
                         />
                       </div>
                     ) : <></>}
-
+                    
                     {sentCandidates.length > 0 && (
                       <SentCandidatesTable
                         userRole={role}
@@ -917,7 +875,7 @@ export default class Candidates extends Component {
                     )}
                   </Localization>
                 </TabPane>
-                <TabPane tabId="3">
+                <TabPane tabId='3'>
                   <Localization
                     locales={localesSentCandidates}
                     onSort={this.filterAndSortCandidates}
@@ -936,7 +894,7 @@ export default class Candidates extends Component {
                     />
                   </Localization>
                 </TabPane>
-
+              
               </Tabs>
             ) : (
               <Localization
@@ -956,7 +914,7 @@ export default class Candidates extends Component {
                     onChangePage={this.onChangeSentCandidatesPage}
                   />
                 )}
-              </Localization> 
+              </Localization>
             )}
           </Col>
         </Row>
