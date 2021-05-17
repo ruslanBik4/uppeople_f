@@ -724,7 +724,7 @@ export default class Candidates extends Component {
               statuses={statuses}
               seniority={seniorities}
               activeTabId={activeTabId}
-              // onFilter={this.filterAndSortCandidates}
+              onFilter={this.filterAndSortCandidates}
               onAllFilter={this.privateFilterAndSortAllCandidates}
               onSentFilter={this.privateFilterAndSortSentCandidates}
             />
