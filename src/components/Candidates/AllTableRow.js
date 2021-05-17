@@ -77,8 +77,8 @@ const CandidateTableRow = (
       <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
       <td>
-        {vacancies.map(el => (
-          <Link to={`/vacancies/${el.value}`}>
+        {vacancies.map((el, idx) => (
+          <Link to={`/vacancies/${el.value}`} key={idx}>
             {el.label}
           </Link>
         ))}
