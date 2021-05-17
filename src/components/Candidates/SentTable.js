@@ -50,7 +50,7 @@ const SentCandidatesTable = ({
                     {...candidate}
                   />
                 </tr>
-                {candidate.status !== null ?
+                {candidate.statuses.length > 0 ?
                     <tr key={candidate.id}>
                       <td colSpan="8">
                         <Table style={{ background: "var(--white)" }} size="sm">
@@ -67,7 +67,7 @@ const SentCandidatesTable = ({
                               <CandidateExpandableTableRow
                                 userRole={userRole}
                                 candId={candidate.id}
-                                candidateStatus={candidate.status.comments}
+                                candidateStatus={candidate.statuses[0].comments}
                                 statuses={statuses}
                               />
                             </tr>

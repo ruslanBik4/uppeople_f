@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 
 const propTypes = {
   children: PropTypes.node
@@ -15,11 +16,9 @@ class DefaultFooter extends Component {
     return (
       <React.Fragment>
         <span>
-          <a href="#" style={{ color: "var(--dark)" }}>UPPeople
-          </a>{" "}
+          <Link to="#" style={{ color: "var(--dark)" }}>UPPeople</Link>
           &copy; 2020{" "}
-          <a href="https://pm-db.net/en/" style={{ color: "var(--dark)" }}>BugFix
-          </a>
+          <Link to="https://pm-db.net/en/" style={{ color: "var(--dark)" }}>BugFix</Link>
           .
         </span>
       </React.Fragment>

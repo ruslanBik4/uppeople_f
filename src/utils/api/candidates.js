@@ -4,15 +4,11 @@ const getToken = () => localStorage.getItem("token");
 
 /**
  * Fetches all candidates
- *
  * @param {Number} page current page
  * @returns {Promise} Promise object represents operation result
  */
-
-
 export const getAllCandidates = page => {
   const token = getToken();
-  console.log(':::::getAllCandidates');
   return fetch(`${URL}/main/allCandidates/${page}`, {
     method: "GET",
     headers: {
@@ -59,35 +55,6 @@ export const getSentCandidates = page => {
     })
     .catch(error => console.log("error in fetch: ", error));
 };
-
-/**
- * Fetches candidates sent by freelancer
- *
- * @param {Number} page current page
- * @returns {Promise} Promise object represents operation result
- */
-export const getCandidatesFromFreelancers = page => {
-  const token = getToken();
-  return fetch(`${URL}/main/viewCandidatesFreelancerOnVacancies/${page}`, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json"
-    }
-  })
-  .then(response => {
-    if (response.ok||response.status === 400) {
-      return response.json();
-    }
-    if (response.status > 400) {
-      return response.status;
-    }
-
-      throw new Error(`Error while fetching: ${response.statusText}`);
-    })
-    .catch(error => console.log("error in fetch: ", error));
-};
-
 
 /**
  * Filters and sorts all candidates

@@ -24,7 +24,6 @@ class AllCandidatesTable extends Component {
       onSort,
       loading
     } = this.props;
-    console.log('currentPage', currentPage);
 
     const loadingStyle = {
       background: "var(--white)",
@@ -35,7 +34,7 @@ class AllCandidatesTable extends Component {
     const tableStyle = {
       background: "var(--white)",
     };
-    console.log(candidates);
+
     const candidatesJSX =
       candidates.length > 0 ? (
         candidates.map((candidate, idx) => (
@@ -140,6 +139,7 @@ AllCandidatesTable.propTypes = {
       platform: PropTypes.string,
       salary: PropTypes.string,
       companies: PropTypes.string,
+      vacancies: PropTypes.array,
       recruiter: PropTypes.string
     })
   ),

@@ -4,7 +4,6 @@ const getToken = () => localStorage.getItem("token");
 
 /**
  * Fetches all users from an api
- *
  * @returns {Promise} Promise object represents operation result
  */
 export const getUsers = () => {

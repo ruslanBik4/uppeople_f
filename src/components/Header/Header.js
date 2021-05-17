@@ -74,7 +74,6 @@ class Header extends Component {
             </NavItem>
           </Nav>
         )}
-        <span style={{ fontWeight: "italic" }}> <a href="/apis" target="_blank" style={{color: "white"}}>{ver}</a></span>
         <Nav className="ml-auto" navbar>
           {/*<NavItem className="d-md-down-none">
             <NavLink href="#">
