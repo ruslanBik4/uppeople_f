@@ -19,7 +19,7 @@ import {getOptionsForSelects} from "../../utils/api";
 import {
   getAllCandidates,
   getSentCandidates,
-  getCandidatesFromFreelancers,
+  // getCandidatesFromFreelancers,
   filterAndSortAllCandidates,
   filterAndSortSentCandidates
 } from "../../utils/api/candidates";
@@ -204,30 +204,30 @@ export default class Candidates extends Component {
     this.getAll(currentAllPage);
     this.getSend(currentSentPage);
 
-    getCandidatesFromFreelancers(currentPageFF).then(data => {
-      if (data === 401) {
-        this.props.history.push('/login/');
-      } else if (data > 400) {
-        alert(data);
-      } else if (typeof data === 'object') {
-          const candidatesFromFreelancersData = {
-            candidatesFF: data.candidates,
-            candidatesCountFF: data.candidates.length,
-            totalPagesFF: data.Page,
-            perPageFF: data.perPage,
-            // statusesFF: data.statuses,
-            currentPageFF: data.currentPage
-          };
+    // getCandidatesFromFreelancers(currentPageFF).then(data => {
+    //   if (data === 401) {
+    //     this.props.history.push('/login/');
+    //   } else if (data > 400) {
+    //     alert(data);
+    //   } else if (typeof data === 'object') {
+    //       const candidatesFromFreelancersData = {
+    //         candidatesFF: data.candidates,
+    //         candidatesCountFF: data.candidates.length,
+    //         totalPagesFF: data.Page,
+    //         perPageFF: data.perPage,
+    //         // statusesFF: data.statuses,
+    //         currentPageFF: data.currentPage
+    //       };
 
-          this.setState({
-            candidatesFromFreelancersData: {
-              ...this.state.candidatesFromFreelancersData,
-              ...candidatesFromFreelancersData
-            }
-          });
-        }
+    //       this.setState({
+    //         candidatesFromFreelancersData: {
+    //           ...this.state.candidatesFromFreelancersData,
+    //           ...candidatesFromFreelancersData
+    //         }
+    //       });
+    //     }
 
-    });
+    // });
   };
 
   requestForCandidates = (currentAllPage, currentSentPage) => {

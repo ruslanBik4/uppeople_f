@@ -55,13 +55,15 @@ const CandidateTableRow = ({
   // }
   //
   let statusesVac = ''
-  let companies = ''
+  let colour = ''
 
   statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
     {/*todo add link for all companies*/}
-    companies += status["compName"];
+    // companies += status["compName"];
+    colour += status["color"];
   })
+
   return (
     <>
       <td>
@@ -130,23 +132,16 @@ const CandidateTableRow = ({
         </div>
       </td>
       <td>
-        <Badge color={color} style={{backgroundColor:color}}>
-        {statusesVac}
-      </Badge>
+        <Badge  style={{backgroundColor:colour}}>
+          {statusesVac}
+        </Badge>
       </td>
       <td>
-        {/*todo add link for all companies*/}
-        {/*{status["comp_id"] > 0 ?*/}
-        {/*      <Link*/}
-        {/*        to={`/companies/${status["comp_id"]}`}*/}
-        {/*        key={`${id}-${status["comp_id"]}`}*/}
-        {/*      >*/}
-                {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {companies}
-                {/*</Badge>*/}
-          {/*    </Link>*/}
-          {/*: null*/}
-          {/*}*/}
+      {statuses.map((status, idx) => (
+        <Link to={`/vacancies/${status["comp_id"]}`} key={idx}>
+          {status["compName"]};
+        </Link>
+      ))}
       </td>
       <td>{recruiter}</td>
     </>
