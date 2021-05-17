@@ -4,15 +4,11 @@ const getToken = () => localStorage.getItem("token");
 
 /**
  * Fetches all candidates
- *
  * @param {Number} page current page
  * @returns {Promise} Promise object represents operation result
  */
-
-
 export const getAllCandidates = page => {
   const token = getToken();
-  console.log(':::::getAllCandidates');
   return fetch(`${URL}/main/allCandidates/${page}`, {
     method: "GET",
     headers: {

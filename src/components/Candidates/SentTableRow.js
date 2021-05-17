@@ -16,27 +16,13 @@ const CandidateTableRow = ({
   mobile: phone,
   linkedin,
   skype,
-  companies,
   recruiter,
   isOpen,
   open,
   close,
-  status,
+  statuses,
   color
 }) => {
-  const getBadge = status => {
-    return status === "OFFER" || status === "Hired"
-      ? "success"
-      : status === "Hold"
-      ? "secondary"
-      : status === "Interview"
-      ? "warning"
-      : status === "Rejected" || status === "Refused"
-      ? "danger"
-      : status === "Review"
-      ? "primary"
-      : null;
-  };
 
   const contactCopied = e => {
     e.target.style.color = "var(--green)"
@@ -68,6 +54,14 @@ const CandidateTableRow = ({
   //   status = JSON.parse(explode[explode.length - 1]);
   // }
   //
+  let statusesVac = ''
+  let companies = ''
+
+  statuses.map((status, idx) => {
+    statusesVac += status["vacStat"];
+    {/*todo add link for all companies*/}
+    companies += status["compName"];
+  })
   return (
     <>
       <td>
@@ -137,21 +131,22 @@ const CandidateTableRow = ({
       </td>
       <td>
         <Badge color={color} style={{backgroundColor:color}}>
-        {status["vacStat"]}
+        {statusesVac}
       </Badge>
       </td>
       <td>
-        {status["comp_id"] > 0 ?
-              <Link
-                to={`/companies/${status["comp_id"]}`}
-                key={`${id}-${status["comp_id"]}`}
-              >
+        {/*todo add link for all companies*/}
+        {/*{status["comp_id"] > 0 ?*/}
+        {/*      <Link*/}
+        {/*        to={`/companies/${status["comp_id"]}`}*/}
+        {/*        key={`${id}-${status["comp_id"]}`}*/}
+        {/*      >*/}
                 {/*<Badge color={getBadge(parsedCompany.vacStat)}>*/}
-                  {status["compName"]}
+                  {companies}
                 {/*</Badge>*/}
-              </Link>
-          : null
-          }
+          {/*    </Link>*/}
+          {/*: null*/}
+          {/*}*/}
       </td>
       <td>{recruiter}</td>
     </>

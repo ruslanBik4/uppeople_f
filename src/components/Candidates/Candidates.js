@@ -34,13 +34,14 @@ const tabs = [
 ];
 
 const localesAllCandidates = [
-  'Date',
-  'Platform',
-  'Name',
-  'Tag/Reason',
-  'Seniority',
-  'Contacts',
-  'Recruiter',
+  "Date",
+  "Platform",
+  "Name",
+  "Tag/Reason",
+  "Seniority",
+  "Vacancies",
+  "Contacts",
+  "Recruiter",
 ];
 
 const localesSentCandidates = [
@@ -128,35 +129,50 @@ export default class Candidates extends Component {
     const {
       user: { role },
     } = this.props;
+
+    //todo: refatoring
+    getOptionsForSelects().then(optionsForSelects => {
+      const platforms = optionsForSelects.platforms;
+      const seniorities = optionsForSelects.seniorities;
+      const tags = optionsForSelects.tags;
+      const reasons = optionsForSelects.reject_reasons;
+      const reject_tag = optionsForSelects.reject_tag;
+      const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
+      const vacancies = optionsForSelects.vacancies;
+      const recruiters = optionsForSelects.recruiters;
+      const companies = optionsForSelects.companies;
+      const statuses = optionsForSelects.vacancyStatus;
+     
+       
+        // allPlatforms: data.platforms,
+        // allStatuses: data.statuses,
+        // allSeniority: this.state.seniorities;
+        // allRecruiters: this.state.recruiters,
+        // // allSeniority: data.seniority,
+        // tags: this.state.tags,
+        // sentRecruiters: this.state.recruiters
+        // reasons: data.reasons,
+        // loading: false
     
-    getOptionsForSelects()
-      .then(optionsForSelects => {
-        const platforms = optionsForSelects.platforms;
-        const seniorities = optionsForSelects.seniorities;
-        const tags = optionsForSelects.tags;
-        const reasons = optionsForSelects.reject_reasons;
-        const reject_tag = optionsForSelects.reject_tag;
-        const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
-        const vacancies = optionsForSelects.vacancies;
-        const recruiters = optionsForSelects.recruiters;
-        const companies = optionsForSelects.companies;
-        const statuses = optionsForSelects.vacancyStatus;
-        
-        this.setState({
-          allRecruiters: optionsForSelects.recruiters,
-          allPlatforms: optionsForSelects.platforms,
-          allSeniority: optionsForSelects.seniorities,
-          platforms,
-          seniorities,
-          tags,
-          reasons,
-          vacancies,
-          reject_tag,
-          defaultSelectedtag,
-          recruiters,
-          companies,
-          statuses,
-        });
+
+      this.setState({
+        allRecruiters: optionsForSelects.recruiters,
+        allPlatforms: optionsForSelects.platforms,
+        allSeniority: optionsForSelects.seniorities,
+        allSeniority: this.state.seniorities,
+        allRecruiters: this.state.recruiters,
+        tags: this.state.tags,
+        platforms,
+        seniorities,
+        tags,
+        reasons,
+        vacancies,
+        reject_tag,
+        defaultSelectedtag,
+        recruiters,
+        companies,
+        statuses,
+        // sendRecruiters
       });
     
     const {
@@ -174,6 +190,31 @@ export default class Candidates extends Component {
     
     this.getAll(currentAllPage);
     this.getSend(currentSentPage);
+
+    getCandidatesFromFreelancers(currentPageFF).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/');
+      } else if (data > 400) {
+        alert(data);
+      } else if (typeof data === 'object') {
+          const candidatesFromFreelancersData = {
+            candidatesFF: data.candidates,
+            candidatesCountFF: data.candidates.length,
+            totalPagesFF: data.Page,
+            perPageFF: data.perPage,
+            // statusesFF: data.statuses,
+            currentPageFF: data.currentPage
+          };
+
+          this.setState({
+            candidatesFromFreelancersData: {
+              ...this.state.candidatesFromFreelancersData,
+              ...candidatesFromFreelancersData
+            }
+          });
+        }
+
+    });
   };
   
   requestForCandidates = (currentAllPage, currentSentPage) => {
@@ -562,14 +603,21 @@ export default class Candidates extends Component {
       companies,
       allRecruiters,
       statuses,
-      
+
       allCandidatesData: {
         allCandidates,
         allCandidatesCount,
         allTotalPages,
         allPerPage,
         currentAllPage,
-        loading,
+
+        // allPlatforms,
+        // allSeniority,
+        // tags,
+        // reasons,
+        // allRecruiters,
+        // sentRecruiters,
+        loading
       },
       sentCandidatesData: {
         sentCandidates,
@@ -578,8 +626,10 @@ export default class Candidates extends Component {
         sentPerPage,
         currentSentPage,
         sentStatuses,
-        loadingSent,
-        
+        sentPlatforms,
+        // statuses,
+        loadingSent
+
       },
       candidatesFromFreelancersData: {
         candidatesFF,
@@ -634,7 +684,7 @@ export default class Candidates extends Component {
               statuses={statuses}
               seniority={seniorities}
               activeTabId={activeTabId}
-              onFilter={this.filterAndSortCandidates}
+              // onFilter={this.filterAndSortCandidates}
               onAllFilter={this.privateFilterAndSortAllCandidates}
               onSentFilter={this.privateFilterAndSortSentCandidates}
             />
@@ -695,7 +745,7 @@ export default class Candidates extends Component {
                       isClearable
                       value={selectRecruiter}
                       options={recruiters}
-                      placeholder='Choose recruiter'
+                      placeholder="Choose recruiter"
                       onChange={this.privateAllHandleRecruiterChange}
                     />
                   </Col>
@@ -728,7 +778,7 @@ export default class Candidates extends Component {
                     isClearable
                     value={selectRecruiter}
                     options={recruiters}
-                    placeholder='Choose recruiter'
+                    placeholder="Choose recruiter"
                     onChange={this.privateSentHandleRecruiterChange}
                   />
                 </Col>
@@ -737,7 +787,7 @@ export default class Candidates extends Component {
                   <Select
                     value={selectRecruiter}
                     options={recruiters}
-                    placeholder='Choose recruiter'
+                    placeholder="Choose recruiter"
                     // onChange={this.handleRecruiterChange}
                   />
                 </Col>
