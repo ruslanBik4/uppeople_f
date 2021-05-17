@@ -56,7 +56,8 @@ const CandidateTableRow = ({
   //
   let statusesVac = ''
   let companies = ''
-  candidate.statuses.map((status, idx) => {
+
+  statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
     {/*todo add link for all companies*/}
     companies += status["compName"];
