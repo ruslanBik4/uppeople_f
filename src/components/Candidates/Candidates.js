@@ -140,6 +140,7 @@ export default class Candidates extends Component {
       user: {role}
     } = this.props;
 
+    //todo: refatoring
     getOptionsForSelects().then(optionsForSelects => {
       const platforms = optionsForSelects.platforms;
       const seniorities = optionsForSelects.seniorities;
@@ -174,7 +175,7 @@ export default class Candidates extends Component {
         platforms,
         seniorities,
         tags,
-        reasons, 
+        reasons,
         vacancies,
         reject_tag,
         defaultSelectedtag,
