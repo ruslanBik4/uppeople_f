@@ -139,9 +139,11 @@ const CandidateTableRow = ({
         </div>
       </td>
       <td>
-        <Badge  style={{backgroundColor:colour}}>
-          {stat}
-        </Badge>
+        statuses.map((status, idx) => {
+          <Badge  style={{backgroundColor:`${status["color"]}`}}>
+            {status["vacStat"]}
+          </Badge>
+        })
       </td>
       <td>
       {statuses.map((status, idx) => (
