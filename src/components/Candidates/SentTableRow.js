@@ -56,14 +56,21 @@ const CandidateTableRow = ({
   //
   let statusesVac = ''
   let colour = ''
+  let companies = ''
+  let stat = ''
 
+  console.log(statuses)
   statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
     {/*todo add link for all companies*/}
-    // companies += status["compName"];
+    companies += status["compName"];
     colour += status["color"];
   })
-
+  console.log(statusesVac)
+  console.log(colour)
+  console.log(companies)
+  stat = statuses.map(id => id.vacStat)
+  console.log(stat)
   return (
     <>
       <td>
@@ -133,7 +140,7 @@ const CandidateTableRow = ({
       </td>
       <td>
         <Badge  style={{backgroundColor:colour}}>
-          {statusesVac}
+          {stat}
         </Badge>
       </td>
       <td>
