@@ -139,15 +139,15 @@ const CandidateTableRow = ({
         </div>
       </td>
       <td>
-        statuses.map((status, idx) => {
-          <Badge  style={{backgroundColor: '${status["color"]}'}}>
+        {statuses.map((status, idx) => (
+          <Badge  style={{backgroundColor: `${status["color"]}`}}>
             {status["vacStat"]}
           </Badge>
-        })
+        ))}
       </td>
       <td>
       {statuses.map((status, idx) => (
-        <Link to={`/vacancies/${status["comp_id"]}`} key={idx}>
+        <Link to={`companies/${status["comp_id"]}`} key={idx}>
           {status["compName"]}
         </Link>
       ))}
