@@ -149,13 +149,13 @@ const CandidateTableRow = ({
       {statuses.map((status, idx) => (
         <Link to={`/vacancies/${status["comp_id"]}`} key={idx}>
           {status["compName"]}
-        </Link> <br>
+        </Link>
       ))}
       </td>
       <td>{recruiter}</td>
     </>
   );
-};
+}
 
 CandidateTableRow.propTypes = {
   id: PropTypes.number.isRequired,
