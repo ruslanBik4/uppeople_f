@@ -76,7 +76,7 @@ export default class Candidates extends Component {
       allSeniority: [],
       tags: [],
       reasons: [],
-      loading: true,
+      loading: false,
     },
     sentCandidatesData: {
       sentCandidates: [],
