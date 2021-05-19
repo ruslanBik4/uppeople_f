@@ -7,7 +7,6 @@ import { AppSwitch } from '@coreui/react';
 import CandidatesForm from './Form';
 import AllCandidatesTable from './AllTable';
 import SentCandidatesTable from './SentTable';
-import CandidatesFromFreelancersTable from './FromFreelancers/Table';
 import Tabs from '../shared/Tabs/Tabs';
 import Select from '../shared/Select';
 // Context Provider
@@ -30,10 +29,6 @@ const tabs = [
   {
     id: '2',
     name: 'Sent candidates',
-  },
-  {
-    id: '3',
-    name: 'Candidates from freelancers',
   },
 ];
 
@@ -95,14 +90,6 @@ export default class Candidates extends Component {
       sentRecruiters: [],
       loadingSent: false,
     },
-    candidatesFromFreelancersData: {
-      candidatesFF: [],
-      candidatesCountFF: null,
-      totalPagesFF: null,
-      perPageFF: null,
-      statusesFF: [],
-      currentPageFF: 1,
-    },
     filterAndSortCandidates: {
       search: '',
       dateFrom: '',
@@ -163,11 +150,10 @@ export default class Candidates extends Component {
     const {
       allCandidatesData: { currentAllPage },
       sentCandidatesData: { currentSentPage },
-      candidatesFromFreelancersData: { currentPageFF },
     } = this.state;
     
     role !== 4 && role !== 5
-      ? this.requestForCandidatesForStaff(currentAllPage, currentSentPage, currentPageFF)
+      ? this.requestForCandidatesForStaff(currentAllPage, currentSentPage)
       : this.requestForCandidates(currentAllPage, currentSentPage);
   }
   
@@ -510,22 +496,6 @@ export default class Candidates extends Component {
     }));
   };
   
-  rejectCandidate = (id, content) => {
-    cancelCandidateFromFreelancer(id, content)
-      .then(data => {
-        data ?
-          this.setState(prevState => ({
-            candidatesFromFreelancersData: {
-              candidatesFF: prevState.candidatesFromFreelancersData.candidatesFF.filter(
-                candidate => candidate.id !== id,
-              ),
-            },
-          }))
-          :
-          console.log(data);
-      });
-  };
-  
   render() {
     const {
       platforms,
@@ -551,14 +521,6 @@ export default class Candidates extends Component {
         currentSentPage,
         sentStatuses,
         loadingSent,
-      },
-      candidatesFromFreelancersData: {
-        candidatesFF,
-        candidatesCountFF,
-        totalPagesFF,
-        perPageFF,
-        currentPageFF,
-        statusesFF,
       },
       filterAndSortCandidates: { selectRecruiter, mySent, selectTag, selectReason },
       activeTabId,
@@ -590,7 +552,6 @@ export default class Candidates extends Component {
               }}>
               {activeTabId === '1' ? allCandidatesCount : null}
               {activeTabId === '2' ? sentCandidatesCount : null}
-              {activeTabId === '3' ? candidatesCountFF : null}
             </span>
           </Col>
         </Row>
@@ -796,24 +757,6 @@ export default class Candidates extends Component {
                         loading={loadingSent}
                       />
                     )}
-                  </Localization>
-                </TabPane>
-                
-                <TabPane tabId='3'>
-                  <Localization
-                    locales={localesSentCandidates}
-                    onSort={this.filterAndSortCandidates}>
-                    <CandidatesFromFreelancersTable
-                      userRole={role}
-                      candidates={candidatesFF}
-                      statuses={statusesFF}
-                      totalItems={candidatesCountFF}
-                      pageSize={perPageFF}
-                      totalPages={totalPagesFF}
-                      currentPage={currentPageFF}
-                      onSendResume={this.sendResume}
-                      onRejectCandidate={this.rejectCandidate}
-                    />
                   </Localization>
                 </TabPane>
               </Tabs>
