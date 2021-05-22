@@ -131,7 +131,7 @@ export default class Candidates extends Component {
         const vacancies = optionsForSelects.vacancies;
         const recruiters = optionsForSelects.recruiters;
         const companies = optionsForSelects.companies;
-        const statuses = optionsForSelects.vacancyStatus;
+        const statuses = optionsForSelects.candidateStatus;
         
         this.setState({
           platforms,
@@ -496,6 +496,7 @@ export default class Candidates extends Component {
     }));
   };
   
+
   render() {
     const {
       platforms,
@@ -525,6 +526,7 @@ export default class Candidates extends Component {
       filterAndSortCandidates: { selectRecruiter, mySent, selectTag, selectReason },
       activeTabId,
     } = this.state;
+    console.log(this.state)
     
     const {
       user: { role },

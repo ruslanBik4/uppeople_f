@@ -100,35 +100,35 @@ class CandidatesForm extends Component {
   };
 
   handlePlatformChange = value => {
-    const { onFilter } = this.props;
+    const { onAllFilter } = this.props;
 
     this.setState(
       {
         selectPlatforms: value
       },
-      () => onFilter(this.state)
+      () => onAllFilter(this.state)
     );
   };
 
   handleCompanyChange = value => {
-    const { onFilter } = this.props;
+    const { onSentFilter } = this.props;
 
     this.setState(
       {
         selectCompanies: value
       },
-      () => onFilter(this.state)
+      () => onSentFilter(this.state)
     );
   };
 
   handleStatusChange = value => {
-    const { onFilter } = this.props;
+    const { onSentFilter } = this.props;
 
     this.setState(
       {
         selectStatuses: value
       },
-      () => onFilter(this.state)
+      () => onSentFilter(this.state)
     );
   };
 

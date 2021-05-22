@@ -146,7 +146,7 @@ const CandidateTableRow = ({
         ))}
       </td>
       <td>
-      {statuses.map((status, idx) => (
+      {statuses.map((status, idx)=> (
         <Link to={`companies/${status["comp_id"]}`} key={idx}>
           {status["compName"]}
         </Link>
