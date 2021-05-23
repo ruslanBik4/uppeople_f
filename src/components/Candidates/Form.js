@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Col, Form, FormGroup, Input, Row } from "reactstrap";
 // Components
 import Select from "../shared/Select";
+import { DateRangePicker } from 'rsuite';
 
 class CandidatesForm extends Component {
   static propTypes = {
@@ -107,6 +108,17 @@ class CandidatesForm extends Component {
         selectPlatforms: value
       },
       () => onAllFilter(this.state)
+    );
+  };
+
+  handleSentPlatformChange = value => {
+    const { onSentFilter } = this.props;
+
+    this.setState(
+      {
+        selectPlatforms: value
+      },
+      () => onSentFilter(this.state)
     );
   };
 
@@ -307,7 +319,7 @@ class CandidatesForm extends Component {
                         value={selectPlatforms}
                         options={platforms}
                         placeholder="Platforms"
-                        onChange={this.handlePlatformChange}
+                        onChange={this.handleSentPlatformChange}
                       />
                     </FormGroup>
                   </Col>
@@ -366,7 +378,7 @@ class CandidatesForm extends Component {
                       value={selectPlatforms}
                       options={platforms}
                       placeholder="Platforms"
-                      onChange={this.handlePlatformChange}
+                      onChange={this.handleSentPlatformChange}
                     />
                   </FormGroup>
                 </Col>
