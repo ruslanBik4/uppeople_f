@@ -35,6 +35,7 @@ class AllCandidatesTable extends Component {
       background: "var(--white)",
     };
 
+    console.log(candidates);
     const candidatesJSX =
       candidates.length > 0 ? (
         candidates.map((candidate, idx) => (

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Badge } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './Candidates.css';
+import Select from "../shared/Select";
 
 const CandidateTableRow = (
   {
@@ -22,7 +23,9 @@ const CandidateTableRow = (
     vacancies,
     skype,
     recruiter,
+    selectedVacancies,
     isOpen,
+    statuses,
     open,
     close,
   },
@@ -52,6 +55,7 @@ const CandidateTableRow = (
   if (skype === '' || null) {
     skypeValue = null;
   }
+  console.log(statuses)
   return (
     <>
       <td>
@@ -77,11 +81,17 @@ const CandidateTableRow = (
       <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
       <td>
-        {vacancies.map((el, idx) => (
-          <Link to={`/vacancies/${el.value}`} key={idx}>
-            {el.label}
-          </Link>
-        ))}
+        {/* <Col sm={9}> */}
+          <Select
+                          id="vacancies"
+                          isMulti
+                          value={selectedVacancies}
+                          // options={platformVacancies}
+                          isClearable
+                          placeholder="None"
+                          style={{zIndex: 2}}
+                        />
+        {/* </Col> */}
       </td>
       <td>
         <div className='contacts-col-icons-wrap'>

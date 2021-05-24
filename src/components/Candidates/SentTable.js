@@ -24,6 +24,7 @@ const SentCandidatesTable = ({
   userRole,
   candidates,
   statuses,
+  selectedVacancies,
   pageSize,
   totalItems,
   totalPages,
@@ -34,6 +35,9 @@ const SentCandidatesTable = ({
 }) => {
 
   console.log(candidates);
+  console.log(selectedVacancies);
+  
+
   const candidatesJSX =
     candidates.length > 0 ? (
       candidates.map((candidate, idx) => (

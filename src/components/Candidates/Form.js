@@ -15,6 +15,13 @@ class CandidatesForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
+    selectedVacancies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
     companies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -52,6 +59,7 @@ class CandidatesForm extends Component {
     dateToSentCandidates: "",
     dateFromFreelancersCandidates: "",
     dateToFreelancersCandidates: "",
+    selectedVacancies: [],
     dateFollowUpFrom: "",
     dateFollowUpTo: "",
     selectPlatforms: [],
@@ -169,6 +177,7 @@ class CandidatesForm extends Component {
       dateToFreelancersCandidates,
       dateFollowUpFrom,
       dateFollowUpTo,
+      selectedVacancies,
       selectPlatforms,
       selectSeniority,
       selectCompanies,
