@@ -79,10 +79,10 @@ class CandidatesForm extends Component {
     console.log('>>>>>>>>>name', [name], value);
 
     if(name === 'dateFromAllCandidates'){
-      // this.setState({ [name]: value });
+      this.setState({ [name]: value });
       this.setState({ dateFrom: value }, () => onAllFilter(this.state));
     }else if(name === 'dateToAllCandidates'){
-      // this.setState({ [name]: value });
+      this.setState({ [name]: value });
       this.setState({ dateTo: value }, () => onAllFilter(this.state));
     }else if(name === 'dateFollowUpFrom'){
       this.setState({ [name]: value }, () => onAllFilter(this.state));
