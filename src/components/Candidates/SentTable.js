@@ -13,7 +13,7 @@ import OpenClose from "../../render_prop/OpenClose";
 const loadingStyle = {
   background: "var(--white)",
   pointerEvents: "none",
-  opacity: 0.4
+  
 }
 
 const tableStyle = {
