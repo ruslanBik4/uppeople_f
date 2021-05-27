@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Badge } from 'reactstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import './Candidates.css';
+import './CandidatesAll.css';
 import Select from "../shared/Select";
 
 const CandidateTableRow = (
@@ -94,7 +94,7 @@ const CandidateTableRow = (
         {/* </Col> */}
       </td>
       <td>
-        <div className='contacts-col-icons-wrap'>
+        <div className="contacts-col-icons-wrap">
           {
             mobileValue !== null ?
               <CopyToClipboard text={mobileValue}>

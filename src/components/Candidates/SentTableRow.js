@@ -5,6 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { Badge } from "reactstrap";
 import {CopyToClipboard} from "react-copy-to-clipboard";
+import './Candidates.css';
 
 const CandidateTableRow = ({
   id,
