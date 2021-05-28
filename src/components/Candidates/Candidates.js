@@ -20,6 +20,7 @@ import {
   getSentCandidates,
 } from '../../utils/api/candidates';
 import { cancelCandidateFromFreelancer, sendCandidateResume } from '../../utils/api/candidate';
+import Label from "reactstrap/lib/Label";
 
 const tabs = [
   {
@@ -299,7 +300,14 @@ export default class Candidates extends Component {
       .then(data => {
         if (data === 401) {
           this.props.history.push('/login/');
-        } else {
+        } else if (data === 204) {
+          let lblErrors = document.querySelector(".errorlist label");
+          document.querySelector(".errorlist label").classList.add('error');
+          lblErrors.textContent = ("Нет данных по выбранным параметрам")
+        }
+        
+        
+        else {
           const sentCandidatesData = {
             sentCandidates: data.candidates,
             sentCandidatesCount: data.Count,
@@ -312,7 +320,7 @@ export default class Candidates extends Component {
             sentRecruiters: data.recruiter,
             loadingSent: false,
           };
-          
+           
           this.setState({
             sentCandidatesData: {
               ...this.state.sentCandidatesData,
@@ -330,6 +338,10 @@ export default class Candidates extends Component {
       .then(data => {
         if (data === 401) {
           this.props.history.push('/login/');
+        } else if (data === 204) {
+          let lblErrors = document.querySelector(".errorlist label");
+          document.querySelector(".errorlist label").classList.add('error');
+          lblErrors.textContent = ("Нет данных по выбранным параметрам")
         } else {
           const allCandidatesData = {
             allCandidates: data.candidates,
@@ -535,6 +547,8 @@ export default class Candidates extends Component {
     const divStyle = {
       color: 'yellow',
     };
+
+    let lblErrors = document.querySelector(".errorlist label");
     
     return (
       <>
@@ -555,6 +569,9 @@ export default class Candidates extends Component {
               {activeTabId === '1' ? allCandidatesCount : null}
               {activeTabId === '2' ? sentCandidatesCount : null}
             </span>
+          </Col>
+          <Col className={"errorlist"} row>
+            <Label></Label>
           </Col>
         </Row>
         <Row>

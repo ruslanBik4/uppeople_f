@@ -93,8 +93,8 @@ const CandidateTableRow = (
                         />
         {/* </Col> */}
       </td>
-      <td>
-        <div className="contacts-col-icons-wrap">
+      <td justify-content= "center">
+        <div className="contacts-col-icons-wrap" justify-content= "center">
           {
             mobileValue !== null ?
               <CopyToClipboard text={mobileValue}>

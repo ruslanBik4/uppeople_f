@@ -236,9 +236,6 @@ class AcquisitionFunnel extends Component {
       if (selectedRecruiter.length > 0) {
         lblErrors.textContent = ("selectedRecruiter")
       }
-      
-      // let result = names.filter(item => item.id == 1)
-      // console.log(result)
     } else if (data !== undefined) {
       let lblErrors = document.querySelector(".errorlist label");
       lblErrors.textContent = ("")
@@ -453,85 +450,10 @@ class AcquisitionFunnel extends Component {
                 percentage: value.percent
               });
             }
-            // data.push({
-            //   stat: value.name,
-            //   count: value.count,
-            //   color: value.color,
-            //   percentage: 100
-            // });
           }
         }
       }
-      // console.log("після нового циклу");
-      // console.log(final_data);
-
-      /////////
-//
-//       console.log('до циклу');
-//       console.log(funnelData);
-//       const result = Object.entries(funnelData).reduceRight(
-//         (acc, [currentKey, currentValue], index, array) => {
-//           console.log(currentValue);
-//           const prev = array[index + 1];
-//           if (prev) {
-//             // console.log(prev);
-//             const [prevKey] = prev;
-//             acc[currentKey] = {
-//               ...currentValue,
-//               count: acc[prevKey].count + currentValue.count
-//             };
-//           } else {
-//             acc[currentKey] = currentValue;
-//           }
-//           return acc;
-//         },
-//         {}
-//       );
-//       console.log('після циклу');
-//       console.log(result);
-//       console.log(' ');
-//       // let data = [];
-//       for (const [index, value] of Object.entries(result)) {
-//         if (selectedTags !== null) {
-//           let in_tags = selectedTags.filter((selectedTag) => selectedTag.id === value.id);
-//           if (in_tags.length > 0) {
-//             data.push({
-//               stat: value.name,
-//               count: value.count,
-//               color: value.color,
-//               percentage: 100
-//             });
-//           }
-//         }
-//       }
-// //
-//       data = data.reduce(
-//         (acc_, currentValue, index, array) => {
-//           const prev = array[index - 1];
-//
-//           if (prev) {
-//             if (prev.count > 0) {
-//               currentValue.percentage = (parseFloat(currentValue.count) * 100 / parseFloat(prev.count)).toFixed(0)
-//             } else {
-//               currentValue.percentage = 0;
-//             }
-//           }
-//
-//           acc_[index] = currentValue;
-//
-//           return acc_;
-//         },
-//         {}
-//       );
-//
-//       let final_data = [];
-//       for (const [index, value] of Object.entries(data)) {
-//         final_data.push({
-//           stat: value.stat + ' ' + value.percentage + '%',
-//           count: value.count,
-//           color: value.color,
-//         });
-//       }
+  
 
       const tooltipRender = (({point = {}}) => (point.category));
 
@@ -570,7 +492,6 @@ class AcquisitionFunnel extends Component {
   render() {
       const {companies, selectedCompany} = this.state;
       const {vacancies, selectedVacancy} = this.state;
-      // const platform_id = this.state;
       const {selectedTags} = this.state;
       const {selectedStartDate, selectedEndDate} = this.state;
       const {
@@ -578,18 +499,8 @@ class AcquisitionFunnel extends Component {
         selectedRecruiter,
         platforms,
         platform_id,
-        // recruitersIsClearable,
         tags
-        // selectedTags,
-        // selectedStartDate,
-        // selectedEndDate
        } = this.props.options;
-       console.log(this.props);
-       console.log(this.props.options);
-       console.log(this.state);
-       console.log(this.state.options)
-      //  this.state.tags = this.props.tags;
-      //  this.state.selectedTags = this.props.selectedTags;
 
 
 

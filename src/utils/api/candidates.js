@@ -75,7 +75,7 @@ export const filterAndSortAllCandidates = (page, filterAndSort) => {
     body: JSON.stringify(filterAndSort)
   })
   .then(response => {
-    if (response.ok||response.status === 400) {
+    if (response.ok||response.status === 400|| response.status === 204) {
       return response.json();
     }
     if (response.status > 400) {
