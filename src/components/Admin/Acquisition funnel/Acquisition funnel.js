@@ -217,9 +217,6 @@ class AcquisitionFunnel extends Component {
       selectedVacancy ? selectedVacancy.id : 0,
       platform_id ? platform_id.id : 0,
       selectedTags ? selectedTags.map(item => item.id) : null)
-      // let value = String( selectedEndDate)
-      // let value = data.join(';')
-      // console.log(value)
       console.log(data)
       console.log(getCandidatesAmountByTags)
       console.log(selectedRecruiter)
@@ -233,9 +230,9 @@ class AcquisitionFunnel extends Component {
       let lblErrors = document.querySelector(".errorlist label");
       document.querySelector(".errorlist label").classList.add('error');
       lblErrors.textContent = ("Нет данных по выбранным параметрам")
-      if (selectedRecruiter.length > 0) {
-        lblErrors.textContent = ("selectedRecruiter")
-      }
+      // if (selectedRecruiter.length > 0) {
+      //   lblErrors.textContent = ("selectedRecruiter")
+      // }
     } else if (data !== undefined) {
       let lblErrors = document.querySelector(".errorlist label");
       lblErrors.textContent = ("")

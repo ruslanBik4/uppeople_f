@@ -301,9 +301,12 @@ export default class Candidates extends Component {
         if (data === 401) {
           this.props.history.push('/login/');
         } else if (data === 204) {
-          let lblErrors = document.querySelector(".errorlist label");
-          document.querySelector(".errorlist label").classList.add('error');
-          lblErrors.textContent = ("Нет данных по выбранным параметрам")
+          const sentCandidatesData = {
+            sentCandidatesCount: "Нет данных по выбранным параметрам Sent",
+          };
+          this.setState({
+            sentCandidatesData: { ...this.state.sentCandidatesData, ...sentCandidatesData },
+          });
         }
         
         
@@ -339,9 +342,13 @@ export default class Candidates extends Component {
         if (data === 401) {
           this.props.history.push('/login/');
         } else if (data === 204) {
-          let lblErrors = document.querySelector(".errorlist label");
-          document.querySelector(".errorlist label").classList.add('error');
-          lblErrors.textContent = ("Нет данных по выбранным параметрам")
+          const allCandidatesData = {
+            allCandidatesCount: "Нет данных по выбранным параметрам All",
+            loading: false,
+          };
+          this.setState({
+            allCandidatesData: { ...this.state.allCandidatesData, ...allCandidatesData },
+          });
         } else {
           const allCandidatesData = {
             allCandidates: data.candidates,
@@ -556,23 +563,24 @@ export default class Candidates extends Component {
           <Col
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
-              maxWidth: 200,
+              // justifyContent: 'space-between',
+              maxWidth: 500,
               marginBottom: '0.5rem',
+              
             }}>
-            <h1 style={{ marginBottom: 0, fontSize: 24 }}>Candidates</h1>
+            <h1 style={{ marginBottom: 0, fontSize: 24, marginRight: 70  }}>Candidates</h1>
             <span
               style={{
                 alignSelf: 'flex-end',
-                color: 'var(--gray)',
+                color: 'red',
               }}>
               {activeTabId === '1' ? allCandidatesCount : null}
               {activeTabId === '2' ? sentCandidatesCount : null}
             </span>
           </Col>
-          <Col className={"errorlist"} row>
+          {/* <Col className={"errorlist"} row>
             <Label></Label>
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col xl={12}>

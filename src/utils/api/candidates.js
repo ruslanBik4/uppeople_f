@@ -73,17 +73,21 @@ export const filterAndSortAllCandidates = (page, filterAndSort) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(filterAndSort)
-  })
-  .then(response => {
-    if (response.ok||response.status === 400|| response.status === 204) {
-      return response.json();
-    }
-    if (response.status > 400) {
-      return response.status;
-    }
+  })   
 
-      throw new Error(`Error while fetching: ${response.statusText}`);
-    })
+  .then(response => {
+    if (response.status > 400 || response.status === 204) {
+      return response.status;
+    // if (response.ok||response.status === 400) {
+    //   return response.json();
+    }
+    if (response.ok||response.status === 400) {
+        return response.json();
+    // if (response.status > 400 || response.status === 204) {
+    //   return response.status;
+    }
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  })
     .catch(error => console.log("error in fetch: ", error));
 };
 
@@ -107,15 +111,18 @@ export const filterAndSortSentCandidates = (page, filterAndSort) => {
     body: JSON.stringify(filterAndSort)
   })
   .then(response => {
-    if (response.ok||response.status === 400) {
-      return response.json();
-    }
-    if (response.status > 400) {
+    if (response.status > 400 || response.status === 204) {
       return response.status;
+    // if (response.ok||response.status === 400) {
+    //   return response.json();
     }
-
-      throw new Error(`Error while fetching: ${response.statusText}`);
-    })
+    if (response.ok||response.status === 400) {
+        return response.json();
+    // if (response.status > 400 || response.status === 204) {
+    //   return response.status;
+    }
+    throw new Error(`Error while fetching: ${response.statusText}`);
+  })
     .catch(error => console.log("error in fetch: ", error));
 };
 
