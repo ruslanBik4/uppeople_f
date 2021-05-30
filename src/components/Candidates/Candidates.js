@@ -21,6 +21,7 @@ import {
 } from '../../utils/api/candidates';
 import { cancelCandidateFromFreelancer, sendCandidateResume } from '../../utils/api/candidate';
 import Label from "reactstrap/lib/Label";
+import styles from "./error.css";
 
 const tabs = [
   {
@@ -62,6 +63,7 @@ export default class Candidates extends Component {
       role: PropTypes.number.isRequired,
       companyId: PropTypes.number,
     }),
+    errorlabel: PropTypes.string
   };
   
   state = {
@@ -90,6 +92,7 @@ export default class Candidates extends Component {
       sentStatuses: [],
       sentRecruiters: [],
       loadingSent: false,
+      errorlabel: null,
     },
     filterAndSortCandidates: {
       search: '',
@@ -114,6 +117,7 @@ export default class Candidates extends Component {
     dataForSendResumeForm: {},
     isActive: true,
     activeTabId: '1',
+    errorlabel: null
   };
   
   componentDidMount() {
@@ -301,11 +305,17 @@ export default class Candidates extends Component {
         if (data === 401) {
           this.props.history.push('/login/');
         } else if (data === 204) {
+          
           const sentCandidatesData = {
-            sentCandidatesCount: "Нет данных по выбранным параметрам Sent",
+            sentCandidatesCount: "Нет данных по выбранным параметрам во вкладке Sent Candidates",
+            
           };
+          
+          const errorlabel = "error"
+          
           this.setState({
             sentCandidatesData: { ...this.state.sentCandidatesData, ...sentCandidatesData },
+            errorlabel
           });
         }
         
@@ -328,6 +338,7 @@ export default class Candidates extends Component {
             sentCandidatesData: {
               ...this.state.sentCandidatesData,
               ...sentCandidatesData,
+              errorlabel: null,
             },
           });
         }
@@ -343,11 +354,14 @@ export default class Candidates extends Component {
           this.props.history.push('/login/');
         } else if (data === 204) {
           const allCandidatesData = {
-            allCandidatesCount: "Нет данных по выбранным параметрам All",
+            allCandidatesCount: "Нет данных по выбранным параметрам во вкладке All Candidates",
             loading: false,
           };
+          const errorlabel = "error"
           this.setState({
+            
             allCandidatesData: { ...this.state.allCandidatesData, ...allCandidatesData },
+            errorlabel
           });
         } else {
           const allCandidatesData = {
@@ -544,6 +558,7 @@ export default class Candidates extends Component {
       },
       filterAndSortCandidates: { selectRecruiter, mySent, selectTag, selectReason },
       activeTabId,
+      errorlabel,
     } = this.state;
     console.log(this.state)
     
@@ -569,10 +584,10 @@ export default class Candidates extends Component {
               
             }}>
             <h1 style={{ marginBottom: 0, fontSize: 24, marginRight: 70  }}>Candidates</h1>
-            <span
+            <span className={(errorlabel ? "error": "")}
               style={{
                 alignSelf: 'flex-end',
-                color: 'red',
+                // color: 'red',
               }}>
               {activeTabId === '1' ? allCandidatesCount : null}
               {activeTabId === '2' ? sentCandidatesCount : null}
