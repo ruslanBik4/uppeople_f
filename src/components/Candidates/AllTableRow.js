@@ -80,16 +80,21 @@ const CandidateTableRow = (
       </td>
       <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
-      <td>
+      <td 
+>
         {/* <Col sm={9}> */}
           <Select
                           id="vacancies"
                           isMulti
                           value={selectedVacancies}
                           // options={platformVacancies}
-                          isClearable
+                          // isClearable
                           placeholder="None"
-                          style={{zIndex: 2}}
+                          style={{zIndex: 2, padding: "0px"}}
+                          // style={{padding: "0px"}}
+                         
+
+                          
                         />
         {/* </Col> */}
       </td>

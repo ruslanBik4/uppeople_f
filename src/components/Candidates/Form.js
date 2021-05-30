@@ -69,9 +69,10 @@ class CandidatesForm extends Component {
   };
 
   handleInputChange = ({ target: { name, value } }) => {
-    const { onFilter } = this.props;
+    const { onAllFilter, onSentFilter } = this.props;
 
-    this.setState({ [name]: value }, () => onFilter(this.state));
+    this.setState({ [name]: value }, () => onAllFilter(this.state));
+    this.setState({ [name]: value }, () => onSentFilter(this.state));
   };
 
   handleAllInputChange = ({ target: { name, value } }) => {
