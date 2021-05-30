@@ -163,8 +163,8 @@ class Analytics extends Component {
   };
 
   fetchStatuses = async (options) => {
-    this.setState({statuses: options.vacancyStatus});
-    this.setState({selectedStatuses: options.vacancyStatus});
+    this.setState({statuses: options.candidateStatus});
+    this.setState({selectedStatuses: options.candidateStatus});
   };
 
 
