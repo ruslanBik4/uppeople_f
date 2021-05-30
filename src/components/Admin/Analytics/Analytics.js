@@ -287,7 +287,7 @@ class Analytics extends Component {
         recruiters,
         selectedRecruiter,
         // statuses,
-        vacancyStatus
+        candidateStatus
        } = this.props.options;
        console.log(this.props);
        console.log(this.props.options);
@@ -346,7 +346,7 @@ class Analytics extends Component {
                 <Select
                   isMulti
                   value={selectedStatuses}
-                  options={vacancyStatus}
+                  options={candidateStatus}
                   placeholder="Statuses"
                   onChange={this.handleStatusChange}
                 />
