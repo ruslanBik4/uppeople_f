@@ -80,7 +80,7 @@ const CandidateTableRow = (
       </td>
       <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
-      <td 
+      <td class ="child" vertical-align= "middle"
 >
         {/* <Col sm={9}> */}
           <Select
@@ -98,7 +98,7 @@ const CandidateTableRow = (
                         />
         {/* </Col> */}
       </td>
-      <td justify-content= "center">
+      <td justify-content= "center" class ="child" vertical-align= "middle">
         <div className="contacts-col-icons-wrap" justify-content= "center">
           {
             mobileValue !== null ?

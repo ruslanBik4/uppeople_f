@@ -40,7 +40,7 @@
   margin-bottom: 0;
 }
 
-tr > td:nth-child(7){
+/* tr > td:nth-child(7){
   flex-wrap: wrap;
   padding: 0;
   display: flex;
@@ -55,6 +55,15 @@ tr > td:nth-child(8){
   flex-direction: column;
   width: 150px;
   border-top: 1px solid #c8ced3;
+} */
+
+.child{
+  flex-wrap: wrap;
+  padding: 0;
+  flex-direction: column;
+  width: 150px;
+  border-top: 1px solid #c8ced3;
+  vertical-align: middle;
 }
 
 table > thead {
@@ -64,6 +73,7 @@ table > thead {
 
 table > tr {
   border-top: 1px solid #c8ced3;
+  vertical-align: middle;
 }
 
 
