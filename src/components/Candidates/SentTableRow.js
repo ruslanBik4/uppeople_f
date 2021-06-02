@@ -146,7 +146,7 @@ const CandidateTableRow = ({
           </Badge>
         ))}
       </td >
-      <td class ="child" verticalAlign = "middle">
+      <td class ="child" verticalAlign = "middle" width = "250px">
       {statuses.map((status, idx)=> (
         <Badge style = {{display: "block", background: "white", width: "150px", verticalAlign: "middle"}}>
           <Link to={`companies/${status["comp_id"]}`} key={idx}>

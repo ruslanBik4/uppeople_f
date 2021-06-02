@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Col, Form, FormGroup, Row } from "reactstrap";
 // Components
 import Select from "../shared/Select";
+import { getOptionsForSelects } from '../../utils/api';
 
 export default class VacanciesForm extends Component {
   static propTypes = {
@@ -40,11 +41,15 @@ export default class VacanciesForm extends Component {
   };
 
   state = {
+    platform: [],
+    seniority: [],
     selectPlatforms: [],
     selectSeniorities: [],
     selectCandidateStatus: [],
     selectStatuses: []
   };
+
+  
 
   componentDidUpdate(prevProps, prevState) {
     const { vacancyStatus } = this.props;
@@ -69,7 +74,18 @@ export default class VacanciesForm extends Component {
         selectSeniorities
       });
     }
+    getOptionsForSelects().then(optionsForSelects => {
+      const platforms = optionsForSelects.platforms;
+      const seniorities = optionsForSelects.seniorities;
+
+      this.setState({
+        platforms,
+        seniorities,
+      });
+    });
   }
+
+ 
 
   handlePlatformChange = value => {
     const { onFilter } = this.props;
@@ -122,6 +138,8 @@ export default class VacanciesForm extends Component {
   render() {
     const { platform, seniority, candidateStatus, vacancyStatus } = this.props;
     const {
+      platforms,
+      seniorities,
       selectPlatforms,
       selectSeniorities,
       selectCandidateStatus,
@@ -137,7 +155,7 @@ export default class VacanciesForm extends Component {
               <Select
                 isMulti
                 value={selectPlatforms}
-                options={platform}
+                options={platforms}
                 placeholder="Platforms"
                 onChange={this.handlePlatformChange}
               />
@@ -148,7 +166,7 @@ export default class VacanciesForm extends Component {
               <Select
                 isMulti
                 value={selectSeniorities}
-                options={seniority}
+                options={seniorities}
                 placeholder="Seniority"
                 onChange={this.handleSeniorityChange}
               />
