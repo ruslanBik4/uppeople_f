@@ -232,7 +232,7 @@ export const editCandidateComment = async (id, comment) => {
 export const deleteCandidateComment = async (id, commentId) => {
   const token = getToken();
   try {
-    const response = await fetch(`${URL}/main/deleteCommentCandidate/${id}`, {
+    const response = await fetch(`${URL}/main/deleteCommentCandidate/${commentId}`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
