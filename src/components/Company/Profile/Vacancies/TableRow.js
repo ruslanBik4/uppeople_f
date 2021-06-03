@@ -44,7 +44,7 @@ const CompanyProfileVacanciesTableRow = ({
               id,
               value
             };
-            onChangeVacancyStatus(content);
+            onChangeVacancyStatus(content); 
           }}
         />
       </td>

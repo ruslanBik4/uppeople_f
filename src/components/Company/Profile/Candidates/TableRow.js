@@ -28,6 +28,8 @@ const CompanyProfileCandidatesTableRow = ({
   onChangeCandidateStatus
 }) => (
   <>
+    
+    {/* console.log(candidateStatus) */}
     <th scope="row">{idx + 1}</th>
     <td>{recruiter !== null && recruiter}</td>
     <td>{platform !== null && platform}</td>
@@ -40,7 +42,7 @@ const CompanyProfileCandidatesTableRow = ({
     <td style={{ minWidth: "9rem" }}>
       <Select
         defaultValue={candidateStatus.find(
-          candidateStatus => candidateStatus.label === status.vacStat
+          candidateStatus => candidateStatus.id === status
         )}
         options={candidateStatus}
         styles={customStyles}
@@ -85,7 +87,8 @@ CompanyProfileCandidatesTableRow.defaultProps = {
   date: "",
   salary: null,
   email: "",
-  status: ""
+  status: "",
+  candidateStatus: []
 };
 
 export default CompanyProfileCandidatesTableRow;

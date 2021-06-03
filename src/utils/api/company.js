@@ -252,7 +252,8 @@ export const getCompanyCandidates = (id, page) => {
         perPage: data.perPage,
         currentPage: data.currentPage,
         platform: data.platforms,
-        candidateStatus: data.statuses
+        // candidateStatus: data.statuses,
+        candidateStatus: data.candidateStatus
       };
 
       return candidatesData;

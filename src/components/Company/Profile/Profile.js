@@ -12,6 +12,7 @@ import CompanyProfileVacancies from "./Vacancies/Vacancies";
 import CompanyProfileCandidates from "./Candidates/Candidates";
 import CompanyProfileComments from "./Comments/Comments";
 import CompanyProfileSettingsForm from "./SettingsForm";
+import { getOptionsForSelects } from '../../../utils/api';
 import Calendar from "../../shared/Calendar";
 // Context
 import Localization from "../../../providers/Localization";
@@ -131,6 +132,21 @@ export default class CompanyProfile extends Component {
     const { filterAndSortVacancies } = this.state;
     const vacanciesCurrentPage = this.state.vacanciesData.currentPage;
     const candidatesCurrentPage = this.state.candidatesData.currentPage;
+
+    getOptionsForSelects()
+    .then(optionsForSelects => {
+      
+      const platforms = optionsForSelects.platforms;
+      const candidateStatus = optionsForSelects.candidateStatus;
+      
+      this.setState({
+       
+        candidateStatus, platforms,
+      });
+      console.log(this.state);
+
+    });
+
 
     id = role !== 5 ? id: companyId;
 
@@ -414,6 +430,7 @@ export default class CompanyProfile extends Component {
       companyInfo: { name, email, phone, skype, logo, calendarEvents, termsOfCooperation, contacts, managers },
       vacanciesData,
       candidatesData,
+      candidateStatus,
       comments
     } = this.state;
     console.log("data candidate", this.state);
@@ -426,6 +443,7 @@ export default class CompanyProfile extends Component {
     const companyName = name && name;
     let { id } = this.props.match.params;
     const { companyId } = this.props.user;
+    
   
       
 
@@ -503,9 +521,11 @@ export default class CompanyProfile extends Component {
                   >
                     <CompanyProfileCandidates
                       candidatesData={candidatesData}
+                      candidateStatus={candidateStatus}
                       onChangePage={this.onChangePageCandidates}
                       onChangeCandidateStatus={this.changeCandidateStatus}
                       onFilterCandidates={this.filterAndSortCandidates}
+                      currentCompany={companyName}
                     />
                   </Localization>
                 </TabPane>

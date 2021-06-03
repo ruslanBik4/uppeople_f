@@ -13,14 +13,16 @@ const CompanyProfileCandidates = ({
     totalPages,
     perPage,
     currentPage,
-    candidateStatus,
+    // candidateStatus,
     platform
   },
   onChangePage,
   onFilterCandidates,
-  onChangeCandidateStatus
+  onChangeCandidateStatus,
+  candidateStatus,
 }) => (
   <>
+    console.log(candidateStatus)
     <Row>
       <Col xl={12}>
         <CompanyProfileCandidatesForm
@@ -76,6 +78,7 @@ CompanyProfileCandidates.propTypes = {
 
 CompanyProfileCandidates.defaultProps = {
   candidatesData: {},
+  candidateStatus: [],
   onChangePage: () => null
 };
 

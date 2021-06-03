@@ -7,6 +7,8 @@ import LocaleSelector from "../../../LocaleSelector";
 import CompanyProfileCandidatesTableRow from "./TableRow";
 import PaginationBackend from "../../../shared/PaginationBackend";
 
+
+
 const CompanyProfileCandidatesTable = ({
   candidates,
   candidateStatus,
@@ -18,6 +20,7 @@ const CompanyProfileCandidatesTable = ({
   onSort,
   onChangeCandidateStatus
 }) => {
+  console.log(candidateStatus)
   const candidatesJSX =
     candidates.length > 0 ? (
       candidates.map((candidate, idx) => (
