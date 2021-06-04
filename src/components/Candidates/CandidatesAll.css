@@ -58,12 +58,13 @@ tr > td:nth-child(8){
 } */
 
 .child{
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding: 0;
   flex-direction: column;
-  width: 150px;
+  /* width: 150px; */
   border-top: 1px solid #c8ced3;
-  vertical-align: middle;
+  /* vertical-align: middle; */
+  vertical-align: top;
 }
 
 table > thead {
@@ -74,6 +75,12 @@ table > thead {
 table > tr {
   border-top: 1px solid #c8ced3;
   vertical-align: middle;
+}
+
+.table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+  border-top: 1px solid #c8ced3;
 }
 
 

@@ -139,16 +139,16 @@ const CandidateTableRow = ({
           }
         </div>
       </td>
-      <td class ="child" vertical-align= "middle">
+      <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
         {statuses.map((status, idx) => (
-          <Badge  style={{backgroundColor: `${status["color"]}`, width: "150px"}}>
+          <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px"}}>
             {status["vacStat"]}
           </Badge>
         ))}
       </td >
-      <td class ="child" verticalAlign = "middle" width = "250px">
+      <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
       {statuses.map((status, idx)=> (
-        <Badge style = {{display: "block", background: "white", width: "150px", verticalAlign: "middle"}}>
+        <Badge style = {{display: "block", background: "white", width: "250px", verticalAlign: "middle"}}>
           <Link to={`companies/${status["comp_id"]}`} key={idx}>
           {status["compName"]}
         </Link>
