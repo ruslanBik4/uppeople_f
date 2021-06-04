@@ -80,7 +80,7 @@ const CandidateTableRow = (
       </td>
       <td><Badge style={{ backgroundColor: tag_color }}>{tag_name}</Badge></td>
       <td>{seniority}</td>
-      <td class ="child"  style={{ minWidth: "16rem" }}
+      <td class ="child"  style={{  width: "250px"}} 
 >
         {/* <Col sm={9}> */}
           <Select
