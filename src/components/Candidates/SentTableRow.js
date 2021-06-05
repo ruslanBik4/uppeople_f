@@ -141,7 +141,7 @@ const CandidateTableRow = ({
       </td>
       <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
         {statuses.map((status, idx) => (
-          <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px"}}>
+          <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
             {status["vacStat"]}
           </Badge>
         ))}

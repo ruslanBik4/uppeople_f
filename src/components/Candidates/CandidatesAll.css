@@ -58,7 +58,7 @@ tr > td:nth-child(8){
 } */
 
 .child{
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
   padding: 0;
   flex-direction: column;
   /* width: 150px; */
