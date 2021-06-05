@@ -70,13 +70,17 @@ export default class Dashboard extends Component {
           usersOnCandidates: data.topUsers,
           countVacanciesOpenAndHot: data.countVacanciesOpenAndHot
         };
+        console.log(this.state)
+        console.log(data)
 
         this.setState({
           ...this.state,
-          dashboardData
+          dashboardData,
         });
+        console.log(data)
       }
     });
+   
   }
 
   filterData = filter => {
@@ -321,7 +325,7 @@ export default class Dashboard extends Component {
       });
 
     const listOfWorstVacancies =
-      worseVacancies.length > 0 &&
+    worseVacancies!== null && worseVacancies.length > 0 &&
       worseVacancies.map(vacancy => (
         <tr key={vacancy.id}>
           <td>
