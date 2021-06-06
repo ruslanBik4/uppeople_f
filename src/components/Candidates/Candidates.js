@@ -311,11 +311,11 @@ export default class Candidates extends Component {
             
           };
           
-          const errorlabel = "error"
+          const errorlabel = 2
           
           this.setState({
             sentCandidatesData: { ...this.state.sentCandidatesData, ...sentCandidatesData },
-            errorlabel
+            errorlabel: 2
           });
         }
         
@@ -333,31 +333,43 @@ export default class Candidates extends Component {
             sentRecruiters: data.recruiter,
             loadingSent: false,
           };
+         
            
           this.setState({
             sentCandidatesData: {
               ...this.state.sentCandidatesData,
               ...sentCandidatesData,
-              errorlabel: null,
+             
             },
+            errorlabel: 1
+            
           });
+          console.log(this.state)
         }
+      
       });
+      
   }
+
   
   filterCand(currentAllPage, filterAndSortCandidates) {
     this.clearEmptyFilter(filterAndSortCandidates);
+
+    
+    var errorlabel = ""
+    console.log(errorlabel)
     
     filterAndSortAllCandidates(currentAllPage, filterAndSortCandidates)
       .then(data => {
         if (data === 401) {
           this.props.history.push('/login/');
+       
         } else if (data === 204) {
           const allCandidatesData = {
             allCandidatesCount: "Нет данных по выбранным параметрам во вкладке All Candidates",
             loading: false,
           };
-          const errorlabel = "error"
+          const errorlabel = 2
           this.setState({
             
             allCandidatesData: { ...this.state.allCandidatesData, ...allCandidatesData },
@@ -376,15 +388,20 @@ export default class Candidates extends Component {
             allSeniority: data.seniority,
             loading: false,
           };
+          // let errorlabel = ""
           this.setState({
             allCandidatesData: {
               ...this.state.allCandidatesData,
               ...allCandidatesData,
+              errorlabel: 1,
             },
+            errorlabel: 1,
           });
         }
       });
   };
+
+ 
   
   clearEmptyFilter(filters) {
     Object.entries(filters).forEach(function(elem) {
@@ -571,6 +588,7 @@ export default class Candidates extends Component {
     };
 
     let lblErrors = document.querySelector(".errorlist label");
+    console.log(errorlabel);
     
     return (
       <>
@@ -584,15 +602,19 @@ export default class Candidates extends Component {
               
             }}>
             <h1 style={{ marginBottom: 0, fontSize: 24, marginRight: 70  }}>Candidates</h1>
-            <span className={(errorlabel ? "error": "")}
+            <span className={(errorlabel > 1 ? "error": "")}
+            
               style={{
                 alignSelf: 'flex-end',
                 // color: 'red',
               }}>
+               
               {activeTabId === '1' ? allCandidatesCount : null}
               {activeTabId === '2' ? sentCandidatesCount : null}
             </span>
+           
           </Col>
+          
           {/* <Col className={"errorlist"} row>
             <Label></Label>
           </Col> */}
