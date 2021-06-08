@@ -849,3 +849,4 @@ export default class Candidates extends Component {
     );
   }
 };
+  
