@@ -208,6 +208,7 @@ export default class VacancyEditForm extends Component {
 
   handleDescriptionStateChange = description => {
     this.setState({description});
+    console.log(description);
   };
 
   handleDetailsStateChange = details => {
@@ -281,11 +282,15 @@ export default class VacancyEditForm extends Component {
       convertToRaw(details.getCurrentContent())
     );
 
+    console.log(description);
+
     const vacancy = {
       ...this.state,
       description: descriptionEditorState.toString().trim(),
       details: detailsEditorState.toString().trim(),
     };
+
+    console.log(description);
 
     let errList = document.querySelector('.error');
 

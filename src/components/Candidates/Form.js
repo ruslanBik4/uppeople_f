@@ -185,6 +185,7 @@ class CandidatesForm extends Component {
       selectStatuses,
     } = this.state;
     const { platforms, companies, statuses, seniority, activeTabId, userRole } = this.props;
+    console.log(this.state);
 
     return (
       <Form>

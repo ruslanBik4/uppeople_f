@@ -57,6 +57,12 @@ export default class VacancyProfile extends Component {
       this.setState({
         ...updatedVacancy
       });
+      if (content.description !== undefined) {
+        this.setState({description: content.description})
+      }
+      if (content.details !== undefined) {
+        this.setState({details: content.details})
+      }
     });
   };
 

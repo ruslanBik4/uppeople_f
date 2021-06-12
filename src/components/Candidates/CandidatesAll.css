@@ -65,6 +65,9 @@ tr > td:nth-child(8){
   border-top: 1px solid #c8ced3;
   /* vertical-align: middle; */
   vertical-align: top;
+  text-overflow: "clip";
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
 }
 
 table > thead {
