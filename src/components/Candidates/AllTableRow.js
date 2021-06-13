@@ -86,7 +86,7 @@ const CandidateTableRow = (
           <Select
                           id="vacancies"
                           isMulti
-                          value={`${selectedVacancies.slice(0,20)}`}
+                          value={selectedVacancies}
                           // options={platformVacancies}
                           // isClearable
                           placeholder="None"
