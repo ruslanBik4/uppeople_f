@@ -205,12 +205,28 @@ export default class CandidateProfile extends Component {
 
   };
 
-  appointInterview = content => {
+  appointInterview = ( content ) => {
     const {id} = this.props.match.params;
 
-    appointInterviewForCandidate(id, content).then(() => {
+    appointInterviewForCandidate(id, content).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else {
+        
+        getCadidateLogs(id).then(logs => {
+          if (logs === 401) {
+              this.props.history.push('/login/') 
+          } else if (logs > 400) {
+              alert(data)
+          } else {
+              this.setState({logs});
+              console.log(logs)
+          }
+      })
       this.setState({dataSaved: true});
-      this.componentDidMount();
+        this.componentDidMount();
+      }
+    
     });
   };
 
