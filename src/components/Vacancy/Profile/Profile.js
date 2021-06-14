@@ -23,7 +23,7 @@ export default class VacancyProfile extends Component {
   };
 
   state = {
-      id: -1,
+      id: null,
       date: "",
       company_id: 0,
       platform_id: 0,
@@ -39,6 +39,7 @@ export default class VacancyProfile extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+    console.log(this.props);
 
     getVacancyProfile(id).then(vacancy => {
       if (vacancy === 401) {
@@ -46,22 +47,33 @@ export default class VacancyProfile extends Component {
       } else {
           this.setState({ ...vacancy });
       }
+      console.log(this.props);
+      console.log(this.state);
     });
+    // let id = Number(this.props.ma)
   }
+
+  
 
   updateVacancyProfileContent = content => {
     const { id } = this.props.match.params;
+    console.log(id)
+    let ids = id
     console.log("content vacancy", content);
     updateVacancy(id, content).then(updatedVacancy => {
       console.log("content vacancy2", updatedVacancy);
       this.setState({
         ...updatedVacancy
       });
+      console.log(this.props)
       if (content.description !== undefined) {
         this.setState({description: content.description})
+        let id = Number(this.props.match.params)
+        this.setState({id: ids})
       }
       if (content.details !== undefined) {
         this.setState({details: content.details})
+        this.setState({id: ids})
       }
     });
   };
