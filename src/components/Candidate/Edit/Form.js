@@ -615,6 +615,8 @@ export default class CandidateEditForm extends Component {
                           options={platforms}
                           value={platform}
                           placeholder="Platform"
+                          isMulti
+                          isClearable
                           onChange={this.handlePlatformChange}
                         />
 
