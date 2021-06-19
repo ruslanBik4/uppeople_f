@@ -48,6 +48,10 @@ export default class CandidateEditForm extends Component {
         PropTypes.object,
         PropTypes.array
       ]),
+      selectedPlatforms: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.array
+      ]),
       // seniority_id: PropTypes.number,
       seniority_id: PropTypes.oneOfType([
         PropTypes.array,
@@ -100,6 +104,7 @@ export default class CandidateEditForm extends Component {
     // tag_id: {},
     platformVacancies: [],
     selectedVacancies: [],
+    selectedPlatforms: [],
     platform: [],
     seniority_id: [],
     vacancies: [],
@@ -197,7 +202,9 @@ export default class CandidateEditForm extends Component {
 
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
 
-    const platform = platforms.find( pl => pl.id === candidate.platform_id)
+    const platform = platforms.find( pl => pl.id === candidate.platform_id);
+
+    let selectedPlatforms = [];
 
     this.setState({
         avatar: candidate.avatar,
@@ -217,11 +224,14 @@ export default class CandidateEditForm extends Component {
         comment: candidate.comment,
         platformVacancies,
         selectedVacancies: candidate.selectedVacancies,
-        vacancies: candidate.vacancies
+        vacancies: candidate.vacancies,
+        selectedPlatforms: candidate.platform,
       }); 
       console.log(candidate.platform_id);
       console.log(candidate.vacancies);
       console.log(vacancies);
+      console.log(this.state.selectedPlatforms);
+      console.log(selectedPlatforms);
         
   }
 
@@ -254,10 +264,12 @@ export default class CandidateEditForm extends Component {
   };
 
   handlePlatformChange = value => {
-    this.setState({platform: value});
-    console.log(platform)
+    this.setState({selectedPlatforms: value});
+    console.log(this.state.selectedPlatforms);
+    
 
     const {vacancies} = this.props;
+    //todo
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
 
     this.setState({
@@ -301,6 +313,8 @@ export default class CandidateEditForm extends Component {
   //   this.setState({about});
   // };
 
+  
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -319,10 +333,18 @@ export default class CandidateEditForm extends Component {
       seniority_id,
       tag_id,
       selectedReason,
-      selectedVacancies
+      selectedVacancies,
+      platforms,
+      selectedPlatforms,
     } = this.state;
 
     console.log (this.state);
+
+    
+    // selectedTags ? selectedTags.map(item => item.id) : null)
+
+    console.log (this.state);
+
     
 
     let isValid = true;
@@ -357,6 +379,7 @@ export default class CandidateEditForm extends Component {
 
         tag_id = tag_id.id
         language = language.id
+        platforms = selectedPlatforms
 
         if (tag_id === 3) {
           document.querySelector('.reasons_div').classList.add('error');
@@ -387,6 +410,11 @@ export default class CandidateEditForm extends Component {
           lblErrors.textContent = ("Неправильный email")
         }
 
+      
+
+        console.log (this.state);
+
+
         const {onEditCandidate} = this.props;
 
         if (isValid) {
@@ -405,9 +433,11 @@ export default class CandidateEditForm extends Component {
             linkedIn,
             resume,
             comment,
-            vacancies
+            vacancies,
+            platforms: selectedPlatforms,
             // about: aboutEditorState
           };
+          console.log(candidateInfo)
 
           // if (salary === "" || salary === null) {
           //   delete candidateInfo.salary
@@ -524,6 +554,7 @@ export default class CandidateEditForm extends Component {
       linkedIn,
       resume,
       comment,
+      selectedPlatforms,
       // about
     } = this.state;
 
@@ -613,7 +644,7 @@ export default class CandidateEditForm extends Component {
                         <Select
                           id="platform_id"
                           options={platforms}
-                          value={platform}
+                          value={selectedPlatforms}
                           placeholder="Platform"
                           isMulti
                           isClearable
