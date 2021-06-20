@@ -50,7 +50,7 @@ export default class CandidateEditForm extends Component {
       ]),
       selectedPlatforms: PropTypes.oneOfType([
         PropTypes.object,
-        PropTypes.array
+        PropTypes.array,
       ]),
       // seniority_id: PropTypes.number,
       seniority_id: PropTypes.oneOfType([
@@ -200,7 +200,7 @@ export default class CandidateEditForm extends Component {
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platform_id)
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platforms)
 
     const platform = platforms.find( pl => pl.id === candidate.platform_id);
 
@@ -270,11 +270,12 @@ export default class CandidateEditForm extends Component {
 
     const {vacancies} = this.props;
     //todo
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
+    const platformVacancies = vacancies.filter(vacancy => vacancy.platforms === value.id)
 
     this.setState({
       platformVacancies
     });
+    console.log(platformVacancies)
 
   };
  
@@ -336,17 +337,12 @@ export default class CandidateEditForm extends Component {
       selectedVacancies,
       platforms,
       selectedPlatforms,
+      
     } = this.state;
 
     console.log (this.state);
 
     
-    // selectedTags ? selectedTags.map(item => item.id) : null)
-
-    console.log (this.state);
-
-    
-
     let isValid = true;
     let lblErrors = document.querySelector(".errorlist label");
 
@@ -361,13 +357,12 @@ export default class CandidateEditForm extends Component {
       if (tag_id !== undefined && tag_id.id === 3 && selectedReason !== undefined || tag_id.id !== 3) {
 
         tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
-        // language = typeof language === 'object' ? language.id : '';
+      
       }
 
-      // if (tag_id.id === 3) {
-      //   document.querySelector('.reasons_div > div').classList.add('error');
-      //   isValid = fal se;
-      // }
+      if (selectedPlatforms !== undefined) {
+        selectedPlatforms = selectedPlatforms.map(item => item.id)
+      }
 
         name = name.trim();
 
@@ -379,7 +374,7 @@ export default class CandidateEditForm extends Component {
 
         tag_id = tag_id.id
         language = language.id
-        platforms = selectedPlatforms
+        platforms = selectedPlatforms.id
 
         if (tag_id === 3) {
           document.querySelector('.reasons_div').classList.add('error');
@@ -387,22 +382,6 @@ export default class CandidateEditForm extends Component {
           lblErrors.textContent = ("Нужно выбрать reason")
         }
 
-        if (linkedIn > '' && !linkedIn.match('https:\/\/www.linkedin.com\/in\/[A-Za-zА-яа-я%0-9-]*\/')) {
-          isValid = false;
-          document.querySelector('.linkedIn_div').classList.add('error');
-          lblErrors.textContent = ("Нужно ввести ссылку linkedIn")
-        }
-
-       
-
-        // if (salary.length !== 0 && !salary.match ('^[1-9]\d*')) {
-        //   isValid = false;
-        //   document.querySelector('.salary_div').classList.add('error');
-        //   lblErrors.textContent = ("Зарплата не может начинаться с 0")
-        // }
-        // else {
-        //   salary = Number(salary);
-        // }
         
         if (email.length > 0 && !email.match('[A-Za-z%0-9-]+\@+[A-Za-z%0-9-]+\.+[A-Za-z%0-9-]+')) {
           isValid = false;
@@ -410,9 +389,13 @@ export default class CandidateEditForm extends Component {
           lblErrors.textContent = ("Неправильный email")
         }
 
-      
+        if (selectedPlatforms !== undefined) {
+          platforms = this.state.selectedPlatforms.map(item => item.id);
+        }
 
         console.log (this.state);
+        console.log (selectedPlatforms);
+        console.log (platforms);
 
 
         const {onEditCandidate} = this.props;
@@ -422,7 +405,6 @@ export default class CandidateEditForm extends Component {
 
           const candidateInfo = {
             name,
-            platform_id: platform.id,
             seniority_id,
             tag_id,
             salary,
@@ -468,25 +450,9 @@ export default class CandidateEditForm extends Component {
             delete candidateInfo.linkedIn
           }
 
-          // if (resume === "") {
-          //   delete candidateInfo.resume
-          // }
-
-          // if (comment === "") {
-          //   delete candidateInfo.comment
-          // }
-
-          // // if (selectedVacancies.length === 0) {
-          // //   delete candidateInfo.selectedVacancies
-          // // }
-
           if (selectedReason === "") {
             delete candidateInfo.selectedReason
           }
-
-          // if (selectedVacancies === undefined) {
-          //   delete candidateInfo.vacancies
-          // }
 
 
           console.log(candidateInfo);
@@ -495,11 +461,11 @@ export default class CandidateEditForm extends Component {
         }
       
 
-      if (!isValid) {
-        if (lblErrors !== undefined) {
-          lblErrors.textContent = 'There are som errors on input data. Please, fix it.'
-        }
-      }
+      // if (!isValid) {
+      //   if (lblErrors !== undefined) {
+      //     lblErrors.textContent = 'There are som errors on input data. Please, fix it.'
+      //   }
+      // }
 
     } catch (error) {
       const errorMsg = 'There are some errors on preparing send data. Hate to developers:' +error
