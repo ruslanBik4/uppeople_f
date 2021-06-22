@@ -39,6 +39,14 @@ const CandidateTableRow = (
   let emailValue = email;
   let linkedinValue = linkedin;
   let skypeValue = skype;
+
+  const slicedVacancies = selectedVacancies !== null && selectedVacancies.map(el => ({
+    ...el,
+    label: `${el.label.slice(0,20)}...`,
+}));
+
+console.log('slicedVacancies: ', slicedVacancies)
+
   
   if (mobile === '' || null) {
     mobileValue = null;
@@ -86,11 +94,11 @@ const CandidateTableRow = (
           <Select
                           id="vacancies"
                           isMulti
-                          value={selectedVacancies}
+                          value={slicedVacancies}
                           // options={platformVacancies}
                           // isClearable
                           placeholder="None"
-                          style={{zIndex: 2, padding: "0px"}}
+                          style={{zIndex: 2, padding: "0px", }}
                           // style={{padding: "0px"}}
                          
 
