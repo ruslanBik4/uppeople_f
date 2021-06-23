@@ -27,6 +27,7 @@ import styles from "./Form.module.css";
 import styles2 from "./Custom.css";
 import { platform } from "chart.js";
 import { is } from "core-js/core/object";
+import {getOptionsForSelects} from "../../../utils/api";
 
 const style = {
   icon: {
@@ -84,6 +85,13 @@ export default class CandidateEditForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
+    platforms: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
     selectedVacancies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -105,7 +113,7 @@ export default class CandidateEditForm extends Component {
     platformVacancies: [],
     selectedVacancies: [],
     selectedPlatforms: [],
-    platform: [],
+    platforms: [],
     seniority_id: [],
     vacancies: [],
     salary: 0,
@@ -170,7 +178,7 @@ export default class CandidateEditForm extends Component {
 
     const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
-    console.log(candidate.platform_id);
+    console.log(candidate.platform);
     console.log(candidate)
     let tag_id = candidate.tag;
     let selectedReason = {};
@@ -202,15 +210,13 @@ export default class CandidateEditForm extends Component {
 
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platforms)
 
-    const platform = platforms.find( pl => pl.id === candidate.platform_id);
+    // const platform = platforms.find( pl => pl.id === candidate.platform_id);
 
     let selectedPlatforms = [];
 
     this.setState({
         avatar: candidate.avatar,
         name: candidate.name,
-        platform,
-        platform_id: candidate.platform_id,
         seniority_id,
         tag_id,
         selectedReason: selectedReason,
@@ -225,14 +231,34 @@ export default class CandidateEditForm extends Component {
         platformVacancies,
         selectedVacancies: candidate.selectedVacancies,
         vacancies: candidate.vacancies,
-        selectedPlatforms: candidate.platform,
+        // selectedPlatforms: candidate.platforms,
       }); 
-      console.log(candidate.platform_id);
+      console.log(candidate);
       console.log(candidate.vacancies);
-      console.log(vacancies);
+      console.log(this.state);
       console.log(this.state.selectedPlatforms);
       console.log(selectedPlatforms);
         
+      getOptionsForSelects().then(optionsForSelects => {
+        const platforms = optionsForSelects.platforms;
+       
+        this.setState({platforms});
+      });
+      console.log(platforms);
+    
+      console.log(this.state.selectedPlatforms);
+      selectedPlatforms = this.state.selectedPlatforms;
+      console.log(candidate.platform);
+      console.log(candidate);
+      
+      if (candidate.platforms !== undefined && platforms !== undefined ) {
+        let newResult = Object.keys(platforms).filter(key => candidate.platforms.includes(platforms[key].id)).map(key => platforms[key]);
+        console.log(newResult);
+        this.setState({selectedPlatforms: newResult})
+      }
+      
+      
+      console.log(this.state);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -266,16 +292,23 @@ export default class CandidateEditForm extends Component {
   handlePlatformChange = value => {
     this.setState({selectedPlatforms: value});
     console.log(this.state.selectedPlatforms);
+
+    
+    
+    // this.setState({
+    //   platformVacancies
+    // });
+    // console.log(platformVacancies)
     
 
-    const {vacancies} = this.props;
-    //todo
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platforms === value.id)
+    // const {vacancies} = this.props;
+    // //todo
+    // const platformVacancies = vacancies.filter(vacancy => vacancy.platforms === value.id)
 
-    this.setState({
-      platformVacancies
-    });
-    console.log(platformVacancies)
+    // this.setState({
+    //   platformVacancies
+    // });
+    // console.log(platformVacancies)
 
   };
  
