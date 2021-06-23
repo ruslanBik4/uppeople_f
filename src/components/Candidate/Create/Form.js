@@ -79,11 +79,12 @@ export default class CandidateCreateForm extends Component {
     avatar: noAvatar,
     name: "",
     platform: [],
-    platform_id: [],
+    selectedPlatforms: [],
     seniority_id: [],
     tag_id: {},
     selectedReason: {},
     selectedVacancies: [],
+    plarforms: [],
     vacancies: [],
     date: moment().format("YYYY-MM-DD"),
     salary: "",
@@ -178,11 +179,11 @@ export default class CandidateCreateForm extends Component {
   
 
   handlePlatformChange = value => {
-    this.setState({platform_id: value});
+    this.setState({selectedPlatforms: value});
     let vacancies = this.state.vacancies;
   
     console.log (vacancies); 
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === value.id)
+    const platformVacancies = vacancies.filter(vacancy => vacancy.selectedPlatforms === value.id)
 
     this.setState({
       platformVacancies
@@ -248,7 +249,8 @@ export default class CandidateCreateForm extends Component {
 
     let {
       name,
-      platform_id,
+      platforms,
+      selectedPlatforms,
       seniority_id,
       date,
       salary,
@@ -265,6 +267,7 @@ export default class CandidateCreateForm extends Component {
       selectedVacancies,
       vacancies
     } = this.state;
+    console.log(this.state)
     const {onCreateCandidate} = this.props;
 
     let errList = document.querySelector('.error');
@@ -277,14 +280,17 @@ export default class CandidateCreateForm extends Component {
 
     
     let lblErrors = document.querySelector(".errorlist label");
+    // if (selectedPlatforms !== undefined) {
+    //   platforms = this.state.selectedPlatforms.map(item => item.id);
+    // }
     
 
-    if (platform_id.length === 0) {
+    if (selectedPlatforms.length === 0) {
       document.querySelector('.platform_div > div').classList.add('error');
       isValid = false;
-      lblErrors.textContent = ("platform_id не выбрано")
+      lblErrors.textContent = ("selectedPlatforms не выбрано")
     } else {
-      platform_id = platform_id.id
+      platforms = this.state.selectedPlatforms.map(item => item.id);
     }
 
     if (seniority_id.length === 0) {
@@ -367,7 +373,7 @@ export default class CandidateCreateForm extends Component {
     if (isValid) {
       const newCandidate = {
         name,
-        platform_id,
+        platforms,
         seniority_id,
         tag_id,
         salary,
@@ -461,7 +467,7 @@ export default class CandidateCreateForm extends Component {
     const {
       avatar,
       name,
-      platform_id,
+      selectedPlatforms,
       seniority_id,
       date,
       salary,
@@ -506,9 +512,9 @@ export default class CandidateCreateForm extends Component {
             </Button>
             <CardBody className={styles.cardBody}>
               <ListGroup flush>
-                {platform_id.label && (
+                {selectedPlatforms.label && (
                   <ListGroupItem className={styles.listGroupItem}>
-                    {platform_id.label}
+                    {selectedPlatforms.label}
                   </ListGroupItem>
                 )}
                 {seniority_id.label && (
@@ -579,7 +585,9 @@ export default class CandidateCreateForm extends Component {
                         <Select
                           required
                           id="platform_id"
-                          value={platform_id}
+                          value={selectedPlatforms}
+                          isMulti
+                          isClearable
                           placeholder="Platform"
                           options={platforms}
                           onChange={this.handlePlatformChange}
