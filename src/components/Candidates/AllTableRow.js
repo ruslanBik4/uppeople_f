@@ -15,7 +15,7 @@ const CandidateTableRow = (
     date,
     name,
     seniority,
-    platform,
+    platforms,
     email,
     mobile,
     linkedin,
@@ -45,7 +45,7 @@ const CandidateTableRow = (
   let linkedinValue = linkedin;
   let skypeValue = skype;
 
-  console.log(selectedVacancies)
+  console.log(platforms)
   // console.log(data)
 
   const slicedVacancies = selectedVacancies !== null && selectedVacancies.map(el => ({
@@ -56,14 +56,14 @@ const CandidateTableRow = (
 console.log('slicedVacancies: ', slicedVacancies)
 options = options;
 console.log(options)
-let platforms = options
-console.log(platforms)
 
 console.log(CandidateTableRow)
 
-if (selectedVacancies !== undefined && selectedVacancies !== null && platforms !== undefined ) {
-  let newResult = Object.keys(platforms).filter(key => selectedVacancies.includes(platforms[key].id)).map(key => platforms[key]);
-  console.log(newResult);
+let selectedPlatforms
+
+if (platforms !== undefined && platforms !== null && options !== undefined ) {
+  selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
+  console.log(selectedPlatforms);
   // this.setState({selectedPlatforms: newResult})
 }
 
@@ -103,7 +103,15 @@ if (selectedVacancies !== undefined && selectedVacancies !== null && platforms !
         )}
       </td>
       <td>{moment(date).format('DD.MM.YY')}</td>
-      <td>{platform}</td>
+      <td class ="child"  style={{  width: "250px"}}><Select
+                          id="platform_id"
+                          options={platforms}
+                          value={selectedPlatforms}
+                          placeholder="Platform"
+                          isMulti
+                          isClearable
+                          // onChange={this.handlePlatformChange}
+                        /></td>
       <td>
         <Link to={`/candidates/${id}`}>{name}</Link>
       </td>
