@@ -8,6 +8,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './CandidatesAll.css';
 import Select from "../shared/Select";
 
+
 const CandidateTableRow = (
   {
     id,
@@ -28,17 +29,24 @@ const CandidateTableRow = (
     statuses,
     open,
     close,
+    options,
   },
+  // options,
 ) => {
   
   const contactCopied = e => {
     e.target.style.color = 'var(--green)';
   };
+
+ 
   
   let mobileValue = mobile;
   let emailValue = email;
   let linkedinValue = linkedin;
   let skypeValue = skype;
+
+  console.log(selectedVacancies)
+  // console.log(data)
 
   const slicedVacancies = selectedVacancies !== null && selectedVacancies.map(el => ({
     ...el,
@@ -46,6 +54,19 @@ const CandidateTableRow = (
 }));
 
 console.log('slicedVacancies: ', slicedVacancies)
+options = options;
+console.log(options)
+let platforms = options
+console.log(platforms)
+
+console.log(CandidateTableRow)
+
+if (selectedVacancies !== undefined && selectedVacancies !== null && platforms !== undefined ) {
+  let newResult = Object.keys(platforms).filter(key => selectedVacancies.includes(platforms[key].id)).map(key => platforms[key]);
+  console.log(newResult);
+  // this.setState({selectedPlatforms: newResult})
+}
+
 
   
   if (mobile === '' || null) {
@@ -170,6 +191,7 @@ CandidateTableRow.propTypes = {
   open: PropTypes.func,
   close: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
+  options: PropTypes.array,
 };
 
 CandidateTableRow.defaultProps = {
@@ -185,6 +207,7 @@ CandidateTableRow.defaultProps = {
   skype: '',
   open: () => null,
   close: () => null,
+  options: [],
 };
 
 export default CandidateTableRow;

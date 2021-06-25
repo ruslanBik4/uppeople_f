@@ -63,8 +63,11 @@ export default class Candidates extends Component {
       role: PropTypes.number.isRequired,
       companyId: PropTypes.number,
     }),
-    errorlabel: PropTypes.string
+    errorlabel: PropTypes.string,
+
+    
   };
+
   
   state = {
     allCandidatesData: {
@@ -151,11 +154,20 @@ export default class Candidates extends Component {
           statuses,
         });
       });
+
+      // console.log(platforms);
+     
+
+      // constructor (props) {
+      //   super(props);
+      //   this.state = {options: optionsForSelects}
+      // };
     
     const {
       allCandidatesData: { currentAllPage },
       sentCandidatesData: { currentSentPage },
     } = this.state;
+    console.log(this.state)
     
     role !== 4 && role !== 5
       ? this.requestForCandidatesForStaff(currentAllPage, currentSentPage)
@@ -210,6 +222,7 @@ export default class Candidates extends Component {
           });
         }
       });
+      console.log(this.state)
   }
   
   privateAllHandleRecruiterChange = value => {
@@ -545,6 +558,10 @@ export default class Candidates extends Component {
       },
     }));
   };
+
+  
+
+  
   
 
   render() {
@@ -563,6 +580,7 @@ export default class Candidates extends Component {
         allPerPage,
         currentAllPage,
         loading,
+        // platforms,
       },
       sentCandidatesData: {
         sentCandidates,
@@ -783,6 +801,7 @@ export default class Candidates extends Component {
                         currentPage={currentAllPage}
                         onChangePage={this.onChangeAllCandidatesPage}
                         loading={loading}
+                        options={platforms}
                       />
                     )}
                   </Localization>

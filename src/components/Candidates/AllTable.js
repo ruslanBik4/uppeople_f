@@ -22,7 +22,9 @@ class AllCandidatesTable extends Component {
       currentPage,
       onChangePage,
       onSort,
-      loading
+      loading,
+      platforms,
+      options,
     } = this.props;
 
     const loadingStyle = {
@@ -36,6 +38,10 @@ class AllCandidatesTable extends Component {
     };
 
     console.log(candidates);
+    console.log(options);
+    console.log(this.props)
+    console.log(this.state)
+
     const candidatesJSX =
       candidates.length > 0 ? (
         candidates.map((candidate, idx) => (
@@ -50,6 +56,7 @@ class AllCandidatesTable extends Component {
                       isOpen={isOpen}
                       close={close}
                       {...candidate}
+                     options={this.props.options}
                     />
                   </tr>
                   <tr>
@@ -82,6 +89,7 @@ class AllCandidatesTable extends Component {
                     {...candidate}
                     isOpen={isOpen}
                     open={open}
+                    options={this.props.options}
                   />
                 </tr>
               )
@@ -120,6 +128,7 @@ class AllCandidatesTable extends Component {
                 initialPage={currentPage}
                 onChangePage={onChangePage}
                 loading={loading}
+                options={options}
                 // onPageChange={this.onPageChange}
               />
             </Col>
@@ -150,7 +159,8 @@ AllCandidatesTable.propTypes = {
   totalPages: PropTypes.number,
   onChangePage: PropTypes.func,
   onSort: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  options: PropTypes.array,
 };
 
 AllCandidatesTable.defaultProps = {
@@ -160,7 +170,10 @@ AllCandidatesTable.defaultProps = {
   totalItems: null,
   totalPages: null,
   onChangePage: () => null,
-  onSort: () => null
+  onSort: () => null,
+  options: [],
 };
+
+
 
 export default AllCandidatesTable;
