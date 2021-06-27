@@ -838,6 +838,7 @@ export default class Candidates extends Component {
                         currentPage={currentSentPage}
                         onChangePage={this.onChangeSentCandidatesPage}
                         loading={loadingSent}
+                        options={platforms}
                       />
                     )}
                   </Localization>
@@ -858,6 +859,7 @@ export default class Candidates extends Component {
                     totalPages={sentTotalPages}
                     currentPage={currentSentPage}
                     onChangePage={this.onChangeSentCandidatesPage}
+                    options={platforms}
                   />
                 )}
               </Localization>

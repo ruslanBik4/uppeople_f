@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { Badge } from "reactstrap";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import './Candidates.css';
+import Select from "../shared/Select";
 
 const CandidateTableRow = ({
   id,
   date,
   name,
-  platform,
   salary,
   email,
   mobile: phone,
@@ -22,7 +22,9 @@ const CandidateTableRow = ({
   open,
   close,
   statuses,
-  color
+  color,
+  options,
+  platforms,
 }) => {
 
   const contactCopied = e => {
@@ -60,6 +62,16 @@ const CandidateTableRow = ({
   let companies = ''
   let stat = ''
 
+  console.log(options)
+  console.log(platforms)
+
+  let selectedPlatforms
+
+  if (platforms !== undefined && platforms !== null && options !== undefined ) {
+    selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
+    console.log(selectedPlatforms);
+  }
+
   console.log(statuses)
   statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
@@ -90,7 +102,16 @@ const CandidateTableRow = ({
         )}
       </td>
       <td>{moment(date).format("DD.MM.YY")}</td>
-      <td>{platform}</td>
+      <td class ="child"  style={{  width: "250px"}}><Select
+                          id="platform_id"
+                          options={platforms}
+                          value={selectedPlatforms}
+                          placeholder="Platform"
+                          isMulti
+                          isClearable
+                          // onChange={this.handlePlatformChange}
+      /></td>
+     
       <td>
         <Link to={`/candidates/${id}`} >{name}</Link>
       </td>

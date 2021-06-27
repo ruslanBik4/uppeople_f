@@ -31,11 +31,14 @@ const SentCandidatesTable = ({
   currentPage,
   onChangePage,
   onSort,
-  loading
+  loading,
+  options,
 }) => {
 
   console.log(candidates);
   console.log(selectedVacancies);
+  console.log(options);
+  // console.log(this.props);
   
 
   const candidatesJSX =
@@ -52,6 +55,7 @@ const SentCandidatesTable = ({
                     isOpen={isOpen}
                     close={close}
                     {...candidate}
+                    options={options}
                   />
                 </tr>
                 {candidate.statuses.length > 0 ?
@@ -73,6 +77,7 @@ const SentCandidatesTable = ({
                                 candId={candidate.id}
                                 candidateStatus={candidate.statuses[0].comments}
                                 statuses={statuses}
+                                options={options}
                               />
                             </tr>
                           </tbody>
@@ -89,6 +94,7 @@ const SentCandidatesTable = ({
                   {...candidate}
                   isOpen={isOpen}
                   open={open}
+                  options={options}
                 />
               </tr>
             )
@@ -128,6 +134,7 @@ const SentCandidatesTable = ({
               initialPage={currentPage}
               onChangePage={onChangePage}
               loading={loading}
+              options={options}
             />
           </Col>
         </Row>
@@ -164,7 +171,8 @@ SentCandidatesTable.propTypes = {
   totalPages: PropTypes.number,
   onChangePage: PropTypes.func,
   onSort: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  options: PropTypes.array,
 };
 
 SentCandidatesTable.defaultProps = {
@@ -174,7 +182,8 @@ SentCandidatesTable.defaultProps = {
   totalItems: null,
   totalPages: null,
   onChangePage: () => null,
-  onSort: () => null
+  onSort: () => null,
+  options: [],
 };
 
 export default SentCandidatesTable;
