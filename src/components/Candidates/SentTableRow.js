@@ -41,6 +41,9 @@ const CandidateTableRow = ({
 }) => {
 
   console.log(selectCandidateStatus);
+  console.log(onChangeCandidateStatus);
+  console.log(id);
+  console.log(company);
   const contactCopied = e => {
     e.target.style.color = "var(--green)"
   };
@@ -113,6 +116,8 @@ const CandidateTableRow = ({
   console.log(statusesVac)
   console.log(colour)
   console.log(companies)
+  let compFirst = statuses.map(id => id.comp_id)
+  console.log(compFirst)
   stat = statuses.map(id => id.vacStat)
   console.log(stat)
   console.log(stat[0])
@@ -206,11 +211,12 @@ const CandidateTableRow = ({
             value={selectedStatuses[0]}
             onChange={value => {
               const content = {
-                id: candidateId,
-                company_id: company.id,
+                candidate_id: id,
+                vacancy_id: vac[0],
                 value
               };
               onChangeCandidateStatus(content);
+              console.log(content)
             }}
           />
         {/* {statuses.map((status, idx) => ( */}
@@ -251,7 +257,8 @@ CandidateTableRow.propTypes = {
   recruiter: PropTypes.string,
   open: PropTypes.func,
   close: PropTypes.func,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  onChangeCandidateStatus: PropTypes.func
 };
 
 CandidateTableRow.defaultProps = {
@@ -266,7 +273,8 @@ CandidateTableRow.defaultProps = {
   companies: "",
   recruiter: "",
   open: () => null,
-  close: () => null
+  close: () => null,
+  onChangeCandidateStatus: () => {}
 };
 
 export default CandidateTableRow;

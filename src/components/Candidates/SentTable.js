@@ -36,6 +36,7 @@ const SentCandidatesTable = ({
   options,
   platforms,
   selectedPlatforms,
+  onChangeCandidateStatus,
 
 }) => {
 
@@ -62,6 +63,7 @@ const SentCandidatesTable = ({
                     {...candidate}
                     options={options}
                     stats={statuses}
+                    onChangeCandidateStatus={onChangeCandidateStatus}
                     // {...candidateStatus}
                   />
                 </tr>
@@ -107,6 +109,7 @@ const SentCandidatesTable = ({
                   open={open}
                   options={options}
                   stats={statuses}
+                  onChangeCandidateStatus={onChangeCandidateStatus}
                   // {...candidateStatus}
                 />
               </tr>

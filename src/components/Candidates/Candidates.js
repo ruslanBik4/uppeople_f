@@ -22,6 +22,7 @@ import {
 import { cancelCandidateFromFreelancer, sendCandidateResume } from '../../utils/api/candidate';
 import Label from "reactstrap/lib/Label";
 import styles from "./error.css";
+import {updateCandidateStatus} from "../../utils/api/company";
 
 const tabs = [
   {
@@ -515,6 +516,21 @@ export default class Candidates extends Component {
     }));
     this.filterSent(currentSentPage, filterAndSortCandidates);
   };
+
+  changeCandidateStatus = content => {
+    const statusCandidate ={
+      vacancy_id: content.vacancy_id,
+      candidate_id: content.id,
+      status: content.value.id
+    }
+    updateCandidateStatus(statusCandidate).then(data => {
+      if (data === 401) {
+        this.props.history.push('/login/')
+      } else {
+          console.log(data)
+      }
+      });
+  };
   
   toggleMySent = () => {
     this.setState(
@@ -594,6 +610,7 @@ export default class Candidates extends Component {
       filterAndSortCandidates: { selectRecruiter, mySent, selectTag, selectReason },
       activeTabId,
       errorlabel,
+      changeCandidateStatus,
     } = this.state;
     console.log(this.state)
     
@@ -802,6 +819,7 @@ export default class Candidates extends Component {
                         onChangePage={this.onChangeAllCandidatesPage}
                         loading={loading}
                         options={platforms}
+                        statuses={statuses}
                       />
                     )}
                   </Localization>
@@ -837,6 +855,7 @@ export default class Candidates extends Component {
                         totalPages={sentTotalPages}
                         currentPage={currentSentPage}
                         onChangePage={this.onChangeSentCandidatesPage}
+                        onChangeCandidateStatus={this.changeCandidateStatus}
                         loading={loadingSent}
                         options={platforms}
                       />
@@ -859,6 +878,7 @@ export default class Candidates extends Component {
                     totalPages={sentTotalPages}
                     currentPage={currentSentPage}
                     onChangePage={this.onChangeSentCandidatesPage}
+                    onChangeCandidateStatus={this.changeCandidateStatus}
                     options={platforms}
                   />
                 )}

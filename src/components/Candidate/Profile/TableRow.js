@@ -21,6 +21,7 @@ const CandidateProfileTableRow = ({
   onChangeCandidateStatus
 }) => {
   console.log(vacancy);
+  console.log(onChangeCandidateStatus);
   const platformName = vacancy !== null ? vacancy.platforms.nazva : "";
   const companyName = company !== null ? company.name : "";
   const salary = vacancy.salary !== null ? vacancy.salary : "0";
@@ -63,7 +64,8 @@ const CandidateProfileTableRow = ({
             )}
             options={selectCandidateStatus}
             styles={customStyles}
-            onChange={value => {
+            onChange={value => 
+              {
               const content = {
                 id: candidateId,
                 company_id: company.id,
