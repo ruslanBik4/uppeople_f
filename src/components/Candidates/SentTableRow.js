@@ -25,8 +25,22 @@ const CandidateTableRow = ({
   color,
   options,
   platforms,
+  stats,
+  vacancies,
+  userRole,
+  idx,
+  platform,
+  vacancy,
+  company,
+  dateUpdate,
+  vacancyStatus,
+  details,
+  candidateId,
+  selectCandidateStatus,
+  onChangeCandidateStatus,
 }) => {
 
+  console.log(selectCandidateStatus);
   const contactCopied = e => {
     e.target.style.color = "var(--green)"
   };
@@ -63,13 +77,30 @@ const CandidateTableRow = ({
   let stat = ''
 
   console.log(options)
+  console.log(statuses);
+  let s = statuses.map (item => item.vacStat)
+  console.log(s);
+  console.log(stats);
   console.log(platforms)
+  console.log(vacancies)
+  let vac = vacancies.map (item => item.platform_id)
+ 
+  console.log(vac)
+  console.log(vac[0])
+  platforms = vac
 
   let selectedPlatforms
 
   if (platforms !== undefined && platforms !== null && options !== undefined ) {
     selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
     console.log(selectedPlatforms);
+  }
+
+  let selectedStatuses
+
+  if (s !== undefined && s !== null && stats !== undefined ) {
+    selectedStatuses = Object.keys(stats).filter(key => s.includes(stats[key].label)).map(key => stats[key]);
+    console.log(selectedStatuses);
   }
 
   console.log(statuses)
@@ -84,6 +115,11 @@ const CandidateTableRow = ({
   console.log(companies)
   stat = statuses.map(id => id.vacStat)
   console.log(stat)
+  console.log(stat[0])
+  let statFirst = stat[0];
+  console.log(statFirst)
+  
+  
   return (
     <>
       <td>
@@ -105,7 +141,7 @@ const CandidateTableRow = ({
       <td class ="child"  style={{  width: "250px"}}><Select
                           id="platform_id"
                           options={platforms}
-                          value={selectedPlatforms}
+                          value={selectedPlatforms[0]}
                           placeholder="Platform"
                           isMulti
                           isClearable
@@ -160,12 +196,30 @@ const CandidateTableRow = ({
           }
         </div>
       </td>
-      <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
-        {statuses.map((status, idx) => (
-          <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
-            {status["vacStat"]}
-          </Badge>
-        ))}
+      <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem", height: "200px"}}>
+      <Select
+            // defaultValue={selectCandidateStatus.find(
+            //   candidateStatus => candidateStatus.label === status
+            // )}
+            options={stats}
+            // styles={customStyles}
+            value={selectedStatuses[0]}
+            onChange={value => {
+              const content = {
+                id: candidateId,
+                company_id: company.id,
+                value
+              };
+              onChangeCandidateStatus(content);
+            }}
+          />
+        {/* {statuses.map((status, idx) => ( */}
+          {/* // <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
+          //   {status["vacStat"]} */}
+           {/* {statFirst}
+           */}
+          {/* // </Badge> */}
+        {/* ))} */}
       </td >
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
       {statuses.map((status, idx) => (

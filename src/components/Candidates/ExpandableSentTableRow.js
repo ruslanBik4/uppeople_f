@@ -10,13 +10,30 @@ import Select from "../shared/Select";
 // Instruments
 import { updateCandidateStatus } from "../../utils/api/company";
 import { saveCommentToCandidate } from "../../utils/api/candidate";
+import './Candidates.css';
 
 const CandidateExpandableTableRow = ({
   userRole,
   candId,
   candidateStatus,
-  statuses
+  statuses,
+  platforms,
+  selectedPlatforms,
+  options,
 }) => {
+  
+  console.log(options)
+  console.log(platforms)
+  console.log(selectedPlatforms)
+  console.log(candId)
+
+  
+
+  if (platforms !== undefined && platforms !== null && options !== undefined ) {
+    selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
+    console.log(selectedPlatforms);
+  }
+
   const getBadge = status => {
     return status === "OFFER" || status === "Hired"
       ? "success"
@@ -39,7 +56,7 @@ const CandidateExpandableTableRow = ({
     <>
       {date !== null || compId !== null ? (
         <>
-          <td>{date ? moment(date).format("DD.MM.YY") : ""}</td>
+          <td height="300px" vertical-align= "top">{date ? moment(date).format("DD.MM.YY") : ""}</td>
           <td>
             {userRole !== 4 ? (
               <Link to={`/companies/${compId}`}>{compName}</Link>
@@ -78,6 +95,15 @@ const CandidateExpandableTableRow = ({
               comment
             )}
           </td>
+          <td class ="child"  style={{  width: "250px"}}><Select
+                          id="platform_id"
+                          options={platforms}
+                          value={selectedPlatforms}
+                          placeholder="Platform"
+                          isMulti
+                          isClearable
+                          // onChange={this.handlePlatformChange}
+          /></td>
         </>
       ) : (
         <td colSpan="9" align="middle" valign="middle">
@@ -95,6 +121,8 @@ CandidateExpandableTableRow.propTypes = {
   userRole: PropTypes.number.isRequired,
   candId: PropTypes.number.isRequired,
   candidateStatus: PropTypes.string.isRequired,
+  platforms: PropTypes.string.isRequired,
+  selectedPlatforms: PropTypes.string.isRequired,
   statuses: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

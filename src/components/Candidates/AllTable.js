@@ -75,6 +75,8 @@ class AllCandidatesTable extends Component {
                             userRole={userRole}
                             candId={candidate.id}
                             candidateStatus={candidate.status}
+                            platforms={platforms}
+                            
                           />
                         </tr>
                         </tbody>

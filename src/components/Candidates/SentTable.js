@@ -9,6 +9,7 @@ import LocaleSelector from "../LocaleSelector";
 import PaginationBackend from "../shared/PaginationBackend";
 // HOC
 import OpenClose from "../../render_prop/OpenClose";
+import Select from "../shared/Select";
 
 const loadingStyle = {
   background: "var(--white)",
@@ -33,11 +34,15 @@ const SentCandidatesTable = ({
   onSort,
   loading,
   options,
+  platforms,
+  selectedPlatforms,
+
 }) => {
 
-  console.log(candidates);
-  console.log(selectedVacancies);
+  console.log(platforms);
+  console.log(selectedPlatforms);
   console.log(options);
+  console.log(statuses);
   // console.log(this.props);
   
 
@@ -56,6 +61,8 @@ const SentCandidatesTable = ({
                     close={close}
                     {...candidate}
                     options={options}
+                    stats={statuses}
+                    // {...candidateStatus}
                   />
                 </tr>
                 {candidate.statuses.length > 0 ?
@@ -68,6 +75,7 @@ const SentCandidatesTable = ({
                               <th>Company</th>
                               <th>Status</th>
                               <th>Comment</th>
+                              <td>Platforms</td>
                             </tr>
                           </thead>
                           <tbody>
@@ -78,6 +86,9 @@ const SentCandidatesTable = ({
                                 candidateStatus={candidate.statuses[0].comments}
                                 statuses={statuses}
                                 options={options}
+                                platforms={platforms}
+                                selectedPlatforms={selectedPlatforms}
+                                {...candidate}
                               />
                             </tr>
                           </tbody>
@@ -95,6 +106,8 @@ const SentCandidatesTable = ({
                   isOpen={isOpen}
                   open={open}
                   options={options}
+                  stats={statuses}
+                  // {...candidateStatus}
                 />
               </tr>
             )

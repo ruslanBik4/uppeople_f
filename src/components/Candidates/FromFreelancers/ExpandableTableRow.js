@@ -15,7 +15,9 @@ const CandidateExpandableTableRow = ({
   userRole,
   candId,
   candidateStatus,
-  statuses
+  statuses,
+  platforms,
+  selectedPlatforms,
 }) => {
   const getBadge = status => {
     return status === "OFFER" || status === "Hired"

@@ -40,6 +40,12 @@
   margin-bottom: 0;
 }
 
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #c8ced3;
+}
+
 /* tr > td:nth-child(7){
   flex-wrap: wrap;
   padding: 0;
