@@ -168,8 +168,9 @@ const CandidateTableRow = ({
         ))}
       </td >
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
-      {statuses.map((status, idx)=> (
-        <Badge style = {{display: "block", background: "white", width: "250px", verticalAlign: "middle"}}>
+      {statuses.map((status, idx) => (
+        // <Badge style = {{backgroundColor: `${status["color"]}`, display: "block", width: "250px", verticalAlign: "middle"}}>
+        <Badge  style={{backgroundColor: `${status["color"]}`, width: "250px", display: "block"}}>
           <Link to={`companies/${status["comp_id"]}`} key={idx}>
           {status["compName"]}
         </Link>
