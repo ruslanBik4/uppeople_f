@@ -46,6 +46,23 @@
   border-top: 1px solid #c8ced3;
 }
 
+.child{
+  /* flex-wrap: nowrap; */
+  padding: 0;
+  flex-direction: column;
+  /* width: 150px; */
+  border-top: 1px solid #c8ced3;
+  /* vertical-align: middle; */
+  vertical-align: top;
+  text-overflow: "clip";
+  white-space: normal; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+}
+
+.bold{
+  font-Weight: 900
+}
+
 /* tr > td:nth-child(7){
   flex-wrap: wrap;
   padding: 0;

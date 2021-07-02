@@ -107,6 +107,7 @@ const CandidateTableRow = ({
   }
 
   console.log(statuses)
+  console.log(statuses.length)
   statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
     {/*todo add link for all companies*/}
@@ -135,12 +136,18 @@ const CandidateTableRow = ({
             onClick={close}
           />
         ) : (
-          <i
-            className="icon-plus icons font-xl"
-            style={{ color: "var(--green)", cursor: "pointer" }}
-            onClick={open}
-          />
+          
+          <i 
+          className={"icon-plus icons font-xl" + " " +(statuses.length > 1 ? "bold": "")}
+          // className="errorlist"
+          // className="icon-plus icons font-xl"
+          style={{ color: "var(--green)", cursor: "pointer"}}
+
+          onClick={open}
+        />
+          
         )}
+
       </td>
       <td>{moment(date).format("DD.MM.YY")}</td>
       <td class ="child"  style={{  width: "250px"}}><Select
@@ -201,6 +208,15 @@ const CandidateTableRow = ({
           }
         </div>
       </td>
+      {/* <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
+        {statuses.map((status, idx) => (
+          <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
+            {status["vacStat"]}
+          </Badge>
+        ))}
+      </td > */}
+
+
       <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem", height: "200px"}}>
       <Select
             // defaultValue={selectCandidateStatus.find(
@@ -219,13 +235,12 @@ const CandidateTableRow = ({
               console.log(content)
             }}
           />
-        {/* {statuses.map((status, idx) => ( */}
-          {/* // <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
-          //   {status["vacStat"]} */}
-           {/* {statFirst}
-           */}
-          {/* // </Badge> */}
-        {/* ))} */}
+      {/* {statuses.map((status, idx) => (
+      <Badge  style={{backgroundColor: `${status["color"]}`, width: "100px", display: "block"}}>
+     {status["vacStat"]}
+       {statFirst}
+      </Badge>))} */}
+       
       </td >
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
       {statuses.map((status, idx) => (
