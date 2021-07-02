@@ -103,7 +103,16 @@ if (platforms !== undefined && platforms !== null && options !== undefined ) {
         )}
       </td>
       <td>{moment(date).format('DD.MM.YY')}</td>
-      <td class ="child"  style={{  width: "250px"}}><Select
+       <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
+        {selectedPlatforms.map((selectedPlatform, idx) => (
+          <Badge  style={{backgroundColor: "white", width: "250px", display: "block"}}>
+            {selectedPlatform["label"]}
+          </Badge>
+        ))}
+      </td >
+
+
+      {/* <td class ="child"  style={{  width: "250px"}}><Select
                           id="platform_id"
                           options={platforms}
                           value={selectedPlatforms}
@@ -111,7 +120,7 @@ if (platforms !== undefined && platforms !== null && options !== undefined ) {
                           isMulti
                           isClearable
                           // onChange={this.handlePlatformChange}
-                        /></td>
+                        /></td> */}
       <td>
         <Link to={`/candidates/${id}`}>{name}</Link>
       </td>
