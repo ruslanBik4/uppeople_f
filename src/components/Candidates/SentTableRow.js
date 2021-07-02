@@ -86,7 +86,7 @@ const CandidateTableRow = ({
   console.log(stats);
   console.log(platforms)
   console.log(vacancies)
-  let vac = vacancies.map (item => item.platform_id)
+  let vac = vacancies.map (item => item.id)
  
   console.log(vac)
   console.log(vac[0])
