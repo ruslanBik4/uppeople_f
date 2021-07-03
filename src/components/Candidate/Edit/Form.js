@@ -59,7 +59,7 @@ export default class CandidateEditForm extends Component {
         PropTypes.number
       ]),
       salary: PropTypes.number,
-      language: PropTypes.string,
+      id_languages: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
       skype: PropTypes.string,
@@ -92,6 +92,13 @@ export default class CandidateEditForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
+    languages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
     selectedVacancies: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -117,51 +124,52 @@ export default class CandidateEditForm extends Component {
     seniority_id: [],
     vacancies: [],
     salary: 0,
-    language: "",
-    languages: [
-      {
-        id: 'Beginner',
-        label: 'Beginner',
-        name: 'Beginner',
-        value: 'Beginner'
-      },
-      {
-        id: 'Elementary',
-        label: 'Elementary',
-        name: 'Elementary',
-        value: 'Elementary'
-      },
-      {
-        id: 'Pre-Intermediate',
-        label: 'Pre-Intermediate',
-        name: 'Pre-Intermediate',
-        value: 'Pre-Intermediate'
-      },
-      {
-        id: 'Intermediate',
-        label: 'Intermediate',
-        name: 'Intermediate',
-        value: 'Intermediate'
-      },
-      {
-        id: 'Upper Intermediate',
-        label: 'Upper Intermediate',
-        name: 'Upper Intermediate',
-        value: 'Upper Intermediate'
-      },
-      {
-        id: 'Advanced',
-        label: 'Advanced',
-        name: 'Advanced',
-        value: 'Advanced'
-      },
-      {
-        id: 'Proficiency',
-        label: 'Proficiency',
-        name: 'Proficiency',
-        value: 'Proficiency'
-      }
-    ],
+    id_languages: "",
+    languages: [],
+    // languages: [
+    //   {
+    //     id: 'Beginner',
+    //     label: 'Beginner',
+    //     name: 'Beginner',
+    //     value: 'Beginner'
+    //   },
+    //   {
+    //     id: 'Elementary',
+    //     label: 'Elementary',
+    //     name: 'Elementary',
+    //     value: 'Elementary'
+    //   },
+    //   {
+    //     id: 'Pre-Intermediate',
+    //     label: 'Pre-Intermediate',
+    //     name: 'Pre-Intermediate',
+    //     value: 'Pre-Intermediate'
+    //   },
+    //   {
+    //     id: 'Intermediate',
+    //     label: 'Intermediate',
+    //     name: 'Intermediate',
+    //     value: 'Intermediate'
+    //   },
+    //   {
+    //     id: 'Upper Intermediate',
+    //     label: 'Upper Intermediate',
+    //     name: 'Upper Intermediate',
+    //     value: 'Upper Intermediate'
+    //   },
+    //   {
+    //     id: 'Advanced',
+    //     label: 'Advanced',
+    //     name: 'Advanced',
+    //     value: 'Advanced'
+    //   },
+    //   {
+    //     id: 'Proficiency',
+    //     label: 'Proficiency',
+    //     name: 'Proficiency',
+    //     value: 'Proficiency'
+    //   }
+    // ],
     phone: "",
     email: "",
     skype: "",
@@ -172,13 +180,17 @@ export default class CandidateEditForm extends Component {
     tag: "",
 
   };
+ 
 
   componentWillReceiveProps(nextProps) {
     // componentDidUpdate(prevProps) {
 
     const {candidate, seniorities, platforms,  reasons, reject_tag, vacancies} = nextProps;
 
+    let languages = [];
+
     console.log(candidate.platform);
+    console.log(this.state)
     console.log(candidate)
     let tag_id = candidate.tag;
     let selectedReason = {};
@@ -221,7 +233,7 @@ export default class CandidateEditForm extends Component {
         tag_id,
         selectedReason: selectedReason,
         salary: candidate.salary,
-        language,
+        id_languages: candidate.id_languages,
         phone: candidate.phone,
         skype: candidate.skype,
         email: candidate.email,
@@ -241,20 +253,30 @@ export default class CandidateEditForm extends Component {
         
       getOptionsForSelects().then(optionsForSelects => {
         const platforms = optionsForSelects.platforms;
+        const languages = optionsForSelects.languages;
        
         this.setState({platforms});
+        this.setState({languages});
       });
       console.log(platforms);
+      console.log(this.props);
     
-      console.log(this.state.selectedPlatforms);
+      console.log(this.state);
       selectedPlatforms = this.state.selectedPlatforms;
-      console.log(candidate.platform);
+      languages = this.state.languages;
+      console.log(languages);
       console.log(candidate);
       
       if (candidate.platforms !== undefined && platforms !== undefined ) {
         let newResult = Object.keys(platforms).filter(key => candidate.platforms.includes(platforms[key].id)).map(key => platforms[key]);
         console.log(newResult);
         this.setState({selectedPlatforms: newResult})
+      }
+
+      if (candidate.id_languages !== undefined && languages !== undefined ) {
+        let newResult1 = languages.find(language =>language.id === candidate.id_languages);
+        console.log(newResult1);
+        this.setState({id_languages: newResult1})
       }
       
       
@@ -331,7 +353,7 @@ export default class CandidateEditForm extends Component {
   };
 
   handleLanguageChange = value => {
-    this.setState({language: value});
+    this.setState({id_languages: value});
   };
 
   handleLinkedInChange = value => {
@@ -355,7 +377,7 @@ export default class CandidateEditForm extends Component {
     let {
       name,
       salary,
-      language,
+      id_languages,
       phone,
       skype,
       email,
@@ -369,6 +391,7 @@ export default class CandidateEditForm extends Component {
       selectedReason,
       selectedVacancies,
       platforms,
+      languages,
       selectedPlatforms,
       
     } = this.state;
@@ -406,7 +429,7 @@ export default class CandidateEditForm extends Component {
         }
 
         tag_id = tag_id.id
-        language = language.id
+        // id_languages = id_languages.id
         platforms = selectedPlatforms.id
 
         if (tag_id === 3) {
@@ -441,7 +464,7 @@ export default class CandidateEditForm extends Component {
             seniority_id,
             tag_id,
             salary,
-            language,
+            id_languages,
             phone,
             skype,
             email,
@@ -458,7 +481,7 @@ export default class CandidateEditForm extends Component {
           //   delete candidateInfo.salary
           // }
 
-          if (language === "") {
+          if (id_languages === "") {
             delete candidateInfo.language
           }
 
@@ -543,7 +566,7 @@ export default class CandidateEditForm extends Component {
       seniority_id,
       tag_id,
       salary,
-      language,
+      id_languages,
       languages,
       platformVacancies,
       selectedVacancies,
@@ -556,6 +579,7 @@ export default class CandidateEditForm extends Component {
       selectedPlatforms,
       // about
     } = this.state;
+    console.log(this.state);
 
 
     const {platforms, seniorities, tags} = this.props;
@@ -599,8 +623,8 @@ export default class CandidateEditForm extends Component {
             </CardHeader>
             <CardBody>
               <ListGroup flush>
-                {language && (
-                  <ListGroupItem>Languages: {language.label}</ListGroupItem>
+                {id_languages && (
+                  <ListGroupItem>Languages: {id_languages.label}</ListGroupItem>
                 )}
                 {comment && <ListGroupItem>Notes: {comment}</ListGroupItem>}
               </ListGroup>
@@ -667,13 +691,13 @@ export default class CandidateEditForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="language" sm={3}>
+                      <Label for="id_languages" sm={3}>
                         Language
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="language"
-                          value={language}
+                          id="id_languages"
+                          value={id_languages}
                           options={languages}
                           isClearable
                           placeholder="language"

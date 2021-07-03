@@ -95,7 +95,7 @@ export default class CandidateCreateForm extends Component {
     vacancies: [],
     date: moment().format("YYYY-MM-DD"),
     salary: "",
-    language_id: "",
+    id_languages: "",
     languages: [],
     // languages: [
     //   {
@@ -212,7 +212,7 @@ export default class CandidateCreateForm extends Component {
   };
 
   handleLanguageChange = value => {
-    this.setState({language_id: value});
+    this.setState({id_languages: value});
   };
 
   handleReasonChange = value => {
@@ -262,7 +262,7 @@ export default class CandidateCreateForm extends Component {
       seniority_id,
       date,
       salary,
-      language_id,
+      id_languages,
       // languages,
       phone,
       skype,
@@ -311,8 +311,8 @@ export default class CandidateCreateForm extends Component {
       seniority_id = seniority_id.id
     }
 
-    if (language_id !== 0) {
-      language_id = language_id.id
+    if (id_languages !== 0) {
+      id_languages = id_languages.id
     }
 
 
@@ -391,7 +391,7 @@ export default class CandidateCreateForm extends Component {
         seniority_id,
         tag_id,
         salary,
-        language_id,
+        id_languages,
         // languages,
         phone,
         skype,
@@ -486,7 +486,7 @@ export default class CandidateCreateForm extends Component {
       seniority_id,
       date,
       salary,
-      language_id,
+      id_languages,
       // languages,
       phone,
       skype,
@@ -555,8 +555,8 @@ export default class CandidateCreateForm extends Component {
             </CardHeader>
             <CardBody>
               <ListGroup flush>
-                {language_id && (
-                  <ListGroupItem>Languages: {language_id.label}</ListGroupItem>
+                {id_languages && (
+                  <ListGroupItem>Languages: {id_languages.label}</ListGroupItem>
            )}
                 {comment && <ListGroupItem>Notes: {comment}</ListGroupItem>}
               </ListGroup>
@@ -626,14 +626,14 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup className={"language_div"} row>
-                      <Label for="language_id" sm={3}>
+                      <Label for="id_languages" sm={3}>
                         Language
                       </Label>
                       <Col sm={9}>
                         <Select
                           required
-                          id="language_id"
-                          value={language_id}
+                          id="id_languages"
+                          value={id_languages}
                           options={languages}
                           isClearable
                           placeholder="language"
@@ -660,12 +660,12 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="language_id" sm={3}>
+                      <Label for="id_languages" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="language_id"
+                          id="id_languages"
                           isMulti
                           value={selectedVacancies}
                           options={platformVacancies}

@@ -24,20 +24,22 @@ class CandidateEdit extends Component {
       skype: "",
       seniority_id: [],
       // tag_id: 0,
-      language: "",
+    //   id_languages: "",
       salary: null,
       linkedIn: "",
       resume: "",
       comment: "",
       about: "",
-      vacancies: []
+      vacancies: [],
+      id_languages: "",
+      languages: [],
     },
       vacancies: []
   };
 
   componentDidMount() {
     const { id } = this.props.match.params;
-      console.log(this.state.platforms)
+      console.log(this.state)
 
     getCandidateProfile(id).then(data => {
         if (data === 201) {
@@ -158,6 +160,7 @@ class CandidateEdit extends Component {
           reasons={options.reasons}
           reject_tag={options.reject_tag}
           vacancies={vacancies}
+          languages={options.languages}
           onUploadAvatar={this.uploadAvatar}
           onEditCandidate={this.updateCandidate}
         />

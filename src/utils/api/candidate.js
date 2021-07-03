@@ -56,7 +56,7 @@ export const getCandidateProfile = id => {
           seniority_id: candidate.seniority_id,
           tag:candidate.tags,
           salary: candidate.salary,
-          language: candidate.language,
+          id_languages: candidate.id_languages,
           phone: candidate.phone,
           email: candidate.email,
           skype: candidate.skype,
