@@ -60,6 +60,13 @@ export default class CandidateCreateForm extends Component {
         value: PropTypes.string.isRequired
       }).isRequired
     ).isRequired,
+    languages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      }).isRequired
+    ).isRequired,
     defaultSelectedtag: PropTypes.func.isRequired,
     onUploadAvatar: PropTypes.func.isRequired,
     onCreateCandidate: PropTypes.func.isRequired,
@@ -84,55 +91,56 @@ export default class CandidateCreateForm extends Component {
     tag_id: {},
     selectedReason: {},
     selectedVacancies: [],
-    plarforms: [],
+    platforms: [],
     vacancies: [],
     date: moment().format("YYYY-MM-DD"),
     salary: "",
-    language: "",
-    languages: [
-      {
-        id: 'Beginner',
-        label: 'Beginner',
-        name: 'Beginner',
-        value: 'Beginner'
-      },
-      {
-        id: 'Elementary',
-        label: 'Elementary',
-        name: 'Elementary',
-        value: 'Elementary'
-      },
-      {
-        id: 'Pre-Intermediate',
-        label: 'Pre-Intermediate',
-        name: 'Pre-Intermediate',
-        value: 'Pre-Intermediate'
-      },
-      {
-        id: 'Intermediate',
-        label: 'Intermediate',
-        name: 'Intermediate',
-        value: 'Intermediate'
-      },
-      {
-        id: 'Upper Intermediate',
-        label: 'Upper Intermediate',
-        name: 'Upper Intermediate',
-        value: 'Upper Intermediate'
-      },
-      {
-        id: 'Advanced',
-        label: 'Advanced',
-        name: 'Advanced',
-        value: 'Advanced'
-      },
-      {
-        id: 'Proficiency',
-        label: 'Proficiency',
-        name: 'Proficiency',
-        value: 'Proficiency'
-      }
-    ],
+    language_id: "",
+    languages: [],
+    // languages: [
+    //   {
+    //     id: 'Beginner',
+    //     label: 'Beginner',
+    //     name: 'Beginner',
+    //     value: 'Beginner'
+    //   },
+    //   {
+    //     id: 'Elementary',
+    //     label: 'Elementary',
+    //     name: 'Elementary',
+    //     value: 'Elementary'
+    //   },
+    //   {
+    //     id: 'Pre-Intermediate',
+    //     label: 'Pre-Intermediate',
+    //     name: 'Pre-Intermediate',
+    //     value: 'Pre-Intermediate'
+    //   },
+    //   {
+    //     id: 'Intermediate',
+    //     label: 'Intermediate',
+    //     name: 'Intermediate',
+    //     value: 'Intermediate'
+    //   },
+    //   {
+    //     id: 'Upper Intermediate',
+    //     label: 'Upper Intermediate',
+    //     name: 'Upper Intermediate',
+    //     value: 'Upper Intermediate'
+    //   },
+    //   {
+    //     id: 'Advanced',
+    //     label: 'Advanced',
+    //     name: 'Advanced',
+    //     value: 'Advanced'
+    //   },
+    //   {
+    //     id: 'Proficiency',
+    //     label: 'Proficiency',
+    //     name: 'Proficiency',
+    //     value: 'Proficiency'
+    //   }
+    // ],
     phone: "",
     email: "",
     skype: "",
@@ -204,7 +212,7 @@ export default class CandidateCreateForm extends Component {
   };
 
   handleLanguageChange = value => {
-    this.setState({language: value});
+    this.setState({language_id: value});
   };
 
   handleReasonChange = value => {
@@ -254,7 +262,8 @@ export default class CandidateCreateForm extends Component {
       seniority_id,
       date,
       salary,
-      language,
+      language_id,
+      // languages,
       phone,
       skype,
       email,
@@ -269,6 +278,7 @@ export default class CandidateCreateForm extends Component {
     } = this.state;
     console.log(this.state)
     const {onCreateCandidate} = this.props;
+    console.log(this.props)
 
     let errList = document.querySelector('.error');
 
@@ -301,12 +311,16 @@ export default class CandidateCreateForm extends Component {
       seniority_id = seniority_id.id
     }
 
+    if (language_id !== 0) {
+      language_id = language_id.id
+    }
+
 
     if (tag_id === 3 && selectedReason !== undefined || tag_id !== 3) {
 
       tag_id = (selectedReason !== undefined && Object.keys(selectedReason).length > 0) ? selectedReason : tag_id;
 
-      language = typeof language === 'object' ? language.id : '';
+      // language = typeof language === 'object' ? language.id : '';
 
     } 
 
@@ -377,7 +391,8 @@ export default class CandidateCreateForm extends Component {
         seniority_id,
         tag_id,
         salary,
-        language,
+        language_id,
+        // languages,
         phone,
         skype,
         email,
@@ -392,9 +407,9 @@ export default class CandidateCreateForm extends Component {
         delete newCandidate.salary
       }
 
-      if (language === "") {
-        delete newCandidate.language
-      }
+      // if (language === "") {
+      //   delete newCandidate.language
+      // }
 
       if (phone === "") {
         delete newCandidate.phone
@@ -471,8 +486,8 @@ export default class CandidateCreateForm extends Component {
       seniority_id,
       date,
       salary,
-      language,
-      languages,
+      language_id,
+      // languages,
       phone,
       skype,
       email,
@@ -484,7 +499,8 @@ export default class CandidateCreateForm extends Component {
       // about
     } = this.state;
     let {tag_id} = this.state;
-    const {platforms, seniorities, tags, defaultSelectedtag} = this.props;
+    const {platforms, seniorities, tags, defaultSelectedtag, languages} = this.props;
+    console.log(this.props);
 
     if (Object.keys(tag_id).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
       tag_id = defaultSelectedtag;
@@ -539,8 +555,8 @@ export default class CandidateCreateForm extends Component {
             </CardHeader>
             <CardBody>
               <ListGroup flush>
-                {language && (
-                  <ListGroupItem>Languages: {language.label}</ListGroupItem>
+                {language_id && (
+                  <ListGroupItem>Languages: {language_id.label}</ListGroupItem>
            )}
                 {comment && <ListGroupItem>Notes: {comment}</ListGroupItem>}
               </ListGroup>
@@ -610,14 +626,14 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup className={"language_div"} row>
-                      <Label for="language" sm={3}>
+                      <Label for="language_id" sm={3}>
                         Language
                       </Label>
                       <Col sm={9}>
                         <Select
                           required
-                          id="language"
-                          value={language}
+                          id="language_id"
+                          value={language_id}
                           options={languages}
                           isClearable
                           placeholder="language"
@@ -644,12 +660,12 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="language" sm={3}>
+                      <Label for="language_id" sm={3}>
                         Vacancies
                       </Label>
                       <Col sm={9}>
                         <Select
-                          id="language"
+                          id="language_id"
                           isMulti
                           value={selectedVacancies}
                           options={platformVacancies}

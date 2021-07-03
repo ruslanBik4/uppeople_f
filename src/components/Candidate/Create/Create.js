@@ -18,7 +18,8 @@ export default class CandidateCreate extends Component {
     reasons: [],
     reject_tag: {},
     defaultSelectedtag: {}, 
-    vacancies: []
+    vacancies: [],
+    languages: [],
   };
 
   componentDidMount() {
@@ -30,6 +31,7 @@ export default class CandidateCreate extends Component {
       const reject_tag = optionsForSelects.reject_tag;
       const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
       const vacancies = optionsForSelects.vacancies;
+      const languages = optionsForSelects.languages;
 
       this.setState({
         platforms,
@@ -38,7 +40,8 @@ export default class CandidateCreate extends Component {
         reasons, 
         vacancies,
         reject_tag,
-        defaultSelectedtag
+        defaultSelectedtag,
+        languages,
       });
     });
     getRecruiterVacancies().then(data => {
@@ -127,7 +130,7 @@ export default class CandidateCreate extends Component {
     }
 
     render() {
-    const {platforms, seniorities, tags, reasons, reject_tag, defaultSelectedtag, vacancies} = this.state;
+    const {platforms, seniorities, tags, reasons, reject_tag, defaultSelectedtag, vacancies, languages} = this.state;
 
     return (
       <>
@@ -142,6 +145,7 @@ export default class CandidateCreate extends Component {
           reject_tag={reject_tag}
           onUploadAvatar={this.uploadAvatar}
           onCreateCandidate={this.createCandidate}
+          languages={languages}
         />
       </>
     );
