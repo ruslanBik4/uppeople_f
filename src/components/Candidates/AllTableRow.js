@@ -56,6 +56,7 @@ const CandidateTableRow = (
 console.log('slicedVacancies: ', slicedVacancies)
 options = options;
 console.log(options)
+console.log(platforms)
 
 console.log(CandidateTableRow)
 

@@ -86,18 +86,24 @@ const CandidateTableRow = ({
   console.log(stats);
   console.log(platforms)
   console.log(vacancies)
-  let vac = vacancies.map (item => item.id)
+  let vac = vacancies.map (item => item.platform_id)
  
   console.log(vac)
   console.log(vac[0])
-  platforms = vac
+  // platforms = vac
+  console.log(options)
+  console.log(platforms)
 
   let selectedPlatforms
 
   if (platforms !== undefined && platforms !== null && options !== undefined ) {
     selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
+    selectedPlatforms = selectedPlatforms[0];
     console.log(selectedPlatforms);
+    // this.setState({selectedPlatforms: newResult})
   }
+  selectedPlatforms = selectedPlatforms.label
+  console.log(selectedPlatforms);
 
   let selectedStatuses
 
@@ -124,6 +130,7 @@ const CandidateTableRow = ({
   console.log(stat[0])
   let statFirst = stat[0];
   console.log(statFirst)
+  console.log(name)
   
   
   return (
@@ -150,7 +157,13 @@ const CandidateTableRow = ({
 
       </td>
       <td>{moment(date).format("DD.MM.YY")}</td>
-      <td class ="child"  style={{  width: "250px"}}><Select
+      <td><Badge  style={{backgroundColor: "white", display: "block"}}>
+            {selectedPlatforms}
+          </Badge></td>
+      {/* <td> 
+        {selectedPlatforms[0]}
+      </td> */}
+      {/* <td class ="child"  style={{  width: "250px"}}><Select
                           id="platform_id"
                           options={platforms}
                           value={selectedPlatforms[0]}
@@ -158,7 +171,7 @@ const CandidateTableRow = ({
                           isMulti
                           isClearable
                           // onChange={this.handlePlatformChange}
-      /></td>
+      /></td> */}
      
       <td>
         <Link to={`/candidates/${id}`} >{name}</Link>
