@@ -98,11 +98,11 @@ const CandidateTableRow = ({
 
   if (platforms !== undefined && platforms !== null && options !== undefined ) {
     selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
-    selectedPlatforms = selectedPlatforms[0];
+    // selectedPlatforms = selectedPlatforms[0];
     console.log(selectedPlatforms);
     // this.setState({selectedPlatforms: newResult})
   }
-  selectedPlatforms = selectedPlatforms.label
+  // selectedPlatforms = selectedPlatforms.label
   console.log(selectedPlatforms);
 
   let selectedStatuses
@@ -157,9 +157,16 @@ const CandidateTableRow = ({
 
       </td>
       <td>{moment(date).format("DD.MM.YY")}</td>
-      <td><Badge  style={{backgroundColor: "white", display: "block"}}>
+      {/* <td><Badge  style={{backgroundColor: "white", display: "block"}}>
             {selectedPlatforms}
-          </Badge></td>
+          </Badge></td> */}
+          <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem" }}>
+        {selectedPlatforms.map((selectedPlatform, idx) => (
+          <Badge  style={{backgroundColor: "white", width: "250px", display: "block"}}>
+            {selectedPlatform["label"]}
+          </Badge>
+        ))}
+      </td >
       {/* <td> 
         {selectedPlatforms[0]}
       </td> */}
