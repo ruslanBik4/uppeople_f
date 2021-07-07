@@ -152,12 +152,12 @@ export default class CandidateProfile extends Component {
         }
       });
     });
-  };
+  }; 
 
   changeCandidateStatus = content => {
     const statusCandidate ={
-      company_id: content.company_id,
-      candidate_id: content.id,
+      vacancy_id: content.vacancy_id,
+      candidate_id: content.candidate_id,
       status: content.value.id
     }
     updateCandidateStatus(statusCandidate).then(data => {
