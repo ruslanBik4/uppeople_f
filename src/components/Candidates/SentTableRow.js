@@ -7,6 +7,7 @@ import { Badge } from "reactstrap";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import './Candidates.css';
 import Select from "../shared/Select";
+import {Button} from "reactstrap";
 
 const CandidateTableRow = ({
   id,
@@ -81,12 +82,13 @@ const CandidateTableRow = ({
 
   console.log(options)
   console.log(statuses);
-  let s = statuses.map (item => item.vacStat)
-  console.log(s);
+  let vacStats = statuses.map (item => item.vacStat)
+  console.log(vacStats);
   console.log(stats);
+  // let statsOptions = stats;
   console.log(platforms)
   console.log(vacancies)
-  let vac = vacancies.map (item => item.platform_id)
+  let vac = vacancies.map (item => item.id)
  
   console.log(vac)
   console.log(vac[0])
@@ -107,8 +109,8 @@ const CandidateTableRow = ({
 
   let selectedStatuses
 
-  if (s !== undefined && s !== null && stats !== undefined ) {
-    selectedStatuses = Object.keys(stats).filter(key => s.includes(stats[key].label)).map(key => stats[key]);
+  if (vacStats !== undefined && vacStats !== null && stats !== undefined ) {
+    selectedStatuses = Object.keys(stats).filter(key => vacStats.includes(stats[key].label)).map(key => stats[key]);
     console.log(selectedStatuses);
   }
 
@@ -265,11 +267,12 @@ const CandidateTableRow = ({
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
       {statuses.map((status, idx) => (
         // <Badge style = {{backgroundColor: `${status["color"]}`, display: "block", width: "250px", verticalAlign: "middle"}}>
-        <Badge  style={{backgroundColor: `${status["color"]}`, width: "250px", display: "block"}}>
-          <Link to={`companies/${status["comp_id"]}`} key={idx}>
+        <Button  style={{backgroundColor: `${status["color"]}`, width: "250px", display: "block"}}>
+         
+        {/* //  <Link to={`companies/${status["comp_id"]}`} key={idx}> */}
           {status["compName"]}
-        </Link>
-        </Badge>
+        {/* </Link> */}
+        </Button>
         
       ))}
       </td>
