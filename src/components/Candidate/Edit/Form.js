@@ -422,6 +422,8 @@ export default class CandidateEditForm extends Component {
 
         name = name.trim();
 
+        id_languages = id_languages.id;
+
         if (name === "") {
           // document.querySelector('.reasons_div').classList.add('error');
           isValid = false;
