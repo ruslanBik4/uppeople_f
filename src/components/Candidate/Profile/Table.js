@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Table} from "reactstrap";
 // Components
-import CandidateProfileTableRow from "./TableRow";
+import CandidateProfileTableRow from "./TableRow"; 
 
 const CandidateProfileTable = ({candidateStatuses, ...props}) => {
   candidateStatuses = candidateStatuses.filter((candidateStatus) => candidateStatus.vacancyStatus.id !== 1);

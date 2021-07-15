@@ -74,7 +74,7 @@ export default class CandidateProfile extends Component {
     logs: [],
     comments: []
   };
-
+  
   componentDidMount() {
     const {id} = this.props.match.params;
 
@@ -87,6 +87,7 @@ export default class CandidateProfile extends Component {
       }
     });
 
+    console.log(this.state.selectCandidateStatus);
     // reContactCandidate(id).then(candidateProfile => {
     //   if (candidateProfile === 401) {
     //     this.props.history.push('/login/')
@@ -136,7 +137,7 @@ export default class CandidateProfile extends Component {
         }
       });
     });
-  };
+  }; 
 
   updateCandidate = content => {
     const {id} = this.props.match.params;
@@ -159,16 +160,23 @@ export default class CandidateProfile extends Component {
       vacancy_id: content.vacancy_id,
       candidate_id: content.candidate_id,
       status: content.value.id
-    }
+    } 
     updateCandidateStatus(statusCandidate).then(data => {
       if (data === 401) {
         this.props.history.push('/login/')
       } else {
-          console.log(data)
+          console.log(data);
+          
+          // this.setState({
+          //   candidate: {
+          //     ...candidate,
+          //     ...updatedCandidate
+          //   }
+          // });
       }
       });
   };
-
+  
   deleteCandidate = id => {
     deleteCandidateProfile(id).then(data => {
       switch (data) {

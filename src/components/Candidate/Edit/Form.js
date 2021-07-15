@@ -222,6 +222,12 @@ export default class CandidateEditForm extends Component {
 
     const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platforms)
 
+    console.log(vacancies );
+    console.log(selectedPlatforms);
+
+    // const plVac = Object.keys(vacancies).filter(key => platforms.includes(platforms[key].id)).map(key => vacancies[key]);
+    // console.log(plVac);
+
     // const platform = platforms.find( pl => pl.id === candidate.platform_id);
 
     let selectedPlatforms = [];
@@ -277,6 +283,18 @@ export default class CandidateEditForm extends Component {
         let newResult1 = languages.find(language =>language.id === candidate.id_languages);
         console.log(newResult1);
         this.setState({id_languages: newResult1})
+      }
+
+      console.log(candidate.platforms);
+      console.log(vacancies);
+      console.log(platforms);
+      console.log(platforms);
+
+      if (candidate.platforms !== undefined && vacancies !== undefined ) {
+        let plVac = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
+        console.log(plVac);
+        // let selectedVacancies = plVac;
+        this.setState({selectedVacancies: plVac})
       }
       
       

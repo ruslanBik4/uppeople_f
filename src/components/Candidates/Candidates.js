@@ -522,7 +522,7 @@ export default class Candidates extends Component {
       vacancy_id: content.vacancy_id,
       candidate_id: content.candidate_id,
       status: content.value.id
-    }
+    }   
     updateCandidateStatus(statusCandidate).then(data => {
       if (data === 401) {
         this.props.history.push('/login/')
