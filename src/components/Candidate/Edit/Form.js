@@ -290,15 +290,18 @@ export default class CandidateEditForm extends Component {
       console.log(platforms);
       console.log(platforms);
 
-      if (candidate.platforms !== undefined && vacancies !== undefined ) {
-        let plVac = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
-        console.log(plVac);
+      
         // let selectedVacancies = plVac;
-        this.setState({selectedVacancies: plVac})
-      }
-      
-      
+        if (candidate.selectedVacancies !== null) {
+          if (candidate.platforms !== undefined && vacancies !== undefined ) {
+            let plVac = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
+            console.log(plVac);
+            this.setState({selectedVacancies: plVac});
+          }
+        }
+      console.log(this.state.selectedVacancies);
       console.log(this.state);
+      
   }
 
   componentDidUpdate(prevProps, prevState) {
