@@ -27,7 +27,7 @@ class CandidateEdit extends Component {
     //   id_languages: "",
       salary: null,
       linkedIn: "",
-      resume: "",
+      cv: "",
       comment: "",
       about: "",
       vacancies: [],
