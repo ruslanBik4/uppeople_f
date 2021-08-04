@@ -64,7 +64,7 @@ export default class CandidateEditForm extends Component {
       email: PropTypes.string,
       skype: PropTypes.string,
       linkedIn: PropTypes.string,
-      resume: PropTypes.string,
+      cv: PropTypes.string,
       comment: PropTypes.string,
       // about: PropTypes.string,
       status: PropTypes.string,
@@ -174,7 +174,7 @@ export default class CandidateEditForm extends Component {
     email: "",
     skype: "",
     linkedIn: "",
-    resume: "",
+    cv: "",
     comment: "",
     status: "",
     tag: "",
@@ -244,7 +244,7 @@ export default class CandidateEditForm extends Component {
         skype: candidate.skype,
         email: candidate.email,
         linkedIn: candidate.linkedIn,
-        resume: candidate.resume,
+        cv: candidate.cv,
         comment: candidate.comment,
         platformVacancies,
         selectedVacancies: candidate.selectedVacancies,
@@ -255,7 +255,7 @@ export default class CandidateEditForm extends Component {
       console.log(candidate.vacancies);
       console.log(this.state);
       console.log(this.state.selectedPlatforms);
-      console.log(selectedPlatforms);
+      console.log(candidate.cv);
         
       getOptionsForSelects().then(optionsForSelects => {
         const platforms = optionsForSelects.platforms;
@@ -400,7 +400,7 @@ export default class CandidateEditForm extends Component {
       skype,
       email,
       linkedIn,
-      resume,
+      cv,
       comment,
       // about,
       platform,
@@ -489,7 +489,7 @@ export default class CandidateEditForm extends Component {
             skype,
             email,
             linkedIn,
-            resume,
+            cv,
             comment,
             vacancies,
             platforms: selectedPlatforms,
@@ -594,7 +594,7 @@ export default class CandidateEditForm extends Component {
       skype,
       email,
       linkedIn,
-      resume,
+      cv,
       comment,
       selectedPlatforms,
       // about
@@ -852,15 +852,15 @@ export default class CandidateEditForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="resume" sm={3}>
+                      <Label for="cv" sm={3}>
                         CV
                       </Label>
                       <Col sm={9}>
                         <Input
-                          id="resume"
+                          id="cv"
                           type="url"
-                          name="resume"
-                          value={resume}
+                          name="cv"
+                          value={cv}
                           onChange={this.handleInputChange}
                         />
                         <i
