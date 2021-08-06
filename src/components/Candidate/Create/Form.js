@@ -145,7 +145,7 @@ export default class CandidateCreateForm extends Component {
     email: "",
     skype: "",
     linkedIn: "",
-    resume: "",
+    cv: "",
     comment: "",
     about: EditorState.createEmpty(),
   };
@@ -268,7 +268,7 @@ export default class CandidateCreateForm extends Component {
       skype,
       email,
       linkedIn,
-      resume,
+      cv,
       comment,
       // about,
       tag_id,
@@ -397,7 +397,7 @@ export default class CandidateCreateForm extends Component {
         skype,
         email,
         linkedIn,
-        resume,
+        cv,
         comment,
         vacancies
         // about: aboutEditorState
@@ -427,8 +427,8 @@ export default class CandidateCreateForm extends Component {
         delete newCandidate.linkedIn
       }
 
-      if (resume === "") {
-        delete newCandidate.resume
+      if (cv === "") {
+        delete newCandidate.cv
       }
 
       if (comment === "") {
@@ -492,7 +492,7 @@ export default class CandidateCreateForm extends Component {
       skype,
       email,
       linkedIn,
-      resume,
+      cv,
       comment,
       platformVacancies,
       selectedVacancies,
@@ -766,15 +766,15 @@ export default class CandidateCreateForm extends Component {
                       </Col>
                     </FormGroup>
                     <FormGroup row>
-                      <Label for="resume" sm={3}>
+                      <Label for="cv" sm={3}>
                         Resume
                       </Label>
                       <Col sm={9}>
                         <Input
-                          id="resume"
+                          id="cv"
                           type="url"
-                          name="resume"
-                          value={resume}
+                          name="cv"
+                          value={cv}
                           onChange={this.handleInputChange}
                         />
                         <i

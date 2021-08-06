@@ -126,50 +126,6 @@ export default class CandidateEditForm extends Component {
     salary: 0,
     id_languages: "",
     languages: [],
-    // languages: [
-    //   {
-    //     id: 'Beginner',
-    //     label: 'Beginner',
-    //     name: 'Beginner',
-    //     value: 'Beginner'
-    //   },
-    //   {
-    //     id: 'Elementary',
-    //     label: 'Elementary',
-    //     name: 'Elementary',
-    //     value: 'Elementary'
-    //   },
-    //   {
-    //     id: 'Pre-Intermediate',
-    //     label: 'Pre-Intermediate',
-    //     name: 'Pre-Intermediate',
-    //     value: 'Pre-Intermediate'
-    //   },
-    //   {
-    //     id: 'Intermediate',
-    //     label: 'Intermediate',
-    //     name: 'Intermediate',
-    //     value: 'Intermediate'
-    //   },
-    //   {
-    //     id: 'Upper Intermediate',
-    //     label: 'Upper Intermediate',
-    //     name: 'Upper Intermediate',
-    //     value: 'Upper Intermediate'
-    //   },
-    //   {
-    //     id: 'Advanced',
-    //     label: 'Advanced',
-    //     name: 'Advanced',
-    //     value: 'Advanced'
-    //   },
-    //   {
-    //     id: 'Proficiency',
-    //     label: 'Proficiency',
-    //     name: 'Proficiency',
-    //     value: 'Proficiency'
-    //   }
-    // ],
     phone: "",
     email: "",
     skype: "",
@@ -220,15 +176,8 @@ export default class CandidateEditForm extends Component {
       candidate.seniority_id !== null &&
       seniorities.find(seniority => seniority.id === candidate.seniority_id);
 
-    const platformVacancies = vacancies.filter(vacancy => vacancy.platform_id === candidate.platforms)
-
-    console.log(vacancies );
-    console.log(selectedPlatforms);
-
-    // const plVac = Object.keys(vacancies).filter(key => platforms.includes(platforms[key].id)).map(key => vacancies[key]);
-    // console.log(plVac);
-
-    // const platform = platforms.find( pl => pl.id === candidate.platform_id);
+    // здесь отбираем вакансии для выпадающего списка по ид платформам
+    const platformVacancies = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
 
     let selectedPlatforms = [];
 
@@ -248,14 +197,10 @@ export default class CandidateEditForm extends Component {
         comment: candidate.comment,
         platformVacancies,
         selectedVacancies: candidate.selectedVacancies,
-        vacancies: candidate.vacancies,
+        vacancies,
         // selectedPlatforms: candidate.platforms,
       }); 
       console.log(candidate);
-      console.log(candidate.vacancies);
-      console.log(this.state);
-      console.log(this.state.selectedPlatforms);
-      console.log(candidate.cv);
         
       getOptionsForSelects().then(optionsForSelects => {
         const platforms = optionsForSelects.platforms;
@@ -292,13 +237,13 @@ export default class CandidateEditForm extends Component {
 
       
         // let selectedVacancies = plVac;
-        if (candidate.selectedVacancies !== null) {
-          if (candidate.platforms !== undefined && vacancies !== undefined ) {
-            let plVac = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
-            console.log(plVac);
-            this.setState({selectedVacancies: plVac});
-          }
-        }
+        // if (candidate.selectedVacancies !== null) {
+        //   if (candidate.platforms !== undefined && vacancies !== undefined ) {
+        //     let plVac = Object.keys(vacancies).filter(key => candidate.platforms.includes(vacancies[key].platform_id)).map(key => vacancies[key]);
+        //     console.log(plVac);
+        //     this.setState({selectedVacancies: plVac});
+        //   }
+        // }
       console.log(this.state.selectedVacancies);
       console.log(this.state);
       
@@ -332,16 +277,13 @@ export default class CandidateEditForm extends Component {
     lblErrors.textContent = (" ")
   };
 
-  handlePlatformChange = value => {
-    this.setState({selectedPlatforms: value});
-    console.log(this.state.selectedPlatforms);
-
-    
-    
-    // this.setState({
-    //   platformVacancies
-    // });
-    // console.log(platformVacancies)
+  handlePlatformChange = platforms => {
+    this.setState({selectedPlatforms: platforms});
+    const vacancies = this.state.vacancies;
+    console.log(vacancies);
+    const platformVacancies = Object.keys(vacancies).filter(key => platforms.find(platform => platform.id === vacancies[key].platform_id)).map(key => vacancies[key]);
+    this.setState({platformVacancies});
+    console.log(platformVacancies);
     
 
     // const {vacancies} = this.props;
