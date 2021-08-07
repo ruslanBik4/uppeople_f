@@ -284,6 +284,7 @@ export default class CandidateEditForm extends Component {
     const platformVacancies = Object.keys(vacancies).filter(key => platforms.find(platform => platform.id === vacancies[key].platform_id)).map(key => vacancies[key]);
     this.setState({platformVacancies});
     console.log(platformVacancies);
+    console.log(this.state.selectedPlatforms);
     
 
     // const {vacancies} = this.props;
@@ -388,14 +389,20 @@ export default class CandidateEditForm extends Component {
         id_languages = id_languages.id;
 
         if (name === "") {
-          // document.querySelector('.reasons_div').classList.add('error');
           isValid = false;
           lblErrors.textContent = ("name не должно быть пустым")
         }
 
+        if (selectedPlatforms.length === 0) {
+          isValid = false;
+          lblErrors.textContent = ("platforms не должно быть пустым");
+        } else {
+          platforms = selectedPlatforms.id;
+        }
+
         tag_id = tag_id.id
         // id_languages = id_languages.id
-        platforms = selectedPlatforms.id
+        
 
         if (tag_id === 3) {
           document.querySelector('.reasons_div').classList.add('error');
@@ -527,7 +534,6 @@ export default class CandidateEditForm extends Component {
     const {
       avatar,
       name,
-      platform,
       seniority_id,
       tag_id,
       salary,
@@ -626,7 +632,7 @@ export default class CandidateEditForm extends Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="platform_id" sm={3}>
-                        Platform<font color="red">*</font>
+                        Platforms<font color="red">*</font>
                       </Label>
                       <Col sm={9}>
                         <Select
