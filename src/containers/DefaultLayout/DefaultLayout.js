@@ -64,9 +64,13 @@ class DefaultLayout extends Component {
     // });
 
     getBackVersion().then(version => {
-      if (version.UPPeople === "dev") {
-        const ver = version.UPPeople + version.Version + ", build at:" + version.BuildTime.substring(2, 19)
-            + ", start at: " + version.StartTime.substring(2, 19);
+      if (version.UPPeople === "master") {
+        const ver = {
+          type: version.UPPeople,
+          version: version.Version,
+          buildAt: 'build at: ' + version.BuildTime.substring(2, 19),
+          startAt: 'start at: ' + version.StartTime.substring(2, 19),
+        }
         this.setState({ver});
       }
   });

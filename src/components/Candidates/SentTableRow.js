@@ -239,7 +239,7 @@ const CandidateTableRow = ({
       </td > */}
 
 
-      <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem", height: "200px"}}>
+      <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem", overflow: "visible"}}>
       <Select
             // defaultValue={selectCandidateStatus.find(
             //   candidateStatus => candidateStatus.label === status
@@ -263,7 +263,7 @@ const CandidateTableRow = ({
        {statFirst}
       </Badge>))} */}
        
-      </td >
+      </td>
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
       {statuses.map((status, idx) => (
         // <Badge style = {{backgroundColor: `${status["color"]}`, display: "block", width: "250px", verticalAlign: "middle"}}>

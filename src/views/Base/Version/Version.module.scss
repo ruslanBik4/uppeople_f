@@ -1,0 +1,21 @@
+.version {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: .05em;
+
+    @media screen and (max-width: 924px) {
+        display: none;
+    }
+}
+
+.version__main {
+    margin-right: 8px;
+}
+
+.version__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

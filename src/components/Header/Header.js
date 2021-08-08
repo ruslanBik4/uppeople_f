@@ -8,17 +8,17 @@ import {
   Nav,
   Dropdown,
   NavItem,
-  NavLink
+  NavLink,
 } from "reactstrap";
 import {
   AppHeaderDropdown,
   AppNavbarBrand,
-  AppSidebarToggler
+  AppSidebarToggler,
 } from "@coreui/react";
+import Version from '../../views/Base/Version/Version';
 // Instruments
 import "./Header.css";
 import companyLogo from "../../assets/img/company_logo.jpg";
-
 const propTypes = {
   children: PropTypes.node,
   onLogout: PropTypes.func
@@ -74,6 +74,11 @@ class Header extends Component {
             </NavItem>
           </Nav>
         )}
+         
+        { ver ? (
+          <Version ver={ver} />
+        ) : null}
+        
         <Nav className="ml-auto" navbar>
           {/*<NavItem className="d-md-down-none">
             <NavLink href="#">
@@ -99,6 +104,7 @@ class Header extends Component {
                 />
                 <span className="logo_text">UPPeople:</span>
               </DropdownToggle>
+
               <DropdownMenu right style={{ right: "auto" }}>
                 <DropdownItem header tag="div" className="text-center">
                   <strong>Account</strong>
