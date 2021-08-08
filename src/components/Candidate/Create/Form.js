@@ -155,12 +155,7 @@ export default class CandidateCreateForm extends Component {
     
     const {vacancies} = this.props;
     // const {vacancies} = this.state;
-    this.setState({vacancies}); 
-    console.log(this.props);
-    console.log(this.props.vacancies);
-    console.log(this.state.vacancies);
-    console.log (vacancies);
-    
+    this.setState({vacancies});     
   }
 
   componentDidMount () {
