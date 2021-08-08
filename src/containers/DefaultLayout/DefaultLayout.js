@@ -64,7 +64,7 @@ class DefaultLayout extends Component {
     // });
 
     getBackVersion().then(version => {
-      if (version.UPPeople === "master") {
+      if (version.UPPeople === "dev") {
         const ver = {
           type: version.UPPeople,
           version: version.Version,
