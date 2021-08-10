@@ -90,8 +90,6 @@ class AcquisitionFunnel extends Component {
     // .toJSON().slice(0, 10);
     let lastDay = new Date(y, m + 1, 1, 0, 0, 0).toJSON().slice(0, 10);
     // .toJSON().slice(0, 10);
-    console.log(firstDay)
-    console.log(lastDay)
 
     this.state = {
       recruiters: [],
@@ -116,7 +114,6 @@ class AcquisitionFunnel extends Component {
       dynamicSlope: true,
       dynamicHeight: false
     };
-    console.log(this.props)
   }
 
   componentDidMount() { // тут пишеться те, що потрібно підгрузити з АПІ
@@ -125,7 +122,6 @@ class AcquisitionFunnel extends Component {
       const opts = localStorage.getItem("optionsForSelects");
       options = JSON.parse(opts);
     }
-    console.log(this.props)
 
     this.fetchRecruiters(options);
     this.fetchCompanies();
@@ -209,7 +205,6 @@ class AcquisitionFunnel extends Component {
   fetchCandidatesData = async () => {
     const {selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags} = this.state;
     let names = 'selectedRecruiter, platform_id, selectedCompany, selectedVacancy, selectedStartDate, selectedEndDate, selectedTags'
-    console.log(names)
     let data = await getCandidatesAmountByTags(
       selectedStartDate, selectedEndDate,
       selectedRecruiter ? selectedRecruiter.id : 0,
@@ -217,10 +212,6 @@ class AcquisitionFunnel extends Component {
       selectedVacancy ? selectedVacancy.id : 0,
       platform_id ? platform_id.id : 0,
       selectedTags ? selectedTags.map(item => item.id) : null)
-      console.log(data)
-      console.log(getCandidatesAmountByTags)
-      console.log(selectedRecruiter)
-      console.log(platform_id, selectedCompany)
     if (data === 401) {
       this.props.history.push('/login/')
     } else if (data === 204) {
@@ -244,7 +235,6 @@ class AcquisitionFunnel extends Component {
       this.setState({funnelData});
       this.setState({pieChartData});
       this.setState({total})
-      console.log(data)
     } else {
       this.setState({funnelData: null});
       this.setState({pieChartData: null});
@@ -253,8 +243,6 @@ class AcquisitionFunnel extends Component {
       document.querySelector(".errorlist label").classList.add('error');
       lblErrors.textContent = ("Нет данных по выбранным параметрам")
     }
-    console.log(data)
-    // console.log(response)
   };
 
   handleExportClick = async () => {
@@ -320,7 +308,6 @@ class AcquisitionFunnel extends Component {
   renderPieChart = () => {
 
     const {pieChartData} = this.state;
-    console.log(pieChartData)
     let total = 0;
     if (pieChartData !== undefined && pieChartData !== null) {
       for (const [index, value] of Object.entries(pieChartData)) {
@@ -386,35 +373,16 @@ class AcquisitionFunnel extends Component {
 
   renderFunnelChart = () => {
     const {funnelData, selectedTags} = this.state;
-    const total = this.state.total;
-    console.log(total)
-  
+    const total = this.state.total;  
   
     let arrtotal = [{color: "gray", count: total, id: "0", name: "Total", parent_id: "0", percent: "100"}]
-    console.log(arrtotal)
     let arr = arrtotal.find(item => item.id == 0);
-    console.log(arr)
-    // funnelData.unshift([arr])
-    // arr.push(funnelData)
-    // funnelData.push(arrtotal)
-    console.log(arrtotal)
-    console.log(funnelData)
-    // console.log(funnelData1)
-    console.log(total)
-    console.log(this.state.total)
 
     if (funnelData !== null && funnelData !== undefined) {
 
-      // //////
-      //
-      // console.log('до нового циклу');
-      // console.log(funnelData);
+     
       let final_data = [];
 
-      // let total = 0;
-      // for (const [index, value] of Object.entries(funnelData)) {
-      //   total += value.count;
-      // }
       if (this.state.total !== 0) {
         final_data.push({
           stat: "Total",
@@ -428,7 +396,6 @@ class AcquisitionFunnel extends Component {
         if (selectedTags !== null) {
           let in_tags = selectedTags.filter((selectedTag) => selectedTag.id === value.id);
           if (in_tags.length > 0) {
-            // console.log(index);
            
              if (parseInt(index) === 0) {
               final_data.push({
