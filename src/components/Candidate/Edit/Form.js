@@ -281,13 +281,14 @@ export default class CandidateEditForm extends Component {
     this.setState({selectedPlatforms: platforms});
     const vacancies = this.state.vacancies;
     console.log(vacancies);
+    console.log (platforms);
     const platformVacancies = Object.keys(vacancies).filter(key => platforms.find(platform => platform.id === vacancies[key].platform_id)).map(key => vacancies[key]);
     this.setState({platformVacancies});
     console.log(platformVacancies);
     console.log(this.state.selectedPlatforms);
     
 
-    // const {vacancies} = this.props;
+    // const {vacancies} = this.props; 
     // //todo
     // const platformVacancies = vacancies.filter(vacancy => vacancy.platforms === value.id)
 

@@ -181,13 +181,15 @@ export default class CandidateCreateForm extends Component {
 
   
 
-  handlePlatformChange = value => {
-    this.setState({selectedPlatforms: value});
+  handlePlatformChange = platforms => {
+    this.setState({selectedPlatforms: platforms});
     let vacancies = this.state.vacancies;
   
-    console.log (vacancies); 
-    const platformVacancies = vacancies.filter(vacancy => vacancy.selectedPlatforms === value.id)
-
+    console.log (vacancies);
+    console.log (platforms);
+    // const platformVacancies = vacancies.filter(vacancy => vacancy.selectedPlatforms === value.id)
+    const platformVacancies = Object.keys(vacancies).filter(key => platforms.find(platform => platform.id === vacancies[key].platform_id)).map(key => vacancies[key]);
+    console.log (platformVacancies);
     this.setState({
       platformVacancies
     });
