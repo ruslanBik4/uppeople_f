@@ -41,10 +41,6 @@ const CandidateTableRow = ({
   onChangeCandidateStatus,
 }) => {
 
-  console.log(selectCandidateStatus);
-  console.log(onChangeCandidateStatus);
-  console.log(id);
-  console.log(company);
   const contactCopied = e => {
     e.target.style.color = "var(--green)"
   };
@@ -80,22 +76,8 @@ const CandidateTableRow = ({
   let companies = ''
   let stat = ''
 
-  console.log(options)
-  console.log(statuses);
   let vacStats = statuses.map (item => item.vacStat)
-  console.log(vacStats);
-  console.log(stats);
-  // let statsOptions = stats;
-  console.log(platforms)
-  console.log(vacancies)
   let vac = vacancies.map (item => item.id)
- 
-  console.log(vac)
-  console.log(vac[0])
-  // platforms = vac
-  console.log(options)
-  console.log(platforms)
-
   let selectedPlatforms
 
   if (platforms !== undefined && platforms !== null && options !== undefined ) {
@@ -105,7 +87,6 @@ const CandidateTableRow = ({
     // this.setState({selectedPlatforms: newResult})
   }
   // selectedPlatforms = selectedPlatforms.label
-  console.log(selectedPlatforms);
 
   let selectedStatuses
 
@@ -114,25 +95,16 @@ const CandidateTableRow = ({
     console.log(selectedStatuses);
   }
 
-  console.log(statuses)
-  console.log(statuses.length)
   statuses.map((status, idx) => {
     statusesVac += status["vacStat"];
     {/*todo add link for all companies*/}
     companies += status["compName"];
     colour += status["color"];
   })
-  console.log(statusesVac)
-  console.log(colour)
-  console.log(companies)
+
   let compFirst = statuses.map(id => id.comp_id)
-  console.log(compFirst)
   stat = statuses.map(id => id.vacStat)
-  console.log(stat)
-  console.log(stat[0])
   let statFirst = stat[0];
-  console.log(statFirst)
-  console.log(name)
   
   
   return (

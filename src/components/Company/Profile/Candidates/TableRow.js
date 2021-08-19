@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 // Components
 import Select from "../../../shared/Select";
+import { Badge } from 'reactstrap';
 
 const customStyles = {
   menu: (provided, state) => ({
@@ -18,21 +19,32 @@ const CompanyProfileCandidatesTableRow = ({
   id,
   company_id,
   recruiter,
-  platform,
   name,
   date,
   salary,
   email,
   status,
   candidateStatus,
-  onChangeCandidateStatus
-}) => (
+  onChangeCandidateStatus,
+  options,
+  platforms,
+}) =>  {
+  const selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
+  console.log(selectedPlatforms);
+
+
+  return (
   <>
-    
-    {/* console.log(candidateStatus) */}
     <th scope="row">{idx + 1}</th>
     <td>{recruiter !== null && recruiter}</td>
-    <td>{platform !== null && platform}</td>
+    <td>
+      {selectedPlatforms.map((selectedPlatform, idx) => (
+          <Badge  style={{backgroundColor: "white", width: "250px", display: "block"}}>
+            {selectedPlatform["label"]}
+          </Badge>
+      ))}
+      {/* {selectedPlatforms} */}
+    </td>
     <td>
       <Link to={`/candidates/${id}`}>{name}</Link>
     </td>
@@ -58,6 +70,7 @@ const CompanyProfileCandidatesTableRow = ({
     </td>
   </>
 );
+      }
 
 CompanyProfileCandidatesTableRow.propTypes = {
   idx: PropTypes.number.isRequired,
@@ -71,6 +84,20 @@ CompanyProfileCandidatesTableRow.propTypes = {
   email: PropTypes.string,
   status: PropTypes.string,
   candidateStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
+  platforms: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
+  options: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       label: PropTypes.string.isRequired,

@@ -13,21 +13,19 @@ const CompanyProfileCandidates = ({
     totalPages,
     perPage,
     currentPage,
-    // candidateStatus,
-    platform
   },
   onChangePage,
   onFilterCandidates,
   onChangeCandidateStatus,
   candidateStatus,
+  platforms,
 }) => (
   <>
-    console.log(candidateStatus)
     <Row>
       <Col xl={12}>
         <CompanyProfileCandidatesForm
           candidateStatus={candidateStatus}
-          platform={platform}
+          platforms={platforms}
           onFilterCandidates={onFilterCandidates}
         />
       </Col>
@@ -37,6 +35,7 @@ const CompanyProfileCandidates = ({
         <CompanyProfileCandidatesTable
           candidates={candidates}
           candidateStatus={candidateStatus}
+          platforms={platforms}
           totalItems={candidatesCount}
           totalPages={totalPages}
           pageSize={perPage}
@@ -56,7 +55,7 @@ CompanyProfileCandidates.propTypes = {
     totalPages: PropTypes.number,
     perPage: PropTypes.number,
     currentPage: PropTypes.number,
-    platform: PropTypes.arrayOf(
+    platforms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         label: PropTypes.string.isRequired,
@@ -79,6 +78,7 @@ CompanyProfileCandidates.propTypes = {
 CompanyProfileCandidates.defaultProps = {
   candidatesData: {},
   candidateStatus: [],
+  platforms: [],
   onChangePage: () => null
 };
 

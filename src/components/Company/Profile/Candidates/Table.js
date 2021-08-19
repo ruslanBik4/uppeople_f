@@ -18,9 +18,9 @@ const CompanyProfileCandidatesTable = ({
   currentPage,
   onChangePage,
   onSort,
-  onChangeCandidateStatus
+  onChangeCandidateStatus,
+  platforms,
 }) => {
-  console.log(candidateStatus)
   const candidatesJSX =
     candidates.length > 0 ? (
       candidates.map((candidate, idx) => (
@@ -28,6 +28,8 @@ const CompanyProfileCandidatesTable = ({
           <CompanyProfileCandidatesTableRow
             idx={idx}
             {...candidate}
+            options={platforms}
+            // platforms={...candidate.platforms}
             candidateStatus={candidateStatus}
             onChangeCandidateStatus={onChangeCandidateStatus}
           />

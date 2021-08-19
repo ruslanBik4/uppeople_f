@@ -101,7 +101,7 @@ export default class CompanyProfile extends Component {
       perPage: null,
       currentPage: 1,
       candidateStatus: [],
-      platform: []
+      platforms: []
     },
     comments: [],
     filterAndSortVacancies: {
@@ -423,6 +423,7 @@ export default class CompanyProfile extends Component {
         }
       })
     );
+    console.log(this.state);
   };
 
   render() {
@@ -431,6 +432,7 @@ export default class CompanyProfile extends Component {
       vacanciesData,
       candidatesData,
       candidateStatus,
+      platforms,
       comments
     } = this.state;
     console.log("data candidate", this.state);
@@ -522,6 +524,7 @@ export default class CompanyProfile extends Component {
                     <CompanyProfileCandidates
                       candidatesData={candidatesData}
                       candidateStatus={candidateStatus}
+                      platforms={platforms}
                       onChangePage={this.onChangePageCandidates}
                       onChangeCandidateStatus={this.changeCandidateStatus}
                       onFilterCandidates={this.filterAndSortCandidates}
