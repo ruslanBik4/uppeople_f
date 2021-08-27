@@ -75,8 +75,12 @@ const CandidateTableRow = ({
   let colour = ''
   let companies = ''
   let stat = ''
+  let vacStats;
 
-  let vacStats = statuses.map (item => item.vacStat)
+  if (statuses !== null && statuses !== undefined) {
+    vacStats = statuses.map (item => item.vacStat);
+  }
+  
   let vac = vacancies.map (item => item.id)
   let selectedPlatforms
 
@@ -95,16 +99,25 @@ const CandidateTableRow = ({
     console.log(selectedStatuses);
   }
 
-  statuses.map((status, idx) => {
-    statusesVac += status["vacStat"];
-    {/*todo add link for all companies*/}
-    companies += status["compName"];
-    colour += status["color"];
-  })
+  if (statuses !== null && statuses !== undefined) {
+    statuses.map((status, idx) => {
+      statusesVac += status["vacStat"];
+      {/*todo add link for all companies*/}
+      companies += status["compName"];
+      colour += status["color"];
+    })
+  }
 
-  let compFirst = statuses.map(id => id.comp_id)
-  stat = statuses.map(id => id.vacStat)
-  let statFirst = stat[0];
+  let compFirst;
+  let statFirst;
+ 
+  if (statuses !== null && statuses !== undefined) {
+    compFirst = statuses.map(id => id.comp_id)
+    stat = statuses.map(id => id.vacStat)
+    statFirst = stat[0];
+  }
+
+  
   
   
   return (
@@ -119,7 +132,7 @@ const CandidateTableRow = ({
         ) : (
           
           <i 
-          className={"icon-plus icons font-xl" + " " +(statuses.length > 1 ? "bold": "")}
+          className={"icon-plus icons font-xl" + " " +(statuses !== null && statuses.length > 1 ? "bold": "")}
           // className="errorlist"
           // className="icon-plus icons font-xl"
           style={{ color: "var(--green)", cursor: "pointer"}}
@@ -213,12 +226,9 @@ const CandidateTableRow = ({
 
       <td class ="child" vertical-align= "middle" style={{ minWidth: "7rem", overflow: "visible"}}>
       <Select
-            // defaultValue={selectCandidateStatus.find(
-            //   candidateStatus => candidateStatus.label === status
-            // )}
             options={stats}
             // styles={customStyles}
-            value={selectedStatuses[0]}
+            value={selectedStatuses !== undefined && selectedStatuses[0]}
             onChange={value => {
               const content = {
                 candidate_id: id,
@@ -237,7 +247,7 @@ const CandidateTableRow = ({
        
       </td>
       <td class ="child" verticalAlign = "middle" style={{ minWidth: "7rem" }}>
-      {statuses.map((status, idx) => (
+      {statuses !== null && statuses.map((status, idx) => (
         // <Badge style = {{backgroundColor: `${status["color"]}`, display: "block", width: "250px", verticalAlign: "middle"}}>
         <Button  style={{backgroundColor: `${status["color"]}`, width: "250px", display: "block"}}>
          

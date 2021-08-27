@@ -35,6 +35,7 @@ const CompanyProfileCandidatesTableRow = ({
 
   return (
   <>
+
     <th scope="row">{idx + 1}</th>
     <td>{recruiter !== null && recruiter}</td>
     <td>

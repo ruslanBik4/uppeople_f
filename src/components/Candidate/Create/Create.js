@@ -29,7 +29,7 @@ export default class CandidateCreate extends Component {
       const tags = optionsForSelects.tags;
       const reasons = optionsForSelects.reject_reasons;
       const reject_tag = optionsForSelects.reject_tag;
-      const defaultSelectedtag = optionsForSelects.tags.filter((tag) => tag.id === 1)[0];
+      const defaultSelectedtag = optionsForSelects.tags.find((tag) => tag.id === 1)[0];
       const vacancies = optionsForSelects.vacancies;
       const languages = optionsForSelects.languages;
 

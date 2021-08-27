@@ -51,22 +51,22 @@ const CandidateTableRow = (
   const slicedVacancies = selectedVacancies !== null && selectedVacancies.map(el => ({
     ...el,
     label: `${el.label.slice(0,20)}...`,
-}));
+  }));
 
-console.log('slicedVacancies: ', slicedVacancies)
-options = options;
-console.log(options)
-console.log(platforms)
+  console.log('slicedVacancies: ', slicedVacancies)
+  options = options;
+  console.log(options)
+    console.log(platforms)
 
-console.log(CandidateTableRow)
+  console.log(CandidateTableRow)
 
-let selectedPlatforms
+  let selectedPlatforms
 
-if (platforms !== undefined && platforms !== null && options !== undefined ) {
+  if (platforms !== undefined && platforms !== null && options !== undefined ) {
   selectedPlatforms = Object.keys(options).filter(key => platforms.includes(options[key].id)).map(key => options[key]);
   console.log(selectedPlatforms);
   // this.setState({selectedPlatforms: newResult})
-}
+  }
 
 
   
