@@ -61,7 +61,7 @@ export default class CompanyProfileSettingsForm extends Component {
           skype,
           cooperation: termsOfCooperation,
           map,
-          manager: managers[0].id
+          // manager: managers[0].id
         });
       }
     }
@@ -99,11 +99,11 @@ export default class CompanyProfileSettingsForm extends Component {
       companyInfo: { managers }
     } = this.props;
 
-    const optionsForSelect = managers.map(option => (
-      <option key={`${option.id}-${option.name}`} value={option.id}>
-        {option.name}
-      </option>
-    ));
+    // const optionsForSelect = managers.map(option => (
+    //   <option key={`${option.id}-${option.name}`} value={option.id}>
+    //     {option.name}
+    //   </option>
+    // ));
 
     return (
       <Form style={{ padding: 20 }} onSubmit={this.handleSubmit}>
