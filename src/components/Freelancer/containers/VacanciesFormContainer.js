@@ -34,11 +34,11 @@ export default class VacanciesFormContainer extends Component {
       });
     });
 
-    getOptionsForSelects().then(options =>
-      this.setState({
-        options
-      })
-    );
+    //todo getOptionsForSelects().then(options =>
+    //   this.setState({
+    //     options
+    //   })
+    // );
   }
 
   filterVacancies = filter => {

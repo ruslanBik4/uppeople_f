@@ -499,10 +499,14 @@ export default class CandidateCreateForm extends Component {
     const {platforms, seniorities, tags, defaultSelectedtag, languages} = this.props;
     console.log(this.props);
 
-    if (Object.keys(tag_id).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
-      tag_id = defaultSelectedtag;
-      this.setState({tag_id: tag_id});
-    }
+    // if (tag_id !== null && tag_id !== undefined && defaultSelectedtag !== null && defaultSelectedtag !== undefined) {
+    //   if (Object.keys(tag_id).length === 0 && Object.keys(defaultSelectedtag).length > 0) {
+    //     tag_id = 1;
+    //     // tag_id = defaultSelectedtag;
+    //     this.setState({tag_id: tag_id});
+    //   }
+    // }
+    
 
     return (
       <Row>

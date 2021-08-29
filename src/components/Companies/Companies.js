@@ -37,7 +37,7 @@ export default class Companies extends Component {
     // const { filterCompanies } = this.state;
     getCompanies(currentPage, isActive).then(companiesData => {
       if (companiesData === 401) {
-        this.props.history.push('/login/')
+        this.props.history.push('/#/login/')
       } else {
       companiesData.currentPage > companiesData.totalPages
         ? this.requestForCompanies( 
@@ -69,11 +69,14 @@ export default class Companies extends Component {
       const { currentPage, isActive, filterCompanies } = this.state;
 
       filterAllCompanies(currentPage, isActive, filterCompanies).then(
-        companiesData => {
+        companiesData => { 
+          if (companiesData === 401) {
+            this.props.history.push('/#/login/')
+          } else {
           this.setState({
             ...companiesData
           });
-        }
+        }}
       );
     });
   };

@@ -63,17 +63,17 @@ class DefaultLayout extends Component {
     //   ver += cfg.Name;
     // });
 
-    getBackVersion().then(version => {
-      if (version.UPPeople === "dev") {
-        const ver = {
-          type: version.UPPeople,
-          version: version.Version,
-          buildAt: 'build at: ' + version.BuildTime.substring(2, 19),
-          startAt: 'start at: ' + version.StartTime.substring(2, 19),
-        }
-        this.setState({ver});
-      }
-  });
+  //   getBackVersion().then(version => {
+  //     if (version.UPPeople === "dev") {
+  //       const ver = {
+  //         type: version.UPPeople,
+  //         version: version.Version,
+  //         buildAt: 'build at: ' + version.BuildTime.substring(2, 19),
+  //         startAt: 'start at: ' + version.StartTime.substring(2, 19),
+  //       }
+  //       this.setState({ver});
+  //     }
+  // });
   }
 
   globalSeatchChange = e => {
