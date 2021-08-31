@@ -53,7 +53,7 @@ const WithModalVacanciesFormContainer = withModalForLetter(
         name: "Сьорчер",
         role: "ROLE_SEARCHER"
     }
-]
+] 
 const UsersTableRow = ({
   idx,
   id,
@@ -92,7 +92,7 @@ const UsersTableRow = ({
         : null
       }
       <td>{phone}</td>
-      <td>{roleName.name_en}</td>
+      <td>{roleName !== undefined && roleName !== null && roleName.name_en}</td>
       <td>{last_login}</td>
       <td>{last_ip}</td>
       {usersGroup === "freelancers" && selectRecruiter !== undefined ? (
