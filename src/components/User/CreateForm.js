@@ -2,6 +2,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, Col, FormGroup, Input, Form } from "reactstrap";
+import styles2 from "./Custom.css";
+
+// Core
+import moment from "moment";
+import {Editor} from "react-draft-wysiwyg";
+import {EditorState, convertToRaw} from "draft-js";
+import draftToHtml from "draftjs-to-html";
 
 const roles = [
   { value: 1, role: "Admin" },
@@ -43,7 +50,29 @@ export default class UserCreateForm extends Component {
     this.setState({
       [name]: value
     });
+    document.querySelector(".name").classList.remove("error");
+    document.querySelector(".email").classList.remove("error");
+    // document.querySelector({name}).classList.remove("error");
+    let lblErrors = document.querySelector(".errorlist label");
+    lblErrors.textContent = ("")
   };
+
+  // handleNameChange = value => {
+  //   this.setState({name: value});
+  //   console.log(this.state.name)
+  // }
+
+  // handlePasswordChange = value => {
+  //   this.setState({password: value});
+  // };
+
+  // handleEmailChange = value => {
+  //   this.setState({email: value});
+  // }
+
+  // handlePhoneChange = value => {
+  //   this.setState({phone: value});
+  // }
 
   handleSelectChange = ({ currentTarget: { value } }) => {
     this.setState({
@@ -55,15 +84,63 @@ export default class UserCreateForm extends Component {
     event.preventDefault();
 
     const { onAddUser, onRequestClose } = this.props;
-    const user = this.state;
-    user.role = Number(user.role);
-    console.log(user.role)
+    let isValid = true;
+    let {
+      name,
+      password,
+      email,      
+      phone,
+      role,
+    } = this.state;
 
+    if (this.state.email === "") {
+      isValid = false;
+      document.querySelector('.email').classList.add('error');
+      let lblErrors = document.querySelector(".errorlist label");
+      lblErrors.textContent = ("Необходимо заполнить email")
+    }
 
-    onAddUser(user);
+    if (this.state.name === "") {
+      isValid = false;
+      document.querySelector('.name').classList.add('error');
+      let lblErrors = document.querySelector(".errorlist label");
+      lblErrors.textContent = ("Необходимо заполнить name")
+    } else {
+      name = String(name);
+    }
 
-    this.setState({ ...initialState });
-    onRequestClose();
+    if (isValid) {
+      // const user = this.state;
+      const user = {
+        name,
+        password,
+        email,
+        phone,
+        role,
+      }
+      user.role = Number(user.role);
+      console.log(user.role);
+
+      if (password === "") {
+        delete user.password
+      }
+      
+      if (phone === "") {
+        delete user.phone
+      }
+      onAddUser(user);
+      this.setState({ ...initialState });
+
+      
+
+      onRequestClose();
+
+     
+    }
+    
+    
+
+    
   };
 
   render() {
@@ -83,13 +160,13 @@ export default class UserCreateForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormGroup row>
-          <Col>
+          <Col className={"name"}>
             <Input
               type="text"
               placeholder="Name"
               name="name"
               value={name}
-              onChange={this.handleInputChange}
+              onChange={this.handleNameChange}
             />
           </Col>
         </FormGroup>
@@ -104,8 +181,8 @@ export default class UserCreateForm extends Component {
             />
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Col>
+        <FormGroup row className={"email"}>
+          <Col className={"email"}>
             <Input
               type="email"
               placeholder="Email"
@@ -150,6 +227,12 @@ export default class UserCreateForm extends Component {
         <Button color="primary" onClick={this.handleSubmit}>
           Create
         </Button>
+        <FormGroup row>
+          <Col md="10" className={"errorlist"} row>
+            <label>
+            </label>
+          </Col>
+        </FormGroup>
       </Form>
     );
   }
